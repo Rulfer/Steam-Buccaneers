@@ -1,0 +1,11 @@
+Hei!
+
+Velkommen til github, din nye venn!
+
+Her er en liten oppgave til deg:
+Lag en ny branch.
+Opprett et nytt tekstdokument i folderen din.
+Last opp til github.
+Merge branchen din med master.
+
+Suksess!
