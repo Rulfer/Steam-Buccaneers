@@ -56,11 +56,14 @@
      <Compile Include="Assets\AI\detectShip.cs" />
      <Compile Include="Assets\AI\playerMovement.cs" />
      <Compile Include="Assets\AI\projectile.cs" />
+     <Compile Include="Assets\GoBack.cs" />
      <Compile Include="Assets\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Gravity and simple movement\simpleMoveWTurning.cs" />
      <Compile Include="Assets\Gravity and simple movement\simpleMovement.cs" />
      <Compile Include="Assets\SaveLoad\GameControl.cs" />
+     <Compile Include="Assets\SaveLoad\LaunchStore.cs" />
      <Compile Include="Assets\SaveLoad\SaveLoadButtons.cs" />
+     <Compile Include="Assets\SaveLoad\StoreLauncher.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

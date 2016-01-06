@@ -7,12 +7,12 @@ public class simpleMoveWTurning : MonoBehaviour {
 	Rigidbody rb;
 
 	void Start () {
-		//Henter ut rigidbody
+		//Get the rigidbody to the object
 		rb = GetComponent<Rigidbody> ();
 	}
 
 	void FixedUpdate () {
-		//W og S legger til force frem og bak, mens A og D svinger.
+		//W and S addsforce in front and back, while A and D turns.
 		if (Input.GetKey(KeyCode.W)) {
 			rb.AddForce (-this.transform.forward);
 		}
