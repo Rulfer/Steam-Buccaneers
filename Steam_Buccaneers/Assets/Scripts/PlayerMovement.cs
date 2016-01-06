@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour 
 {
-	public static float forwardSpeed = 50;
+	public static float forwardSpeed = 100;
 	public static int turnSpeed = 20;
 	public static int swingSpeed = 50;
 	public float rotationPerSecond = 15f;
