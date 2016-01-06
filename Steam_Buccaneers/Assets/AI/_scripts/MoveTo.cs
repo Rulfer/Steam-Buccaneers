@@ -1,47 +1,40 @@
 ﻿// MoveTo.cs
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MoveTo : MonoBehaviour {
 
 
-	public Transform[] ball;
-	public Transform aiPoint;
+	private GameObject[] ball; //Array for the balls around the player
+	public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
 
 	private float distance = 1000;
-	public float timeLeft = 2;
-	private int tempI;
 
 	private NavMeshAgent agent;
 
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
+
+		ball = GameObject.FindGameObjectsWithTag("playerBalls"); //Finds all gameobjects with the tag "playerBalls" and put them in the array
 		touchBalls ();
 	}
 
 	void Update() {
-			touchBalls ();
+		touchBalls ();
 	}
 
+	//This function makes it so that the AI follows the balls surrounding the player instead of the player itself.
 	void touchBalls()
 	{
-		for (int i = 0; i < ball.Length; i++)
+		for (int i = 0; i < ball.Length; i++) //Runs the length of the array
 		{
-			float temp = Vector3.Distance (aiPoint.transform.position, ball [i].transform.position);
-			if (temp < distance) {
-				distance = temp;
-				agent.destination = ball [i].position;
-//				tempI = i;
-
-
-//				if (i == 5) {
-//					agent.destination = ball [0].position;
-//					tempI = 0;
-//				} else {
-//					agent.destination = ball [i++].position;
-//					tempI = i++;
-//				} 
+			float temp = Vector3.Distance (aiPoint.transform.position, ball [i].transform.position); //Calculates the distance between the aiPoint and the player
+			if (temp < distance) { //The new ball is closer than the previous
+				distance = temp; //The new ball is the closest one
+				agent.destination = ball [i].transform.position; //The new ball is the new destination
 			}
 		}
+		distance = 1000; //Resets the distance so a new test kan be initiated. 
 	}
 }

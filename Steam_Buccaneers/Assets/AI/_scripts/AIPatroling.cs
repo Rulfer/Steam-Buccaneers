@@ -8,6 +8,7 @@ public class AIPatroling : MonoBehaviour {
 	private int destPoint = 0;
 	private NavMeshAgent agent;
 
+
 //	private Script AIPatroling;
 
 	void Start () {
@@ -20,6 +21,7 @@ public class AIPatroling : MonoBehaviour {
 
 		GotoNextPoint();
 	}
+
 
 
 	void GotoNextPoint() {

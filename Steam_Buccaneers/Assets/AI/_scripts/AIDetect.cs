@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+////
+/// OLD AND UNUSED
+////
+/// //////THIS SCRIPT IS OLD AND UNUSED
+/// I keep it for funzies. :)
+
 public class AIDetect : MonoBehaviour {
 
 	public static bool rightSide;

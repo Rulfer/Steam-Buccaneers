@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AI\_scripts\AIAngry.cs" />
      <Compile Include="Assets\AI\_scripts\AIDetect.cs" />
      <Compile Include="Assets\AI\_scripts\AIMaster.cs" />
      <Compile Include="Assets\AI\_scripts\AIPatroling.cs" />
@@ -56,9 +55,7 @@
      <Compile Include="Assets\AI\_scripts\detectShip.cs" />
      <Compile Include="Assets\AI\_scripts\playerMovement.cs" />
      <Compile Include="Assets\AI\_scripts\projectile.cs" />
-     <Compile Include="Assets\Gravity and simple movement\gravityPull.cs" />
-     <Compile Include="Assets\Gravity and simple movement\simpleMoveWTurning.cs" />
-     <Compile Include="Assets\Gravity and simple movement\simpleMovement.cs" />
+     <Compile Include="Assets\AI\_scripts\spawnAI.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

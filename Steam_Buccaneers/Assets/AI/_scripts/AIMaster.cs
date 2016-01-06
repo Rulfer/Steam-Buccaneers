@@ -6,45 +6,27 @@ public class AIMaster : MonoBehaviour {
 	public static float detectDistance;
 	public Transform playerPoint;
 	public Transform aiPoint;
-//	private NavMeshAgent agent;
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, aiPoint.transform.position);
-		if (detectDistance <= 40) 
-		{
-			GetComponent<AIPatroling>().enabled = false;
-			GetComponent<MoveTo> ().enabled = true;
-			GetComponent<AIDetect> ().enabled = false;
-		}
 
-		if (detectDistance >= 50)
-		{
-			GetComponent<AIPatroling> ().enabled = true;
-			GetComponent<MoveTo> ().enabled = false;
-			GetComponent<AIDetect> ().enabled = false;
-		}
-
-//		if (detectDistance <= 20) 
+//		if (detectDistance <= 40) 
 //		{
-//			GetComponent<AIDetect> ().enabled = true;
-//			//GetComponent<AIsideCanons> ().enabled = true;
-//			//GameObject.Find ("Sidecanons").GetComponent<AIsideCanons> ().enabled = true;
+//			GetComponent<AIPatroling>().enabled = false;
+//			GetComponent<MoveTo> ().enabled = true;
+//		}
+//
+//		if (detectDistance >= 50)
+//		{
+//			GetComponent<AIPatroling> ().enabled = true;
+//			GetComponent<MoveTo> ().enabled = false;
 //		}
 
-//		if (AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true) {
-//			agent.stoppingDistance = 20;
-//			agent.autoBraking = true;
-//		} 
-//		if (AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false){
-//			agent.stoppingDistance = 0;
-//			agent.autoBraking = false;
-//		}
-
-
+		Debug.DrawLine(aiPoint.position, playerPoint.position, Color.red);
+		Debug.Log (detectDistance);
 	}
 }
