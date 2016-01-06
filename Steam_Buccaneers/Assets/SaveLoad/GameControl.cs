@@ -53,15 +53,31 @@ public class GameControl : MonoBehaviour {
 		GUI.Label (new Rect (10, 70, 150, 30), "Last Store: " + storeTag);
 	}
 
+	//Runs when scene is loaded
+	void OnLevelWasLoaded(int level)
+	{
+		if (level == 0) 
+		{
+			Load ();
+		}
+	}
+
 	public void Save()
 	{
-		//This is magic that makes a file in binaryformat
+		//This is magic that creates a file in binaryformat
 		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.john");
+		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.ohhijohnny");
 
 		//Initilizes class that can be written to file
 		PlayerData data = new PlayerData ();
+		//Updates controller with current data. Here posstions to player and meteor
+		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+		GameControl.control.shipPos = goP.transform.position-Vector3.forward;
+		GameObject goM = GameObject.FindGameObjectWithTag ("Meteor");
+		GameControl.control.meteorPos = goM.transform.position;
+		GameControl.control.storeTag = this.tag;
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
+		//Writes data to file in GameControl.cs
 		data.shipPos = Vector3toFloats(shipPos);
 		data.meteorPos = Vector3toFloats(meteorPos);
 		data.storeTag = storeTag;
@@ -73,13 +89,13 @@ public class GameControl : MonoBehaviour {
 
 	public void Load()
 	{
-		//Have to check if file exists before athempting to read it
-		if (File.Exists (Application.persistentDataPath + "/playerInfo.john")) 
+		//Have to check if file exists before attempting to read it
+		if (File.Exists (Application.persistentDataPath + "/playerInfo.ohhijohnny")) 
 		{
 			//Makes binaryformatter to be able to convert binary into data
 			BinaryFormatter bf = new BinaryFormatter ();
 			//Opens file. Application.persistentDataPath is unity general savingplace for files. (Somewhere in appdata)
-			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.john", FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.ohhijohnny", FileMode.Open);
 			//Deserializes the binaryfile to playerdata. 
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			//Close file after reading
@@ -87,11 +103,17 @@ public class GameControl : MonoBehaviour {
 			//sets lokal data posisions to what we read of.
 			shipPos = FloatstoVector3(data.shipPos);
 			meteorPos = FloatstoVector3(data.meteorPos);
+			//Update gameobjects with loaded data
+			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+			goP.transform.position = GameControl.control.shipPos;
+			GameObject goM = GameObject.FindGameObjectWithTag ("Meteor");
+			goM.transform.position = GameControl.control.meteorPos;
 		}
 	}
 
 	public void ChangeScene(string name)
 	{
+		//Changes scene to parameter
 		SceneManager.LoadScene (name);
 	}
 
