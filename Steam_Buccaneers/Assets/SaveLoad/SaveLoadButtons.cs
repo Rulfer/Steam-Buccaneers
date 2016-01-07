@@ -9,7 +9,7 @@ public class SaveLoadButtons : MonoBehaviour {
 		//If buttons is pressed this stuff happens. I am making a button and saying what will happen to it in one
 		if (GUI.Button (new Rect (10, 100, 100, 30), "Save")) 
 		{
-			GameControl.control.Save ();
+			GameControl.control.Save ("null");
 		}
 		if (GUI.Button (new Rect (10, 140, 100, 30), "Load")) 
 		{

@@ -12,8 +12,7 @@ public class GameControl : MonoBehaviour {
 
 	//Here is the gamedata saved
 	public Vector3 shipPos;
-	public Vector3 meteorPos;
-	public string storeTag = "";
+	public string storeName = "";
 
 	void Awake () 
 	{
@@ -29,28 +28,15 @@ public class GameControl : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-
-		if (storeTag != "")
-		{
-			//Loads data from file in GameControl.cs
-			GameControl.control.Load ();
-			//Update gameobjects with loaded data
-			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-			goP.transform.position = GameControl.control.shipPos;
-			//goP.transform.position = (
-			goP.GetComponent<Rigidbody> ().AddForce (goP.transform.position - this.transform.position);
-			GameObject goM = GameObject.FindGameObjectWithTag ("Meteor");
-			goM.transform.position = GameControl.control.meteorPos;
-		}
+			
 	}
 
 	//Makes Gui on launch of program
 	void OnGUI()
 	{
 		//Only for debug purposes to see the saved posistions 
-		GUI.Label (new Rect (10, 10, 100, 30), "ShipPos: " + shipPos);
-		GUI.Label (new Rect (10, 40, 150, 30), "MeteorPos: " + meteorPos);
-		GUI.Label (new Rect (10, 70, 150, 30), "Last Store: " + storeTag);
+		GUI.Label (new Rect (10, 10, 140, 30), "ShipPos: " + shipPos);
+		GUI.Label (new Rect (10, 70, 150, 30), "Last Store: " + storeName);
 	}
 
 	//Runs when scene is loaded
@@ -62,7 +48,7 @@ public class GameControl : MonoBehaviour {
 		}
 	}
 
-	public void Save()
+	public void Save(string storeName)
 	{
 		//This is magic that creates a file in binaryformat
 		BinaryFormatter bf = new BinaryFormatter ();
@@ -70,17 +56,22 @@ public class GameControl : MonoBehaviour {
 
 		//Initilizes class that can be written to file
 		PlayerData data = new PlayerData ();
-		//Updates controller with current data. Here posstions to player and meteor
-		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-		GameControl.control.shipPos = goP.transform.position-Vector3.forward;
-		GameObject goM = GameObject.FindGameObjectWithTag ("Meteor");
-		GameControl.control.meteorPos = goM.transform.position;
-		GameControl.control.storeTag = this.tag;
+		//Updates controller with current data. Here posstions to player
+		//First checks if it is a storesave. If it is not, it will save player position instead of store.
+		if (storeName != "null") 
+		{
+			GameObject goP = GameObject.Find (storeName);
+			GameControl.control.shipPos = goP.transform.position-(Vector3.forward*3);
+		} 
+		else 
+		{
+			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+			GameControl.control.shipPos = goP.transform.position;
+		}
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
 		//Writes data to file in GameControl.cs
 		data.shipPos = Vector3toFloats(shipPos);
-		data.meteorPos = Vector3toFloats(meteorPos);
-		data.storeTag = storeTag;
+		data.storeName = storeName;
 		//Writes to file here. File reference the file we made over and data is the class with the data we want to store.
 		bf.Serialize (file, data);
 		//Closing file after writing it.
@@ -94,7 +85,7 @@ public class GameControl : MonoBehaviour {
 		{
 			//Makes binaryformatter to be able to convert binary into data
 			BinaryFormatter bf = new BinaryFormatter ();
-			//Opens file. Application.persistentDataPath is unity general savingplace for files. (Somewhere in appdata)
+			//Opens file. Application.persistentDataPath is unity general savingplace for files. (Somewhere in appdata on windows)
 			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.ohhijohnny", FileMode.Open);
 			//Deserializes the binaryfile to playerdata. 
 			PlayerData data = (PlayerData)bf.Deserialize (file);
@@ -102,12 +93,10 @@ public class GameControl : MonoBehaviour {
 			file.Close ();
 			//sets lokal data posisions to what we read of.
 			shipPos = FloatstoVector3(data.shipPos);
-			meteorPos = FloatstoVector3(data.meteorPos);
 			//Update gameobjects with loaded data
 			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
 			goP.transform.position = GameControl.control.shipPos;
-			GameObject goM = GameObject.FindGameObjectWithTag ("Meteor");
-			goM.transform.position = GameControl.control.meteorPos;
+			goP.transform.rotation = Quaternion.identity;
 		}
 	}
 
@@ -145,6 +134,6 @@ class PlayerData
 {
 	//Here we store all the data we want to write to file
 	public float[] shipPos = new float[3];
-	public float[] meteorPos = new float[3];
-	public string storeTag;
+	public float[] shipRot = new float[3];
+	public string storeName;
 }
