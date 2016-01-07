@@ -45,17 +45,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AI\_scripts\AIDetect.cs" />
      <Compile Include="Assets\AI\_scripts\AIMaster.cs" />
      <Compile Include="Assets\AI\_scripts\AIPatroling.cs" />
-     <Compile Include="Assets\AI\_scripts\AIprepareShots.cs" />
+     <Compile Include="Assets\AI\_scripts\AIprojectile.cs" />
      <Compile Include="Assets\AI\_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\AI\_scripts\MoveTo.cs" />
-     <Compile Include="Assets\AI\_scripts\detectLeft.cs" />
      <Compile Include="Assets\AI\_scripts\detectShip.cs" />
      <Compile Include="Assets\AI\_scripts\playerMovement.cs" />
-     <Compile Include="Assets\AI\_scripts\projectile.cs" />
      <Compile Include="Assets\AI\_scripts\spawnAI.cs" />
+     <Compile Include="Assets\AI\testscripts\PlayerMovement.cs" />
+     <Compile Include="Assets\AI\testscripts\cameraControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

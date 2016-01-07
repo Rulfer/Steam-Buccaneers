@@ -1,23 +1,19 @@
-﻿// MoveTo.cs
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class MoveTo : MonoBehaviour {
-
 
 	private GameObject[] ball; //Array for the balls around the player
 	public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
 
-	private float distance = 1000;
+	private float distance = 1000; //An unreasonable large distance used for testing
 
-	private NavMeshAgent agent;
+	private NavMeshAgent agent; //AI Agent
 
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
 
 		ball = GameObject.FindGameObjectsWithTag("playerBalls"); //Finds all gameobjects with the tag "playerBalls" and put them in the array
-		touchBalls ();
 	}
 
 	void Update() {
