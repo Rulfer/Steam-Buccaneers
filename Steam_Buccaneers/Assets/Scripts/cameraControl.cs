@@ -19,28 +19,27 @@ public class cameraControl : MonoBehaviour
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
 		Vector3 PlayerPOS = GameObject.Find("PlayerShip").transform.transform.position;
-		GameObject.Find("MainCamera").transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)- distanceAway, (PlayerPOS.z)); 
+		GameObject.Find("MainCamera").transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway, (PlayerPOS.z)); 
 
 		// Kamera zoom
 		float scrollDistance = Input.GetAxisRaw("Mouse ScrollWheel");
 
 		if (scrollDistance > 0f)
 		{
-			// scroll in
-			if (distanceAway <= -1)
+			if (distanceAway >= 5)
 			{
 				//Debug.Log (scrollDistance);
-				distanceAway += scrollBy;
+				distanceAway -= scrollBy;
 				//Debug.Log (distanceAway);
 			}
 		}
 		else if (scrollDistance < 0f)
 		{
-			// scroll out
-			if (distanceAway >= -4)
+			// scroll down
+			if (distanceAway <= 20)
 			{
 				//Debug.Log (scrollDistance);
-				distanceAway -= scrollBy;
+				distanceAway += scrollBy;
 				//Debug.Log (distanceAway);
 			}
 		}

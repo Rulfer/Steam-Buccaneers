@@ -49,13 +49,13 @@ public class sideWeaponControl : MonoBehaviour
 			Instantiate (cannonball, cannonL2.transform.position, cannonL2.transform.rotation);
 			Instantiate (cannonball, cannonL3.transform.position, cannonL3.transform.rotation);
 			//Inventory.mainAmmo -= 1;
-			//Debug.Log (Inventory.mainAmmo);
+			Debug.Log (Inventory.mainAmmo);
 			pangPang.Play();
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}
 
-		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight) 
+		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight && Inventory.mainAmmo > 0) 
 		{
 
 			Debug.Log ("pang");
@@ -66,9 +66,9 @@ public class sideWeaponControl : MonoBehaviour
 			Instantiate (cannonball, cannonR1.transform.position, transform.rotation);
 			Instantiate (cannonball, cannonR2.transform.position, transform.rotation);
 			Instantiate (cannonball, cannonR3.transform.position, transform.rotation);
-			//Inventory.mainAmmo -= 1;
+			Inventory.mainAmmo -= 1;
 			pangPang.Play();
-			//Debug.Log (Inventory.mainAmmo);
+			Debug.Log (Inventory.mainAmmo);
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}

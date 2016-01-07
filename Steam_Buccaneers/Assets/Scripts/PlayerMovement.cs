@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour 
 {
-	public static float forwardSpeed = 100;
+	public static float forwardSpeed = 20;
 	public static int turnSpeed = 20;
 	public static int swingSpeed = 50;
 	public float rotationPerSecond = 15f;
@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKey (KeyCode.W)) 
 		{
 			//AudioSource wubWub = GetComponent<AudioSource> ();
-			transform.Translate (Vector3.forward/forwardSpeed);
+			transform.Translate (Vector3.up/forwardSpeed);
 		}
 		if (Input.GetKey (KeyCode.A)) 
 		{
-			transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
+			transform.Rotate (Vector3.forward, turnSpeed * Time.deltaTime);
 			//transform.Rotate (Vector3.up, swingSpeed * Time.deltaTime);
 			//endRotation.transform.Rotate(Vector3.left, 360, Space.World);	
 			//transform.Translate (Vector3.left/turnSpeed);
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if (Input.GetKey (KeyCode.D)) 
 		{
-			transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+			transform.Rotate (Vector3.back, turnSpeed * Time.deltaTime);
 			//transform.Rotate (Vector3.up, PlayerMovement.turnSpeed * Time.deltaTime);
 			//transform.Rotate (Vector3.down, swingSpeed * Time.deltaTime);
 			//endRotation.transform.Rotate(Vector3.right, 360, Space.World);
