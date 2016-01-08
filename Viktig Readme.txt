@@ -1,0 +1,1 @@
+Bård du er skikkelig teit lelelelelelelelel
