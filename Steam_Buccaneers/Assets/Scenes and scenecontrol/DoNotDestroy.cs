@@ -1,0 +1,18 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class DoNotDestroy : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+
+		DontDestroyOnLoad (gameObject);
+	
+	}
+
+	void FixedUpdate () {
+	
+		this.transform.position = GameObject.FindGameObjectWithTag ("Player").gameObject.transform.position; 
+		this.transform.Translate(Vector3.back * 11);
+	}
+}

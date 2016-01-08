@@ -14,7 +14,7 @@ public class simpleMoveWTurning : MonoBehaviour {
 	void FixedUpdate () {
 		//W and S addsforce in front and back, while A and D turns.
 		if (Input.GetKey(KeyCode.W)) {
-			rb.AddForce (-this.transform.forward);
+			rb.transform.Translate (Vector3.back);
 		}
 
 		if (Input.GetKey (KeyCode.A)) {
@@ -22,7 +22,7 @@ public class simpleMoveWTurning : MonoBehaviour {
 		}
 
 		if (Input.GetKey (KeyCode.S)) {
-			rb.AddForce (this.transform.forward);
+			rb.transform.Translate (Vector3.forward);
 		}
 
 		if (Input.GetKey (KeyCode.D)) {
