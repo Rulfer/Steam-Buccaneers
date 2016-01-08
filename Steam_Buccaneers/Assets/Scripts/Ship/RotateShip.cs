@@ -16,12 +16,12 @@ public class RotateShip : MonoBehaviour
 	{
 		if (Input.GetKey (KeyCode.A)) 
 		{
-			transform.Rotate (-Vector3.back, (PlayerMovement.turnSpeed*2) * Time.deltaTime);
+			transform.Rotate (-Vector3.back, (PlayerMove.turnSpeed*2) * Time.deltaTime);
 		}
 		
 		if (Input.GetKey (KeyCode.D)) 
 		{
-			transform.Rotate (Vector3.back, (PlayerMovement.turnSpeed*2) * Time.deltaTime);
+			transform.Rotate (Vector3.back, (PlayerMove.turnSpeed*2) * Time.deltaTime);
 		}
 	
 	}

@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -61,10 +61,10 @@
      <Compile Include="Assets\Scripts\Save and load\GameControl.cs" />
      <Compile Include="Assets\Scripts\Save and load\SaveLoadButtons.cs" />
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
+     <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
      <Compile Include="Assets\Scripts\Scene\LaunchStore.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
-     <Compile Include="Assets\Scripts\Ship\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Ship\Inventory.cs" />
      <Compile Include="Assets\Scripts\Ship\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Ship\Projectile.cs" />
@@ -74,10 +74,10 @@
      <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour 
+public class PlayerMove : MonoBehaviour 
 {
 	public static float forwardSpeed = 20;
 	public static int turnSpeed = 20;

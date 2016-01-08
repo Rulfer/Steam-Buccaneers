@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cameraControl : MonoBehaviour 
+public class cameraController : MonoBehaviour 
 {
 	public float distanceAway;
 	private float amountScrolled;
