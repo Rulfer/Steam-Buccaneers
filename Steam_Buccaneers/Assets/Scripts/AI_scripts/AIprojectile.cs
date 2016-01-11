@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class projectile : MonoBehaviour {
+public class AIprojectile : MonoBehaviour {
 
 	public float projectileSpeed;
 	public static float damageOutput;
-	private float timer = 10;
+	private float distance;
+	public Rigidbody test;
 
 	// Use this for initialization
 	void Start () {
@@ -17,25 +18,31 @@ public class projectile : MonoBehaviour {
 		{
 			damageOutput = 2;
 		}
+
+		test.AddForce (this.transform.right * projectileSpeed);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (Vector3.right * projectileSpeed * Time.deltaTime);
-		timer -= Time.deltaTime;
-		if (timer <= 0) {
-			Destroy (this.gameObject);
+	//	transform.Translate (Vector3.right * projectileSpeed * Time.deltaTime);
+
+
+		distance = Vector3.Distance(transform.position, GameObject.Find("PlayerShip").transform.position);
+
+		if (distance >= 40)
+		{
+			Destroy(gameObject);
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnCollisionEnter(Collision other)
 	{
-		if (other.tag == "Player") 
+		if (other.gameObject.tag == "Player") 
 		{
 			Debug.Log ("We hit the player!");
 			Debug.Log ("Damage delt is " + damageOutput);
 			Destroy (this.gameObject);
-
 		}
 	}
 }

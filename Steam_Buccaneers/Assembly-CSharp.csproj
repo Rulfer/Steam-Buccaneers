@@ -54,10 +54,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\gravityCs.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMoveWTurning.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
      <Compile Include="Assets\Scripts\Save and load\GameControl.cs" />
      <Compile Include="Assets\Scripts\Save and load\SaveLoadButtons.cs" />
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />

@@ -17,10 +17,10 @@ public class AIMaster : MonoBehaviour {
 		 
 		//We dont want to render the AI if its to far away from the player,
 		//so we delete it when the distance is equal or greater than 100 (we can change this number at any time).
-		if (detectDistance >= 100) {
-			Destroy(this.gameObject);
-			spawnAI.livingShip = false;
-		}
+//		if (detectDistance >= 100) {
+//			Destroy(this.gameObject);
+//			spawnAI.livingShip = false;
+//		}
 
 		//This is commented out, but is usefull when the AI is patrolling.
 		//When its not patrolling, and only always going to move against the player,
