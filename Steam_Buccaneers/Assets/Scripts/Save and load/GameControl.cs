@@ -96,7 +96,7 @@ public class GameControl : MonoBehaviour {
 			//Update gameobjects with loaded data
 			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
 			goP.transform.position = GameControl.control.shipPos;
-			goP.transform.rotation = Quaternion.identity;
+			goP.transform.rotation = Quaternion.Euler(90,0,0);
 		}
 	}
 
