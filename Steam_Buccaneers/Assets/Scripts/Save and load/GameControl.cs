@@ -13,6 +13,8 @@ public class GameControl : MonoBehaviour {
 	//Here is the gamedata saved
 	public Vector3 shipPos;
 	public string storeName = "";
+	public int health = 20;
+	public int money = 100;
 
 	void Awake () 
 	{
@@ -28,15 +30,12 @@ public class GameControl : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
-			
-	}
 
-	//Makes Gui on launch of program
-	void OnGUI()
-	{
-		//Only for debug purposes to see the saved posistions 
-		GUI.Label (new Rect (10, 10, 140, 30), "ShipPos: " + shipPos);
-		GUI.Label (new Rect (10, 70, 150, 30), "Last Store: " + storeName);
+		if (health == 0 && money == 0)
+		{
+			health = 20;
+			money = 100;
+		}
 	}
 
 	//Runs when scene is loaded
@@ -48,20 +47,39 @@ public class GameControl : MonoBehaviour {
 		}
 	}
 
-	public void Save(string storeName)
+	//Makes Gui on launch of program
+	void OnGUI()
+	{
+		//Only for debug purposes to see the saved posistions 
+		GUI.Label (new Rect (10, 10, 160, 30), "ShipPos: " + shipPos);
+		GUI.Label (new Rect (10, 30, 160, 30), "Last Store: " + storeName);
+		GUI.Label (new Rect (10, 50, 160, 30), "Health: " + health);
+		GUI.Label (new Rect (10, 70, 160, 39), "Money: " + money);
+	}
+
+	public void Save(string storesName)
 	{
 		//This is magic that creates a file in binaryformat
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.ohhijohnny");
-
 		//Initilizes class that can be written to file
 		PlayerData data = new PlayerData ();
+		storeName = storesName;
+		data = saveData(data);
+		//Writes to file here. File reference the file we made over and data is the class with the data we want to store.
+		bf.Serialize (file, data);
+		//Closing file after writing it.
+		file.Close ();
+	}
+
+	private PlayerData saveData(PlayerData data)
+	{
 		//Updates controller with current data. Here posstions to player
 		//First checks if it is a storesave. If it is not, it will save player position instead of store.
 		if (storeName != "null") 
 		{
 			GameObject goP = GameObject.Find (storeName);
-			GameControl.control.shipPos = goP.transform.position-(Vector3.forward*3);
+			GameControl.control.shipPos = goP.transform.position+(Vector3.forward*3);
 		} 
 		else 
 		{
@@ -72,10 +90,10 @@ public class GameControl : MonoBehaviour {
 		//Writes data to file in GameControl.cs
 		data.shipPos = Vector3toFloats(shipPos);
 		data.storeName = storeName;
-		//Writes to file here. File reference the file we made over and data is the class with the data we want to store.
-		bf.Serialize (file, data);
-		//Closing file after writing it.
-		file.Close ();
+		data.money = money;
+		data.health = health;
+
+		return data;
 	}
 
 	public void Load()
@@ -91,13 +109,20 @@ public class GameControl : MonoBehaviour {
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			//Close file after reading
 			file.Close ();
-			//sets lokal data posisions to what we read of.
-			shipPos = FloatstoVector3(data.shipPos);
-			//Update gameobjects with loaded data
-			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-			goP.transform.position = GameControl.control.shipPos;
-			goP.transform.rotation = Quaternion.Euler(90,0,0);
+			loadData(data);
 		}
+	}
+
+	private void loadData(PlayerData data)
+	{
+		//sets lokal data posisions to what we read of.
+		shipPos = FloatstoVector3(data.shipPos);
+		//Update gameobjects with loaded data
+		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+		goP.transform.position = FloatstoVector3(data.shipPos);
+		goP.transform.rotation = Quaternion.Euler(90,0,0);
+		health = data.health;
+		money = data.money;
 	}
 
 	public void ChangeScene(string name)
@@ -136,4 +161,6 @@ class PlayerData
 	public float[] shipPos = new float[3];
 	public float[] shipRot = new float[3];
 	public string storeName;
+	public int health;
+	public int money;
 }
