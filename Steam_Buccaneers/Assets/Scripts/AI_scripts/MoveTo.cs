@@ -12,7 +12,6 @@ public class MoveTo : MonoBehaviour {
 
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
-
 		ball = GameObject.FindGameObjectsWithTag("playerBalls"); //Finds all gameobjects with the tag "playerBalls" and put them in the array
 	}
 
@@ -32,5 +31,14 @@ public class MoveTo : MonoBehaviour {
 			}
 		}
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
+	}
+
+	void swapBalls()
+	{
+		for (int i = 0; i < ball.Length; i++)
+		{
+			NavMesh.GetAreaCost (ball[i]);
+		}
+
 	}
 }
