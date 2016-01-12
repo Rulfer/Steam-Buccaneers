@@ -9,7 +9,8 @@ public class AIprojectile : MonoBehaviour {
 	public Rigidbody test;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		if (this.tag == "ball1") 
 		{
 			damageOutput = 1;
@@ -20,11 +21,11 @@ public class AIprojectile : MonoBehaviour {
 		}
 
 		test.AddForce (this.transform.right * projectileSpeed);
-
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	//	transform.Translate (Vector3.right * projectileSpeed * Time.deltaTime);
 
 

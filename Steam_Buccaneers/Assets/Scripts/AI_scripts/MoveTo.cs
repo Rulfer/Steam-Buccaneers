@@ -3,10 +3,19 @@ using System.Collections;
 
 public class MoveTo : MonoBehaviour {
 
+	private Vector3 playerPrevPos;
+	private Vector3 playerNewPos;
+
 	private GameObject[] ball; //Array for the balls around the player
-	public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
+	//public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
+	public Transform aiPoint; //We now use the basic Agent object. No detector in front, as the AI is to follow this Agent.
+	public Transform player;
+	public Transform aiObject;
 
 	private float distance = 1000; //An unreasonable large distance used for testing
+	private float playerAndBallsDistance = 1000;
+
+	public static bool playerLeftside;
 
 	private NavMeshAgent agent; //AI Agent
 
@@ -16,7 +25,18 @@ public class MoveTo : MonoBehaviour {
 	}
 
 	void Update() {
-		touchBalls ();
+		playerNewPos = player.position;
+
+		if(playerNewPos == playerPrevPos)
+		{
+			stopNextToPlayer();
+		}
+
+		else
+		{
+			touchBalls ();
+		}
+		playerPrevPos = playerNewPos;
 	}
 
 	//This function makes it so that the AI follows the balls surrounding the player instead of the player itself.
@@ -33,12 +53,42 @@ public class MoveTo : MonoBehaviour {
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
 	}
 
-	void swapBalls()
+	void stopNextToPlayer()
 	{
-		for (int i = 0; i < ball.Length; i++)
+		playerLeftside = studyBalls(playerLeftside);
+		GameObject testLeft = GameObject.Find("primaryLeft");
+		GameObject testRight = GameObject.Find("primaryRight");
+
+		if(playerLeftside == true)
 		{
-			NavMesh.GetAreaCost (ball[i]);
+			agent.destination = testLeft.transform.position;
 		}
 
+		else
+		{
+			agent.destination = testRight.transform.position;
+		}
+
+	}
+
+	private bool studyBalls(bool test)
+	{
+		GameObject testLeft = GameObject.Find("primaryLeft");
+		GameObject testRight = GameObject.Find("primaryRight");
+		float temp = Vector3.Distance (aiObject.transform.position, testLeft.transform.position);
+
+		if(temp < playerAndBallsDistance)
+		{
+			playerAndBallsDistance = temp;
+			test = true;
+		}
+
+		temp = Vector3.Distance (aiObject.transform.position, testRight.transform.position);
+		if(temp < playerAndBallsDistance)
+		{
+			test = false;
+		}
+
+		return test;
 	}
 }
