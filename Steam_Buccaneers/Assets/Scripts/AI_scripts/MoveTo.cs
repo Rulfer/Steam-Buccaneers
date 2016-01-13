@@ -15,7 +15,10 @@ public class MoveTo : MonoBehaviour {
 	private float distance = 1000; //An unreasonable large distance used for testing
 	private float playerAndBallsDistance = 1000;
 
-	public static bool playerLeftside;
+	public static int aiTargetBall;
+
+	private bool isChosen = false;
+	public static bool playerStopped = false;
 
 	private NavMeshAgent agent; //AI Agent
 
@@ -25,18 +28,26 @@ public class MoveTo : MonoBehaviour {
 	}
 
 	void Update() {
-		playerNewPos = player.position;
+		playerNewPos = player.position; //The new position of the player
 
-		if(playerNewPos == playerPrevPos)
+		if(playerNewPos == playerPrevPos) //If its equal to the previous, then the player has stopped moving
 		{
-			stopNextToPlayer();
+			playerStopped = true;
+			stopNextToPlayer(); //Make the next AI move
+		}
+
+		if(AImove.turnLeft == true || AImove.turnRight == true)
+		{
+			playerIsTurning();
 		}
 
 		else
 		{
-			touchBalls ();
+			isChosen = false;
+			playerStopped = false;
+			touchBalls (); //Continue to touch the balls
 		}
-		playerPrevPos = playerNewPos;
+		playerPrevPos = playerNewPos; //Save the new position as the previous one to conduct new tests
 	}
 
 	//This function makes it so that the AI follows the balls surrounding the player instead of the player itself.
@@ -53,42 +64,36 @@ public class MoveTo : MonoBehaviour {
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
 	}
 
-	void stopNextToPlayer()
+	void playerIsTurning()
 	{
-		playerLeftside = studyBalls(playerLeftside);
-		GameObject testLeft = GameObject.Find("primaryLeft");
-		GameObject testRight = GameObject.Find("primaryRight");
-
-		if(playerLeftside == true)
-		{
-			agent.destination = testLeft.transform.position;
-		}
-
-		else
-		{
-			agent.destination = testRight.transform.position;
-		}
-
+		aiTargetBall = studyBalls(aiTargetBall);
+		agent.destination = ball [aiTargetBall].transform.position;
 	}
 
-	private bool studyBalls(bool test)
+	void stopNextToPlayer()
 	{
-		GameObject testLeft = GameObject.Find("primaryLeft");
-		GameObject testRight = GameObject.Find("primaryRight");
-		float temp = Vector3.Distance (aiObject.transform.position, testLeft.transform.position);
-
-		if(temp < playerAndBallsDistance)
+		if(isChosen == false)
 		{
-			playerAndBallsDistance = temp;
-			test = true;
+			aiTargetBall = studyBalls(aiTargetBall);
+			agent.destination = ball [aiTargetBall].transform.position;
 		}
 
-		temp = Vector3.Distance (aiObject.transform.position, testRight.transform.position);
-		if(temp < playerAndBallsDistance)
-		{
-			test = false;
-		}
+		else agent.destination = ball [aiTargetBall].transform.position;
+	}
 
+	private int studyBalls(int test)
+	{
+		float temp;
+		for (int i = 0; i < ball.Length; i++)
+		{
+			temp = Vector3.Distance (aiObject.transform.position, ball[i].transform.position);
+			if(temp < playerAndBallsDistance)
+			{
+				playerAndBallsDistance = temp;
+				test = i;
+			}
+		}
+		isChosen = true;
 		return test;
 	}
 }

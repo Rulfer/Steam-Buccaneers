@@ -7,9 +7,10 @@ public class AImove : MonoBehaviour {
 	public static int swingSpeed = 50;
 	public float rotationPerSecond = 15f;
 	public float rotationMax = 45f;
-	private bool turnLeft = false;
-	private bool turnRight = false;
+	public static bool turnLeft = false;
+	public static bool turnRight = false;
 	public static bool stopMoving = false;
+	private bool startTurning = true;
 
 	public Transform agent;
 	public Transform player;
@@ -20,13 +21,27 @@ public class AImove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		relativePoint = transform.InverseTransformPoint(player.position);
-		Debug.Log(relativePoint);
+//		relativePoint = transform.InverseTransformPoint(player.position);
+//		Debug.Log(relativePoint);
 		checkAIPosition ();
+
+		if(MoveTo.playerStopped == true)
+		{
+			if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
+			{
+				stopMoving = true;
+				startTurning = true;
+			}
+		}
+
+		else stopMoving = false;
 
 		if(stopMoving == true)
 		{
-			isFacingPlayer();
+			if(startTurning == true)
+			{
+				isFacingPlayer();
+			}
 		}
 
 		else transform.Translate (Vector3.forward/forwardSpeed);
@@ -81,18 +96,15 @@ public class AImove : MonoBehaviour {
 			{
 				if(relativePoint.z <= -0.1)
 				{
+					startTurning = true;
 					turnLeft = true;
 					turnRight = false;
 				}
 				if(relativePoint.z >= 0.1)
 				{
+					startTurning = true;
 					turnLeft = false;
 					turnRight = true;
-				}
-				if(relativePoint.z == 0)
-				{
-					turnLeft = false;
-					turnRight = false;
 				}
 			}
 
@@ -108,12 +120,14 @@ public class AImove : MonoBehaviour {
 					turnLeft = true;
 					turnRight = false;
 				}
-				if(relativePoint.z == 0)
-				{
-					turnLeft = false;
-					turnRight = false;
-				}
 			}
+		}
+
+		else
+		{
+			turnLeft = false;
+			turnRight = false;
+			startTurning = false;
 		}
 	}
 

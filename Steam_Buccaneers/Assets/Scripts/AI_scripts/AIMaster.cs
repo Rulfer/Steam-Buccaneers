@@ -6,6 +6,7 @@ public class AIMaster : MonoBehaviour {
 	public static float detectDistance;
 	private GameObject playerPoint;
 	public Transform aiPoint;
+	public static int aiHealth = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -36,5 +37,18 @@ public class AIMaster : MonoBehaviour {
 //			GetComponent<AIPatroling> ().enabled = true;
 //			GetComponent<MoveTo> ().enabled = false;
 //		}
+	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.gameObject.tag == "playerBullet")
+		{
+			aiHealth --;
+			Debug.Log("aiHealth = " + aiHealth);
+			if(aiHealth <= 0)
+			{
+				GetComponent<aiDestroy> ().enabled = true;
+			}
+		}
 	}
 }

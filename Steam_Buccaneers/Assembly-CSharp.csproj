@@ -66,11 +66,11 @@
      <Compile Include="Assets\Scripts\Ship\Inventory.cs" />
      <Compile Include="Assets\Scripts\Ship\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Ship\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Ship\RotateShip.cs" />
      <Compile Include="Assets\Scripts\Ship\cameraController.cs" />
      <Compile Include="Assets\Scripts\Ship\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
+     <Compile Include="Assets\aiDestroy.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

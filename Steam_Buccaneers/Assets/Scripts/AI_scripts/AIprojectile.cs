@@ -41,8 +41,8 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player") 
 		{
-			Debug.Log ("We hit the player!");
-			Debug.Log ("Damage delt is " + damageOutput);
+			//Debug.Log ("We hit the player!");
+			//Debug.Log ("Damage delt is " + damageOutput);
 			Destroy (this.gameObject);
 		}
 	}
