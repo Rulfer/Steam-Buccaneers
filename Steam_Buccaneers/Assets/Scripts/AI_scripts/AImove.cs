@@ -12,11 +12,17 @@ public class AImove : MonoBehaviour {
 	public static bool stopMoving = false;
 	private bool startTurning = true;
 
-	public Transform agent;
-	public Transform player;
+	private GameObject agent;
+	private GameObject player;
 	private Vector3 relativePoint;
 
 	private bool agentInFrontOfPlayer;
+
+	void Start ()
+	{
+		agent = GameObject.FindGameObjectWithTag("aiAgent");
+		player = GameObject.FindGameObjectWithTag("Player");
+	}
 
 	// Update is called once per frame
 	void Update () 
@@ -25,7 +31,7 @@ public class AImove : MonoBehaviour {
 //		Debug.Log(relativePoint);
 		checkAIPosition ();
 
-		if(MoveTo.playerStopped == true)
+		if(PlayerMove.goingForward == false)
 		{
 			if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
 			{
@@ -73,9 +79,9 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
-	private Vector3 Transformation(Transform test)
+	private Vector3 Transformation(GameObject test)
 	{
-		relativePoint = transform.InverseTransformPoint(test.position);
+		relativePoint = transform.InverseTransformPoint(test.transform.position);
 		return relativePoint;
 	}
 

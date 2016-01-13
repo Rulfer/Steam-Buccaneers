@@ -5,13 +5,13 @@ public class PlayerMove : MonoBehaviour
 {
 	public Rigidbody donger;
 	public float force = 0.5f;
-	public int turnSpeed = 2;
+	public int turnSpeed = 40;
 	Vector3 maxVelocity = new Vector3 (0.5f, 0.0f, 0.5f);
 	//Quaternion playerUpright = GameObject.Find("Small_Ship").transform.transform.rotation;
 	//private GameObject Small_Ship;
-	public bool turnLeft = false;
-	public bool turnRight = false;
-	public bool goingForward = false;
+	public static bool turnLeft = false;
+	public static bool turnRight = false;
+	public static bool goingForward = false;
 	//Vector3 prevVelocity = new Vector3 (x,y,z);
 
 
@@ -78,7 +78,6 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetKey (KeyCode.D)) 
 		{
 			transform.Rotate (Vector3.back, turnSpeed*Time.deltaTime);
-			GameObject.Find("Small_Ship").transform.Rotate(Vector3.up, turnSpeed*Time.deltaTime);
 			turnRight = true;
 		}
 		// ALT DETTE ER NYTT

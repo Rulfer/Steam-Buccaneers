@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\aiDestroy.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
@@ -70,7 +71,8 @@
      <Compile Include="Assets\Scripts\Ship\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
-     <Compile Include="Assets\aiDestroy.cs" />
+     <Compile Include="Assets\ballsPosition.cs" />
+     <Compile Include="Assets\playerBulletHit.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

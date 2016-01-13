@@ -37,9 +37,9 @@ public class AIprojectile : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision other)
+	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Player") 
+		if (other.tag == "Player") 
 		{
 			//Debug.Log ("We hit the player!");
 			//Debug.Log ("Damage delt is " + damageOutput);

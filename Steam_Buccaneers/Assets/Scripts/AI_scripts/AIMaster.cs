@@ -6,16 +6,30 @@ public class AIMaster : MonoBehaviour {
 	public static float detectDistance;
 	private GameObject playerPoint;
 	public Transform aiPoint;
-	public static int aiHealth = 10;
+	public static int aiHealth;
 
 	// Use this for initialization
 	void Start () {
+		if(this.gameObject.name == "AI_LVL1")
+		{
+			aiHealth = 10;
+		}
+		if(this.gameObject.name == "AI_LVL2")
+		{
+			aiHealth = 15;
+		}
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 	}
 	
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, aiPoint.transform.position); //calculates the distance between the AI and the player
 		 
+		if(aiHealth <= 0)
+		{
+			spawnAI.livingShip = false;
+			Debug.Log("There are now no longer any living ships: " + spawnAI.livingShip);
+			Destroy(this.transform.parent.gameObject);
+		}
 		//We dont want to render the AI if its to far away from the player,
 		//so we delete it when the distance is equal or greater than 100 (we can change this number at any time).
 //		if (detectDistance >= 100) {
@@ -39,16 +53,20 @@ public class AIMaster : MonoBehaviour {
 //		}
 	}
 
-	void OnCollisionEnter(Collision other)
-	{
-		if(other.gameObject.tag == "playerBullet")
-		{
-			aiHealth --;
-			Debug.Log("aiHealth = " + aiHealth);
-			if(aiHealth <= 0)
-			{
-				GetComponent<aiDestroy> ().enabled = true;
-			}
-		}
-	}
+//	void OnTriggerEnter(Collider other)
+//	{
+//		if(this.tag == "detectRight" || this.tag == "detectLeft")
+//		{
+//		}
+//		if(other.tag == "playerBullet")
+//		{
+//			Destroy(other.gameObject);
+//			aiHealth --;
+//			Debug.Log("aiHealth = " + aiHealth);
+//			if(aiHealth <= 0)
+//			{
+//				Destroy(this.transform.parent.gameObject);
+//			}
+//		}
+//	}
 }

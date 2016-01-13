@@ -9,8 +9,8 @@ public class MoveTo : MonoBehaviour {
 	private GameObject[] ball; //Array for the balls around the player
 	//public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
 	public Transform aiPoint; //We now use the basic Agent object. No detector in front, as the AI is to follow this Agent.
-	public Transform player;
-	public Transform aiObject;
+	public GameObject player;
+	public GameObject aiObject;
 
 	private float distance = 1000; //An unreasonable large distance used for testing
 	private float playerAndBallsDistance = 1000;
@@ -18,33 +18,28 @@ public class MoveTo : MonoBehaviour {
 	public static int aiTargetBall;
 
 	private bool isChosen = false;
-	public static bool playerStopped = false;
+	private bool isTurning = false;
 
 	private NavMeshAgent agent; //AI Agent
 
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		aiObject = GameObject.FindGameObjectWithTag("aiShip");
 		ball = GameObject.FindGameObjectsWithTag("playerBalls"); //Finds all gameobjects with the tag "playerBalls" and put them in the array
 	}
 
 	void Update() {
-		playerNewPos = player.position; //The new position of the player
 
-		if(playerNewPos == playerPrevPos) //If its equal to the previous, then the player has stopped moving
+		if(PlayerMove.goingForward == false) //If its equal to the previous, then the player has stopped moving
 		{
-			playerStopped = true;
 			stopNextToPlayer(); //Make the next AI move
-		}
-
-		if(AImove.turnLeft == true || AImove.turnRight == true)
-		{
-			playerIsTurning();
 		}
 
 		else
 		{
 			isChosen = false;
-			playerStopped = false;
+			isTurning = false;
 			touchBalls (); //Continue to touch the balls
 		}
 		playerPrevPos = playerNewPos; //Save the new position as the previous one to conduct new tests
@@ -62,12 +57,6 @@ public class MoveTo : MonoBehaviour {
 			}
 		}
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
-	}
-
-	void playerIsTurning()
-	{
-		aiTargetBall = studyBalls(aiTargetBall);
-		agent.destination = ball [aiTargetBall].transform.position;
 	}
 
 	void stopNextToPlayer()
