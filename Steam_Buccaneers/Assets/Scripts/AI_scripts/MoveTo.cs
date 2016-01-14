@@ -14,6 +14,7 @@ public class MoveTo : MonoBehaviour {
 
 	private float distance = 1000; //An unreasonable large distance used for testing
 	private float playerAndBallsDistance = 1000;
+	public float minDistanceToPlayerBall = 40; //The minimun distance the AI Ship must have between itself and a player ball
 
 	public static int aiTargetBall;
 
@@ -59,6 +60,8 @@ public class MoveTo : MonoBehaviour {
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
 	}
 
+	//Makes the Agent choose a ball that is close to the AI Ship.
+	//This happens when the player stoppes moving forward.
 	void stopNextToPlayer()
 	{
 		if(isChosen == false)
@@ -73,15 +76,20 @@ public class MoveTo : MonoBehaviour {
 	private int studyBalls(int test)
 	{
 		float temp;
-		for (int i = 0; i < ball.Length; i++)
+		for (int i = 0; i < ball.Length; i++) //Runs equal to the ammount of player balls
 		{
-			temp = Vector3.Distance (aiObject.transform.position, ball[i].transform.position);
-			if(temp < playerAndBallsDistance)
+			temp = Vector3.Distance (aiObject.transform.position, ball[i].transform.position); //Distance between AI Ship and the chosen ball
+			Debug.Log("ball " + i + " er lengden " + temp);
+			if(temp >= minDistanceToPlayerBall)
 			{
-				playerAndBallsDistance = temp;
-				test = i;
+				if(temp < playerAndBallsDistance)
+				{
+					playerAndBallsDistance = temp;
+					test = i;
+				}
 			}
 		}
+		Debug.Log("Vi returnerer " + test);
 		isChosen = true;
 		return test;
 	}

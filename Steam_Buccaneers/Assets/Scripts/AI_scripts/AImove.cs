@@ -2,55 +2,81 @@
 using System.Collections;
 
 public class AImove : MonoBehaviour {
-	public static float forwardSpeed = 20;
 	public static int turnSpeed = 20;
 	public static int swingSpeed = 50;
+
+	private int targetPlanet;
+
+	public static float forwardSpeed = 20;
+
 	public float rotationPerSecond = 15f;
 	public float rotationMax = 45f;
+
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool stopMoving = false;
+
+	private bool agentInFrontOfPlayer;
 	private bool startTurning = true;
+	private bool planetTrouble = false;
 
 	private GameObject agent;
 	private GameObject player;
-	private Vector3 relativePoint;
+	private GameObject[] planets;
 
-	private bool agentInFrontOfPlayer;
+	private Vector3 relativePoint;
 
 	void Start ()
 	{
 		agent = GameObject.FindGameObjectWithTag("aiAgent");
 		player = GameObject.FindGameObjectWithTag("Player");
+		planets = GameObject.FindGameObjectsWithTag("Planet");
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-//		relativePoint = transform.InverseTransformPoint(player.position);
+//		relativePoint = transform.InverseTransformPoint(player.transform.position);
 //		Debug.Log(relativePoint);
 		checkAIPosition ();
+		planetTrouble = spotPlanets();
 
-		if(PlayerMove.goingForward == false)
+		if(planetTrouble == true)
 		{
-			if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
-			{
-				stopMoving = true;
-				startTurning = true;
-			}
+
 		}
 
-		else stopMoving = false;
-
-		if(stopMoving == true)
+		else
 		{
-			if(startTurning == true)
+			if(PlayerMove.goingForward == false)
 			{
-				isFacingPlayer();
+				if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
+				{
+					stopMoving = true;
+					startTurning = true;
+				}
 			}
-		}
 
-		else transform.Translate (Vector3.forward/forwardSpeed);
+			else stopMoving = false;
+
+			if(stopMoving == true)
+			{
+				if(startTurning == true)
+				{
+					isFacingPlayer(player);
+				}
+			}
+
+			if(PlayerMove.goingForward == false && startTurning == false && stopMoving == true)
+			{
+				if(AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false)
+				{
+					startTurning = true;
+				}
+			}
+
+			else transform.Translate (Vector3.forward/forwardSpeed);
+		}
 
 		if (turnLeft == true) 
 		{
@@ -63,6 +89,22 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	private bool spotPlanets()
+	{
+		float temp;
+
+		for(int i = 0; i < planets.Length; i++)
+		{
+			temp = Vector3.Distance (this.transform.position, planets[i].transform.position); //Distance between AI Ship and the chosen ball
+			if(temp <= 150)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	void checkAIPosition()
 	{
 		agentInFrontOfPlayer = isFacingAgent ();
@@ -71,7 +113,6 @@ public class AImove : MonoBehaviour {
 		{
 			turnLeft = false;
 			turnRight = false;
-			return;
 		} 
 		else 
 		{
@@ -92,21 +133,21 @@ public class AImove : MonoBehaviour {
 		else return false;
 	}
 
-	void isFacingPlayer()
+	private void isFacingPlayer(GameObject test)
 	{
-		relativePoint = Transformation(player);
+		relativePoint = Transformation(test);
 
 		if(relativePoint.z != 0)
 		{
 			if(relativePoint.x < 0)
 			{
-				if(relativePoint.z <= -0.1)
+				if(relativePoint.z < 0)
 				{
 					startTurning = true;
 					turnLeft = true;
 					turnRight = false;
 				}
-				if(relativePoint.z >= 0.1)
+				if(relativePoint.z > 0)
 				{
 					startTurning = true;
 					turnLeft = false;
@@ -121,7 +162,7 @@ public class AImove : MonoBehaviour {
 					turnLeft = false;
 					turnRight = true;
 				}
-				if(relativePoint.z >= 0)
+				if(relativePoint.z > 0)
 				{
 					turnLeft = true;
 					turnRight = false;
@@ -151,7 +192,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay(Collider other)
+	void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "aiAgent")
 		{

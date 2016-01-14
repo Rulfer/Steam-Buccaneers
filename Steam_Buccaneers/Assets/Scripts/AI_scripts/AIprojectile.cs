@@ -26,9 +26,6 @@ public class AIprojectile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	//	transform.Translate (Vector3.right * projectileSpeed * Time.deltaTime);
-
-
 		distance = Vector3.Distance(transform.position, GameObject.Find("PlayerShip").transform.position);
 
 		if (distance >= 40)
