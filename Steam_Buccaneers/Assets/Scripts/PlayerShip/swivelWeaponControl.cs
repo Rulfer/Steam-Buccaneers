@@ -35,7 +35,7 @@ public class swivelWeaponControl : MonoBehaviour
 		//av en eller annen grunn som roterer linja under objektet i 90 grader eller noe sånt, og det funker ikke riktig.
 
 		//husk at også projectile(scriptet) er endra på til å skyte "fremover" i sin y-akse, ikke x/z som den egentlig skal.
-		transform.eulerAngles = new Vector3 (90,0,Mathf.Atan2((mousePos.z - transform.position.z), (mousePos.x - transform.position.x))*Mathf.Rad2Deg +90);
+		transform.eulerAngles = new Vector3 (90,0,Mathf.Atan2((mousePos.z - transform.position.z), (mousePos.x - transform.position.x))*Mathf.Rad2Deg -90);
 		//transform.rotation = Quaternion.Euler (0,0,Mathf.Atan2((mousePos.y - transform.rotation.y), (mousePos.x - transform.rotation.x))*Mathf.Rad2Deg);
 
 		//distanse mellom mus og swivelen
