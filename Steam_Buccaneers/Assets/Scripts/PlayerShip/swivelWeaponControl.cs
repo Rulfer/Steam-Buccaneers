@@ -41,6 +41,6 @@ public class swivelWeaponControl : MonoBehaviour
 		//distanse mellom mus og swivelen
 		distanceFromObject = (Input.mousePosition - main.WorldToScreenPoint(transform.position)).magnitude;
 		//flytte seg mot musa
-		GetComponent<Rigidbody>().AddForce(direction * speed * distanceFromObject * Time.deltaTime);
+		//GetComponent<Rigidbody>().AddForce(direction * speed * distanceFromObject * Time.deltaTime);
 	}
 }
