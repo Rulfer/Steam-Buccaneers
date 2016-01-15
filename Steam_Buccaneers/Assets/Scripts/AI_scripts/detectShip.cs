@@ -10,10 +10,12 @@ public class detectShip : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player" && this.gameObject.tag == "detectRight") {
 			AIsideCanons.fireLeft = true;
+			//AImove.stopMoving = true;
 		}
 
 		if (other.gameObject.tag == "Player" && this.gameObject.tag == "detectLeft") {
 			AIsideCanons.fireRight = true;
+			//AImove.stopMoving = true;
 		}
 	}
 
@@ -22,6 +24,7 @@ public class detectShip : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			AIsideCanons.fireLeft = false;
 			AIsideCanons.fireRight = false;
+			//AImove.stopMoving = false;
 		}
 	}
 }

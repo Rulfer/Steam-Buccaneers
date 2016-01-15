@@ -3,7 +3,7 @@ using System.Collections;
 
 public class spawnAI : MonoBehaviour
 {
-	public Transform playerPoint; //Player position
+	private GameObject playerPoint; //Player position
 	public Transform AI1; //AI_LVL1 prefab
 	public Transform AI2; //AI_LVL2 prefab
 	public Transform[] spawnPoints; //Array containing all spawnpoints
@@ -15,6 +15,7 @@ public class spawnAI : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		playerPoint = GameObject.FindGameObjectWithTag("Player");
 		spawnShip ();
 	}
 
@@ -23,6 +24,7 @@ public class spawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
+		Debug.Log("We are waiting");
 		Invoke ("checkShipStatus", 5);
 	}
 
@@ -30,6 +32,7 @@ public class spawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		if (livingShip == false) { //There are no living ships, therefore we spawn a new one
+			Debug.Log("Hello");
 			spawnShip ();
 		}
 
