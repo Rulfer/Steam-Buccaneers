@@ -13,8 +13,8 @@ public class GameControl : MonoBehaviour {
 	//Here is the gamedata saved
 	public Vector3 shipPos;
 	public string storeName = "";
-	public int health = 20;
-	public int money = 100;
+	public int health;
+	public int money;
 
 	void Awake () 
 	{

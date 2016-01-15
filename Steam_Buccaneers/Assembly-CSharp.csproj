@@ -72,9 +72,8 @@
      <Compile Include="Assets\Scripts\Ship\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
-     <Compile Include="Assets\Scripts\Shop\disableOnStart.cs" />
-     <Compile Include="Assets\Scripts\Shop\openRepair.cs" />
-     <Compile Include="Assets\turnOnUpgradeMenu.cs" />
+     <Compile Include="Assets\Scripts\Shop\monies.cs" />
+     <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
