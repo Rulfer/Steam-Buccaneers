@@ -26,7 +26,7 @@ public class cameraController : MonoBehaviour
 
 		if (scrollDistance > 0f)
 		{
-			if (distanceAway >= 5)
+			if (distanceAway >= 20)
 			{
 				//Debug.Log (scrollDistance);
 				distanceAway -= scrollBy;
@@ -36,7 +36,7 @@ public class cameraController : MonoBehaviour
 		else if (scrollDistance < 0f)
 		{
 			// scroll down
-			if (distanceAway <= 20)
+			if (distanceAway <= 40)
 			{
 				//Debug.Log (scrollDistance);
 				distanceAway += scrollBy;

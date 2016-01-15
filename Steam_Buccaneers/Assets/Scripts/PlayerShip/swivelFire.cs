@@ -22,6 +22,7 @@ public class swivelFire : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		//Debug.Log ("fukku shittu");
 		if (Input.GetButton ("Fire1") && Time.time > fireDelay && PlayerStatus.swivelAmmo > 0)
 		{
 			AudioSource pewPew = GetComponent<AudioSource> ();
