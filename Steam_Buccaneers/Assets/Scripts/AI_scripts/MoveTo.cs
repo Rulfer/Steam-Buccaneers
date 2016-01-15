@@ -32,7 +32,7 @@ public class MoveTo : MonoBehaviour {
 
 	void Update() {
 
-		if(PlayerMove.goingForward == false) //If its equal to the previous, then the player has stopped moving
+		if(PlayerMove2.goingForward == false) //If its equal to the previous, then the player has stopped moving
 		{
 			stopNextToPlayer(); //Make the next AI move
 		}

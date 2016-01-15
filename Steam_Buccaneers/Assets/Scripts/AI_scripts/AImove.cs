@@ -34,7 +34,10 @@ public class AImove : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	/// <summary>
+    /// 
+    /// </summary>
+    void Update () 
 	{
 //		relativePoint = transform.InverseTransformPoint(player.transform.position);
 //		Debug.Log(relativePoint);
@@ -48,7 +51,7 @@ public class AImove : MonoBehaviour {
 
 		else
 		{
-			if(PlayerMove.goingForward == false)
+			if(PlayerMove2.goingForward == false)
 			{
 				if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
 				{
@@ -67,7 +70,7 @@ public class AImove : MonoBehaviour {
 				}
 			}
 
-			if(PlayerMove.goingForward == false && startTurning == false && stopMoving == true)
+			if(PlayerMove2.goingForward == false && startTurning == false && stopMoving == true)
 			{
 				if(AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false)
 				{
