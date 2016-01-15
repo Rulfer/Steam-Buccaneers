@@ -34,11 +34,14 @@ public class AImove : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	/// <summary>
+    /// 
+    /// </summary>
+    void Update () 
 	{
 //		relativePoint = transform.InverseTransformPoint(player.transform.position);
 //		Debug.Log(relativePoint);
-		checkAIPosition ();
+/*		checkAIPosition ();
 		planetTrouble = spotPlanets();
 
 		if(planetTrouble == true)
@@ -86,7 +89,7 @@ public class AImove : MonoBehaviour {
 		if (turnRight == true) 
 		{
 			transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
-		}
+		}*/
 	}
 
 	private bool spotPlanets()
