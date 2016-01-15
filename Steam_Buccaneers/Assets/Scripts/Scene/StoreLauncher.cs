@@ -13,7 +13,7 @@ public class StoreLauncher : MonoBehaviour {
 			//Writes data to file in GameControl.cs
 			GameControl.control.Save (this.name);
 			//Write whatever scene we want to go to here
-			GameControl.control.ChangeScene("Store");
+			GameControl.control.ChangeScene("Shop");
 		}
 	}
 }
