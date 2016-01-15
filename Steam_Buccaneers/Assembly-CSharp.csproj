@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\aiDestroy.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\ballsPosition.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\playerBulletHit.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\swivelFire.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\swivelWeaponControl.cs" />
@@ -79,10 +81,10 @@
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -32,17 +32,17 @@ public class MoveTo : MonoBehaviour {
 
 	void Update() {
 
-//		if(PlayerMove.goingForward == false) //If its equal to the previous, then the player has stopped moving
-//		{
-//			stopNextToPlayer(); //Make the next AI move
-//		}
-//
-//		else
-//		{
-//			isChosen = false;
-//			isTurning = false;
-//			touchBalls (); //Continue to touch the balls
-//		}
+		if(PlayerMove2.goingForward == false) //If its equal to the previous, then the player has stopped moving
+		{
+			stopNextToPlayer(); //Make the next AI move
+		}
+
+		else
+		{
+			isChosen = false;
+			isTurning = false;
+			touchBalls (); //Continue to touch the balls
+		}
 		playerPrevPos = playerNewPos; //Save the new position as the previous one to conduct new tests
 	}
 
