@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +63,6 @@
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
-     <Compile Include="Assets\Scripts\Scene\LaunchStore.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Ship\Inventory.cs" />
      <Compile Include="Assets\Scripts\Ship\PlayerMove.cs" />
@@ -73,11 +72,13 @@
      <Compile Include="Assets\Scripts\Ship\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
      <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
+     <Compile Include="Assets\Scripts\Shop\monies.cs" />
+     <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
