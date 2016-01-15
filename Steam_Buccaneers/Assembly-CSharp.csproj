@@ -65,7 +65,6 @@
      <Compile Include="Assets\Scripts\Scene\LaunchStore.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Ship\Inventory.cs" />
-     <Compile Include="Assets\Scripts\Ship\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Ship\Projectile.cs" />
      <Compile Include="Assets\Scripts\Ship\ballsPosition.cs" />
      <Compile Include="Assets\Scripts\Ship\cameraController.cs" />
