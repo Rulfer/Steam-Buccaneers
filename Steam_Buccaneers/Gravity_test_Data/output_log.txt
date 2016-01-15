@@ -14,18 +14,20 @@ Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\
 Loading D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.310 seconds
+- Completed reload, in  0.346 seconds
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.281495 ms
-Failed to create agent because there is no valid NavMesh
- 
-(Filename:  Line: 497)
-
+UnloadTime: 1.331713 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2a38 -> priority: 1 
-  Thread -> id: 1bb4 -> priority: 1 
+  Thread -> id: 38c0 -> priority: 1 
+  Thread -> id: 26b0 -> priority: 1 
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.963019 ms
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 449.
+Total: 0.913555 ms (FindLiveObjects: 0.050224 ms CreateObjectMapping: 0.038809 ms MarkObjects: 0.687164 ms  DeleteObjects: 0.136215 ms)
+
