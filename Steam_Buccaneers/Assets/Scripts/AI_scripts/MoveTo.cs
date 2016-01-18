@@ -3,9 +3,6 @@ using System.Collections;
 
 public class MoveTo : MonoBehaviour {
 
-	private Vector3 playerPrevPos;
-	private Vector3 playerNewPos;
-
 	private GameObject[] ball; //Array for the balls around the player
 	//public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
 	public Transform aiPoint; //We now use the basic Agent object. No detector in front, as the AI is to follow this Agent.
@@ -43,7 +40,6 @@ public class MoveTo : MonoBehaviour {
 			isTurning = false;
 			touchBalls (); //Continue to touch the balls
 		}
-		playerPrevPos = playerNewPos; //Save the new position as the previous one to conduct new tests
 	}
 
 	//This function makes it so that the AI follows the balls surrounding the player instead of the player itself.
@@ -79,7 +75,6 @@ public class MoveTo : MonoBehaviour {
 		for (int i = 0; i < ball.Length; i++) //Runs equal to the ammount of player balls
 		{
 			temp = Vector3.Distance (aiObject.transform.position, ball[i].transform.position); //Distance between AI Ship and the chosen ball
-			Debug.Log("ball " + i + " er lengden " + temp);
 			if(temp >= minDistanceToPlayerBall)
 			{
 				if(temp < playerAndBallsDistance)
@@ -89,7 +84,6 @@ public class MoveTo : MonoBehaviour {
 				}
 			}
 		}
-		Debug.Log("Vi returnerer " + test);
 		isChosen = true;
 		return test;
 	}

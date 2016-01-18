@@ -4,25 +4,20 @@ using System.Collections;
 public class AImove : MonoBehaviour {
 	public static int turnSpeed = 20;
 	public static int swingSpeed = 50;
-
 	private int targetPlanet;
 
 	public static float forwardSpeed = 20;
-
 	public float rotationPerSecond = 15f;
 	public float rotationMax = 45f;
 
-	public static bool turnLeft = false;
-	public static bool turnRight = false;
+	private bool turnLeft = false;
+	private bool turnRight = false;
 	public static bool stopMoving = false;
-
 	private bool agentInFrontOfPlayer;
 	private bool startTurning = true;
-	private bool planetTrouble = false;
 
 	private GameObject agent;
 	private GameObject player;
-	private GameObject[] planets;
 
 	private Vector3 relativePoint;
 
@@ -30,56 +25,43 @@ public class AImove : MonoBehaviour {
 	{
 		agent = GameObject.FindGameObjectWithTag("aiAgent");
 		player = GameObject.FindGameObjectWithTag("Player");
-		planets = GameObject.FindGameObjectsWithTag("Planet");
 	}
-
-	// Update is called once per frame
-	/// <summary>
-    /// 
-    /// </summary>
+		
     void Update () 
 	{
 //		relativePoint = transform.InverseTransformPoint(player.transform.position);
 //		Debug.Log(relativePoint);
 		checkAIPosition ();
-		planetTrouble = spotPlanets();
 
-		if(planetTrouble == true)
+		if(PlayerMove2.goingForward == false)
 		{
-
+			if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
+			{
+				stopMoving = true;
+				startTurning = true;
+			}
 		}
 
-		else
+		else stopMoving = false;
+
+		if(stopMoving == true)
 		{
-			if(PlayerMove2.goingForward == false)
+			if(startTurning == true)
 			{
-				if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
-				{
-					stopMoving = true;
-					startTurning = true;
-				}
+				canonsFacingPlayer(player);
 			}
-
-			else stopMoving = false;
-
-			if(stopMoving == true)
-			{
-				if(startTurning == true)
-				{
-					isFacingPlayer(player);
-				}
-			}
-
-			if(PlayerMove2.goingForward == false && startTurning == false && stopMoving == true)
-			{
-				if(AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false)
-				{
-					startTurning = true;
-				}
-			}
-
-			else transform.Translate (Vector3.forward/forwardSpeed);
 		}
+
+		if(PlayerMove2.goingForward == false && startTurning == false && stopMoving == true)
+		{
+			if(AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false)
+			{
+				startTurning = true;
+			}
+		}
+
+		else transform.Translate (Vector3.forward/forwardSpeed);
+
 
 		if (turnLeft == true) 
 		{
@@ -90,24 +72,12 @@ public class AImove : MonoBehaviour {
 		{
 			transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
 		}
+
 	}
 
-	private bool spotPlanets()
-	{
-		float temp;
-
-		for(int i = 0; i < planets.Length; i++)
-		{
-			temp = Vector3.Distance (this.transform.position, planets[i].transform.position); //Distance between AI Ship and the chosen ball
-			if(temp <= 150)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
+	//Uses the data recieved from isFacingAgent
+	//to determine weather or not to turn left,
+	//right or continue driving forward
 	void checkAIPosition()
 	{
 		agentInFrontOfPlayer = isFacingAgent ();
@@ -123,12 +93,16 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	//Runs a test and returns the result in a float variable.
+	//Used to determine if an object is to the left, right
+	//or front of This object
 	private Vector3 Transformation(GameObject test)
 	{
 		relativePoint = transform.InverseTransformPoint(test.transform.position);
 		return relativePoint;
 	}
 
+	//Checks if the AI Ship is facing the Agent object or not
 	private bool isFacingAgent()
 	{
 		relativePoint = Transformation(agent);
@@ -136,7 +110,11 @@ public class AImove : MonoBehaviour {
 		else return false;
 	}
 
-	private void isFacingPlayer(GameObject test)
+	//Turns the AI Ship so that the canons on either side
+	//is facing straight for the player.
+	//This is so that if the player is stationary, the
+	//AI will still shoot on it.
+	private void canonsFacingPlayer(GameObject test)
 	{
 		relativePoint = Transformation(test);
 
@@ -181,6 +159,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	//Makes the AI Ship turn towards the agent
 	void turnTowardsAgent()
 	{
 		relativePoint = Transformation(agent);
@@ -195,6 +174,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	//Stops the AI Ship when it collides with the Agent
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "aiAgent")
@@ -203,6 +183,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	//Makes the AI move again
 	void OnTriggerExit(Collider other)
 	{
 		if(other.tag == "aiAgent")
