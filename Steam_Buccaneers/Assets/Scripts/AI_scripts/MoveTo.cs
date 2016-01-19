@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class MoveTo : MonoBehaviour {
+	public static MoveTo move;
 
 	private GameObject[] ball; //Array for the balls around the player
 	//public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
@@ -17,6 +18,7 @@ public class MoveTo : MonoBehaviour {
 
 	private bool isChosen = false;
 	private bool isTurning = false;
+	public static bool newBall = false;
 
 	private NavMeshAgent agent; //AI Agent
 
@@ -29,6 +31,12 @@ public class MoveTo : MonoBehaviour {
 
 	void Update() {
 
+		if(newBall == true)
+		{
+			isChosen = false;
+			stopNextToPlayer();
+			newBall = false;
+		}
 		if(PlayerMove2.goingForward == false) //If its equal to the previous, then the player has stopped moving
 		{
 			stopNextToPlayer(); //Make the next AI move
@@ -58,7 +66,7 @@ public class MoveTo : MonoBehaviour {
 
 	//Makes the Agent choose a ball that is close to the AI Ship.
 	//This happens when the player stoppes moving forward.
-	void stopNextToPlayer()
+	public void stopNextToPlayer()
 	{
 		if(isChosen == false)
 		{

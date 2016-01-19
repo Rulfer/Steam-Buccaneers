@@ -19,8 +19,8 @@ public class avoidPlanet : MonoBehaviour {
 	private float aiPlanetDistance;
 	private float distanceToPlanet;
 	private float distanceToPlayer;
-	private float minPlanetForwardDistance = 50;
-	private float minPlanetSideDistance = 20;
+	private float minPlanetForwardDistance = 60;
+	private float minPlanetSideDistance = 40;
 
 	private Vector3 relativePlanetPoint;
 	private Vector3 relativePlayerPoint;
@@ -55,6 +55,7 @@ public class avoidPlanet : MonoBehaviour {
 		if(relativePoint >= aiPlanetDistance)
 		{
 			GetComponent<AImove> ().enabled = true;
+			MoveTo.newBall = true;
 		}
 
 //			if(playerPrevPos.z < playerNewPos.z){playerHigherZ = true;}
@@ -117,21 +118,25 @@ public class avoidPlanet : MonoBehaviour {
 		distanceToPlanet = Vector3.Distance (this.transform.position, planets[planetI].transform.position); //distance between AI and planet
 		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //Distance between AI and player
 
-		Debug.Log(relativePlanetPoint);
+		Debug.Log(relativePlayerPoint);
+//		Debug.Log("distance to planet " + distanceToPlanet);
 
-		if(relativePlayerPoint.x == 0) //The player is to the front of the AI
+		if(relativePlayerPoint.x >-0.1 && relativePlayerPoint.x <0.1) //The player is to the front of the AI
 		{
 			playerToTheFront();
+			Debug.Log("Player fremover");
 		}
 
-		if(relativePlayerPoint.x < 0) //The player is to the left of the AI
+		if(relativePlayerPoint.x < -0.1)//The player is to the left of the AI
 		{
 			playerToTheLeft();
+			Debug.Log("Player til venstre");
 		}
 
-		if(relativePlayerPoint.x > 0) //The player is to the right of the AI
+		if(relativePlayerPoint.x > 0.1) //The player is to the right of the AI
 		{
 			playerToTheRight();
+			Debug.Log("Player til høyre");
 		}
 	}
 
@@ -411,7 +416,179 @@ public class avoidPlanet : MonoBehaviour {
 
 	private void playerToTheRight()
 	{
+		if(relativePlanetPoint.x == 0) //the planet is right in front of the AI
+		{
+			if(distanceToPlanet < minPlanetForwardDistance)
+			{
+				onlyRight();
+			}
+			else
+			{
+				rightandForward();
+			}
+		}
 
+		if(relativePlanetPoint.x > 0) //The planet is to the right of the AI
+		{
+			if(relativePlanetPoint.z > 0) //The planet is to the front
+			{
+				if(relativePlayerPoint.z > 0) //The player is to the front-right of the AI
+				{
+					if(relativePlayerPoint.z < relativePlanetPoint.z) //The player is not behind the planet
+					{
+						if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+						{
+							onlyRight();
+						}
+						else //The AI is far enough away from the planet
+						{
+							rightandForward();
+						}
+					}
+
+					else //The player could be behind the planet
+					{
+						if(relativePlayerPoint.x < relativePlanetPoint.x) //The player is not behind the planet
+						{
+							rightandForward();
+						}
+
+						else //The player is behind the planet
+						{
+							if(playerPrevPos.x < playerNewPos.x) //We know the player is moving away from the AI
+							{
+
+								//Need a better way to ca
+								if(playerPrevPos.z < playerNewPos.z) //Upwards and away from the AI
+								{
+									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+									{
+										leftAndForward();
+									}
+
+									else
+									{
+										rightandForward();
+									}
+								}
+
+								else //Down and away from the AI
+								{
+									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+									{
+										onlyRight();
+									}
+
+									else
+									{
+										rightandForward();
+									}
+								}
+							}
+
+							else //The player is driving to the left, towards the AI
+							{
+								//Seen as how both tests under this is equal, its unnessessary to include them both
+								//Saves them for now, in case of needed change later.
+								if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+								{
+									onlyRight();
+								}
+
+								else
+								{
+									rightandForward();
+								}
+								//								if(playerPrevPos.z < playerNewPos.z) //The player is driving upwards, away from the player
+								//								{
+								//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+								//									{
+								//										onlyRight();
+								//									}
+								//
+								//									else
+								//									{
+								//										rightandForward();
+								//									}
+								//								}
+								//
+								//								else //The player is driving closer to the player
+								//								{
+								//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+								//									{
+								//										onlyRight();
+								//									}
+								//
+								//									else
+								//									{
+								//										rightandForward();
+								//									}
+								//								}
+							}
+						}
+					}
+				}
+			}
+
+			else //The planet is to the rear
+			{
+				if(relativePlayerPoint.z > 0) //The player is to the front-right of the AI
+				{
+					if(playerPrevPos.x < playerNewPos.x)//The player is moving to the left
+					{
+						leftAndForward();
+					}
+					else
+					{
+						rightandForward(); //We aim for the player
+					}
+				}
+
+				else //The player is back with the planet
+				{
+					if(relativePlanetPoint.z < relativePlayerPoint.z) //The player is not behind the planet
+					{
+						if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+						{
+							onlyRight();
+						}
+						else
+						{
+							rightandForward();
+						}
+					}
+
+					else //the player could be behind the planet
+					{
+						if(relativePlayerPoint.x < relativePlanetPoint.x) //The player is not behind the planet
+						{
+							if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+							{
+								onlyRight();
+							}
+							else
+							{
+								rightandForward();
+							}
+						}
+
+						else //The player is behind the planet
+						{
+							//It does not matter what direction the player is driving, the AI
+							//must turn to the right anyway
+							if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
+							{
+								onlyRight();
+							}
+							else
+							{
+								rightandForward();
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void leftAndForward()

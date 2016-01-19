@@ -7,7 +7,7 @@ public class AIMaster : MonoBehaviour {
 	private GameObject playerPoint;
 	public Transform aiPoint;
 	public static int aiHealth;
-
+	private float killtimer = 0;
 	// Use this for initialization
 	void Start () {
 		if(this.gameObject.name == "AI_LVL1")
@@ -26,10 +26,24 @@ public class AIMaster : MonoBehaviour {
 		 
 		if(aiHealth <= 0)
 		{
-			spawnAI.livingShip = false;
-			Debug.Log("There are now no longer any living ships: " + spawnAI.livingShip);
-			Destroy(this.transform.parent.gameObject);
+			killAI();
 		}
+
+		if(detectDistance >= 60)
+		{
+			killtimer+= Time.deltaTime;
+		}
+
+		if(detectDistance < 60)
+		{
+			killtimer = 0;
+		}
+
+		if(killtimer > 5)
+		{
+			killAI();
+		}
+			
 		//We dont want to render the AI if its to far away from the player,
 		//so we delete it when the distance is equal or greater than 100 (we can change this number at any time).
 //		if (detectDistance >= 100) {
@@ -69,4 +83,10 @@ public class AIMaster : MonoBehaviour {
 //			}
 //		}
 //	}
+
+	private void killAI()
+	{
+		spawnAI.livingShip = false;
+		Destroy(this.transform.parent.gameObject);
+	}
 }
