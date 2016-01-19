@@ -53,7 +53,6 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\aiDestroy.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\ballsPosition.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />

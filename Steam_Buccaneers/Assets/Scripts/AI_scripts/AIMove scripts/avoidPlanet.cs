@@ -41,42 +41,22 @@ public class avoidPlanet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		relativePoint = Vector3.Distance (this.transform.position, planets[planetI].transform.position);
+		relativePoint = Vector3.Distance (this.transform.position, planets[planetI].transform.position); //Distance between AI and all planets
 
-		playerPrevPos = playerNewPos;
-		playerNewPos = player.transform.position;
+		playerPrevPos = playerNewPos; //Updates old player position
+		playerNewPos = player.transform.position; //Updates new player position
 
-		if(relativePoint <= aiPlanetDistance)
+		if(relativePoint <= aiPlanetDistance) //AI to close to a planet
 		{
 			GetComponent<AImove> ().enabled = false;
 			planNewRoute();
 		}
 
-		if(relativePoint >= aiPlanetDistance)
+		if(relativePoint >= aiPlanetDistance) //Out of danger
 		{
 			GetComponent<AImove> ().enabled = true;
 			MoveTo.newBall = true;
 		}
-
-//			if(playerPrevPos.z < playerNewPos.z){playerHigherZ = true;}
-//			else playerHigherZ = false;
-//
-//			if(playerPrevPos.x < playerNewPos.x){playerHigherX = true;}
-//			else {playerHigherX = false;}
-//
-//			distanceToPlanet = Vector3.Distance (this.transform.position, planet.transform.position); //Distance between AI Ship and the chosen ball
-//
-//			if(distanceToPlanet < minPlanetSideDistance)
-//			{
-//				planetSideClose = true;
-//			}
-//			else planetSideClose = false;
-//
-//			if(distanceToPlanet < minPlanetForwardDistance)
-//			{
-//				planetFrontClose = true;
-//			}
-//			else planetFrontClose = false;
 
 		if(moveForward == true)
 		{
@@ -591,6 +571,8 @@ public class avoidPlanet : MonoBehaviour {
 		}
 	}
 
+	//Here comes a bunch of prefab code to decrease
+	//the amount of reused lines of code.
 	private void leftAndForward()
 	{
 		turnLeft = true;

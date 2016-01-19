@@ -39,7 +39,7 @@ public class AIMaster : MonoBehaviour {
 			killtimer = 0;
 		}
 
-		if(killtimer > 5)
+		if(killtimer > 10)
 		{
 			killAI();
 		}
