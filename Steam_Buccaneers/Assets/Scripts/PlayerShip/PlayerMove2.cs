@@ -4,16 +4,11 @@ using System.Collections;
 public class PlayerMove2 : MonoBehaviour 
 {
 	public static Rigidbody donger;
-	//public static Rigidbody dingleDonger;
-	public GameObject schlonger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public static float force = 10.0f;
 	public static int turnSpeed = 20;
 	public static float dongerTurn = 0.50f;
 	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
-	//Vector3 maxRotation = new Vector3 (3.5f, 0.0f, 3.5f);
-	//Quaternion playerUpright = GameObject.Find("Small_Ship").transform.transform.rotation;
-	//private GameObject Small_Ship;
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
@@ -25,9 +20,6 @@ public class PlayerMove2 : MonoBehaviour
 	void Start () 
 	{
 		donger = GetComponent<Rigidbody>();
-		schlonger = GameObject.Find("Small_Ship");
-		//dingleDonger = schlonger.GetComponent<Rigidbody>();
-		//schlonger = GetComponent<Rigidbody>();
 
 	}
 
@@ -72,46 +64,21 @@ public class PlayerMove2 : MonoBehaviour
 			goingForward = false;
 		}
 
-		//float turn = Input.GetAxis("Horizontal");
 
 		if (Input.GetKey (KeyCode.A)) 
 		{
-			//if (transform.localEulerAngles.x > 110)
-			//{
-				//transform.Rotate (Vector3.left,2 * Time.deltaTime);
-			//}
 			transform.Rotate (Vector3.forward, turnSpeed*Time.deltaTime);
-			//dingleDonger.AddTorque(Vector3.up * dongerTurn*turn);
-			//schlonger.transform.Rotate(Vector3(0,0,-turnSpeed*Time.deltaTime));
 			turnLeft = true;
 		}
 
 		else
 		{
-//			dingleDonger.rotation = dingleDonger.rotation * 0.90;
 			turnLeft = false;
-			/*if (schlonger.transform.localEulerAngles.y < stopRotatingShitface.y)
-			{
-				
-				schlonger.transform.Rotate(-transform.up, turnSpeed*Time.deltaTime);
-				//Debug.Log ("i hate you");
-				if (schlonger.transform.localEulerAngles.y >= stopRotatingShitface.y)
-				{
-				//if (schlonger.transform.local
-				schlonger.transform.localEulerAngles = new Vector3 (90f, 
-					180f, 0f);
-				}
-			}*/
 		}
 
 		if (Input.GetKey (KeyCode.D)) 
 		{
 			transform.Rotate (Vector3.back, turnSpeed*Time.deltaTime);
-
-			//donger.AddTorque(-transform.forward * turnSpeed*Time.deltaTime);
-			//schlonger.transform.Rotate(Vector3(0,0,turnSpeed*Time.deltaTime));
-			//transform.Rotate (Vector3.up, turnSpeed*Time.deltaTime);
-			//GameObject.Find("Small_Ship").transform.Rotate(Vector3.forward, turnSpeed*Time.deltaTime);
 			turnRight = true;
 		}
 		// ALT DETTE ER NYTT
