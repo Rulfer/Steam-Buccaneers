@@ -48,6 +48,7 @@
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\avoidPlanet.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\chasePlayer.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />

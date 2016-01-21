@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿//This class is used to move the AI Agent around!
+//It detects the balls surrounding the player and drives towards the closest one.
+//The AI will follow this object.
+
+using UnityEngine;
 using System.Collections;
 
 public class MoveTo : MonoBehaviour {
 	public static MoveTo move;
 
 	private GameObject[] ball; //Array for the balls around the player
-	//public Transform aiPoint; //The AI has a ball in front of it, a detector. This is that detector used to detect the balls around the player
-	public Transform aiPoint; //We now use the basic Agent object. No detector in front, as the AI is to follow this Agent.
-	public GameObject player;
-	public GameObject aiObject;
+	public Transform agentObject; //We now use the basic Agent object. No detector in front, as the AI is to follow this Agent.
+	public GameObject player; //Player
+	//public GameObject aiObject; //AI ship
+	public GameObject aiPoint; //Detector in front of AI ship
 
 	private float distance = 1000; //An unreasonable large distance used for testing
 	private float playerAndBallsDistance = 1000;
@@ -17,7 +21,6 @@ public class MoveTo : MonoBehaviour {
 	public static int aiTargetBall;
 
 	private bool isChosen = false;
-	private bool isTurning = false;
 	public static bool newBall = false;
 
 	private NavMeshAgent agent; //AI Agent
@@ -25,7 +28,8 @@ public class MoveTo : MonoBehaviour {
 	void Start () {
 		agent = GetComponent<NavMeshAgent>();
 		player = GameObject.FindGameObjectWithTag("Player");
-		aiObject = GameObject.FindGameObjectWithTag("aiShip");
+		//aiObject = GameObject.FindGameObjectWithTag("aiShip");
+		aiPoint = GameObject.Find("aiPoint");
 		ball = GameObject.FindGameObjectsWithTag("playerBalls"); //Finds all gameobjects with the tag "playerBalls" and put them in the array
 	}
 
@@ -44,8 +48,6 @@ public class MoveTo : MonoBehaviour {
 
 		else
 		{
-			isChosen = false;
-			isTurning = false;
 			touchBalls (); //Continue to touch the balls
 		}
 	}
@@ -63,7 +65,7 @@ public class MoveTo : MonoBehaviour {
 		}
 		distance = 1000; //Resets the distance so a new test kan be initiated. 
 	}
-
+		
 	//Makes the Agent choose a ball that is close to the AI Ship.
 	//This happens when the player stoppes moving forward.
 	public void stopNextToPlayer()
@@ -72,17 +74,18 @@ public class MoveTo : MonoBehaviour {
 		{
 			aiTargetBall = studyBalls(aiTargetBall);
 			agent.destination = ball [aiTargetBall].transform.position;
+			isChosen = true;
 		}
 
 		else agent.destination = ball [aiTargetBall].transform.position;
 	}
 
-	private int studyBalls(int test)
+	private int studyBalls(int test) //Drives to the ball closest to the AI detector
 	{
 		float temp;
 		for (int i = 0; i < ball.Length; i++) //Runs equal to the ammount of player balls
 		{
-			temp = Vector3.Distance (aiObject.transform.position, ball[i].transform.position); //Distance between AI Ship and the chosen ball
+			temp = Vector3.Distance (aiPoint.transform.position, ball[i].transform.position); //Distance between AI Detector and the chosen ball
 			if(temp >= minDistanceToPlayerBall)
 			{
 				if(temp < playerAndBallsDistance)

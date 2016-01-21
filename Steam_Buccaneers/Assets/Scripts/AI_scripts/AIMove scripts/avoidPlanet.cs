@@ -52,11 +52,11 @@ public class avoidPlanet : MonoBehaviour {
 			planNewRoute();
 		}
 
-		if(relativePoint >= aiPlanetDistance) //Out of danger
-		{
-			GetComponent<AImove> ().enabled = true;
-			MoveTo.newBall = true;
-		}
+//		if(relativePoint >= aiPlanetDistance) //Out of danger
+//		{
+//			GetComponent<AImove> ().enabled = true;
+//			MoveTo.newBall = true;
+//		}
 
 		if(moveForward == true)
 		{
@@ -120,7 +120,7 @@ public class avoidPlanet : MonoBehaviour {
 		}
 	}
 
-	void playerToTheFront()
+	private void playerToTheFront()
 	{
 		//The planet is in front of the AI
 		if(relativePlanetPoint.x == 0)
