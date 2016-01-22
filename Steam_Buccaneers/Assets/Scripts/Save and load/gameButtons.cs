@@ -27,4 +27,9 @@ public class gameButtons : MonoBehaviour {
 		escMenuStatus = !escMenuStatus;
 	}
 
+	public void closeApplication()
+	{
+		Application.Quit();
+	}
+
 }
