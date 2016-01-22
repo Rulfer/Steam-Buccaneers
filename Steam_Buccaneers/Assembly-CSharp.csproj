@@ -45,12 +45,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Graphics\GUI components\Cursor.cs" />
+     <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIPatroling.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\aiDestroy.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\ballsPosition.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
@@ -58,22 +62,26 @@
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMoveWTurning.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\playerBulletHit.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\sideWeaponControl.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\swivelFire.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\swivelWeaponControl.cs" />
      <Compile Include="Assets\Scripts\Save and load\GameControl.cs" />
      <Compile Include="Assets\Scripts\Save and load\SaveLoadButtons.cs" />
+     <Compile Include="Assets\Scripts\Save and load\gameButtons.cs" />
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
-     <Compile Include="Assets\Scripts\Ship\Inventory.cs" />
-     <Compile Include="Assets\Scripts\Ship\PlayerMove.cs" />
-     <Compile Include="Assets\Scripts\Ship\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Ship\RotateShip.cs" />
-     <Compile Include="Assets\Scripts\Ship\cameraController.cs" />
-     <Compile Include="Assets\Scripts\Ship\sideWeaponControl.cs" />
-     <Compile Include="Assets\Scripts\Ship\swivelFire.cs" />
-     <Compile Include="Assets\Scripts\Ship\swivelWeaponControl.cs" />
+     <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
+     <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -11,8 +11,8 @@ public class DoNotDestroy : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-	
-		this.transform.position = GameObject.FindGameObjectWithTag ("Player").gameObject.transform.position; 
-		this.transform.Translate(Vector3.back * 11);
+//	
+//		this.transform.position = GameObject.FindGameObjectWithTag ("Player").gameObject.transform.position; 
+//		this.transform.Translate(Vector3.back * 11);
 	}
 }
