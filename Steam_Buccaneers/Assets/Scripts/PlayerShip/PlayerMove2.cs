@@ -5,8 +5,8 @@ public class PlayerMove2 : MonoBehaviour
 {
 	public static Rigidbody donger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
-	public static float force = 10.0f;
-	public static int turnSpeed = 20;
+	public static float force = 200.0f;
+	public static int turnSpeed = 70;
 	public static float dongerTurn = 0.50f;
 	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 	public static bool turnLeft = false;
@@ -60,8 +60,8 @@ public class PlayerMove2 : MonoBehaviour
 			
 		else
 		{
-			donger.velocity = donger.velocity * 0.90f;
-			goingForward = false;
+			//donger.velocity = donger.velocity * 0.90f;
+			//goingForward = false;
 		}
 
 
