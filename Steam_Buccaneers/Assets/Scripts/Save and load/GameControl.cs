@@ -15,6 +15,7 @@ public class GameControl : MonoBehaviour {
 	public string storeName = "";
 	public int health;
 	public int money;
+	public int spessAmmo;
 
 	void Awake () 
 	{
@@ -34,8 +35,11 @@ public class GameControl : MonoBehaviour {
 		if (health == 0 && money == 0)
 		{
 			health = 20;
-			money = 100;
+			money = 120;
+			spessAmmo = 100;
 		}
+		Debug.Log("Health = " + health);
+		Debug.Log("Money = " + money);
 	}
 
 	//Runs when scene is loaded
@@ -51,10 +55,10 @@ public class GameControl : MonoBehaviour {
 	void OnGUI()
 	{
 		//Only for debug purposes to see the saved posistions 
-		GUI.Label (new Rect (10, 10, 160, 30), "ShipPos: " + shipPos);
-		GUI.Label (new Rect (10, 30, 160, 30), "Last Store: " + storeName);
-		GUI.Label (new Rect (10, 50, 160, 30), "Health: " + health);
-		GUI.Label (new Rect (10, 70, 160, 39), "Money: " + money);
+		GUI.Label (new Rect (10, 80, 160, 30), "ShipPos: " + shipPos);
+		GUI.Label (new Rect (10, 100, 160, 30), "Last Store: " + storeName);
+		GUI.Label (new Rect (10, 120, 160, 30), "Health: " + health);
+		GUI.Label (new Rect (10, 140, 160, 39), "Money: " + money);
 	}
 
 	public void Save(string storesName)
@@ -92,6 +96,7 @@ public class GameControl : MonoBehaviour {
 		data.storeName = storeName;
 		data.money = money;
 		data.health = health;
+		data.spessAmmo = spessAmmo;
 
 		return data;
 	}
@@ -123,6 +128,7 @@ public class GameControl : MonoBehaviour {
 		goP.transform.rotation = Quaternion.Euler(90,0,0);
 		health = data.health;
 		money = data.money;
+		spessAmmo = data.spessAmmo;
 	}
 
 	public void ChangeScene(string name)
@@ -163,4 +169,5 @@ class PlayerData
 	public string storeName;
 	public int health;
 	public int money;
+	public int spessAmmo;
 }
