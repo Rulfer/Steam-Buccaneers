@@ -22,7 +22,7 @@ public class swivelWeaponControl : MonoBehaviour
 
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		//mousePos = Input.mousePosition;
 		//henter musas pos.
