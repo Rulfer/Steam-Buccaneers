@@ -81,8 +81,11 @@
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
+     <Compile Include="Assets\Scripts\Shop\setCurrentHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
+     <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
+     <Compile Include="Assets\updatePayment.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
