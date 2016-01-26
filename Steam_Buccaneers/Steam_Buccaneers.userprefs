@@ -1,21 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shop\monies.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\updatePayment.cs">
     <Files>
-      <File FileName="Assets\Scripts\Shop\monies.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\swivelWeaponControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerRotate.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\cameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\AIsideCanons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\MoveTo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\AImove.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Graphics\shop\Cursor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\spawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\playerBulletHit.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerStatus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\swivelFire.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="25" Column="1" />
+      <File FileName="Assets\Scripts\Shop\setCurrentHealth.cs" Line="7" Column="12" />
+      <File FileName="Assets\Scripts\Shop\updateHealth.cs" Line="7" Column="1" />
+      <File FileName="Assets\updatePayment.cs" Line="8" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
