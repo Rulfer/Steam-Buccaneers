@@ -47,12 +47,13 @@
   <ItemGroup>
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\avoidPlanet.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\chasePlayer.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\aiDestroy.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\ballsPosition.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
@@ -82,6 +83,8 @@
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
+     <None Include="Assets\Materials\ToonBasic.shader" />
+     <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
