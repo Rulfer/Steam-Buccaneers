@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>D:/Unity/Program files Unity 5/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +59,6 @@
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\gravityCs.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMoveWTurning.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
@@ -85,10 +84,10 @@
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
