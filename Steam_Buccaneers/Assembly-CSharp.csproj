@@ -77,12 +77,14 @@
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
-     <Compile Include="Assets\Scripts\Scene\LaunchStore.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
+     <Compile Include="Assets\Scripts\Shop\setCurrentHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
+     <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
+     <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
