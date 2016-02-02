@@ -8,15 +8,17 @@ public class AIMaster : MonoBehaviour {
 	public Transform aiPoint;
 	public static int aiHealth;
 	private float killtimer = 0;
+	public static bool isFleeing = false;
+	int ranNum;
 	// Use this for initialization
 	void Start () {
-		if(this.gameObject.name == "AI_LVL1")
-		{
-			aiHealth = 10;
-		}
-		if(this.gameObject.name == "AI_LVL2")
+		if(this.gameObject.name == "AI_LVL1(Clone)")
 		{
 			aiHealth = 15;
+		}
+		if(this.gameObject.name == "AI_LVL2(Clone)")
+		{
+			aiHealth = 20;
 		}
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 	}
@@ -29,9 +31,25 @@ public class AIMaster : MonoBehaviour {
 			killAI();
 		}
 
+		if(isFleeing == false)
+		{
+			if(aiHealth <= (aiHealth*0.2))
+			{
+				int ranNum = Random.Range(1, 101);
+				{
+					if(ranNum > 90)
+					{
+						isFleeing = true;
+						AImove.move.flee();
+					}
+				}
+			}
+		}
+
 		if(detectDistance >= 60)
 		{
 			killtimer+= Time.deltaTime;
+			Debug.Log("killtimer" + killtimer);
 		}
 
 		if(detectDistance < 60)
@@ -67,26 +85,20 @@ public class AIMaster : MonoBehaviour {
 //		}
 	}
 
-//	void OnTriggerEnter(Collider other)
-//	{
-//		if(this.tag == "detectRight" || this.tag == "detectLeft")
-//		{
-//		}
-//		if(other.tag == "playerBullet")
-//		{
-//			Destroy(other.gameObject);
-//			aiHealth --;
-//			Debug.Log("aiHealth = " + aiHealth);
-//			if(aiHealth <= 0)
-//			{
-//				Destroy(this.transform.parent.gameObject);
-//			}
-//		}
-//	}
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Planet")
+		{
+			Debug.Log("planet pls");
+			killAI();
+		}
+
+	}
 
 	private void killAI()
 	{
 		spawnAI.livingShip = false;
-		Destroy(this.transform.parent.gameObject);
+		Debug.Log("pls dont kill");
+		Destroy(this.gameObject);
 	}
 }

@@ -2,66 +2,73 @@
 using System.Collections;
 
 public class AImove : MonoBehaviour {
-	public static int turnSpeed = 20;
-	public static int swingSpeed = 50;
+	public static AImove move;
+//	public static int turnSpeed = 20;
+//	public static int swingSpeed = 50;
 	private int targetPlanet;
 
-	public static float forwardSpeed = 20;
-	public float rotationPerSecond = 15f;
-	public float rotationMax = 45f;
+	public static Rigidbody aiRigid;
+
+	public static float force = 200.0f;
+	public static int turnSpeed = 50;
+
+//	public static float forwardSpeed = 20;
+//	public float rotationPerSecond = 15f;
+//	public float rotationMax = 45f;
+	private float distanceToPlayer;
+	public float minDist = 20f;
+	public float maxDist = 40f;
 
 	private bool turnLeft = false;
 	private bool turnRight = false;
-	public static bool stopMoving = false;
-	private bool agentInFrontOfPlayer;
-	private bool startTurning = true;
+	private bool playerInFrontOfAI;
+	private bool isFleeing = false;
 
-	private GameObject agent;
 	private GameObject player;
-
 	private Vector3 relativePoint;
+	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+
 
 	void Start ()
 	{
-		agent = GameObject.FindGameObjectWithTag("aiAgent");
 		player = GameObject.FindGameObjectWithTag("Player");
+		aiRigid = GetComponent<Rigidbody>();
 	}
 		
-    void Update () 
+    void FixedUpdate () 
 	{
-//		relativePoint = transform.InverseTransformPoint(player.transform.position);
-//		Debug.Log(relativePoint);
-		checkAIPosition ();
-
-		if(PlayerMove2.goingForward == false)
+		if(isFleeing == false)
 		{
-			if(AIsideCanons.fireLeft == true || AIsideCanons.fireRight == true)
-			{
-				stopMoving = true;
-				startTurning = true;
-			}
+			checkPlayerPosition ();
+		}
+		else{
+			flee();
 		}
 
-		else stopMoving = false;
 
-		if(stopMoving == true)
+		aiRigid.AddForce(transform.forward * force*Time.deltaTime);
+		// Series of if tests
+		if (aiRigid.velocity.x >= maxVelocity.x) //|| -aiRigid.velocity.x >= -maxVelocity.x)
 		{
-			if(startTurning == true)
-			{
-				canonsFacingPlayer(player);
-			}
+			// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
+			// in the z-axis, although it does in fact accelerate.
+			aiRigid.velocity = new Vector3 (maxVelocity.x, 0.0f, aiRigid.velocity.z);
 		}
 
-		if(PlayerMove2.goingForward == false && startTurning == false && stopMoving == true)
+		if (aiRigid.velocity.x <= -maxVelocity.x)
 		{
-			if(AIsideCanons.fireLeft == false && AIsideCanons.fireRight == false)
-			{
-				startTurning = true;
-			}
+			aiRigid.velocity = new Vector3 (-maxVelocity.x, 0.0f, aiRigid.velocity.z);
 		}
 
-		else transform.Translate (Vector3.forward/forwardSpeed);
+		if (aiRigid.velocity.z >= maxVelocity.z)
+		{
+			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, maxVelocity.z);
+		}
 
+		if (aiRigid.velocity.z <= -maxVelocity.z)
+		{
+			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, -maxVelocity.z);
+		}
 
 		if (turnLeft == true) 
 		{
@@ -75,21 +82,83 @@ public class AImove : MonoBehaviour {
 
 	}
 
+	public void flee()
+	{
+		relativePoint = Transformation(player);
+
+		if(relativePoint.x >-0.1 && relativePoint.x <0.1)
+		{
+			if(relativePoint.z <= 0)
+			{
+				turnLeft = false;
+				turnRight = false;
+			}
+			else if(relativePoint.z >= 0)
+			{
+				if(PlayerMove2.turnLeft == true)
+				{
+					turnRight = true;
+					turnLeft = false;
+				}
+
+				else if(PlayerMove2.turnRight == true)
+				{
+					turnLeft = true;
+					turnRight = false;
+				}
+
+				else
+				{
+					turnLeft = true;
+					turnRight = false;
+				}
+			}
+		}
+		if (relativePoint.x <= 0)
+		{
+			turnRight = true;
+			turnLeft = false;
+		}
+		else if (relativePoint.x >= 0) 
+		{
+			turnRight = false;
+			turnLeft = true;
+		}
+		isFleeing = true;
+	}
+
 	//Uses the data recieved from isFacingAgent
 	//to determine weather or not to turn left,
 	//right or continue driving forward
-	void checkAIPosition()
+	void checkPlayerPosition()
 	{
-		agentInFrontOfPlayer = isFacingAgent ();
+		playerInFrontOfAI = isFacingAgent ();
+		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //distance between AI and player
+		Debug.Log("distancetoplayer er " + distanceToPlayer);
+		Vector3 tempPos = this.transform.position - player.transform.position;
 
-		if (agentInFrontOfPlayer == true) 
+		if(distanceToPlayer > maxDist)
 		{
-			turnLeft = false;
-			turnRight = false;
-		} 
-		else 
+			if(playerInFrontOfAI == true)
+			{
+				turnLeft = false;
+				turnRight = false;
+			}
+
+			else
+			{
+				turnTowardsPlayer ();
+			}
+		}
+
+		else if(distanceToPlayer < minDist)
 		{
-			turnTowardsAgent ();
+			avoidPlayer();
+		}
+
+		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist)
+		{
+			canonsFacingPlayer(player);
 		}
 	}
 
@@ -99,14 +168,14 @@ public class AImove : MonoBehaviour {
 	private Vector3 Transformation(GameObject test)
 	{
 		relativePoint = transform.InverseTransformPoint(test.transform.position);
+		Debug.Log("Relativepoint " + relativePoint);
 		return relativePoint;
 	}
 
 	//Checks if the AI Ship is facing the Agent object or not
 	private bool isFacingAgent()
 	{
-		relativePoint = Transformation(agent);
-		if(relativePoint.x == 0){return true;}
+		if(relativePoint.x > -0.01 && relativePoint.x < 0.01){return true;}
 		else return false;
 	}
 
@@ -118,36 +187,18 @@ public class AImove : MonoBehaviour {
 	{
 		relativePoint = Transformation(test);
 
-		if(relativePoint.z != 0)
+		if(relativePoint.z < 0)
 		{
-			if(relativePoint.x < 0)
+			if(relativePoint.x <= 0)
 			{
-				if(relativePoint.z < 0)
-				{
-					startTurning = true;
-					turnLeft = true;
-					turnRight = false;
-				}
-				if(relativePoint.z > 0)
-				{
-					startTurning = true;
-					turnLeft = false;
-					turnRight = true;
-				}
+				turnLeft = true;
+				turnRight = false;
 			}
-
-			if(relativePoint.x >= 0)
+				
+			else if(relativePoint.x >= 0)
 			{
-				if(relativePoint.z < 0)
-				{
-					turnLeft = false;
-					turnRight = true;
-				}
-				if(relativePoint.z > 0)
-				{
-					turnLeft = true;
-					turnRight = false;
-				}
+				turnLeft = false;
+				turnRight = true;
 			}
 		}
 
@@ -155,40 +206,41 @@ public class AImove : MonoBehaviour {
 		{
 			turnLeft = false;
 			turnRight = false;
-			startTurning = false;
+		}
+	}
+
+	void avoidPlayer()
+	{
+		relativePoint = Transformation(player);
+		if (relativePoint.x <= 0)
+		{
+			if(relativePoint.z > -0.2)
+			{
+				turnLeft = false;
+				turnRight = true;
+			}
+		}
+		else if (relativePoint.x >= 0) {
+			if(relativePoint.z > -0.2)
+			{	
+				turnRight = false;
+				turnLeft = true;
+			}
 		}
 	}
 
 	//Makes the AI Ship turn towards the agent
-	void turnTowardsAgent()
+	void turnTowardsPlayer()
 	{
-		relativePoint = Transformation(agent);
-		if (relativePoint.x < 0)
+		relativePoint = Transformation(player);
+		if (relativePoint.x <= 0)
 		{
 			turnLeft = true;
 			turnRight = false;
 		}
-		if (relativePoint.x > 0) {
+		else if (relativePoint.x >= 0) {
 			turnRight = true;
 			turnLeft = false;
-		}
-	}
-
-	//Stops the AI Ship when it collides with the Agent
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.tag == "aiAgent")
-		{
-			stopMoving = true;
-		}
-	}
-
-	//Makes the AI move again
-	void OnTriggerExit(Collider other)
-	{
-		if(other.tag == "aiAgent")
-		{
-			stopMoving = false;
 		}
 	}
 }

@@ -11,16 +11,22 @@ public class avoidPlanet : MonoBehaviour {
 
 	private bool turnRight = false;
 	private bool turnLeft = false;
-	private bool moveForward = false;
 
-	private float forwardSpeed;
-	private float turnSpeed;
+	public static float force = 200.0f;
+	public static int turnSpeed = 50;
+	public static Rigidbody aiRigid;
+	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+
+
 	private float relativePoint;
 	private float aiPlanetDistance;
 	private float distanceToPlanet;
 	private float distanceToPlayer;
 	private float minPlanetForwardDistance = 60;
 	private float minPlanetSideDistance = 40;
+
+	public float minDist = 20f;
+	public float maxDist = 40f;
 
 	private Vector3 relativePlanetPoint;
 	private Vector3 relativePlayerPoint;
@@ -33,8 +39,8 @@ public class avoidPlanet : MonoBehaviour {
 		planets = GameObject.FindGameObjectsWithTag("Planet");
 		planetI = detectPlanet();
 
-		turnSpeed = PlayerMove2.turnSpeed;
-		forwardSpeed = 20;
+		player = GameObject.FindGameObjectWithTag("Player");
+
 		aiPlanetDistance = 100;
 	}
 
@@ -42,7 +48,10 @@ public class avoidPlanet : MonoBehaviour {
 	void Update () {
 		
 		relativePoint = Vector3.Distance (this.transform.position, planets[planetI].transform.position); //Distance between AI and all planets
-
+		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
+		relativePlanetPoint = transform.InverseTransformPoint(planets[planetI].transform.position); //Used to check if the planet is to the left or right of the AI
+		distanceToPlanet = Vector3.Distance (this.transform.position, planets[planetI].transform.position); //distance between AI and planet
+		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //Distance between AI and player
 		playerPrevPos = playerNewPos; //Updates old player position
 		playerNewPos = player.transform.position; //Updates new player position
 
@@ -52,15 +61,24 @@ public class avoidPlanet : MonoBehaviour {
 			planNewRoute();
 		}
 
-//		if(relativePoint >= aiPlanetDistance) //Out of danger
-//		{
-//			GetComponent<AImove> ().enabled = true;
-//			MoveTo.newBall = true;
-//		}
-
-		if(moveForward == true)
+		if(relativePoint >= aiPlanetDistance) //Out of danger
 		{
-			transform.Translate (Vector3.forward/forwardSpeed);
+			GetComponent<AImove> ().enabled = true;
+		}
+
+		if (aiRigid.velocity.x <= -maxVelocity.x)
+		{
+			aiRigid.velocity = new Vector3 (-maxVelocity.x, 0.0f, aiRigid.velocity.z);
+		}
+
+		if (aiRigid.velocity.z >= maxVelocity.z)
+		{
+			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, maxVelocity.z);
+		}
+
+		if (aiRigid.velocity.z <= -maxVelocity.z)
+		{
+			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, -maxVelocity.z);
 		}
 
 		if (turnLeft == true) 
@@ -92,31 +110,19 @@ public class avoidPlanet : MonoBehaviour {
 
 	void planNewRoute()
 	{
-		relativePlanetPoint = transform.InverseTransformPoint(planets[planetI].transform.position); //Used to check if the planet is to the left or right of the AI
-		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
-
-		distanceToPlanet = Vector3.Distance (this.transform.position, planets[planetI].transform.position); //distance between AI and planet
-		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //Distance between AI and player
-
-		Debug.Log(relativePlayerPoint);
-//		Debug.Log("distance to planet " + distanceToPlanet);
-
 		if(relativePlayerPoint.x >-0.1 && relativePlayerPoint.x <0.1) //The player is to the front of the AI
 		{
 			playerToTheFront();
-			Debug.Log("Player fremover");
 		}
 
-		if(relativePlayerPoint.x < -0.1)//The player is to the left of the AI
+		else if(relativePlayerPoint.x < -0.1)//The player is to the left of the AI
 		{
 			playerToTheLeft();
-			Debug.Log("Player til venstre");
 		}
 
-		if(relativePlayerPoint.x > 0.1) //The player is to the right of the AI
+		else if(relativePlayerPoint.x > 0.1) //The player is to the right of the AI
 		{
 			playerToTheRight();
-			Debug.Log("Player til høyre");
 		}
 	}
 
@@ -309,31 +315,6 @@ public class avoidPlanet : MonoBehaviour {
 								{
 									rightandForward();
 								}
-//								if(playerPrevPos.z < playerNewPos.z) //The player is driving upwards, away from the player
-//								{
-//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
-//									{
-//										onlyRight();
-//									}
-//
-//									else
-//									{
-//										rightandForward();
-//									}
-//								}
-//
-//								else //The player is driving closer to the player
-//								{
-//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
-//									{
-//										onlyRight();
-//									}
-//
-//									else
-//									{
-//										rightandForward();
-//									}
-//								}
 							}
 						}
 					}
@@ -479,31 +460,6 @@ public class avoidPlanet : MonoBehaviour {
 								{
 									rightandForward();
 								}
-								//								if(playerPrevPos.z < playerNewPos.z) //The player is driving upwards, away from the player
-								//								{
-								//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
-								//									{
-								//										onlyRight();
-								//									}
-								//
-								//									else
-								//									{
-								//										rightandForward();
-								//									}
-								//								}
-								//
-								//								else //The player is driving closer to the player
-								//								{
-								//									if(distanceToPlanet < minPlanetSideDistance) //The planet is to close to the AI
-								//									{
-								//										onlyRight();
-								//									}
-								//
-								//									else
-								//									{
-								//										rightandForward();
-								//									}
-								//								}
 							}
 						}
 					}
@@ -577,34 +533,29 @@ public class avoidPlanet : MonoBehaviour {
 	{
 		turnLeft = true;
 		turnRight = false;
-		moveForward = true;
 	}
 
 	private void rightandForward()
 	{
 		turnLeft = false;
 		turnRight = true;
-		moveForward = true;
 	}
 
 	private void onlyLeft()
 	{
 		turnLeft = true;
 		turnRight = false;
-		moveForward = false;
 	}
 
 	private void onlyRight()
 	{
 		turnLeft = false;
 		turnRight = true;
-		moveForward = false;
 	}
 
 	private void onlyForward()
 	{
 		turnLeft = false;
 		turnRight = false;
-		moveForward = true;
 	}
 }

@@ -27,7 +27,6 @@ public class spawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		Debug.Log("We are waiting");
 		Invoke ("checkShipStatus", 5);
 	}
 
@@ -47,6 +46,7 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
+		livingShip = true;
 
 		float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 
@@ -92,7 +92,6 @@ public class spawnAI : MonoBehaviour
 			AI2.position = spawnPosition;
 		}
 
-		livingShip = true;
 		waitBeforeNewSpawn();
 	}
 }
