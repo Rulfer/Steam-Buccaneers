@@ -59,7 +59,6 @@
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\gravityCs.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMoveWTurning.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
@@ -78,16 +77,12 @@
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
+     <Compile Include="Assets\Scripts\Scene\LaunchStore.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
-     <Compile Include="Assets\Scripts\Shop\setCurrentHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
-     <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
-     <Compile Include="Assets\updatePayment.cs" />
-     <None Include="Assets\Materials\ToonBasic.shader" />
-     <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

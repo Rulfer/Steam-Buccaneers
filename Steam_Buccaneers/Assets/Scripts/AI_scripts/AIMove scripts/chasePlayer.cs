@@ -158,43 +158,148 @@ public class chasePlayer : MonoBehaviour {
 		}
 	}
 
+
+
 	void playerToTheLeft()
 	{
-		if(relativePlayerPoint.x < 0 && relativePlayerPoint.x > -0.2)
+		if(relativePlayerPoint.x > -0.5)
 		{
-			if(relativePlayerPoint.z > 0)
+			if(relativePlayerPoint.z > -0.1 && relativePlayerPoint.z < 0.1)
 			{
-				if(playerRotation.y <= 45) //Player is driving up-right
+				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
 				{
-					onlyRight();
+					onlyForward();
 				}
-				else if(playerRotation.y > 45 && playerRotation.y <= 90) //Player is driving down-right
+				else if(playerRotation.y <= 45) //Player is driving up-right
 				{
-					rightandForward();
+					if(PlayerMove2.turnRight == true)
+					{
+						leftAndForward();
+					}
+
+					else if(PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else onlyRight();
 				}
-				else if(playerRotation.y > 90 && playerRotation.y <= 135) //Player is driving down-left
+				else if(playerRotation.y > 45 && playerRotation.y <= 90) //Player is driving up-right
 				{
-					leftAndForward();
+					if(PlayerMove2.turnRight == true)
+					{
+						leftAndForward();
+					}
+
+					else if(PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
 				}
-				else if(playerRotation.y > 135 && playerRotation.y <= 180) //Player is driving up-left
+				else if(playerRotation.y > 90) //Player is driving down-left
 				{
-					leftAndForward();
+					if(PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
 				}
-				else if(playerRotation.y > 180 && playerRotation.y <= 225) //Player is driving up-left
+			}
+
+			else if(relativePlayerPoint.z >= 0.1)
+			{
+				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
 				{
-					leftAndForward();
+					if(aiRotation.y >= 358 || playerRotation.y <= 2)
+					{
+						onlyForward();
+					}
+
+
 				}
-				else if(playerRotation.y > 225 && playerRotation.y <= 270) //Player is driving up-left
+
+				else if(playerRotation.y <= 90) //Player is driving up-right
 				{
-					leftAndForward();
+					if(PlayerMove2.turnRight == true || PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+						
+					else rightandForward();
 				}
-				else if(playerRotation.y > 270 && playerRotation.y <= 315) //Player is driving up-left
+				else if(playerRotation.y > 90 && playerRotation.y <= 180) //Player is driving down-left
 				{
-					leftAndForward();
+					if(PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
 				}
-				else if(playerRotation.y > 315 && playerRotation.y <= 360) //Player is driving up-left
+
+				else if(playerRotation.y > 180) //Player is driving down-left
 				{
-					leftAndForward();
+					if(PlayerMove2.turnLeft == true)
+					{
+						leftAndForward();
+					}
+
+					else if(PlayerMove2.turnRight == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
+				}
+			}
+
+			else if(relativePlayerPoint.z >= 0.2)
+			{
+
+			}
+
+			else if(relativePlayerPoint.z <= -0.1)
+			{
+				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
+				{
+					onlyForward();
+				}
+
+				else if(playerRotation.y <= 90) //Player is driving up-right
+				{
+					if(PlayerMove2.turnRight == true || PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else rightandForward();
+				}
+				else if(playerRotation.y > 90 && playerRotation.y <= 180) //Player is driving down-left
+				{
+					if(PlayerMove2.turnLeft == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
+				}
+
+				else if(playerRotation.y > 180) //Player is driving down-left
+				{
+					if(PlayerMove2.turnLeft == true)
+					{
+						leftAndForward();
+					}
+
+					else if(PlayerMove2.turnRight == true)
+					{
+						onlyForward();
+					}
+
+					else leftAndForward();
 				}
 			}
 		}
