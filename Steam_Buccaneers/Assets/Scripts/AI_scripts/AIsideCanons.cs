@@ -16,6 +16,9 @@ public class AIsideCanons : MonoBehaviour {
 	public GameObject cannonR2;
 	public GameObject cannonR3;
 
+	private Vector3 right;
+	private Vector3 left;
+
 	public static bool fireLeft = false;
 	public static bool fireRight = false;
 
@@ -28,8 +31,14 @@ public class AIsideCanons : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-		if (fireRight == true && Time.time > fireDelayRight) { // && Inventory.mainAmmo > 0
-			fireDelayRight = Time.time + fireRate;
+		right = this.transform.TransformDirection(Vector3.right);
+		left = this.transform.TransformDirection(Vector3.left);
+
+		checkGunPosition();
+
+
+		if (fireLeft == true && Time.time > fireDelayLeft) { // && Inventory.mainAmmo > 0
+			fireDelayLeft = Time.time + fireRate;
 			//Hadde helst sett til at de var i en array, men det fikk jeg ikke til akkurat nå, ballene spawner på de andre når de er i en array av en eller 
 			//annen grunn.
 			//må finne ut av, array er mye ryddigere.
@@ -50,8 +59,8 @@ public class AIsideCanons : MonoBehaviour {
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}
 
-		if (fireLeft == true && Time.time > fireDelayLeft) {				
-			fireDelayLeft = Time.time + fireRate;
+		if (fireRight == true && Time.time > fireDelayRight) {				
+			fireDelayRight = Time.time + fireRate;
 			/*rightCannons[0]=(GameObject)Instantiate (cannonball, rightCannons[0].transform.position, transform.rotation);
 			rightCannons[1]=(GameObject)Instantiate (cannonball, rightCannons[1].transform.position, transform.rotation);
 			rightCannons[2]=(GameObject)Instantiate (cannonball, rightCannons[2].transform.position, transform.rotation);*/
@@ -60,6 +69,31 @@ public class AIsideCanons : MonoBehaviour {
 			Instantiate (cannonball, cannonR3.transform.position, transform.rotation);
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
+		}
+	}
+
+	void checkGunPosition()
+	{
+		RaycastHit objectHit;
+		if(Physics.Raycast(this.transform.position, left, out objectHit, 50))
+		{
+			if(objectHit.transform.tag == "Player")
+			{
+				fireLeft = true;
+				fireRight = false;
+			}
+			else fireLeft = false;
+		}
+
+		if(Physics.Raycast(this.transform.position, right, out objectHit, 50))
+		{
+			if(objectHit.transform.tag == "Player")
+			{
+				fireRight = true;
+				fireLeft = false;
+			}
+
+			else fireRight = false;
 		}
 	}
 }

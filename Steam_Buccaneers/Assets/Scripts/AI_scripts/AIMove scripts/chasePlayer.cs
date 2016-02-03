@@ -13,9 +13,9 @@ public class chasePlayer : MonoBehaviour {
 	private float turnSpeed;
 	private float relativePoint;
 	private float distanceToPlayer;
-	private float minDistance = 12;
-	private float goodDistance =25;
-	private float maxDistance = 40;
+//	private float minDistance = 12;
+//	private float goodDistance =25;
+//	private float maxDistance = 40;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 playerRotation;

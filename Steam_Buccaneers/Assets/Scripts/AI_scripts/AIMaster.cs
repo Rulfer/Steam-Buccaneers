@@ -8,7 +8,9 @@ public class AIMaster : MonoBehaviour {
 	public Transform aiPoint;
 	public static int aiHealth;
 	private float killtimer = 0;
-	public static bool isFleeing = false;
+	private bool testedFleeing = false;
+	private bool newSpawn = true;
+
 	int ranNum;
 	// Use this for initialization
 	void Start () {
@@ -25,26 +27,35 @@ public class AIMaster : MonoBehaviour {
 	
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, aiPoint.transform.position); //calculates the distance between the AI and the player
-		 
+
+		if(detectDistance < 40)
+		{
+			AImove.maxVelocity.x = 3.5f;
+			AImove.maxVelocity.z = 3.5f;
+			AImove.force = 200f;
+			newSpawn = false;
+		}
+
 		if(aiHealth <= 0)
 		{
 			killAI();
 		}
 
-		if(isFleeing == false)
+		if(testedFleeing == false)
 		{
 			if(aiHealth <= (aiHealth*0.2))
 			{
-				int ranNum = Random.Range(1, 101);
+				int ranNum = Random.Range(1, 11);
 				{
-					if(ranNum > 90)
+					if(ranNum > 9)
 					{
-						isFleeing = true;
+						testedFleeing = true;
 						AImove.move.flee();
 					}
 				}
 			}
 		}
+
 
 		if(detectDistance >= 60)
 		{
@@ -52,7 +63,7 @@ public class AIMaster : MonoBehaviour {
 			Debug.Log("killtimer" + killtimer);
 		}
 
-		if(detectDistance < 60)
+		if(detectDistance < 60 || newSpawn == true)
 		{
 			killtimer = 0;
 		}
