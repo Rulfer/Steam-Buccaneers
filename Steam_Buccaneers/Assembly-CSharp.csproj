@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
      <Compile Include="Assets\Scripts\Shop\setCurrentHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
+     <Compile Include="Assets\Scripts\Shop\shopText.cs" />
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
      <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
