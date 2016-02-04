@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\deleteaftertest.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\scrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMoveWTurning.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\pickupScrap.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\playerBulletHit.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\sideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\swivelFire.cs" />

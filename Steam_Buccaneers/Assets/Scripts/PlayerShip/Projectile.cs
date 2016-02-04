@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
 		//Debug.Log (distance);
 
 		// if the distance between the player ship and the traveling cannonball is greater or equal 40, this will get destroyed.
-		if (distance >= 40)
+		if (distance >= 100)
 		{
 			Destroy(gameObject);
 		}

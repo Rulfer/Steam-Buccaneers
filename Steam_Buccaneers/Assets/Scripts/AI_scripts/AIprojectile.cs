@@ -28,7 +28,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		distance = Vector3.Distance(transform.position, GameObject.Find("PlayerShip").transform.position);
 
-		if (distance >= 40)
+		if (distance >= 100)
 		{
 			Destroy(gameObject);
 		}

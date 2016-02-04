@@ -3,20 +3,25 @@ using System.Collections;
 
 public class AIMaster : MonoBehaviour {
 	
-	public static float detectDistance;
+	public GameObject scrap;
 	private GameObject playerPoint;
+
 	public Transform aiPoint;
-	public static int aiHealth;
+
+	public static float detectDistance;
 	private float killtimer = 0;
+
 	private bool testedFleeing = false;
 	private bool newSpawn = true;
 
-	int ranNum;
+	public static int aiHealth;
+	private int ranNum;
+
 	// Use this for initialization
 	void Start () {
 		if(this.gameObject.name == "AI_LVL1(Clone)")
 		{
-			aiHealth = 15;
+			aiHealth = 1;
 		}
 		if(this.gameObject.name == "AI_LVL2(Clone)")
 		{
@@ -60,7 +65,6 @@ public class AIMaster : MonoBehaviour {
 		if(detectDistance >= 60)
 		{
 			killtimer+= Time.deltaTime;
-			Debug.Log("killtimer" + killtimer);
 		}
 
 		if(detectDistance < 60 || newSpawn == true)
@@ -108,6 +112,12 @@ public class AIMaster : MonoBehaviour {
 
 	private void killAI()
 	{
+		int temp = Random.Range(1, 7);
+		for(int i = 0; i < temp; i++)
+		{
+			Instantiate(scrap);
+			scrap.transform.position = this.transform.position;
+		}
 		spawnAI.livingShip = false;
 		Debug.Log("pls dont kill");
 		Destroy(this.gameObject);

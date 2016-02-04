@@ -42,8 +42,6 @@ public class AImove : MonoBehaviour {
 	{
 		if(avoidPlanet.hitPlanet == false)
 		{
-			Debug.Log("We should do stuff");
-
 			if(isFleeing == false)
 			{
 				checkPlayerPosition ();
@@ -100,30 +98,25 @@ public class AImove : MonoBehaviour {
 
 		if(distanceToPlayer > maxDist) //AI too far away from the player
 		{
-			Debug.Log("We are too far away.");
 			if(playerInFrontOfAI == true)
 			{
-				Debug.Log("Player in front of me.");
 				turnLeft = false;
 				turnRight = false;
 			}
 
 			else
 			{
-				Debug.Log("Player to the side.");
 				turnTowardsPlayer ();
 			}
 		}
 
 		else if(distanceToPlayer < minDist)
 		{
-			Debug.Log("We are too close.");
 			avoidPlayer();
 		}
 
 		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist)
 		{
-			Debug.Log("Perfect distance!");
 			canonsFacingPlayer(player);
 		}
 	}
@@ -183,7 +176,6 @@ public class AImove : MonoBehaviour {
 	//Makes the AI Ship turn towards the agent
 	void turnTowardsPlayer()
 	{
-		Debug.Log("We are turning!");
 		relativePoint = Transformation(player);
 		if (relativePoint.x <= 0)
 		{
