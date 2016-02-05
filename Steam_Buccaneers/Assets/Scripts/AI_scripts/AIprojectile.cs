@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AIprojectile : MonoBehaviour {
 
-	public float projectileSpeed;
+	private float projectileSpeed = 100;
 	public static float damageOutput;
 	private float distance;
 	public Rigidbody test;
@@ -28,7 +28,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		distance = Vector3.Distance(transform.position, GameObject.Find("PlayerShip").transform.position);
 
-		if (distance >= 40)
+		if (distance >= 100)
 		{
 			Destroy(gameObject);
 		}

@@ -16,6 +16,7 @@ public class GameControl : MonoBehaviour {
 	public int health;
 	public int money;
 	public int spessAmmo;
+	public int[] canonUpgrades = new int[6];
 
 	void Awake () 
 	{
@@ -32,11 +33,18 @@ public class GameControl : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
+		//Sets start data
 		if (health == 0 && money == 0)
 		{
 			health = 20;
-			money = 120;
+			money = 12000;
 			spessAmmo = 100;
+
+			for (int i = 0; i < canonUpgrades.Length; i ++)
+			{
+				
+				canonUpgrades[i] = 1;
+			}
 		}
 		Debug.Log("Health = " + health);
 		Debug.Log("Money = " + money);
@@ -59,6 +67,8 @@ public class GameControl : MonoBehaviour {
 		GUI.Label (new Rect (10, 100, 160, 30), "Last Store: " + storeName);
 		GUI.Label (new Rect (10, 120, 160, 30), "Health: " + health);
 		GUI.Label (new Rect (10, 140, 160, 39), "Money: " + money);
+		GUI.Label (new Rect (10, 160, 160, 30), "SpessAmmo: " + spessAmmo);
+		GUI.Label (new Rect (10, 180, 160, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
 	}
 
 	public void Save(string storesName)
@@ -97,6 +107,7 @@ public class GameControl : MonoBehaviour {
 		data.money = money;
 		data.health = health;
 		data.spessAmmo = spessAmmo;
+		data.canonUpgrades = canonUpgrades;
 
 		return data;
 	}
@@ -129,6 +140,7 @@ public class GameControl : MonoBehaviour {
 		health = data.health;
 		money = data.money;
 		spessAmmo = data.spessAmmo;
+		canonUpgrades = data.canonUpgrades;
 	}
 
 	public void ChangeScene(string name)
@@ -170,4 +182,5 @@ class PlayerData
 	public int health;
 	public int money;
 	public int spessAmmo;
+	public int[] canonUpgrades = new int[6];
 }

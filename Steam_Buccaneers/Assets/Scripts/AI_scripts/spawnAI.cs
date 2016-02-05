@@ -27,7 +27,6 @@ public class spawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		Debug.Log("We are waiting");
 		Invoke ("checkShipStatus", 5);
 	}
 
@@ -35,7 +34,6 @@ public class spawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		if (livingShip == false) { //There are no living ships, therefore we spawn a new one
-			Debug.Log("Hello");
 			spawnShip ();
 		}
 
@@ -47,39 +45,30 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
+		livingShip = true;
 
 		float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 
-		//Create random numbers between -5 and 5
-		float tempX = Random.Range(-5.0f, 5.0f);
-		float tempZ = Random.Range(-5.0f, 5.0f);
-
-		//Based on tempX and tempZ, we decide where the AI will spawn.
-		//Use "Random.Range" to give he AI a random x and z position based on tempX and tempZ.
-		//These can and should be tweeked when player control is finished. 
-		if(tempX < 0 && tempZ < 0)
+		//Create random numbers between -60 and -20
+		float tempPosX = Random.Range(60f, 120f);
+		float tempPosZ = Random.Range(60f, 120f);
+		float posX;
+		float posZ;
+		float ranRangeX = Random.Range(1, 11);
+		if(ranRangeX > 5)
 		{
-			spawnPosition = new Vector3(Random.Range(playerPoint.transform.position.x -40.0f, playerPoint.transform.position.x -10.0f), -50, 
-				Random.Range(playerPoint.transform.position.z - 40.0f, playerPoint.transform.position.z -10.0f));
+			posX = tempPosX;
 		}
+		else posX = -tempPosX;
 
-		else if(tempX < 0 && tempZ >= 0)
+		float ranRangeZ = Random.Range(1, 11);
+		if(ranRangeZ > 5)
 		{
-			spawnPosition = new Vector3(Random.Range(playerPoint.transform.position.x -40.0f, playerPoint.transform.position.x -10.0f), -50, 
-				Random.Range(playerPoint.transform.position.z + 10.0f, playerPoint.transform.position.z + 40.0f));
+			posZ = tempPosZ;
 		}
+		else posZ = -tempPosZ;
 
-		else if(tempX >= 0 && tempZ < 0)
-		{
-			spawnPosition = new Vector3(Random.Range(playerPoint.transform.position.x + 10.0f, playerPoint.transform.position.x + 40.0f), -50, 
-				Random.Range(playerPoint.transform.position.z - 40.0f, playerPoint.transform.position.z -10.0f));
-		}
-
-		else if(tempX >= 0 && tempZ >= 0)
-		{
-			spawnPosition = new Vector3(Random.Range(playerPoint.transform.position.x + 10.0f, playerPoint.transform.position.x + 40.0f), -50, 
-				Random.Range(playerPoint.transform.position.z + 10.0f, playerPoint.transform.position.z + 40.0f));
-		}
+		spawnPosition = new Vector3(posX, -50, posZ);
 
 		if(relativePoint < 200) //Spawns AI_LVL1 if the player is close to Origin
 		{
@@ -92,7 +81,6 @@ public class spawnAI : MonoBehaviour
 			AI2.position = spawnPosition;
 		}
 
-		livingShip = true;
 		waitBeforeNewSpawn();
 	}
 }
