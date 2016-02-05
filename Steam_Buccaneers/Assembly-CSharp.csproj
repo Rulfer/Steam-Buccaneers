@@ -86,6 +86,8 @@
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
      <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
+     <None Include="Assets\Materials\ToonBasic.shader" />
+     <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Program files Unity 5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

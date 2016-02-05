@@ -14,20 +14,34 @@ Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\
 Loading D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.346 seconds
+- Completed reload, in  0.290 seconds
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\Pilot\Steam-Buccaneers\Steam_Buccaneers\Gravity_test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.331713 ms
+UnloadTime: 1.322968 ms
+SerializationException: Field "health" not found in class PlayerData
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadTypeMetadata (System.IO.BinaryReader reader, Boolean isRuntimeObject, Boolean hasTypeInfo) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadObjectInstance (System.IO.BinaryReader reader, Boolean isRuntimeObject, Boolean hasTypeInfo, System.Int64& objectId, System.Object& value, System.Runtime.Serialization.SerializationInfo& info) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadObject (BinaryElement element, System.IO.BinaryReader reader, System.Int64& objectId, System.Object& value, System.Runtime.Serialization.SerializationInfo& info) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadObject (BinaryElement element, System.IO.BinaryReader reader, System.Int64& objectId, System.Object& value, System.Runtime.Serialization.SerializationInfo& info) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadNextObject (BinaryElement element, System.IO.BinaryReader reader) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.ObjectReader.ReadObjectGraph (BinaryElement elem, System.IO.BinaryReader reader, Boolean readHeaders, System.Object& result, System.Runtime.Remoting.Messaging.Header[]& headers) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.NoCheckDeserialize (System.IO.Stream serializationStream, System.Runtime.Remoting.Messaging.HeaderHandler handler) [0x00000] in <filename unknown>:0 
+  at System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize (System.IO.Stream serializationStream) [0x00000] in <filename unknown>:0 
+  at GameControl.Load () [0x00000] in <filename unknown>:0 
+  at GameControl.OnLevelWasLoaded (Int32 level) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 38c0 -> priority: 1 
-  Thread -> id: 26b0 -> priority: 1 
+  Thread -> id: 3244 -> priority: 1 
+  Thread -> id: 341c -> priority: 1 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.963019 ms
+UnloadTime: 1.055863 ms
 
 Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 449.
-Total: 0.913555 ms (FindLiveObjects: 0.050224 ms CreateObjectMapping: 0.038809 ms MarkObjects: 0.687164 ms  DeleteObjects: 0.136215 ms)
+Total: 0.958838 ms (FindLiveObjects: 0.059737 ms CreateObjectMapping: 0.038049 ms MarkObjects: 0.713421 ms  DeleteObjects: 0.146108 ms)
 
