@@ -19,14 +19,7 @@ public class AIMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(this.gameObject.name == "AI_LVL1(Clone)")
-		{
-			aiHealth = 1;
-		}
-		if(this.gameObject.name == "AI_LVL2(Clone)")
-		{
-			aiHealth = 20;
-		}
+		aiHealth = 1;
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 	}
 	
