@@ -13,15 +13,16 @@ public class chasePlayer : MonoBehaviour {
 	private float turnSpeed;
 	private float relativePoint;
 	private float distanceToPlayer;
-	private float minDistance = 12;
-	private float goodDistance =25;
-	private float maxDistance = 40;
+//	private float minDistance = 12;
+//	private float goodDistance =25;
+//	private float maxDistance = 40;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 playerRotation;
 	private Vector3 aiRotation;
 	private Vector3 playerPrevPos;
 	private Vector3 playerNewPos;
+	private Vector3 rotationDif;
 
 
 	// Use this for initialization
@@ -79,6 +80,9 @@ public class chasePlayer : MonoBehaviour {
 		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //Distance between AI and player
 		playerRotation =  gameObject.transform.localEulerAngles;
 		aiRotation = this.gameObject.transform.localEulerAngles;
+		rotationDif = aiRotation-playerRotation;
+
+		//if(rotationDif < 0) {rotationDif *= -1;}
 
 		Debug.Log(relativePlayerPoint);
 
@@ -158,54 +162,183 @@ public class chasePlayer : MonoBehaviour {
 		}
 	}
 
-
-
 	void playerToTheLeft()
 	{
 		if(relativePlayerPoint.x > -0.5)
 		{
 			if(relativePlayerPoint.z > -0.1 && relativePlayerPoint.z < 0.1)
 			{
+				//Unsure if I should test this at the beginning or in every test in the code
+				//Checking in the beginning might be the least popular option, because if the
+				//AI is driving one direction and the player in the other while the difference is small enough
+				//they will forever increase the distance between them.
+//				if(rotationDif < 5) 
+//				{
+//
+//				}
 				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
 				{
-					onlyForward();
+					if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+					{
+						onlyForward(); //We continue driving forwards
+					}
+					else if(aiRotation.y <= 180) //ai is driving to the right
+					{
+						leftAndForward();
+					}
+					else if(aiRotation.y > 180) //ai is facing the wrong way
+					{
+						rightandForward();
+					}
 				}
 				else if(playerRotation.y <= 45) //Player is driving up-right
 				{
 					if(PlayerMove2.turnRight == true)
 					{
-						leftAndForward();
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+							leftAndForward();
+						}
+						else if(aiRotation.y <= 180) //ai is driving to the right
+						{
+							leftAndForward();
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+							rightandForward();
+						}
 					}
 
 					else if(PlayerMove2.turnLeft == true)
 					{
-						onlyForward();
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+							onlyForward();
+						}
+						else if(aiRotation.y <= 180) //ai is driving to the right
+						{
+							leftAndForward();
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+							rightandForward();
+						}
 					}
 
-					else onlyRight();
+					else
+					{
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+							onlyRight();
+						}
+						else if(aiRotation.y <= 180) //ai is driving to the right
+						{
+							leftAndForward();
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+							rightandForward();
+						}
+					}
 				}
 				else if(playerRotation.y > 45 && playerRotation.y <= 90) //Player is driving up-right
 				{
 					if(PlayerMove2.turnRight == true)
 					{
-						leftAndForward();
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+							leftAndForward();
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
 					}
 
 					else if(PlayerMove2.turnLeft == true)
 					{
-						onlyForward();
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+							
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
 					}
 
-					else leftAndForward();
+					else
+					{
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
+					}
 				}
 				else if(playerRotation.y > 90) //Player is driving down-left
 				{
 					if(PlayerMove2.turnLeft == true)
 					{
-						onlyForward();
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
 					}
 
-					else leftAndForward();
+					if(PlayerMove2.turnRight == true)
+					{
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
+					}
+					else
+					{
+						if(aiRotation.y >= 358 || playerRotation.y <= 2) //the ai is basically driving straight forward
+						{
+
+						}
+						else if(aiRotation.y <= 45) //ai is driving to the right
+						{
+
+						}
+						else if(aiRotation.y > 180) //ai is facing the wrong way
+						{
+
+						}
+					}
 				}
 			}
 
@@ -256,11 +389,11 @@ public class chasePlayer : MonoBehaviour {
 				}
 			}
 
-			else if(relativePlayerPoint.z >= 0.2)
-			{
-
-			}
-
+//			else if(relativePlayerPoint.z >= 0.2)
+//			{
+//
+//			}
+//
 			else if(relativePlayerPoint.z <= -0.1)
 			{
 				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
@@ -305,10 +438,154 @@ public class chasePlayer : MonoBehaviour {
 		}
 	}
 
-	void playerToTheRight()
-	{
-
-	}
+//	void playerToTheRight()
+//	{
+//		if(relativePlayerPoint.x > 0.5)
+//		{
+//			if(relativePlayerPoint.z > -0.1 && relativePlayerPoint.z < 0.1)
+//			{
+//				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
+//				{
+//					onlyForward();
+//					if(aiRotation.y >= 358 || aiRotation.y <= 2) //The ai is basically driving straight forward
+//					{
+//
+//					}
+//				}
+//				else if(playerRotation.y <= 45) //Player is driving up-right
+//				{
+//					if(PlayerMove2.turnRight == true)
+//					{
+//						leftAndForward();
+//					}
+//
+//					else if(PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else onlyRight();
+//				}
+//				else if(playerRotation.y > 45 && playerRotation.y <= 90) //Player is driving up-right
+//				{
+//					if(PlayerMove2.turnRight == true)
+//					{
+//						leftAndForward();
+//					}
+//
+//					else if(PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//				else if(playerRotation.y > 90) //Player is driving down-left
+//				{
+//					if(PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//			}
+//
+//			else if(relativePlayerPoint.z >= 0.1)
+//			{
+//				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
+//				{
+//					if(aiRotation.y >= 358 || playerRotation.y <= 2)
+//					{
+//						onlyForward();
+//					}
+//
+//
+//				}
+//
+//				else if(playerRotation.y <= 90) //Player is driving up-right
+//				{
+//					if(PlayerMove2.turnRight == true || PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else rightandForward();
+//				}
+//				else if(playerRotation.y > 90 && playerRotation.y <= 180) //Player is driving down-left
+//				{
+//					if(PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//
+//				else if(playerRotation.y > 180) //Player is driving down-left
+//				{
+//					if(PlayerMove2.turnLeft == true)
+//					{
+//						leftAndForward();
+//					}
+//
+//					else if(PlayerMove2.turnRight == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//			}
+//
+//			//			else if(relativePlayerPoint.z >= 0.2)
+//			//			{
+//			//
+//			//			}
+//			//
+//			else if(relativePlayerPoint.z <= -0.1)
+//			{
+//				if(playerRotation.y >= 358 || playerRotation.y <= 2) //The player is basically driving straight forward
+//				{
+//					onlyForward();
+//				}
+//
+//				else if(playerRotation.y <= 90) //Player is driving up-right
+//				{
+//					if(PlayerMove2.turnRight == true || PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else rightandForward();
+//				}
+//				else if(playerRotation.y > 90 && playerRotation.y <= 180) //Player is driving down-left
+//				{
+//					if(PlayerMove2.turnLeft == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//
+//				else if(playerRotation.y > 180) //Player is driving down-left
+//				{
+//					if(PlayerMove2.turnLeft == true)
+//					{
+//						leftAndForward();
+//					}
+//
+//					else if(PlayerMove2.turnRight == true)
+//					{
+//						onlyForward();
+//					}
+//
+//					else leftAndForward();
+//				}
+//			}
+//		}
+//	}
 
 	//Here comes a bunch of prefab code to decrease
 	//the amount of reused lines of code.
