@@ -10,5 +10,10 @@ public class playerBulletHit : MonoBehaviour {
 			AIMaster.aiHealth --;
 			Destroy(this.gameObject);
 		}
+		if(other.tag == "Player") //Hit itself in the confusion!
+		{
+			GameControl.control.health --;
+			Destroy(this.gameObject);
+		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class AIprojectile : MonoBehaviour {
 
 	private float projectileSpeed = 100;
-	public static float damageOutput;
+	public static int damageOutput;
 	private float distance;
 	public Rigidbody test;
 
@@ -38,9 +38,14 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.tag == "Player") 
 		{
-			//Debug.Log ("We hit the player!");
-			//Debug.Log ("Damage delt is " + damageOutput);
+			GameControl.control.health -= damageOutput;
 			Destroy (this.gameObject);
+		}
+
+		if(other.tag == "aiShip") //The AI hit itself
+		{
+			AIMaster.aiHealth -= damageOutput;
+			Destroy(this.gameObject);
 		}
 	}
 }

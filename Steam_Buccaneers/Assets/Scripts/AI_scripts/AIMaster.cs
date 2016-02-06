@@ -6,25 +6,22 @@ public class AIMaster : MonoBehaviour {
 	public GameObject scrap;
 	private GameObject playerPoint;
 
-	public Transform aiPoint;
-
 	public static float detectDistance;
 	private float killtimer = 0;
 
 	private bool testedFleeing = false;
 	private bool newSpawn = true;
 
-	public static int aiHealth;
+	public static float aiHealth;
 	private int ranNum;
 
 	// Use this for initialization
 	void Start () {
-		aiHealth = 1;
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 	}
 	
 	void Update () {
-		detectDistance = Vector3.Distance (playerPoint.transform.position, aiPoint.transform.position); //calculates the distance between the AI and the player
+		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
 		if(detectDistance < 40)
 		{

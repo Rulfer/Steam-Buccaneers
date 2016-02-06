@@ -4,21 +4,21 @@ using System.Collections;
 public class spawnAI : MonoBehaviour
 {
 	private GameObject playerPoint; //Player position
-	private GameObject origin;
-	public Transform AI1; //AI_LVL1 prefab
-	public Transform AI2; //AI_LVL2 prefab
+	private GameObject origin; //Position of players original startoint in the game
+	private GameObject bossSpawn;
+	public GameObject AI;
+	public GameObject Boss;
 
-	private Vector3 spawnPosition;
+	private Vector3 spawnPosition; //Where the AI should spawn
 
 	public static bool livingShip = false; //Public bool to check if there is a living AI or not
-
-	private int tempI; //Used to determine what lvl of AI that is to spawn
 
 	// Use this for initialization
 	void Start ()
 	{
 		playerPoint = GameObject.FindGameObjectWithTag("Player");
 		origin = GameObject.Find("GameOrigin");
+		bossSpawn = GameObject.Find("BossSpawn");
 		spawnShip ();
 	}
 
@@ -47,38 +47,47 @@ public class spawnAI : MonoBehaviour
 	{
 		livingShip = true;
 
-		float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
+		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
+		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
 
-		//Create random numbers between -60 and -20
-		float tempPosX = Random.Range(60f, 120f);
-		float tempPosZ = Random.Range(60f, 120f);
-		float posX;
-		float posZ;
-		float ranRangeX = Random.Range(1, 11);
-		if(ranRangeX > 5)
+		if(relativeBossPoint > 100)
 		{
-			posX = tempPosX;
+			//Create random numbers between -60 and -20
+			float tempPosX = Random.Range(60f, 120f);
+			float tempPosZ = Random.Range(60f, 120f);
+			float posX;
+			float posZ;
+			float ranRangeX = Random.Range(1, 11);
+			if(ranRangeX > 5)
+			{
+				posX = tempPosX;
+			}
+			else posX = -tempPosX;
+
+			float ranRangeZ = Random.Range(1, 11);
+			if(ranRangeZ > 5)
+			{
+				posZ = tempPosZ;
+			}
+			else posZ = -tempPosZ;
+
+			spawnPosition = new Vector3(posX, -44, posZ);
+
+			//Here I should actually check distance to Origin, and spawn an AI
+			//with better gear depending on the distance.
+			//We don't really have the code for that yet, so for now I just spawn the regular AI.
+			Instantiate(AI);
+			AI.transform.position = spawnPosition;
+
+			float aiOriginDistance = Vector3.Distance (AI.transform.position, origin.transform.position); //Distance between player and Origin
+			AIMaster.aiHealth = Mathf.Floor(aiOriginDistance * 0.1f); //AI health is equal to the number that is 10% of the distance between it and origin
 		}
-		else posX = -tempPosX;
 
-		float ranRangeZ = Random.Range(1, 11);
-		if(ranRangeZ > 5)
+		else
 		{
-			posZ = tempPosZ;
-		}
-		else posZ = -tempPosZ;
-
-		spawnPosition = new Vector3(posX, -50, posZ);
-
-		if(relativePoint < 200) //Spawns AI_LVL1 if the player is close to Origin
-		{
-			Instantiate(AI1); //Spawns the prefab
-			AI1.position = spawnPosition;
-		}
-		else //Spawn AI_LVL2
-		{
-			Instantiate(AI2); //Spawns the prefab
-			AI2.position = spawnPosition;
+			Instantiate(Boss);
+			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, -44, bossSpawn.transform.position.z);
+			AIMaster.aiHealth = 50;
 		}
 
 		waitBeforeNewSpawn();

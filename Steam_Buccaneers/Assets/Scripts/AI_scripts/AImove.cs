@@ -9,16 +9,15 @@ public class AImove : MonoBehaviour {
 
 	public static float force = 10000f;
 	public static int turnSpeed = 50;
+	private float bombTimer;
 
-//	public static float forwardSpeed = 20;
-//	public float rotationPerSecond = 15f;
-//	public float rotationMax = 45f;
 	private float distanceToPlayer;
 	public float minDist = 20f;
 	public float maxDist = 40f;
 
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
+	public static bool hitBomb = false;
 	private bool playerInFrontOfAI;
 	private bool isFleeing = false;
 
@@ -38,7 +37,7 @@ public class AImove : MonoBehaviour {
 		aiRigid = GetComponent<Rigidbody>();
 	}
 		
-    void FixedUpdate () 
+    void Update () 
 	{
 		if(avoidPlanet.hitPlanet == false)
 		{
@@ -51,40 +50,53 @@ public class AImove : MonoBehaviour {
 			}
 		}
 
+		if(hitBomb ==  true)
+		{
+			bombTimer += Time.deltaTime;
+			if(bombTimer >= 1)
+			{
+				bombTimer = 0;
+				hitBomb = false;
+			}
+		}
+			
 		relativePoint = transform.InverseTransformPoint(player.transform.position);
 
-		aiRigid.AddForce(transform.forward * force*Time.deltaTime);
-		// Series of if tests
-		if (aiRigid.velocity.x >= maxVelocity.x) //|| -aiRigid.velocity.x >= -maxVelocity.x)
+		if(hitBomb == false)
 		{
-			// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
-			// in the z-axis, although it does in fact accelerate.
-			aiRigid.velocity = new Vector3 (maxVelocity.x, 0.0f, aiRigid.velocity.z);
-		}
+			aiRigid.AddForce(transform.forward * force*Time.deltaTime);
+			// Series of if tests
+			if (aiRigid.velocity.x >= maxVelocity.x) //|| -aiRigid.velocity.x >= -maxVelocity.x)
+			{
+				// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
+				// in the z-axis, although it does in fact accelerate.
+				aiRigid.velocity = new Vector3 (maxVelocity.x, 0.0f, aiRigid.velocity.z);
+			}
 
-		if (aiRigid.velocity.x <= -maxVelocity.x)
-		{
-			aiRigid.velocity = new Vector3 (-maxVelocity.x, 0.0f, aiRigid.velocity.z);
-		}
+			if (aiRigid.velocity.x <= -maxVelocity.x)
+			{
+				aiRigid.velocity = new Vector3 (-maxVelocity.x, 0.0f, aiRigid.velocity.z);
+			}
 
-		if (aiRigid.velocity.z >= maxVelocity.z)
-		{
-			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, maxVelocity.z);
-		}
+			if (aiRigid.velocity.z >= maxVelocity.z)
+			{
+				aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, maxVelocity.z);
+			}
 
-		if (aiRigid.velocity.z <= -maxVelocity.z)
-		{
-			aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, -maxVelocity.z);
-		}
+			if (aiRigid.velocity.z <= -maxVelocity.z)
+			{
+				aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, -maxVelocity.z);
+			}
 
-		if (turnLeft == true) 
-		{
-			transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
-		}
+			if (turnLeft == true) 
+			{
+				transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
+			}
 
-		if (turnRight == true) 
-		{
-			transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+			if (turnRight == true) 
+			{
+				transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+			}
 		}
 	}
 		
