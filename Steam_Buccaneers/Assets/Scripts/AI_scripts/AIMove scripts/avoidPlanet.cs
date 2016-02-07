@@ -33,9 +33,9 @@ public class avoidPlanet : MonoBehaviour {
 		right = this.transform.TransformDirection(Vector3.right);
 		left = this.transform.TransformDirection(Vector3.left);
 
-		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
-		Debug.DrawRay(this.transform.position, right * detectDistance, Color.green);
-		Debug.DrawRay(this.transform.position, left * detectDistance, Color.blue);
+//		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
+//		Debug.DrawRay(this.transform.position, right * detectDistance, Color.green);
+//		Debug.DrawRay(this.transform.position, left * detectDistance, Color.blue);
 
 		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 

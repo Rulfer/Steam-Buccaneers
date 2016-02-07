@@ -47,17 +47,13 @@
   <ItemGroup>
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIPatroling.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\avoidPlanet.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\AIPatroling.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\AImove.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\AIprojectile.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\AIsideCanons.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\MoveTo.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\aiSpecialWeapon.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\ballsPosition.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\bombHitSomething.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\detectShip.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\playerMovement.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\aiSpecialWeapon.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\scrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />

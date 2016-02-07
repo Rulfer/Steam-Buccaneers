@@ -30,7 +30,7 @@ public class AIsideCanons : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate ()
+	void Update ()
 	{
 		right = this.transform.TransformDirection(Vector3.right);
 		left = this.transform.TransformDirection(Vector3.left);
@@ -62,28 +62,41 @@ public class AIsideCanons : MonoBehaviour {
 		}
 	}
 
-	void checkGunPosition()
+	private void checkGunPosition()
 	{
 		RaycastHit objectHit;
-		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
+
+		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance)) //Raycast hit something
 		{
-			if(objectHit.transform.tag == "Player")
+			if(objectHit.transform.tag == "Player")//Hit the player
 			{
-				fireLeft = true;
-				fireRight = false;
+				fireLeft = true;//The AI can now fire
 			}
-			else fireLeft = false;
+			else //Hit something else than the player
+			{
+				fireLeft = false; //The AI cant fire anyway
+			}
+		}
+		else //Hit nothing
+		{
+			fireLeft = false; //The AI cant fire
 		}
 
-		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
+		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))//Raycast hit something
 		{
-			if(objectHit.transform.tag == "Player")
+			if(objectHit.transform.tag == "Player")//Hit the player
 			{
-				fireRight = true;
-				fireLeft = false;
+				fireRight = true;//The AI can now fire
 			}
 
-			else fireRight = false;
+			else //Hit something else than the player
+			{
+				fireRight = false; //The AI cant fire anyway
+			}
+		}
+		else//Hit nothing
+		{
+			fireRight = false;//The AI cant fire
 		}
 	}
 }

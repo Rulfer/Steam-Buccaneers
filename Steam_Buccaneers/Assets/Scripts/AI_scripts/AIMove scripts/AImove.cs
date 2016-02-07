@@ -127,7 +127,7 @@ public class AImove : MonoBehaviour {
 			avoidPlayer();
 		}
 
-		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist)
+		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist) //Perfect distance! Lets aim our cannons directly at the player
 		{
 			canonsFacingPlayer(player);
 		}
@@ -139,37 +139,47 @@ public class AImove : MonoBehaviour {
 	{
 		relativePoint = Transformation(test);
 
-		if(relativePoint.z < 0)
+		//We use the public bools "fireLeft" and "fireRight" from the
+		//AIsideCanons.cs script. These change based on Raycast checks.
+		//If fireLeft = false, but the ship is to the left, we turn based on that.
+		//The same goes for the right side. This results in a much 
+		//smoother turning, compared to the previous stuttering one.
+		if(relativePoint.x <= 0) //Player to the left
 		{
-			if(relativePoint.x <= 0)
+			if(AIsideCanons.fireLeft == false) //The AI cant shoot at the player
 			{
-				turnLeft = true;
-				turnRight = false;
-			}
-
-			else if(relativePoint.x >= 0)
-			{
-				turnLeft = false;
-				turnRight = true;
+				if(relativePoint.z >= 0) //Player to the front-left
+				{
+					turnRight = true;
+					turnLeft = false;
+				}
+				else if(relativePoint.z <= 0) //Player to  the back-left
+				{
+					turnLeft = true;
+					turnRight = false;
+				}
 			}
 		}
 
-		else
+		else if(relativePoint.x >= 0) //Player to the right
 		{
-			if(relativePoint.x <= 0)
+			if(AIsideCanons.fireRight == false) //The AI cant shoot at the player
 			{
-				turnLeft = false;
-				turnRight = true;
-			}
-
-			else if(relativePoint.x >= 0)
-			{
-				turnLeft = true;
-				turnRight = false;
+				if(relativePoint.z >= 0) //Player to the front-right
+				{
+					turnRight = false;
+					turnLeft = true;
+				}
+				else if(relativePoint.z <= 0) //Player to  the back-right
+				{
+					turnLeft = false;
+					turnRight = true;
+				}
 			}
 		}
 	}
 
+	//If the AI gets to close to the player, we want it to avoid collitions
 	void avoidPlayer()
 	{
 		relativePoint = Transformation(player);
@@ -200,6 +210,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
+	//The AI decided to flee due to lack of heath 
 	public void flee()
 	{
 		relativePoint = Transformation(player);

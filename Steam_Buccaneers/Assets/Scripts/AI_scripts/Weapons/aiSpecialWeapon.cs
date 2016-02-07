@@ -13,10 +13,6 @@ public class aiSpecialWeapon : MonoBehaviour {
 	void placeBomb()
 	{
 		Instantiate(bomb, this.transform.position, this.transform.rotation);
-//		bomb.transform.parent = this.transform;
-//		bomb.transform.position = this.transform.position;
-//		this.transform.DetachChildren();
-
 		Invoke("placeBomb", 5);
 	}
 }
