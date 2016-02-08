@@ -15,8 +15,10 @@ public class GameControl : MonoBehaviour {
 	public string storeName = "";
 	public int health;
 	public int money;
-	public int spessAmmo;
 	public int[] canonUpgrades = new int[6];
+	public int hullUpgrade;
+	public int specialAmmo;
+	public int thrusterUpgrade;
 
 	void Awake () 
 	{
@@ -37,8 +39,10 @@ public class GameControl : MonoBehaviour {
 		if (health == 0 && money == 0)
 		{
 			health = 20;
-			money = 12000;
-			spessAmmo = 100;
+			money = 120;
+			hullUpgrade = 1;
+			specialAmmo = 1;
+			thrusterUpgrade = 1;
 
 			for (int i = 0; i < canonUpgrades.Length; i ++)
 			{
@@ -67,8 +71,10 @@ public class GameControl : MonoBehaviour {
 		GUI.Label (new Rect (10, 100, 160, 30), "Last Store: " + storeName);
 		GUI.Label (new Rect (10, 120, 160, 30), "Health: " + health);
 		GUI.Label (new Rect (10, 140, 160, 39), "Money: " + money);
-		GUI.Label (new Rect (10, 160, 160, 30), "SpessAmmo: " + spessAmmo);
-		GUI.Label (new Rect (10, 180, 160, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
+		GUI.Label (new Rect (10, 160, 160, 30), "SpessAmmo: " + specialAmmo);
+		GUI.Label (new Rect (10, 180, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
+		GUI.Label (new Rect (10, 200, 160, 30), "Hullupgrade: " + hullUpgrade);
+		GUI.Label (new Rect (10, 220, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
 	}
 
 	public void Save(string storesName)
@@ -106,8 +112,10 @@ public class GameControl : MonoBehaviour {
 		data.storeName = storeName;
 		data.money = money;
 		data.health = health;
-		data.spessAmmo = spessAmmo;
 		data.canonUpgrades = canonUpgrades;
+		data.hullUpgrade = hullUpgrade;
+		data.specialAmmo = specialAmmo;
+		data.thrusterUpgrade = thrusterUpgrade;
 
 		return data;
 	}
@@ -139,8 +147,10 @@ public class GameControl : MonoBehaviour {
 		goP.transform.rotation = Quaternion.Euler(90,0,0);
 		health = data.health;
 		money = data.money;
-		spessAmmo = data.spessAmmo;
 		canonUpgrades = data.canonUpgrades;
+		hullUpgrade = data.hullUpgrade;
+		specialAmmo = data.specialAmmo;
+		thrusterUpgrade = data.thrusterUpgrade;
 	}
 
 	public void ChangeScene(string name)
@@ -181,6 +191,8 @@ class PlayerData
 	public string storeName;
 	public int health;
 	public int money;
-	public int spessAmmo;
 	public int[] canonUpgrades = new int[6];
+	public int hullUpgrade;
+	public int specialAmmo;
+	public int thrusterUpgrade;
 }
