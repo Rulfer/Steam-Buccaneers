@@ -3,7 +3,7 @@ using System.Collections;
 
 public class bombHitSomething : MonoBehaviour {
 	private float radius = 20F;
-	private float force = 20.0f;
+	private float force = 10.0f;
 	private Rigidbody rigi;
 
 	void Start()

@@ -4,23 +4,18 @@ using System.Collections;
 public class AIprojectile : MonoBehaviour {
 
 	private float projectileSpeed = 100;
-	public static int damageOutput;
+	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
 
 	// Use this for initialization
 	void Start () 
 	{
-		if (this.tag == "ball1") 
-		{
-			damageOutput = 1;
-		}
-		if (this.tag == "ball2") 
-		{
-			damageOutput = 2;
-		}
-
 		test.AddForce (this.transform.right * projectileSpeed);
+		if(this.transform.root.name == "Boss(Clone)")
+		{
+			damageOutput = 5;
+		}
 	}
 	
 	// Update is called once per frame
