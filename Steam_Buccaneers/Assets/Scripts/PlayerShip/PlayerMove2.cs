@@ -26,6 +26,7 @@ public class PlayerMove2 : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		Debug.Log (turnLeft);
 		//Debug.Log (Small_Ship.transform.position);
 		//Debug.Log ("x: " + donger.velocity.x);
 		//Debug.Log ("z: " + donger.velocity.z);
