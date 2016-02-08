@@ -109,7 +109,6 @@ public class AIMaster : MonoBehaviour {
 			scrap.transform.position = this.transform.position;
 		}
 		spawnAI.livingShip = false;
-		Debug.Log("pls dont kill");
 		Destroy(this.gameObject);
 	}
 }

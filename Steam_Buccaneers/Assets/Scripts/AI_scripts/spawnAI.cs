@@ -92,6 +92,11 @@ public class spawnAI : MonoBehaviour
 				}
 			}
 		}
+
+		for(int i = 0; i < 6; i++)
+		{
+			Debug.Log(cannonLevel[i]);
+		}
 	}
 
 	void spawnShip ()
@@ -130,9 +135,6 @@ public class spawnAI : MonoBehaviour
 
 			spawnPosition = new Vector3(posX+playerPoint.transform.position.x, -44, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
-			//Here I should actually check distance to Origin, and spawn an AI
-			//with better gear depending on the distance.
-			//We don't really have the code for that yet, so for now I just spawn the regular AI.
 			Instantiate(AI);
 			AI.transform.position = spawnPosition;
 

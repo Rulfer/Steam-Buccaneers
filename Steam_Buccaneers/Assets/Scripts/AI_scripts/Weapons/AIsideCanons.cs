@@ -3,14 +3,19 @@ using System.Collections;
 
 public class AIsideCanons : MonoBehaviour {
 
-	public GameObject cannonball;
+	public GameObject cannonball1;
+	public GameObject cannonball2;
+	public GameObject cannonball3;
 	public GameObject[] leftCannons;
 	public GameObject[] rightCannons;
-	private GameObject[] allCannons;
+	public GameObject[] allCannons;
+	private int[] cannonLevel = new int[6];
 
 	public float fireRate;
 	public float fireDelayLeft;
 	public float fireDelayRight;
+
+	public static int damageOutput;
 
 	public Mesh mesh1;
 	public Mesh mesh2;
@@ -28,22 +33,24 @@ public class AIsideCanons : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		allCannons = GameObject.FindGameObjectsWithTag("sideCannons");
-		if(this.transform.root.name == "AI_LVL1(Clone)")
+		if(this.transform.root.name == "Marine(Clone)")
 		{
 			for(int i = 0; i < 6; i++)
 			{
 				if(spawnAI.cannonLevel[i] == 1)
 				{
 					allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
+					cannonLevel[i] = 1;
 				}
 				else if(spawnAI.cannonLevel[i] == 2)
 				{
 					allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
+					cannonLevel[i] = 2;
 				}
 				else if(spawnAI.cannonLevel[i] == 3)
 				{
 					allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
+					cannonLevel[i] = 3;
 				}
 			}
 		}
@@ -64,22 +71,25 @@ public class AIsideCanons : MonoBehaviour {
 		if (fireLeft == true && Time.time > fireDelayLeft) { // && Inventory.mainAmmo > 0
 			fireDelayLeft = Time.time + fireRate;
 
-			for(int i = 0; i <= 2; i++)
+			for(int i = 0; i < 3; i++)
 			{
-				Instantiate (cannonball, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
-				if(cannonball.transform.root.name == "AI_LVL1(Clone)")
+				if(this.transform.root.name == "Boss(Clone)")
 				{
-					if(spawnAI.cannonLevel[i] == 1)
+					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+				}
+				else
+				{
+					if(cannonLevel[i] == 1)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 1;
+						Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
 					}
-					else if(spawnAI.cannonLevel[i] == 2)
+					else if(cannonLevel[i] == 2)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 3;
+						Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
 					}
-					else if(spawnAI.cannonLevel[i] == 3)
+					else if(cannonLevel[i] == 3)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 5;
+						Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
 					}
 				}
 			}
@@ -88,22 +98,25 @@ public class AIsideCanons : MonoBehaviour {
 		if (fireRight == true && Time.time > fireDelayRight) {				
 			fireDelayRight = Time.time + fireRate;
 
-			for(int i = 0; i <= 2; i++)
+			for(int i = 0; i < 3; i++)
 			{
-				Instantiate (cannonball, rightCannons[i].transform.position, rightCannons[i].transform.rotation);
-				if(cannonball.transform.root.name == "AI_LVL1(Clone)")
+				if(this.transform.root.name == "Boss(Clone)")
 				{
-					if(spawnAI.cannonLevel[i+3] == 1)
+					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+				}
+				else
+				{
+					if(cannonLevel[i+3] == 1)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 1;
+						Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);
 					}
-					else if(spawnAI.cannonLevel[i+3] == 2)
+					else if(cannonLevel[i+3] == 2)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 3;
+						Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation);
 					}
-					else if(spawnAI.cannonLevel[i+3] == 3)
+					else if(cannonLevel[i+3] == 3)
 					{
-						cannonball.GetComponent<AIprojectile>().damageOutput = 5;
+						Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
 					}
 				}
 			}

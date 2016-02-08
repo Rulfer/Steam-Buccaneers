@@ -12,10 +12,7 @@ public class AIprojectile : MonoBehaviour {
 	void Start () 
 	{
 		test.AddForce (this.transform.right * projectileSpeed);
-		if(this.transform.root.name == "Boss(Clone)")
-		{
-			damageOutput = 5;
-		}
+		damageOutput = 3;
 	}
 	
 	// Update is called once per frame
@@ -34,6 +31,7 @@ public class AIprojectile : MonoBehaviour {
 		if (other.tag == "Player") 
 		{
 			GameControl.control.health -= damageOutput;
+			Debug.Log("Player lost " + damageOutput + " health");
 			Destroy (this.gameObject);
 		}
 
