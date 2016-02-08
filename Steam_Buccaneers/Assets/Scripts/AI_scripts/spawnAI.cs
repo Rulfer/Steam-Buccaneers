@@ -4,9 +4,11 @@ using System.Collections;
 public class spawnAI : MonoBehaviour
 {
 	private GameObject playerPoint; //Player position
+	private GameObject origin;
 	public Transform AI1; //AI_LVL1 prefab
 	public Transform AI2; //AI_LVL2 prefab
-	public Transform[] spawnPoints; //Array containing all spawnpoints
+
+	private Vector3 spawnPosition;
 
 	public static bool livingShip = false; //Public bool to check if there is a living AI or not
 
@@ -16,6 +18,7 @@ public class spawnAI : MonoBehaviour
 	void Start ()
 	{
 		playerPoint = GameObject.FindGameObjectWithTag("Player");
+		origin = GameObject.Find("GameOrigin");
 		spawnShip ();
 	}
 
@@ -24,7 +27,6 @@ public class spawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		Debug.Log("We are waiting");
 		Invoke ("checkShipStatus", 5);
 	}
 
@@ -32,7 +34,6 @@ public class spawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		if (livingShip == false) { //There are no living ships, therefore we spawn a new one
-			Debug.Log("Hello");
 			spawnShip ();
 		}
 
@@ -44,31 +45,43 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
-		float distance = 1000; //Unnessesary large variable
-		
-		for (int i = 0; i < spawnPoints.Length; i++) //Runs equal to the ammount of spawnpoints
+		livingShip = true;
+
+		float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
+
+		//Create random numbers between -60 and -20
+		float tempPosX = Random.Range(60f, 120f);
+		float tempPosZ = Random.Range(60f, 120f);
+		float posX;
+		float posZ;
+		float ranRangeX = Random.Range(1, 11);
+		if(ranRangeX > 5)
 		{
-			float temp = Vector3.Distance (playerPoint.transform.position, spawnPoints [i].transform.position); //Distance between spawnpoint [i] and player
-			if (temp < distance) //This spawnpoint is closer to the player than the others
-			{
-				distance = temp; //Sets distance = temp to be able to perform new tests
-				tempI = i; //Saves what position in the array the spawnpoint is
-			}
+			posX = tempPosX;
+		}
+		else posX = -tempPosX;
+
+		float ranRangeZ = Random.Range(1, 11);
+		if(ranRangeZ > 5)
+		{
+			posZ = tempPosZ;
+		}
+		else posZ = -tempPosZ;
+
+		spawnPosition = new Vector3(posX, -50, posZ);
+
+		if(relativePoint < 200) //Spawns AI_LVL1 if the player is close to Origin
+		{
+			Instantiate(AI1); //Spawns the prefab
+			AI1.position = spawnPosition;
+		}
+		else //Spawn AI_LVL2
+		{
+			Instantiate(AI2); //Spawns the prefab
+			AI2.position = spawnPosition;
 		}
 
-		if (tempI <= 2) //Will spawn AI_LVL1 ship
-		{ 
-			Instantiate (AI1); //Spawns the prefab
-			AI1.position = spawnPoints [tempI].position; //Sets the AI position equal to the spawnpoint position
-		} 
-		else //Will spawn AI_LVL2 ship
-		{ 
-			Instantiate (AI2); //Spawns the prefab
-			AI2.position = spawnPoints [tempI].position; //Sets the AI position equal to the spawnpoint position
-		}
-
-		livingShip = true; //There is now a living AI
-		waitBeforeNewSpawn (); //Restarts the whole prosess
+		waitBeforeNewSpawn();
 	}
 }
 
