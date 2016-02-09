@@ -26,6 +26,7 @@ public class PlayerMove2 : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		Debug.Log (turnLeft);
 		//Debug.Log (Small_Ship.transform.position);
 		//Debug.Log ("x: " + donger.velocity.x);
 		//Debug.Log ("z: " + donger.velocity.z);
@@ -33,7 +34,7 @@ public class PlayerMove2 : MonoBehaviour
 		if (Input.GetKey(KeyCode.W))
 		{
 			goingForward = true;
-			donger.AddForce(transform.up * force*Time.deltaTime);
+			donger.AddForce(transform.forward * force*Time.deltaTime);
 			// Series of if tests
 			if (donger.velocity.x >= maxVelocity.x) //|| -donger.velocity.x >= -maxVelocity.x)
 			{
@@ -67,7 +68,7 @@ public class PlayerMove2 : MonoBehaviour
 
 		if (Input.GetKey (KeyCode.A)) 
 		{
-			transform.Rotate (Vector3.forward, turnSpeed*Time.deltaTime);
+			transform.Rotate (Vector3.down, turnSpeed*Time.deltaTime);
 			turnLeft = true;
 		}
 
@@ -78,7 +79,7 @@ public class PlayerMove2 : MonoBehaviour
 
 		if (Input.GetKey (KeyCode.D)) 
 		{
-			transform.Rotate (Vector3.back, turnSpeed*Time.deltaTime);
+			transform.Rotate (Vector3.up, turnSpeed*Time.deltaTime);
 			turnRight = true;
 		}
 		// ALT DETTE ER NYTT
