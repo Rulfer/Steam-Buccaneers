@@ -39,7 +39,7 @@ public class GameControl : MonoBehaviour {
 		if (health == 0 && money == 0)
 		{
 			health = 20;
-			money = 120;
+			money = 120000000;
 			hullUpgrade = 1;
 			specialAmmo = 1;
 			thrusterUpgrade = 1;

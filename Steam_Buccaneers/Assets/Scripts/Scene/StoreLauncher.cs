@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StoreLauncher : MonoBehaviour {
 
-	void OnCollisionEnter(Collision collision)
+	void OnTriggerEnter(Collider collision)
 	{
 		//When player hits store he travles to store
 		if (collision.gameObject.tag == "Player") 
@@ -15,5 +15,7 @@ public class StoreLauncher : MonoBehaviour {
 			//Write whatever scene we want to go to here
 			GameControl.control.ChangeScene("Shop");
 		}
+
+		Debug.Log("Triggered!");
 	}
 }
