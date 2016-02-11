@@ -12,9 +12,7 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
-
-
-	
+	public static bool hitBomb = false;
 
 	// Use this for initialization
 	void Start () 
@@ -31,68 +29,71 @@ public class PlayerMove2 : MonoBehaviour
 		//Debug.Log ("x: " + donger.velocity.x);
 		//Debug.Log ("z: " + donger.velocity.z);
 		//Debug.Log (maxVelocity.x);
-		if (Input.GetKey(KeyCode.W))
-		{
-			goingForward = true;
-			donger.AddForce(transform.forward * force*Time.deltaTime);
-			// Series of if tests
-			if (donger.velocity.x >= maxVelocity.x) //|| -donger.velocity.x >= -maxVelocity.x)
+		if(hitBomb == false)
 			{
-				// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
-				// in the z-axis, although it does in fact accelerate.
-				donger.velocity = new Vector3 (maxVelocity.x, 0.0f, donger.velocity.z);
-			}
-
-			if (donger.velocity.x <= -maxVelocity.x)
+			if (Input.GetKey(KeyCode.W))
 			{
-				donger.velocity = new Vector3 (-maxVelocity.x, 0.0f, donger.velocity.z);
+				goingForward = true;
+				donger.AddForce(transform.forward * force*Time.deltaTime);
+				// Series of if tests
+				if (donger.velocity.x >= maxVelocity.x) //|| -donger.velocity.x >= -maxVelocity.x)
+				{
+					// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
+					// in the z-axis, although it does in fact accelerate.
+					donger.velocity = new Vector3 (maxVelocity.x, 0.0f, donger.velocity.z);
+				}
+
+				if (donger.velocity.x <= -maxVelocity.x)
+				{
+					donger.velocity = new Vector3 (-maxVelocity.x, 0.0f, donger.velocity.z);
+				}
+
+				if (donger.velocity.z >= maxVelocity.z)
+				{
+					donger.velocity = new Vector3 (donger.velocity.x, 0.0f, maxVelocity.z);
+				}
+
+				if (donger.velocity.z <= -maxVelocity.z)
+				{
+					donger.velocity = new Vector3 (donger.velocity.x, 0.0f, -maxVelocity.z);
+				}
 			}
-
-			if (donger.velocity.z >= maxVelocity.z)
-			{
-				donger.velocity = new Vector3 (donger.velocity.x, 0.0f, maxVelocity.z);
-			}
-
-			if (donger.velocity.z <= -maxVelocity.z)
-			{
-				donger.velocity = new Vector3 (donger.velocity.x, 0.0f, -maxVelocity.z);
-			}
-		}
-			
-		else
-		{
-			//donger.velocity = donger.velocity * 0.90f;
-			//goingForward = false;
-		}
-
-
-		if (Input.GetKey (KeyCode.A)) 
-		{
-			transform.Rotate (Vector3.down, turnSpeed*Time.deltaTime);
-			turnLeft = true;
-		}
-
-		else
-		{
-			turnLeft = false;
-		}
-
-		if (Input.GetKey (KeyCode.D)) 
-		{
-			transform.Rotate (Vector3.up, turnSpeed*Time.deltaTime);
-			turnRight = true;
-		}
-		// ALT DETTE ER NYTT
-		else 
-		{
-			turnRight = false;
-		}
 				
-		// Just a test to see if how fast we can drive without problems, also for testing the possibilities for increasing max speed in the shop upgrade menus.
-		if (Input.GetKeyDown (KeyCode.X))
-		{
-			maxVelocity += new Vector3 (0.5f, 0.0f, 0.5f);
-			Debug.Log (maxVelocity);
+			else
+			{
+				//donger.velocity = donger.velocity * 0.90f;
+				//goingForward = false;
+			}
+
+
+			if (Input.GetKey (KeyCode.A)) 
+			{
+				transform.Rotate (Vector3.down, turnSpeed*Time.deltaTime);
+				turnLeft = true;
+			}
+
+			else
+			{
+				turnLeft = false;
+			}
+
+			if (Input.GetKey (KeyCode.D)) 
+			{
+				transform.Rotate (Vector3.up, turnSpeed*Time.deltaTime);
+				turnRight = true;
+			}
+			// ALT DETTE ER NYTT
+			else 
+			{
+				turnRight = false;
+			}
+					
+			// Just a test to see if how fast we can drive without problems, also for testing the possibilities for increasing max speed in the shop upgrade menus.
+			if (Input.GetKeyDown (KeyCode.X))
+			{
+				maxVelocity += new Vector3 (0.5f, 0.0f, 0.5f);
+				Debug.Log (maxVelocity);
+			}
 		}
 	}
 }
