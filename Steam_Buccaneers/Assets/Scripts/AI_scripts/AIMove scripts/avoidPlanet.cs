@@ -11,26 +11,19 @@ public class avoidPlanet : MonoBehaviour {
 	public static float force = 200.0f;
 	public static int turnSpeed = 50;
 	public static Rigidbody aiRigid;
-	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 
-
-	private float aiPlanetDistance;
-
-	private Vector3 relativePlaterPoint;
+	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
 	private Vector3 right;
 	private Vector3 left;
 
 	private float planetTimer;
-	private bool runTimer = false;
 	private int detectDistance = 30;
 
     void Start()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		aiRigid = GetComponent<Rigidbody>();
-
-		aiPlanetDistance = 100;
 	}
 
 	// Update is called once per frame
@@ -40,11 +33,11 @@ public class avoidPlanet : MonoBehaviour {
 		right = this.transform.TransformDirection(Vector3.right);
 		left = this.transform.TransformDirection(Vector3.left);
 
-		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
-		Debug.DrawRay(this.transform.position, right * detectDistance, Color.green);
-		Debug.DrawRay(this.transform.position, left * detectDistance, Color.blue);
+//		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
+//		Debug.DrawRay(this.transform.position, right * detectDistance, Color.green);
+//		Debug.DrawRay(this.transform.position, left * detectDistance, Color.blue);
 
-		relativePlaterPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
+		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 
 		planetSensors();
 
@@ -67,12 +60,12 @@ public class avoidPlanet : MonoBehaviour {
 		{
 			if(objectHit.transform.tag == "Planet") //The planet is in front of the AI
 			{
-				if(relativePlaterPoint.x > 0) //Player to the right of the AI
+				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{
 					AImove.turnLeft = false;
 					AImove.turnRight = true;
 				}
-				else if(relativePlaterPoint.x <= 0)//Player to the left of the AI
+				else if(relativePlayerPoint.x <= 0)//Player to the left of the AI
 				{
 					AImove.turnLeft = true;
 					AImove.turnRight = false;
@@ -86,7 +79,6 @@ public class avoidPlanet : MonoBehaviour {
 		else
 		{
 			forwards = false;
-			runTimer = true;
 			AImove.turnLeft = false;
 			AImove.turnRight = false;
 		}
@@ -109,7 +101,6 @@ public class avoidPlanet : MonoBehaviour {
 			{
 				AImove.turnRight = false;
 				AImove.turnLeft = false;
-				runTimer = true;
 			}
 		}
 
@@ -131,7 +122,6 @@ public class avoidPlanet : MonoBehaviour {
 			{
 				AImove.turnLeft = false;
 				AImove.turnRight = false;
-				runTimer = true;
 			}
 		}
 	}
