@@ -52,7 +52,7 @@ public class OrbitPlanets : MonoBehaviour
 			{
 				//Debug.Log ("dongeriSchlonger");
 			}
-			Debug.Log (hit.transform.tag);
+			//Debug.Log (hit.transform.tag);
 
 		}
 

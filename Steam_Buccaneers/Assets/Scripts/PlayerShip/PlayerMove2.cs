@@ -5,10 +5,10 @@ public class PlayerMove2 : MonoBehaviour
 {
 	public static Rigidbody donger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
-	public static float force = 200.0f;
-	public static int turnSpeed = 10;
+	public float force;
+	public int turnSpeed;
 	public static float dongerTurn = 0.50f;
-	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+	public Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
