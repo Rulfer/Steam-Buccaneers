@@ -7,6 +7,6 @@ public class spesialAmmo : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		GetComponent<Text>().text = GameControl.control.spessAmmo.ToString();
+		GetComponent<Text>().text = GameControl.control.specialAmmo.ToString();
 	}
 }
