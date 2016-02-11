@@ -133,19 +133,23 @@ public class spawnAI : MonoBehaviour
 			}
 			else posZ = -tempPosZ;
 
-			spawnPosition = new Vector3(posX+playerPoint.transform.position.x, -44, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
+			spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 1950, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
 			Instantiate(AI);
 			AI.transform.position = spawnPosition;
 
 			float aiOriginDistance = Vector3.Distance (AI.transform.position, origin.transform.position); //Distance between player and Origin
-			AIMaster.aiHealth = Mathf.Floor(aiOriginDistance * 0.1f); //AI health is equal to the number that is 10% of the distance between it and origin
+			AIMaster.aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
+			if(AIMaster.aiHealth < 20)
+			{
+				AIMaster.aiHealth = 20;
+			}
 		}
 
 		else //We should spawn the boss
 		{
 			Instantiate(Boss);
-			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, -44, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
+			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 1950, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
 			AIMaster.aiHealth = 75; //Sets the health
 		}
 

@@ -4,7 +4,13 @@ using System.Collections;
 public class AIMaster : MonoBehaviour {
 	
 	public GameObject scrap;
+	public GameObject aiModelObject;
 	private GameObject playerPoint;
+
+	public Material mat2;
+	public Material mat3;
+	private float aiHealthMat2;
+	private float aiHealthMat3;
 
 	public static float detectDistance;
 	private float killtimer = 0;
@@ -18,6 +24,12 @@ public class AIMaster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
+		Debug.Log("aiHealth");
+		Debug.Log(aiHealth);
+		Debug.Log(aiHealth*0.33f);
+		Debug.Log(aiHealth*0.66f);
+		aiHealthMat2= aiHealth * 0.66f;
+		aiHealthMat3 = aiHealth * 0.33f;
 	}
 	
 	void Update () {
@@ -30,6 +42,19 @@ public class AIMaster : MonoBehaviour {
 			AImove.force = 200f;
 			newSpawn = false;
 		}
+
+		if(aiHealth <= aiHealthMat3)
+		{
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
+			Debug.Log("We changed to mat3");
+		}
+
+		else if(aiHealth <= aiHealthMat2)
+		{
+			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
+			Debug.Log("We changed to mat2");
+		}
+
 
 		if(aiHealth <= 0)
 		{
