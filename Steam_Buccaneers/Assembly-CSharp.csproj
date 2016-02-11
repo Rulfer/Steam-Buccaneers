@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
