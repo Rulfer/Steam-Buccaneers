@@ -9,6 +9,7 @@ public class PlayerRotate : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		rotateThis = GameObject.Find ("Player");
 		
 	}
 	
@@ -18,12 +19,12 @@ public class PlayerRotate : MonoBehaviour
 
 		if (PlayerMove2.turnLeft == true) 
 		{
-			if (rotateThis.transform.localEulerAngles.z < uprightRotation.z+20f)
+			if (rotateThis.transform.localEulerAngles.z >340) //uprightRotation.z+20f)
 			{
 				//Debug.Log(rotateThis.transform.localEulerAngles.z + " this is rotation1");
-				rotateThis.transform.Rotate(transform.up, 5 * Time.deltaTime);
-				rotateThis.transform.localEulerAngles = new Vector3 (0f, 
-					rotateThis.transform.localEulerAngles.z, uprightRotation.z);
+				rotateThis.transform.Rotate(transform.right, 5 * Time.deltaTime);
+				rotateThis.transform.localEulerAngles = new Vector3 (0f, uprightRotation.y,
+					rotateThis.transform.localEulerAngles.z);
 			}
 		}
 
@@ -47,11 +48,11 @@ public class PlayerRotate : MonoBehaviour
 
 		if (PlayerMove2.turnRight == true) 
 		{
-			if (rotateThis.transform.localEulerAngles.z > uprightRotation.z-20f)
+			if (rotateThis.transform.localEulerAngles.z > 340)//uprightRotation.z-20f)
 			{
-				rotateThis.transform.Rotate(-transform.up, 5 * Time.deltaTime);
-				rotateThis.transform.localEulerAngles = new Vector3 (0f, 
-					rotateThis.transform.localEulerAngles.z, uprightRotation.z);
+				rotateThis.transform.Rotate(-transform.right, 5 * Time.deltaTime);
+				rotateThis.transform.localEulerAngles = new Vector3 (0f, uprightRotation.y,
+					rotateThis.transform.localEulerAngles.z);
 			}
 		}
 
