@@ -23,7 +23,7 @@ public class PlayerStatus : MonoBehaviour
 	void Update () 
 	{
 		//Debug.Log (playerCurrentHealth + "playerhealth, u no dead now");
-		healthPercentageLeft = (playerCurrentHealth / playerMaxHealth)*100;
+/*		healthPercentageLeft = (playerCurrentHealth / playerMaxHealth)*100;
 
 		if (healthPercentageLeft <= 100)
 		{
@@ -58,6 +58,6 @@ public class PlayerStatus : MonoBehaviour
 		if (playerCurrentHealth <= 0)
 		{
 			//Debug.Log("u ded");
-		}					
+		}	*/				
 	}
 }

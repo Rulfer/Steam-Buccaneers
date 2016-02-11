@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Gravity and simple movement\simpleMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
@@ -86,6 +87,8 @@
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
      <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
+     <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
+     <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">

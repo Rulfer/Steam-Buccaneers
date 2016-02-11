@@ -6,16 +6,13 @@ public class PlayerMove2 : MonoBehaviour
 	public static Rigidbody donger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public static float force = 200.0f;
-	public static int turnSpeed = 70;
+	public static int turnSpeed = 10;
 	public static float dongerTurn = 0.50f;
 	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
-
 	public static bool hitBomb = false;
-	private float timer;
-	
 
 	// Use this for initialization
 	void Start () 
@@ -27,22 +24,13 @@ public class PlayerMove2 : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(hitBomb == true)
-		{
-			timer += Time.deltaTime ;
-
-			if(timer >= 1)
-			{
-				hitBomb = false;
-				timer = 0;
-			}
-		}
+		//Debug.Log (turnLeft);
 		//Debug.Log (Small_Ship.transform.position);
 		//Debug.Log ("x: " + donger.velocity.x);
 		//Debug.Log ("z: " + donger.velocity.z);
 		//Debug.Log (maxVelocity.x);
 		if(hitBomb == false)
-		{
+			{
 			if (Input.GetKey(KeyCode.W))
 			{
 				goingForward = true;
