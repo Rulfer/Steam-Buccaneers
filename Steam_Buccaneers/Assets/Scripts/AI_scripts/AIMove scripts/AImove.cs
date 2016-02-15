@@ -22,7 +22,7 @@ public class AImove : MonoBehaviour {
 	private bool isFleeing = false;
 
 	private GameObject player;
-	private Vector3 relativePoint;
+	public static Vector3 relativePoint;
 	/// <summary>
 	/// Is now changed via AIMaster.cs.
 	/// We want the AI to move extra fast once spawned, and slower
@@ -213,6 +213,7 @@ public class AImove : MonoBehaviour {
 	//The AI decided to flee due to lack of heath 
 	public void flee()
 	{
+		Debug.Log("WE ARE RUNNING AWAY!");
 		relativePoint = Transformation(player);
 
 		if(relativePoint.x >-0.1 && relativePoint.x <0.1)

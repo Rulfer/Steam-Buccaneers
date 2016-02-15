@@ -56,9 +56,10 @@ public class spawnAI : MonoBehaviour
 		for(int i = 0; i < 6; i++)
 		{
 			temp = Mathf.Floor(relativeOriginPosition * 0.1f); //10% of the distance is the new temp
-			ranNum = Random.Range (0, 101); //Generates a numer from 0 to 100
+			ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
 			if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
 			{
+				ranNum = Random.Range(0, 101);
 				if(ranNum < temp*0.5)
 				{
 					cannonLevel[i] = 3;

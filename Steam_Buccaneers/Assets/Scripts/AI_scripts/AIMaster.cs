@@ -70,7 +70,7 @@ public class AIMaster : MonoBehaviour {
 					if(ranNum > 9)
 					{
 						testedFleeing = true;
-						AImove.move.flee();
+						this.gameObject.GetComponent<AImove>().flee();
 					}
 				}
 			}
