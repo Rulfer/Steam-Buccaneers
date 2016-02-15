@@ -51,7 +51,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AvoidPlanet.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\avoidPlanet.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogRigh.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" />

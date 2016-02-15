@@ -13,7 +13,7 @@ public class bombHitSomething : MonoBehaviour {
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
-			AIMaster.aiHealth -= 10; //Remove 10 health from the AI
+			other.transform.GetComponent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
 		}
 		if(other.tag == "canonball") //A ball hit this object
 		{

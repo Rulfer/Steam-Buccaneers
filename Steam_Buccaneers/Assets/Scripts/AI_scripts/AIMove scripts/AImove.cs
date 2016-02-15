@@ -7,7 +7,7 @@ public class AImove : MonoBehaviour {
 
 	public static Rigidbody aiRigid;
 
-	public static float force = 10000f;
+	public static float force = 200f;
 	public static int turnSpeed = 50;
 	private float bombTimer;
 
@@ -23,6 +23,7 @@ public class AImove : MonoBehaviour {
 
 	private GameObject player;
 	public static Vector3 relativePoint;
+	private Vector3 patrolPoint;
 	/// <summary>
 	/// Is now changed via AIMaster.cs.
 	/// We want the AI to move extra fast once spawned, and slower
@@ -34,7 +35,8 @@ public class AImove : MonoBehaviour {
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
-		aiRigid = GetComponent<Rigidbody>();
+		aiRigid = this.GetComponent<Rigidbody>();
+		patrolPoint = spawnAI.patrolPoint;
 	}
 		
     void Update () 
@@ -90,12 +92,12 @@ public class AImove : MonoBehaviour {
 
 			if (turnLeft == true) 
 			{
-				transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
+				this.transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
 			}
 
 			if (turnRight == true) 
 			{
-				transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+				this.transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
 			}
 		}
 	}
