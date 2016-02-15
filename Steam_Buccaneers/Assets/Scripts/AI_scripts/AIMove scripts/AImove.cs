@@ -39,7 +39,7 @@ public class AImove : MonoBehaviour {
 		
     void Update () 
 	{
-		if(avoidPlanet.hitPlanet == false)
+		if(AIavoid.hitObject == false)
 		{
 			if(isFleeing == false)
 			{
