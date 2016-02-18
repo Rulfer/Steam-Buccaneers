@@ -50,13 +50,13 @@ public class spawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		Invoke ("checkShipStatus", 5);
+		Invoke ("checkShipStatus", 1);
 	}
 
 	//Checks if we should spawn a new ship or not
 	void checkShipStatus ()
 	{
-		if (livingShips < 10) 
+		if (livingShips < 5) 
 		{ //There are no living ships, therefore we spawn a new one
 			spawnShip ();
 		}
@@ -114,17 +114,12 @@ public class spawnAI : MonoBehaviour
 				}
 			}
 		}
-
-		for(int i = 0; i < 6; i++)
-		{
-			Debug.Log(cannonLevel[i]);
-		}
 	}
 
 	private Vector3 setPatrolPoint()
 	{
-		float tempPosX = Random.Range(this.transform.position.x, this.transform.position.x + 1000); //Random x position
-		float tempPosZ = Random.Range(this.transform.position.z, this.transform.position.z + 1000); //Random z position
+		float tempPosX = Random.Range(this.transform.position.x, this.transform.position.x + 3000); //Random x position
+		float tempPosZ = Random.Range(this.transform.position.z, this.transform.position.z + 3000); //Random z position
 		float posX;
 		float posZ;
 
@@ -146,7 +141,7 @@ public class spawnAI : MonoBehaviour
 		}
 		else posZ = -tempPosZ;
 
-		return new Vector3(posX, 0, posZ);
+		return new Vector3(posX, 1946, posZ);
 
 	}
 
@@ -204,12 +199,12 @@ public class spawnAI : MonoBehaviour
 						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
 					}
 					marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
-					checkShipStatus();
+					waitBeforeNewSpawn();
 					return;
 				}
 			}
 
-			checkShipStatus();
+			waitBeforeNewSpawn();
 		}
 
 		else //We should spawn the boss

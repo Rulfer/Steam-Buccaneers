@@ -37,7 +37,7 @@ public class bombHitSomething : MonoBehaviour {
 			}
 			if(hit.tag == "aiShip") //If we hit the aiShip
 			{
-				AImove.hitBomb = true; //Disable movement
+				this.GetComponent<AImove>().hitBomb = true; //Disable movement
 			}
 			if(rb == null) //The object has no rigidbody. Check if the root has
 			{

@@ -15,7 +15,7 @@ public class AIMaster : MonoBehaviour {
 	public static float detectDistance;
 
 	private bool testedFleeing = false;
-	public static bool detectedPlayer = false;
+	public bool detectedPlayer = false;
 
 	public float aiHealth = 20;
 	public int arrayIndex;
@@ -24,10 +24,6 @@ public class AIMaster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
-		Debug.Log("aiHealth");
-		Debug.Log(aiHealth);
-		Debug.Log(aiHealth*0.33f);
-		Debug.Log(aiHealth*0.66f);
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 
@@ -37,38 +33,17 @@ public class AIMaster : MonoBehaviour {
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(detectDistance < 40)
+		if(detectDistance < 60)
 		{
-			AImove.maxVelocity.x = 3.5f;
-			AImove.maxVelocity.z = 3.5f;
-			AImove.force = 200f;
+			this.GetComponent<AImove>().maxVelocity.x = 3.5f;
+			this.GetComponent<AImove>().maxVelocity.z = 3.5f;
+			this.GetComponent<AImove>().force = 200f;
 		}
 
 		if(detectDistance < 100)
 		{
 			if(detectedPlayer == false)
-			{
-				detectedPlayer = false;
-				AImove.force = 10000f;
-			}
-		}
-
-		if(aiHealth <= aiHealthMat3)
-		{
-			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
-			Debug.Log("We changed to mat3");
-		}
-
-		else if(aiHealth <= aiHealthMat2)
-		{
-			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
-			Debug.Log("We changed to mat2");
-		}
-
-
-		if(aiHealth <= 0)
-		{
-			killAI();
+				deaktivatePatroling();
 		}
 
 		if(testedFleeing == false)
@@ -80,17 +55,31 @@ public class AIMaster : MonoBehaviour {
 					if(ranNum > 9)
 					{
 						testedFleeing = true;
-						this.gameObject.GetComponent<AImove>().flee();
+						this.GetComponent<AImove>().flee();
 					}
 				}
 			}
 		}
 
+		if(aiHealth <= aiHealthMat3)
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
-		if(detectDistance > 300)
-		{
+		else if(aiHealth <= aiHealthMat2)
+			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
+
+		if(detectDistance > 500)
 			killAI();
-		}
+		
+		if(aiHealth <= 0)
+			killAI();
+	}
+
+	public void deaktivatePatroling()
+	{
+		detectedPlayer = true;
+		this.GetComponent<AIPatroling>().enabled = false;
+		this.GetComponent<AImove>().isPatroling = false;
+		this.GetComponent<AImove>().force = 10000f;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -112,6 +101,7 @@ public class AIMaster : MonoBehaviour {
 		}
 		spawnAI.livingShips--;
 		spawnAI.availableIndes[arrayIndex]= false;
+		Destroy(this.GetComponent<AIPatroling>().target);
 		Destroy(this.gameObject);
 	}
 }

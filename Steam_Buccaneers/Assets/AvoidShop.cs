@@ -61,13 +61,13 @@ public class AvoidShop : MonoBehaviour {
 			{
 				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{
-					AImove.turnLeft = true;
-					AImove.turnRight = false;
+					this.GetComponent<AImove>().turnLeft = true;
+					this.GetComponent<AImove>().turnRight = false;
 				}
 				else if(relativePlayerPoint.x <= 0)//Player to the left of the AI
 				{
-					AImove.turnLeft = false;
-					AImove.turnRight = true;
+					this.GetComponent<AImove>().turnLeft = false;
+					this.GetComponent<AImove>().turnRight = true;
 				}
 				hitShop = true;
 				forwards = true;
@@ -78,16 +78,16 @@ public class AvoidShop : MonoBehaviour {
 		else
 		{
 			forwards = false;
-			AImove.turnLeft = false;
-			AImove.turnRight = false;
+			this.GetComponent<AImove>().turnLeft = false;
+			this.GetComponent<AImove>().turnRight = false;
 		}
 
 		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
 		{
 			if(objectHit.transform.tag == "Planet") //The planet is to the left of the AI
 			{
-				AImove.turnRight = true;
-				AImove.turnLeft = false;
+				this.GetComponent<AImove>().turnRight = true;
+				this.GetComponent<AImove>().turnLeft = false;
 				hitShop = true;
 				shopTimer = 0;
 
@@ -98,8 +98,8 @@ public class AvoidShop : MonoBehaviour {
 		{
 			if(forwards == false)
 			{
-				AImove.turnRight = false;
-				AImove.turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
+				this.GetComponent<AImove>().turnLeft = false;
 			}
 		}
 
@@ -107,8 +107,8 @@ public class AvoidShop : MonoBehaviour {
 		{
 			if(objectHit.transform.tag == "Planet") //The planet is to the right of the AI
 			{
-				AImove.turnLeft = true;
-				AImove.turnRight = false;
+				this.GetComponent<AImove>().turnLeft = true;
+				this.GetComponent<AImove>().turnRight = false;
 				hitShop = true;
 				shopTimer = 0;
 
@@ -119,8 +119,8 @@ public class AvoidShop : MonoBehaviour {
 		{
 			if(forwards == false && lefty == false)
 			{
-				AImove.turnLeft = false;
-				AImove.turnRight = false;
+				this.GetComponent<AImove>().turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
 			}
 		}
 	}

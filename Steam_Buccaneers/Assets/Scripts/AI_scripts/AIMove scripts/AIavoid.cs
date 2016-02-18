@@ -4,7 +4,7 @@ using System.Collections;
 public class AIavoid : MonoBehaviour {
 	private GameObject player;
 
-	public static bool hitObject = false;
+	public bool hitObject = false;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
@@ -50,17 +50,17 @@ public class AIavoid : MonoBehaviour {
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, fwd, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet") //The planet is in front of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip") //The planet is in front of the AI
 			{
 				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{
-					AImove.turnLeft = false;
-					AImove.turnRight = true;
+					this.GetComponent<AImove>().turnLeft = false;
+					this.GetComponent<AImove>().turnRight = true;
 				}
 				else if(relativePlayerPoint.x <= 0)//Player to the left of the AI
 				{
-					AImove.turnLeft = true;
-					AImove.turnRight = false;
+					this.GetComponent<AImove>().turnLeft = true;
+					this.GetComponent<AImove>().turnRight = false;
 				}
 				hitObject = true; //We hit something
 				forwards = true; //Sets this to true so the rest of the code knows this
@@ -71,13 +71,13 @@ public class AIavoid : MonoBehaviour {
 			{
 				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{
-					AImove.turnLeft = true;
-					AImove.turnRight = false;
+					this.GetComponent<AImove>().turnLeft = true;
+					this.GetComponent<AImove>().turnRight = false;
 				}
 				else if(relativePlayerPoint.x <= 0)//Player to the left of the AI
 				{
-					AImove.turnLeft = false;
-					AImove.turnRight = true;
+					this.GetComponent<AImove>().turnLeft = false;
+					this.GetComponent<AImove>().turnRight = true;
 				}
 				hitObject = true; //We hit something
 				forwards = true; //Sets this to true so the rest of the code knows this
@@ -88,19 +88,19 @@ public class AIavoid : MonoBehaviour {
 		else
 		{
 			forwards = false;
-			AImove.turnLeft = false;
-			AImove.turnRight = false;
+			this.GetComponent<AImove>().turnLeft = false;
+			this.GetComponent<AImove>().turnRight = false;
 		}
 
 		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet") //The planet is to the left of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the left of the AI
 			{
-				AImove.turnRight = true;
-				AImove.turnLeft = false;
+				Debug.Log("Hit " + objectHit.transform.name + " on the left side");
 				hitObject = true;
 				hitTimer = 0;
-
+				this.GetComponent<AImove>().turnRight = true;
+				this.GetComponent<AImove>().turnLeft = false;
 			}
 
 		}
@@ -108,20 +108,20 @@ public class AIavoid : MonoBehaviour {
 		{
 			if(forwards == false)
 			{
-				AImove.turnRight = false;
-				AImove.turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
+				this.GetComponent<AImove>().turnLeft = false;
 			}
 		}
 
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet") //The planet is to the right of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the right of the AI
 			{
-				AImove.turnLeft = true;
-				AImove.turnRight = false;
+				Debug.Log("Hit " + objectHit.transform.name + " on the right side");
 				hitObject = true;
 				hitTimer = 0;
-
+				this.GetComponent<AImove>().turnLeft = true;
+				this.GetComponent<AImove>().turnRight = false;
 			}
 
 		}
@@ -129,8 +129,8 @@ public class AIavoid : MonoBehaviour {
 		{
 			if(forwards == false && lefty == false)
 			{
-				AImove.turnLeft = false;
-				AImove.turnRight = false;
+				this.GetComponent<AImove>().turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
 			}
 		}
 	}
