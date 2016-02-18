@@ -1,14 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Save and load\GameControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs">
     <Files>
-      <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="194" Column="52" />
-      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="53" Column="1" />
-      <File FileName="Assets\Scripts\Shop\shopText.cs" Line="133" Column="1" />
-      <File FileName="Assets\Scripts\Shop\monies.cs" Line="1" Column="1" />
+      <File FileName="Assets\setWeapon.cs" Line="29" Column="48" />
       <File FileName="Assets\Scripts\PlayerShip\swivelWeaponControl.cs" Line="29" Column="1" />
-      <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="19" Column="27" />
-      <File FileName="Assets\Scripts\PlayerShip\cameraController.cs" Line="21" Column="1" />
+      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="50" Column="25" />
+      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" Line="6" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\Projectile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\sideWeaponControl.cs" Line="33" Column="52" />
+      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" Line="23" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
+     <Compile Include="Assets\setWeapon.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
