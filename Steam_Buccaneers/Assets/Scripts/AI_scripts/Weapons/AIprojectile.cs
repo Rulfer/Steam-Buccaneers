@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AIprojectile : MonoBehaviour {
 
-	private float projectileSpeed = 100;
+	private float projectileSpeed = 120;
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
