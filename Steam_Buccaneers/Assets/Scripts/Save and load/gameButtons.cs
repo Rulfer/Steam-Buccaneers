@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-
 public class gameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
 	public GameObject escMenu;
@@ -13,6 +11,19 @@ public class gameButtons : MonoBehaviour {
 		{
 		setDifferent();
 		escMenu.SetActive(escMenuStatus);
+		pause();
+		}
+	}
+
+	public void pause()
+	{
+		if(Time.timeScale == 0)
+		{
+			Time.timeScale = 1;
+		}
+		else
+		{
+			Time.timeScale = 0;
 		}
 	}
 
@@ -20,6 +31,7 @@ public class gameButtons : MonoBehaviour {
 	{
 		escMenu.SetActive(!escMenuStatus);
 		setDifferent();
+		pause();
 	}
 
 	private void setDifferent()
