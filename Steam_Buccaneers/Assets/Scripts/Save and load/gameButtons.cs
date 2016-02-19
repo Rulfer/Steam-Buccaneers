@@ -25,6 +25,8 @@ public class gameButtons : MonoBehaviour {
 		{
 			Time.timeScale = 0;
 		}
+
+		Debug.Log (Time.timeScale);
 	}
 
 	public void resume()
