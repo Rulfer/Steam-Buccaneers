@@ -4,36 +4,46 @@ using System.Collections;
 public class AIMaster : MonoBehaviour {
 	
 	public GameObject scrap;
+	public GameObject aiModelObject;
 	private GameObject playerPoint;
 
+	public Material mat2;
+	public Material mat3;
+	private float aiHealthMat2;
+	private float aiHealthMat3;
+
 	public static float detectDistance;
-	private float killtimer = 0;
 
 	private bool testedFleeing = false;
-	private bool newSpawn = true;
+	public bool detectedPlayer = false;
 
-	public static float aiHealth;
+	public float aiHealth = 20;
+	public int arrayIndex;
 	private int ranNum;
 
 	// Use this for initialization
 	void Start () {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
+		aiHealthMat2= aiHealth * 0.66f;
+		aiHealthMat3 = aiHealth * 0.33f;
+
+		this.transform.position = spawnAI.spawnPosition;
 	}
 	
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(detectDistance < 40)
+		if(detectDistance < 60)
 		{
-			AImove.maxVelocity.x = 3.5f;
-			AImove.maxVelocity.z = 3.5f;
-			AImove.force = 200f;
-			newSpawn = false;
+			this.GetComponent<AImove>().maxVelocity.x = 3.5f;
+			this.GetComponent<AImove>().maxVelocity.z = 3.5f;
+			this.GetComponent<AImove>().force = 200f;
 		}
 
-		if(aiHealth <= 0)
+		if(detectDistance < 100)
 		{
-			killAI();
+			if(detectedPlayer == false)
+				deaktivatePatroling();
 		}
 
 		if(testedFleeing == false)
@@ -45,49 +55,31 @@ public class AIMaster : MonoBehaviour {
 					if(ranNum > 9)
 					{
 						testedFleeing = true;
-						AImove.move.flee();
+						this.GetComponent<AImove>().flee();
 					}
 				}
 			}
 		}
 
+		if(aiHealth <= aiHealthMat3)
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
-		if(detectDistance >= 60)
-		{
-			killtimer+= Time.deltaTime;
-		}
+		else if(aiHealth <= aiHealthMat2)
+			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
 
-		if(detectDistance < 60 || newSpawn == true)
-		{
-			killtimer = 0;
-		}
-
-		if(killtimer > 10)
-		{
+		if(detectDistance > 500)
 			killAI();
-		}
-			
-		//We dont want to render the AI if its to far away from the player,
-		//so we delete it when the distance is equal or greater than 100 (we can change this number at any time).
-//		if (detectDistance >= 100) {
-//			Destroy(this.gameObject);
-//			spawnAI.livingShip = false;
-//		}
+		
+		if(aiHealth <= 0)
+			killAI();
+	}
 
-		//This is commented out, but is usefull when the AI is patrolling.
-		//When its not patrolling, and only always going to move against the player,
-		//we dont need this code at all.
-//		if (detectDistance <= 40) 
-//		{
-//			GetComponent<AIPatroling>().enabled = false;
-//			GetComponent<MoveTo> ().enabled = true;
-//		}
-//
-//		if (detectDistance >= 50)
-//		{
-//			GetComponent<AIPatroling> ().enabled = true;
-//			GetComponent<MoveTo> ().enabled = false;
-//		}
+	public void deaktivatePatroling()
+	{
+		detectedPlayer = true;
+		this.GetComponent<AIPatroling>().enabled = false;
+		this.GetComponent<AImove>().isPatroling = false;
+		this.GetComponent<AImove>().force = 10000f;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -97,7 +89,6 @@ public class AIMaster : MonoBehaviour {
 			Debug.Log("planet pls");
 			killAI();
 		}
-
 	}
 
 	private void killAI()
@@ -108,7 +99,9 @@ public class AIMaster : MonoBehaviour {
 			Instantiate(scrap);
 			scrap.transform.position = this.transform.position;
 		}
-		spawnAI.livingShip = false;
+		spawnAI.livingShips--;
+		spawnAI.availableIndes[arrayIndex]= false;
+		Destroy(this.GetComponent<AIPatroling>().target);
 		Destroy(this.gameObject);
 	}
 }

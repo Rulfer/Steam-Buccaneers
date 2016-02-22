@@ -37,7 +37,7 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			AIMaster.aiHealth -= damageOutput;
+			other.transform.GetComponent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
 	}
