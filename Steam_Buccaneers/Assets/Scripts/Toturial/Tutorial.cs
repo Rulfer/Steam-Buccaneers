@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour
 	private Text characterName;
 	public static int dialogNumber;
 	public GameObject[] shootyThings;
+	private gameButtons buttonEvents;
 
 	void Start ()
 	{
@@ -16,7 +17,8 @@ public class Tutorial : MonoBehaviour
 		dialogText = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		//Turn of functuallity
-		GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents.pause ();
 		shootingAllowed (false);
 		Debug.Log ("pause");
 		//Trigger dialog here
@@ -33,16 +35,25 @@ public class Tutorial : MonoBehaviour
 			setDialog ("shopkeeper", "Very funny dialog");
 			break;
 		case(1):
-			setDialog ("shopkeeper", "Instructions. Click button to continue");
-			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+			setDialog ("shopkeeper", "Steer ship with WASD. Click button to continue");
+			buttonEvents.pause ();
 			break;
 		case(2):
+			setDialog ("ShopKeeper", "GG guy");
+			buttonEvents.pause ();
 			break;
 		case(3):
+			setDialog ("ShopKeeper", "Now shoot with Q and E and spess weapon mouse 1. Click button to continue");
+			shootingAllowed (true);
+			buttonEvents.pause ();
 			break;
 		case(4):
+			setDialog ("ShopKeeper", "Good stuff.");
+			buttonEvents.pause ();
 			break;
 		case(5):
+			setDialog ("ShopKeeper", "Look a douchbag!");
+			buttonEvents.pause ();
 			break;
 		case(6):
 			break;

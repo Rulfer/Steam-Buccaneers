@@ -45,7 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AnimationPlay.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
+     <Compile Include="Assets\PlsAnimationstart.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIavoid.cs" />
