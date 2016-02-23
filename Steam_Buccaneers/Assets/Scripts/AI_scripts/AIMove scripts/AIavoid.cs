@@ -96,13 +96,11 @@ public class AIavoid : MonoBehaviour {
 		{
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the left of the AI
 			{
-				Debug.Log("Hit " + objectHit.transform.name + " on the left side");
 				hitObject = true;
 				hitTimer = 0;
 				this.GetComponent<AImove>().turnRight = true;
 				this.GetComponent<AImove>().turnLeft = false;
 			}
-
 		}
 		else
 		{
@@ -117,13 +115,11 @@ public class AIavoid : MonoBehaviour {
 		{
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the right of the AI
 			{
-				Debug.Log("Hit " + objectHit.transform.name + " on the right side");
 				hitObject = true;
 				hitTimer = 0;
 				this.GetComponent<AImove>().turnLeft = true;
 				this.GetComponent<AImove>().turnRight = false;
 			}
-
 		}
 		else
 		{

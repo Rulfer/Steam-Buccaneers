@@ -9,8 +9,8 @@ public class spawnAI : MonoBehaviour
 	private GameObject playerPoint; //Player position
 	private GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn;
-	public GameObject[] marineShips = new GameObject[10];
-	public static bool[] availableIndes = new bool[10];
+	public List<GameObject> marineShips = new List<GameObject>();
+	//public static bool[] availableIndes = new bool[10];
 	public GameObject AI;
 	public GameObject Boss;
 
@@ -20,15 +20,10 @@ public class spawnAI : MonoBehaviour
 	public static Vector3 spawnPosition; //Where the AI should spawn
 	public static Vector3 patrolPoint;
 
-	public static int livingShips;
+	public int livingShips = 0;
 	// Use this for initialization
 	void Start ()
 	{
-		for(int i = 0; i < marineShips.Length; i++)
-		{
-			marineShips[i] = null;
-			availableIndes[i] = true;
-		}
 		playerPoint = GameObject.FindGameObjectWithTag("Player");
 		origin = GameObject.Find("GameOrigin");
 		bossSpawn = GameObject.Find("BossSpawn");
@@ -37,13 +32,7 @@ public class spawnAI : MonoBehaviour
 
 	void Update()
 	{
-		for(int i = 0; i < marineShips.Length; i++)
-		{
-			if(availableIndes[i] == false)
-			{
-				marineShips[i] = null;
-			}
-		}
+
 	}
 	//After X (now 5) seconds the checkShipStatus function will run
 	//This function is used to check weather or not to spawn a new ship
@@ -56,7 +45,7 @@ public class spawnAI : MonoBehaviour
 	//Checks if we should spawn a new ship or not
 	void checkShipStatus ()
 	{
-		if (livingShips < 5) 
+		if (livingShips < 10) 
 		{ //There are no living ships, therefore we spawn a new one
 			spawnShip ();
 		}
@@ -149,8 +138,6 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
-		livingShips++;
-
 		setCannonLevel();
 		patrolPoint = setPatrolPoint();
 		Debug.Log("patrolPoint " + patrolPoint);
@@ -184,28 +171,20 @@ public class spawnAI : MonoBehaviour
 
 			spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 1950, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
-			for(int i = 0; i < marineShips.Length; i++)
+
+			marineShips.Add(Instantiate(AI));
+			GameObject temp = marineShips.FindLast(o=>o.name== "Marine(Clone)");
+			temp.transform.position = spawnPosition;
+
+			float aiOriginDistance = Vector3.Distance (AI.transform.position, origin.transform.position); //Distance between player and Origin
+			temp.gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
+			if(temp.gameObject.GetComponent<AIMaster>().aiHealth < 20)
 			{
-				if(availableIndes[i] == true)
-				{
-					availableIndes[i] = false;
-					Instantiate(AI);
-					marineShips[i] = AI;
-					marineShips[i].transform.position = spawnPosition;
-
-					float aiOriginDistance = Vector3.Distance (AI.transform.position, origin.transform.position); //Distance between player and Origin
-					marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
-					if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20)
-					{
-						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
-					}
-					marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
-					waitBeforeNewSpawn();
-					return;
-				}
+				temp.gameObject.GetComponent<AIMaster>().aiHealth = 20;
 			}
+			temp.gameObject.GetComponent<AIMaster>().arrayIndex = livingShips;
 
-			waitBeforeNewSpawn();
+			livingShips++;
 		}
 
 		else //We should spawn the boss

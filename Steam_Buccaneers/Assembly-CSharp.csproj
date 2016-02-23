@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMaster.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIFlightControl.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" />

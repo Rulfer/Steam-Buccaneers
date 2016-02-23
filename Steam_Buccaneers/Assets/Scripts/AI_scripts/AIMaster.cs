@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class AIMaster : MonoBehaviour {
-	
+public class AIMaster : MonoBehaviour 
+{
+	private spawnAI spawn;
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
@@ -27,7 +29,7 @@ public class AIMaster : MonoBehaviour {
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 
-		this.transform.position = spawnAI.spawnPosition;
+		spawn = GameObject.Find("GameControl").GetComponent<spawnAI>();
 	}
 	
 	void Update () {
@@ -43,7 +45,10 @@ public class AIMaster : MonoBehaviour {
 		if(detectDistance < 100)
 		{
 			if(detectedPlayer == false)
+			{
 				deaktivatePatroling();
+				killMarines();
+			}
 		}
 
 		if(testedFleeing == false)
@@ -91,6 +96,27 @@ public class AIMaster : MonoBehaviour {
 		}
 	}
 
+	private void killMarines()
+	{
+//		foreach(GameObject i in spawnAI.spawn.marineShips)
+//			Debug.Log("the name is " + i.name);
+		for(int i = 0; i < 10; i++)
+		{
+			Debug.Log("We are killing them now,");
+			if(i != arrayIndex)
+			{
+				if(spawn.marineShips[i] != null)
+				{
+					Destroy(spawn.marineShips[i]);
+					spawn.marineShips.RemoveAt(i);
+					spawn.livingShips--;
+				}
+			}
+		}
+
+		//spawn.marineShips.Sort();
+	}
+
 	private void killAI()
 	{
 		int temp = Random.Range(1, 7);
@@ -99,9 +125,10 @@ public class AIMaster : MonoBehaviour {
 			Instantiate(scrap);
 			scrap.transform.position = this.transform.position;
 		}
-		spawnAI.livingShips--;
-		spawnAI.availableIndes[arrayIndex]= false;
 		Destroy(this.GetComponent<AIPatroling>().target);
-		Destroy(this.gameObject);
+		spawn.marineShips.RemoveAt(arrayIndex);
+		spawn.livingShips--;
+		spawn.marineShips.Sort();
+		//Destroy(this.gameObject);
 	}
 }
