@@ -118,8 +118,8 @@ public class spawnAI : MonoBehaviour
 
 	private Vector3 setPatrolPoint()
 	{
-		float tempPosX = Random.Range(this.transform.position.x, this.transform.position.x + 3000); //Random x position
-		float tempPosZ = Random.Range(this.transform.position.z, this.transform.position.z + 3000); //Random z position
+		float tempPosX = Random.Range(playerPoint.transform.position.x, playerPoint.transform.position.x + 3000); //Random x position
+		float tempPosZ = Random.Range(playerPoint.transform.position.z, playerPoint.transform.position.z + 3000); //Random z position
 		float posX;
 		float posZ;
 
@@ -129,17 +129,18 @@ public class spawnAI : MonoBehaviour
 		float ranRangeX = Random.Range(1, 11);
 		if(ranRangeX > 5)
 		{
-			posX = tempPosX;
+			posX = playerPoint.transform.position.x + tempPosX;
+
 		}
-		else posX = -tempPosX;
+		else posX = playerPoint.transform.position.x - tempPosX;
 
 		//Does the same to the Z position of the AI as we did with the X position just above this.
 		float ranRangeZ = Random.Range(1, 11);
 		if(ranRangeZ > 5)
 		{
-			posZ = tempPosZ;
+			posZ = playerPoint.transform.position.z + tempPosZ;
 		}
-		else posZ = -tempPosZ;
+		else posZ = playerPoint.transform.position.z - tempPosZ;
 
 		return new Vector3(posX, 1946, posZ);
 
@@ -152,7 +153,7 @@ public class spawnAI : MonoBehaviour
 
 		setCannonLevel();
 		patrolPoint = setPatrolPoint();
-
+		Debug.Log("patrolPoint " + patrolPoint);
 		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
 
