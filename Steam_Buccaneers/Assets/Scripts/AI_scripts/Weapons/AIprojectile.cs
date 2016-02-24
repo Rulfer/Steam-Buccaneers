@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIprojectile : MonoBehaviour {
-
+public class AIprojectile : MonoBehaviour 
+{
 	private float projectileSpeed = 120;
 	public int damageOutput;
 	private float distance;
@@ -37,7 +37,7 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			other.GetComponent<AIMaster>().aiHealth -= damageOutput;
+			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
 	}
