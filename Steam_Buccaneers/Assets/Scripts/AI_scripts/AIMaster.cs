@@ -98,8 +98,7 @@ public class AIMaster : MonoBehaviour
 
 	private void killMarines()
 	{
-//		foreach(GameObject i in spawnAI.spawn.marineShips)
-//			Debug.Log("the name is " + i.name);
+		spawn.stopSpawn = true;
 		for(int i = 0; i < 10; i++)
 		{
 			Debug.Log("We are killing them now,");
@@ -107,8 +106,10 @@ public class AIMaster : MonoBehaviour
 			{
 				if(spawn.marineShips[i] != null)
 				{
+					Destroy(spawn.marineShips[i].GetComponent<AIPatroling>().target);
 					Destroy(spawn.marineShips[i]);
-					spawn.marineShips.RemoveAt(i);
+					spawn.marineShips[i] = null;
+					spawn.availableIndes[i] = true;
 					spawn.livingShips--;
 				}
 			}
@@ -126,9 +127,10 @@ public class AIMaster : MonoBehaviour
 			scrap.transform.position = this.transform.position;
 		}
 		Destroy(this.GetComponent<AIPatroling>().target);
-		spawn.marineShips.RemoveAt(arrayIndex);
+		spawn.marineShips[arrayIndex] = null;
+		spawn.availableIndes[arrayIndex] = true;
 		spawn.livingShips--;
-		spawn.marineShips.Sort();
-		//Destroy(this.gameObject);
+		spawn.stopSpawn = false;
+		Destroy(this.gameObject);
 	}
 }
