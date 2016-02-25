@@ -4,45 +4,65 @@ using System.Collections;
 
 public class AIPatroling : MonoBehaviour {
 
-	public Transform[] points;
+	public GameObject target;
 	private int destPoint = 0;
-	private NavMeshAgent agent;
+	private Vector3 patrolPoint;
+	private float distanceToObjective;
 
 
 //	private Script AIPatroling;
 
-	void Start () {
-		agent = GetComponent<NavMeshAgent>();
-
-		// Disabling auto-braking allows for continuous movement
-		// between points (ie, the agent doesn't slow down as it
-		// approaches a destination point).
-		agent.autoBraking = false;
-
-		GotoNextPoint();
+	void Start () 
+	{
+		patrolPoint = spawnAI.patrolPoint;
+		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		target.transform.position = spawnAI.patrolPoint;
+		target.GetComponent<MeshRenderer>().enabled = false;
 	}
 
-
-
-	void GotoNextPoint() {
-		// Returns if no points have been set up
-		if (points.Length == 0)
-			return;
-
-		// Set the agent to go to the currently selected destination.
-		agent.destination = points[destPoint].position;
-
-		// Choose the next point in the array as the destination,
-		// cycling to the start if necessary.
-		destPoint = (destPoint + 1) % points.Length;
-	}
-
-
-	void Update () {
-		// Choose the next destination point when the agent gets
+	void Update () 
+	{
+		// Choose the next destination point when the AI gets
 		// close to the current one.
-		if (agent.remainingDistance < 0.5f)
-			GotoNextPoint();
+		distanceToObjective = Vector3.Distance (this.transform.position, target.transform.position); //distance between AI and player
+		if(GetComponent<AIavoid>().hitObject == false)
+			goToPoint();
+		if (distanceToObjective < 10f)
+		{
+			this.GetComponent<AIMaster>().deaktivatePatroling();
+		}
 
 	}
+
+
+	void goToPoint()
+	{
+		Vector3 relativePoint = transform.InverseTransformPoint(target.transform.position);
+		if(relativePoint.x >-0.1 && relativePoint.x < 0.1)
+		{
+			if(relativePoint.z >= 0)
+			{
+				this.GetComponent<AImove>().turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
+			}
+			else
+			{
+				this.GetComponent<AImove>().turnLeft = true;
+				this.GetComponent<AImove>().turnRight = false;
+			}
+		}
+
+		else if(relativePoint.x >= 0)
+		{
+			this.GetComponent<AImove>().turnLeft = false;
+			this.GetComponent<AImove>().turnRight = true;
+		}
+
+		else if(relativePoint.z <= 0)
+		{
+			this.GetComponent<AImove>().turnLeft = true;
+			this.GetComponent<AImove>().turnRight = false;
+		}
+	}
+
 }

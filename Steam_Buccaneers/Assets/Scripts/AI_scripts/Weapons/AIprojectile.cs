@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AIprojectile : MonoBehaviour {
 
-	private float projectileSpeed = 100;
+	private float projectileSpeed = 120;
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
@@ -37,7 +37,7 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			AIMaster.aiHealth -= damageOutput;
+			other.transform.GetComponent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
 	}

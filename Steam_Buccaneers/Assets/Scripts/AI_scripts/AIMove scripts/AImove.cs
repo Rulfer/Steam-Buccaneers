@@ -5,48 +5,54 @@ public class AImove : MonoBehaviour {
 	public static AImove move;
 	private int targetPlanet;
 
-	public static Rigidbody aiRigid;
+	public Rigidbody aiRigid;
 
-	public static float force = 10000f;
-	public static int turnSpeed = 50;
+	public float force = 200f;
+	public int turnSpeed = 50;
 	private float bombTimer;
 
 	private float distanceToPlayer;
+	private float distanceToObjective;
 	public float minDist = 20f;
 	public float maxDist = 40f;
 
-	public static bool turnLeft = false;
-	public static bool turnRight = false;
-	public static bool hitBomb = false;
+	public bool turnLeft = false;
+	public bool turnRight = false;
+	public bool hitBomb = false;
+	public bool isPatroling = true;
 	private bool playerInFrontOfAI;
 	private bool isFleeing = false;
 
 	private GameObject player;
-	private Vector3 relativePoint;
+	public Vector3 relativePoint;
 	/// <summary>
 	/// Is now changed via AIMaster.cs.
 	/// We want the AI to move extra fast once spawned, and slower
 	/// when it has reached the player.
 	/// </summary>
-	public static Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+	public Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 
 
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
-		aiRigid = GetComponent<Rigidbody>();
+		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		
     void Update () 
 	{
-		if(avoidPlanet.hitPlanet == false)
+		if(this.GetComponent<AIavoid>().hitObject == false)
 		{
-			if(isFleeing == false)
+			if(isPatroling == false)
 			{
-				checkPlayerPosition ();
-			}
-			else{
-				flee();
+				if(isFleeing == false)
+				{
+					checkPlayerPosition ();
+				}
+				else
+				{
+					flee();
+				}
 			}
 		}
 
@@ -90,12 +96,12 @@ public class AImove : MonoBehaviour {
 
 			if (turnLeft == true) 
 			{
-				transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
+				this.transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
 			}
 
 			if (turnRight == true) 
 			{
-				transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+				this.transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
 			}
 		}
 	}
@@ -213,6 +219,7 @@ public class AImove : MonoBehaviour {
 	//The AI decided to flee due to lack of heath 
 	public void flee()
 	{
+		Debug.Log("WE ARE RUNNING AWAY!");
 		relativePoint = Transformation(player);
 
 		if(relativePoint.x >-0.1 && relativePoint.x <0.1)
