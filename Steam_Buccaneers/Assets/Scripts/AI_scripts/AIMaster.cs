@@ -120,11 +120,10 @@ public class AIMaster : MonoBehaviour
 
 	private void killAI()
 	{
-		int temp = Random.Range(1, 7);
+		int temp = Random.Range(4, 7);
 		for(int i = 0; i < temp; i++)
 		{
-			Instantiate(scrap);
-			scrap.transform.position = this.transform.position;
+			Instantiate(scrap, this.transform.position, this.transform.rotation);
 		}
 		Destroy(this.GetComponent<AIPatroling>().target);
 		spawn.marineShips[arrayIndex] = null;

@@ -215,6 +215,14 @@ public class spawnAI : MonoBehaviour
 			Instantiate(Boss);
 			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 1950, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 75; //Sets the health
+			for(int i = 0; i < marineShips.Length; i++)
+			{
+				if(marineShips[i] != null)
+				{
+					marineShips[i].GetComponent<AImove>().isPatroling = false;
+					marineShips[i].GetComponent<AImove>().isFleeing = true;
+				}
+			}
 		}
 
 		waitBeforeNewSpawn();

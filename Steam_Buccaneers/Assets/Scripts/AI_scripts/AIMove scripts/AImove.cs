@@ -21,7 +21,7 @@ public class AImove : MonoBehaviour {
 	public bool hitBomb = false;
 	public bool isPatroling = true;
 	private bool playerInFrontOfAI;
-	private bool isFleeing = false;
+	public bool isFleeing = false;
 
 	private GameObject player;
 	public Vector3 relativePoint;
