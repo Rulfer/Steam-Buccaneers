@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class AImove : MonoBehaviour {
-	public static AImove move;
 	private int targetPlanet;
 
 	public Rigidbody aiRigid;
