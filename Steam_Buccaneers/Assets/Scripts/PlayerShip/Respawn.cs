@@ -24,9 +24,11 @@ public class Respawn : MonoBehaviour
 	void Update () 
 	{
 		//Debug.Log (GameControl.control.health);
-		GameControl.control.health --;
+		//GameControl.control.health --;
 		if (GameControl.control.health <= 0)
 		{
+			PlayerMove2.turnLeft = false;
+			PlayerMove2.turnRight = false;
 			showDeathScreen = true;
 			//Debug.Log("You are dead, press space to respawn at closest shop");
 			deathScreen.SetActive (showDeathScreen);
@@ -65,6 +67,7 @@ public class Respawn : MonoBehaviour
 
 		}
 		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,shops[tempI].transform.position.y,shops[tempI].transform.position.z - 100);
+		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
 		GameControl.control.health = 20;
