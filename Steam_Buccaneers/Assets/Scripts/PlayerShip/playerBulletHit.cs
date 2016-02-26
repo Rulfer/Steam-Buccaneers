@@ -7,7 +7,7 @@ public class playerBulletHit : MonoBehaviour {
 	{
 		if(other.tag == "aiShip")
 		{
-			other.GetComponent<AIMaster>().aiHealth --;
+			other.GetComponentInParent<AIMaster>().aiHealth --;
 			Destroy(this.gameObject);
 		}
 		if(other.tag == "Player") //Hit itself in the confusion!
