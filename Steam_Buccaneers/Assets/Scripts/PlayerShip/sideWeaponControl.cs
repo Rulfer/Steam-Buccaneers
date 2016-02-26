@@ -31,7 +31,7 @@ public class sideWeaponControl : MonoBehaviour
 	void Update () 
 	{
 		AudioSource pangPang = GetComponent<AudioSource> ();
-		if (Input.GetKey (KeyCode.Q) && Time.time > fireDelayLeft) // && Inventory.mainAmmo > 0
+		if (Input.GetKey (KeyCode.Q) && Time.time > fireDelayLeft && GameControl.control.health > 0) // && Inventory.mainAmmo > 0
 		{
 			//Debug.Log ("pang");
 			fireDelayLeft = Time.time + fireRate;
@@ -84,7 +84,7 @@ public class sideWeaponControl : MonoBehaviour
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}
 
-		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight) 
+		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight && GameControl.control.health > 0) 
 		{
 
 			Debug.Log ("pang");

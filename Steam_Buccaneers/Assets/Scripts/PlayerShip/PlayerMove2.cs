@@ -41,7 +41,7 @@ public class PlayerMove2 : MonoBehaviour
 			}
 		}
 
-		if(hitBomb == false)
+		if(hitBomb == false && GameControl.control.health > 0)
 		{
 			if (Input.GetKey(KeyCode.W))
 			{
