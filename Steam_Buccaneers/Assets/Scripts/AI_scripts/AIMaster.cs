@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class AIMaster : MonoBehaviour {
-	
+public class AIMaster : MonoBehaviour 
+{
+	private spawnAI spawn;
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
@@ -16,6 +18,7 @@ public class AIMaster : MonoBehaviour {
 
 	private bool testedFleeing = false;
 	public bool detectedPlayer = false;
+	public bool isBoss = false;
 
 	public float aiHealth = 20;
 	public int arrayIndex;
@@ -26,6 +29,11 @@ public class AIMaster : MonoBehaviour {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
+<<<<<<< HEAD
+=======
+
+		spawn = GameObject.Find("GameControl").GetComponent<spawnAI>();
+>>>>>>> refs/remotes/origin/Bard-ded
 	}
 	
 	void Update () {
@@ -38,11 +46,20 @@ public class AIMaster : MonoBehaviour {
 			this.GetComponent<AImove>().force = 200f;
 		}
 
-		if(detectDistance < 100)
+		if(isBoss == false)
 		{
-			if(detectedPlayer == false)
-				deaktivatePatroling();
+			if(detectDistance < 100)
+			{
+				if(detectedPlayer == false)
+				{
+					deaktivatePatroling();
+					killMarines();
+				}
+			}
 		}
+
+		else
+			deaktivatePatroling();
 
 		if(testedFleeing == false)
 		{
@@ -63,7 +80,7 @@ public class AIMaster : MonoBehaviour {
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
 		else if(aiHealth <= aiHealthMat2)
-			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 
 		if(detectDistance > 500)
 			killAI();
@@ -75,6 +92,7 @@ public class AIMaster : MonoBehaviour {
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
+		spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		this.GetComponent<AImove>().force = 10000f;
@@ -89,16 +107,38 @@ public class AIMaster : MonoBehaviour {
 		}
 	}
 
+	public void killMarines()
+	{
+		spawn.stopSpawn = true;
+		for(int i = 0; i < 10; i++)
+		{
+			Debug.Log("We are killing them now,");
+			if(i != arrayIndex)
+			{
+				if(spawn.marineShips[i] != null)
+				{
+					Destroy(spawn.marineShips[i].GetComponent<AIPatroling>().target);
+					Destroy(spawn.marineShips[i]);
+					spawn.marineShips[i] = null;
+					spawn.availableIndes[i] = true;
+					spawn.livingShips--;
+				}
+			}
+		}
+	}
+
 	private void killAI()
 	{
 		int temp = Random.Range(1, 7);
 		for(int i = 0; i < temp; i++)
 		{
-			Instantiate(scrap);
-			scrap.transform.position = this.transform.position;
+			Instantiate(scrap, this.transform.position, this.transform.rotation);
 		}
-		spawnAI.livingShips--;
-		spawnAI.availableIndes[arrayIndex]= false;
+		spawn.marineShips[arrayIndex] = null;
+		spawn.availableIndes[arrayIndex] = true;
+		spawn.livingShips--;
+		spawn.stopSpawn = false;
+		spawn.stopFightTimer = false;
 		Destroy(this.GetComponent<AIPatroling>().target);
 		Destroy(this.gameObject);
 	}

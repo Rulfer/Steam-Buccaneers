@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class AIprojectile : MonoBehaviour {
-
 	private float projectileSpeed = 120;
 	public int damageOutput;
 	private float distance;
@@ -38,6 +37,8 @@ public class AIprojectile : MonoBehaviour {
 		{
 			Debug.Log ("Stuff" +other.transform.GetComponentInParent<AIMaster>().aiHealth);
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+
+			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
 	}
