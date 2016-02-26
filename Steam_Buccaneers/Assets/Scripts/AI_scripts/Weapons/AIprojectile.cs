@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIprojectile : MonoBehaviour 
-{
+public class AIprojectile : MonoBehaviour {
 	private float projectileSpeed = 120;
 	public int damageOutput;
 	private float distance;
@@ -12,7 +11,6 @@ public class AIprojectile : MonoBehaviour
 	void Start () 
 	{
 		test.AddForce (this.transform.right * projectileSpeed);
-		damageOutput = 3;
 	}
 	
 	// Update is called once per frame
@@ -37,6 +35,9 @@ public class AIprojectile : MonoBehaviour
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
+			Debug.Log ("Stuff" +other.transform.GetComponentInParent<AIMaster>().aiHealth);
+			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
