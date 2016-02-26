@@ -41,6 +41,7 @@ public class scrapRandomDirection : MonoBehaviour {
 	//If the object hits the player it means that the player picked it up.
 	void OnTriggerEnter(Collider other)
 	{
+		Debug.Log ("Collide pls?");
 		if(other.tag == "Player")
 		{
 			GameControl.control.money += value; //Pay the player
@@ -51,10 +52,11 @@ public class scrapRandomDirection : MonoBehaviour {
 
 	void kill()
 	{
-		if (GameObject.Find ("TutorialControl").activeInHierarchy == true)
+		Destroy(this.gameObject); //Destroy this object
+		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
-		Destroy(this.gameObject); //Destroy this object
+
 	}
 }
