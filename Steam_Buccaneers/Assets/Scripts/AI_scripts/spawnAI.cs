@@ -190,7 +190,7 @@ public class spawnAI : MonoBehaviour
 				}
 				else posZ = -tempPosZ;
 
-				spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 1950, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
+				spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 0, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
 				Debug.Log("Hi");
 				for(int i = 0; i < marineShips.Length; i++)
@@ -233,7 +233,7 @@ public class spawnAI : MonoBehaviour
 			}
 			Instantiate(Boss);
 			Boss.GetComponent<AIMaster>().isBoss = true;
-			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 1945, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
+			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 0, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 100; //Sets the health
 			stopFightTimer = true;
 			stopSpawn = true;
