@@ -17,6 +17,10 @@ public class sideWeaponControl : MonoBehaviour
 	public GameObject cannonR2;
 	public GameObject cannonR3;
 
+	public GameObject cannonball1;
+	public GameObject cannonball2;
+	public GameObject cannonball3;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -27,7 +31,7 @@ public class sideWeaponControl : MonoBehaviour
 	void Update () 
 	{
 		AudioSource pangPang = GetComponent<AudioSource> ();
-		if (Input.GetKey (KeyCode.Q) && Time.time > fireDelayLeft) // && Inventory.mainAmmo > 0
+		if (Input.GetKey (KeyCode.Q) && Time.time > fireDelayLeft && GameControl.control.health > 0) // && Inventory.mainAmmo > 0
 		{
 			//Debug.Log ("pang");
 			fireDelayLeft = Time.time + fireRate;
@@ -43,8 +47,18 @@ public class sideWeaponControl : MonoBehaviour
 			{
 				// fungerer ikke dette fordi left cannons blir på en måte lik cannonball som man skyter, så her blir "leftCannons[i] = gameobject dvs cannonball, og derfor
 				// spawner alle nye kuler på de som allerede finnes?
-				Instantiate (cannonball, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
-				//Debug.Log ("Left pew");
+				if(GameControl.control.canonUpgrades[i] == 1)
+				{
+					Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+				}
+				else if(GameControl.control.canonUpgrades[i] == 2)
+				{
+					Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+				}
+				else if(GameControl.control.canonUpgrades[i] == 3)
+				{
+					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+				}				//Debug.Log ("Left pew");
 				//Debug.Log (i);
 			}
 			//må finne ut av, array er mye ryddigere.
@@ -70,7 +84,7 @@ public class sideWeaponControl : MonoBehaviour
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}
 
-		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight) 
+		if (Input.GetKey (KeyCode.E) && Time.time > fireDelayRight && GameControl.control.health > 0) 
 		{
 
 			Debug.Log ("pang");
@@ -81,8 +95,18 @@ public class sideWeaponControl : MonoBehaviour
 
 			for (int i = 0; i <= 2; i++)
 			{
-				Instantiate (cannonball, rightCannons[i].transform.position, transform.rotation);
-				//Debug.Log ("right pew");
+				if(GameControl.control.canonUpgrades[i+3] == 1)
+				{
+					Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);
+				}
+				else if(GameControl.control.canonUpgrades[i+3] == 2)
+				{
+					Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation);
+				}
+				else if(GameControl.control.canonUpgrades[i+3] == 3)
+				{
+					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+				}				//Debug.Log ("right pew");
 			}
 			/*
 			Instantiate (cannonball, cannonR1.transform.position, transform.rotation);
