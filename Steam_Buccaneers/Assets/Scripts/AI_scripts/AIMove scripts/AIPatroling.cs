@@ -5,7 +5,6 @@ using System.Collections;
 public class AIPatroling : MonoBehaviour {
 
 	public GameObject target;
-	private int destPoint = 0;
 	private Vector3 patrolPoint;
 	private float distanceToObjective;
 
@@ -17,7 +16,7 @@ public class AIPatroling : MonoBehaviour {
 		patrolPoint = spawnAI.patrolPoint;
 		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		target.transform.position = spawnAI.patrolPoint;
-		target.GetComponent<MeshRenderer>().enabled = false;
+		//target.GetComponent<MeshRenderer>().enabled = false;
 	}
 
 	void Update () 
