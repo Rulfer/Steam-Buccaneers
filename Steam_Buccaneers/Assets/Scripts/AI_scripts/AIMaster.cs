@@ -138,5 +138,10 @@ public class AIMaster : MonoBehaviour
 		spawn.stopFightTimer = false;
 		Destroy(this.GetComponent<AIPatroling>().target);
 		Destroy(this.gameObject);
+
+		if (GameObject.Find ("TutorialControl").activeInHierarchy == true)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
 	}
 }
