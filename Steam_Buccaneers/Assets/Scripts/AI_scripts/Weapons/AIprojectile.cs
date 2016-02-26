@@ -12,7 +12,6 @@ public class AIprojectile : MonoBehaviour {
 	void Start () 
 	{
 		test.AddForce (this.transform.right * projectileSpeed);
-		damageOutput = 3;
 	}
 	
 	// Update is called once per frame
@@ -37,7 +36,8 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			other.transform.GetComponent<AIMaster>().aiHealth -= damageOutput;
+			Debug.Log ("Stuff" +other.transform.GetComponentInParent<AIMaster>().aiHealth);
+			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Destroy(this.gameObject);
 		}
 	}

@@ -26,8 +26,6 @@ public class AIMaster : MonoBehaviour {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
-
-		this.transform.position = spawnAI.spawnPosition;
 	}
 	
 	void Update () {
