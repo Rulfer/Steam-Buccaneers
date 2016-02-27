@@ -20,7 +20,6 @@ public class PlayerMove2 : MonoBehaviour
 	void Start () 
 	{
 		donger = GetComponent<Rigidbody>();
-
 	}
 
 	// Update is called once per frame
