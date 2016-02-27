@@ -6,8 +6,8 @@ public class spawnAI : MonoBehaviour
 {
 	public static spawnAI spawn;
 
-	private GameObject playerPoint; //Player position
-	private GameObject origin; //Position of players original startoint in the game
+	public GameObject playerPoint; //Player position
+	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
 	public GameObject[] marineShips = new GameObject[10]; //Array holding all living Marines
 	public GameObject AI; //The Marine prefab
