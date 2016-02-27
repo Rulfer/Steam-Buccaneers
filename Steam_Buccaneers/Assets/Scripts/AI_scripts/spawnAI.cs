@@ -153,6 +153,7 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
+		livingShips++;
 		setCannonLevel();
 		patrolPoint = setPatrolPoint();
 		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
@@ -161,8 +162,6 @@ public class spawnAI : MonoBehaviour
 		{
 			if(livingShips < 10)
 			{
-				livingShips++;
-
 				//Create random numbers between 60 and 120
 				float tempPosX = Random.Range(100f, 200f); //Random x position
 				float tempPosZ = Random.Range(100f, 200f); //Random z position
