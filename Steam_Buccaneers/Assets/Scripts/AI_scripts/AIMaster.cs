@@ -38,8 +38,8 @@ public class AIMaster : MonoBehaviour
 
 		if(detectDistance < 60)
 		{
-			this.GetComponent<AImove>().maxVelocity.x = 3.5f;
-			this.GetComponent<AImove>().maxVelocity.z = 3.5f;
+			this.GetComponent<AImove>().maxVelocity.x = 50f;
+			this.GetComponent<AImove>().maxVelocity.z = 50f;
 			this.GetComponent<AImove>().force = 200f;
 		}
 
