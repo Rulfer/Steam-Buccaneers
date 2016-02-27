@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class spawnAI : MonoBehaviour
 {
-	public static spawnAI spawn;
-
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
@@ -56,7 +54,7 @@ public class spawnAI : MonoBehaviour
 			marineShips[lastSpawn].GetComponent<AIMaster>().killMarines();
 		}
 	}
-	//After X (now 5) seconds the checkShipStatus function will run
+	//After X (now 1) seconds the checkShipStatus function will run
 	//This function is used to check weather or not to spawn a new ship
 	//every X second.
 	void waitBeforeNewSpawn () 

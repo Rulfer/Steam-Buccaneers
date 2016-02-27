@@ -30,7 +30,7 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 
-		spawn = GameObject.Find("GameControl").GetComponent<spawnAI>();
+		spawn = GameObject.Find("SpawnsAI").GetComponent<spawnAI>();
 	}
 	
 	void Update () {
