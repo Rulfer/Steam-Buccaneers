@@ -2,12 +2,11 @@
 using System.Collections;
 
 public class playerBulletHit : MonoBehaviour {
-
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "aiShip")
 		{
-			AIMaster.aiHealth --;
+			other.GetComponentInParent<AIMaster>().aiHealth --;
 			Destroy(this.gameObject);
 		}
 		if(other.tag == "Player") //Hit itself in the confusion!

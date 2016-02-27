@@ -6,13 +6,15 @@ public class PlayerMove2 : MonoBehaviour
 	public static Rigidbody donger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public static float force = 200.0f;
-	public static int turnSpeed = 10;
+	public static int turnSpeed = 50;
 	public static float dongerTurn = 0.50f;
 	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
+
 	public static bool hitBomb = false;
+	private float bombTimer = 0;
 
 	// Use this for initialization
 	void Start () 
@@ -29,8 +31,18 @@ public class PlayerMove2 : MonoBehaviour
 		//Debug.Log ("x: " + donger.velocity.x);
 		//Debug.Log ("z: " + donger.velocity.z);
 		//Debug.Log (maxVelocity.x);
-		if(hitBomb == false)
+		if(hitBomb == true)
+		{
+			bombTimer += Time.deltaTime;
+			if(bombTimer >= 1)
 			{
+				bombTimer = 0;
+				hitBomb = false;
+			}
+		}
+
+		if(hitBomb == false && GameControl.control.health > 0)
+		{
 			if (Input.GetKey(KeyCode.W))
 			{
 				goingForward = true;

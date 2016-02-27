@@ -39,7 +39,7 @@ public class GameControl : MonoBehaviour {
 		if (health == 0 && money == 0)
 		{
 			health = 20;
-			money = 120000000;
+			money = 120;
 			hullUpgrade = 1;
 			specialAmmo = 1;
 			thrusterUpgrade = 1;
@@ -144,7 +144,8 @@ public class GameControl : MonoBehaviour {
 		//Update gameobjects with loaded data
 		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
 		goP.transform.position = FloatstoVector3(data.shipPos);
-		goP.transform.rotation = Quaternion.Euler(90,0,0);
+		goP.transform.rotation = Quaternion.Euler(0, 0,0);
+		goP.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		health = data.health;
 		money = data.money;
 		canonUpgrades = data.canonUpgrades;

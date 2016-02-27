@@ -23,7 +23,7 @@ public class swivelFire : MonoBehaviour
 	void Update () 
 	{
 		//Debug.Log ("fukku shittu");
-		if (Input.GetButton ("Fire1") && Time.time > fireDelay && PlayerStatus.swivelAmmo > 0)
+		if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && PlayerStatus.swivelAmmo > 0 && GameControl.control.health > 0)
 		{
 			AudioSource pewPew = GetComponent<AudioSource> ();
 			Debug.Log ("pew");

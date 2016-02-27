@@ -4,12 +4,6 @@ using System.Collections;
 public class bombHitSomething : MonoBehaviour {
 	private float radius = 20F;
 	private float force = 10.0f;
-	private Rigidbody rigi;
-
-	void Start()
-	{
-		rigi = GetComponent<Rigidbody>(); //Get the rigidbody of THIS object
-	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
 	{
@@ -19,7 +13,7 @@ public class bombHitSomething : MonoBehaviour {
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
-			AIMaster.aiHealth -= 10; //Remove 10 health from the AI
+			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
 		}
 		if(other.tag == "canonball") //A ball hit this object
 		{
@@ -43,7 +37,7 @@ public class bombHitSomething : MonoBehaviour {
 			}
 			if(hit.tag == "aiShip") //If we hit the aiShip
 			{
-				AImove.hitBomb = true; //Disable movement
+				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
 			}
 			if(rb == null) //The object has no rigidbody. Check if the root has
 			{
