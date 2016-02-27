@@ -155,17 +155,16 @@ public class spawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
-		livingShips++;
-
 		setCannonLevel();
 		patrolPoint = setPatrolPoint();
 		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
-		Debug.Log("relativeBossPoint" + relativeBossPoint);
 		if(relativeBossPoint > 100) //We are too far away from the boss, so we spawn a regular AI.
 		{
 			if(livingShips < 10)
 			{
+				livingShips++;
+
 				//Create random numbers between 60 and 120
 				float tempPosX = Random.Range(100f, 200f); //Random x position
 				float tempPosZ = Random.Range(100f, 200f); //Random z position
@@ -191,17 +190,14 @@ public class spawnAI : MonoBehaviour
 
 				spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 0, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
-				Debug.Log("Hi");
 				for(int i = 0; i < marineShips.Length; i++)
 				{
-					Debug.Log("Hi2");
-
 					if(availableIndes[i] == true)
-					{			Debug.Log("Hi3");
-						
+					{						
 						GameObject temp = (Instantiate(AI));
 						lastSpawn = i;
 						marineShips[i] = temp;
+						Debug.Log("marineships[" + i + "] = " + marineShips[i]);
 						availableIndes[i] = false;
 
 						marineShips[i].transform.position = spawnPosition;

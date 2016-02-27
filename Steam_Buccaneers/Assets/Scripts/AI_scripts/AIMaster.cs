@@ -49,6 +49,7 @@ public class AIMaster : MonoBehaviour
 			{
 				if(detectedPlayer == false)
 				{
+					Debug.Log("We must kill all other marines!");
 					deaktivatePatroling();
 					killMarines();
 				}
@@ -107,13 +108,15 @@ public class AIMaster : MonoBehaviour
 	public void killMarines()
 	{
 		spawn.stopSpawn = true;
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < spawn.marineShips.Length; i++)
 		{
 			Debug.Log("We are killing them now,");
 			if(i != arrayIndex)
 			{
+				Debug.Log("Its not this object");
 				if(spawn.marineShips[i] != null)
 				{
+					Debug.Log("Another one died.");
 					Destroy(spawn.marineShips[i].GetComponent<AIPatroling>().target);
 					Destroy(spawn.marineShips[i]);
 					spawn.marineShips[i] = null;
