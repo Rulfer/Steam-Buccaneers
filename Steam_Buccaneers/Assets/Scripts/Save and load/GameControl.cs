@@ -145,7 +145,7 @@ public class GameControl : MonoBehaviour {
 		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
 		goP.transform.position = FloatstoVector3(data.shipPos);
 		goP.transform.rotation = Quaternion.Euler(0, 0,0);
-		goP.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		goP.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
 		health = data.health;
 		money = data.money;
 		canonUpgrades = data.canonUpgrades;
