@@ -13,7 +13,7 @@ public class spawnAI : MonoBehaviour
 	public GameObject Boss; //The Boss prefab
 
 	public static int[] cannonLevel = new int[6];
-	private bool[] cannonUpgraded = new bool[6];
+	public bool[] cannonUpgraded = new bool[6];
 	public bool[] availableIndes = new bool[10]; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
@@ -48,12 +48,30 @@ public class spawnAI : MonoBehaviour
 		if(stopFightTimer == true)
 			startFightTimer = 0;
 		
-		if(startFightTimer > 20)
+		if(startFightTimer > 10)
 		{
 			//Debug.Log("We started a fight!");
 			startFightTimer = 0;
-			marineShips[lastSpawn].GetComponent<AIMaster>().deaktivatePatroling();
-			marineShips[lastSpawn].GetComponent<AIMaster>().killMarines();
+			float temp = 10000;
+			float aiPlayerDistance;
+			int tempI = 100;
+			for(int i = 0; i < marineShips.Length; i++)
+			{
+				if(marineShips[i] != null)
+				{
+					aiPlayerDistance = Vector3.Distance (playerPoint.transform.position, marineShips[i].transform.position); //Distance between player and where the boss spawns
+					if(aiPlayerDistance < temp)
+					{
+						temp = aiPlayerDistance;
+						tempI = i;
+					}
+				}
+			}
+			if(tempI != 100)
+			{
+				marineShips[tempI].GetComponent<AIMaster>().deaktivatePatroling();
+				marineShips[tempI].GetComponent<AIMaster>().killMarines();
+			}
 		}
 	}
 	//After X (now 1) seconds the checkShipStatus function will run

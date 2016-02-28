@@ -26,21 +26,19 @@ public class AIprojectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject != null)
+		if (other.tag == "Player") 
 		{
-			if (other.tag == "Player") 
-			{
-				GameControl.control.health -= damageOutput;
-				Destroy (this.gameObject);
-			}
-
-			if(other.tag == "aiShip") //The AI hit itself
-			{
-				other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-
-				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-				Destroy(this.gameObject);
-			}
+			Debug.Log("We hit the player");
+			GameControl.control.health -= damageOutput;
 		}
+
+		if(other.tag == "aiShip") //The AI hit itself
+		{
+			Debug.Log("We hit an ai");
+			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+		}
+
+		Destroy(this.gameObject);
 	}
 }
