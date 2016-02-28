@@ -129,21 +129,28 @@ public class AIMaster : MonoBehaviour
 
 	private void killAI()
 	{
+		Debug.Log("We are killing this ai");
 		int temp = Random.Range(1, 7);
 		for(int i = 0; i < temp; i++)
 		{
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
+			Debug.Log("We are spawning scrap!");
 		}
 		spawnAI.spawn.marineShips[arrayIndex] = null;
+		Debug.Log("Deleted ship from array");
 		spawnAI.spawn.availableIndes[arrayIndex] = true;
+		Debug.Log("Made index available");
 		spawnAI.spawn.livingShips--;
 		spawnAI.spawn.stopSpawn = false;
 		spawnAI.spawn.stopFightTimer = false;
 		Destroy(this.GetComponent<AIPatroling>().target);
+		Debug.Log("Destroyd the target of this object");
 		Destroy(this.gameObject);
+		Debug.Log("WeDestroyd this object");
 		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
+		Debug.Log("not the tutorial");
 	}
 }

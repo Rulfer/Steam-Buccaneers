@@ -48,7 +48,7 @@ public class spawnAI : MonoBehaviour
 		if(stopFightTimer == true)
 			startFightTimer = 0;
 		
-		if(startFightTimer > 45)
+		if(startFightTimer > 20)
 		{
 			//Debug.Log("We started a fight!");
 			startFightTimer = 0;

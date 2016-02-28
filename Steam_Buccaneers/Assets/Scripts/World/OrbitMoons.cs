@@ -18,6 +18,6 @@ public class OrbitMoons : MonoBehaviour
 	void Update () 
 	{
 		distance = Vector3.Distance(this.transform.position, this.transform.parent.position);
-		transform.RotateAround (this.transform.parent.position, transform.up, 20f / distance);
+		transform.RotateAround (this.transform.parent.position, transform.up, 2f / distance);
 	}
 }

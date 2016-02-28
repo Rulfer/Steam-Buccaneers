@@ -48,7 +48,7 @@ public class OrbitPlanets : MonoBehaviour
 		{
 			if (hit.transform.tag == ("endOfWorld"))
 			{
-				rotationSpeed = 10f;
+				rotationSpeed = 1f;
 				//Debug.Log ("dongeriSchlonger");
 			}
 			//Debug.Log (hit.transform.tag);
