@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AIsideCanons : MonoBehaviour {
 
@@ -33,31 +34,42 @@ public class AIsideCanons : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(this.transform.root.name == "Marine(Clone)")
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			if(this.transform.root.name == "Marine(Clone)")
+			{
+				for(int i = 0; i < 6; i++)
+				{
+					if(spawnAI.cannonLevel[i] == 1)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
+						cannonLevel[i] = 1;
+					}
+					else if(spawnAI.cannonLevel[i] == 2)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
+						cannonLevel[i] = 2;
+					}
+					else if(spawnAI.cannonLevel[i] == 3)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
+						cannonLevel[i] = 3;
+					}
+				}
+			}
+
+			for(int i = 0; i < 6; i++)
+			{
+				spawnAI.spawn.cannonUpgraded[i] = false;
+			}
+		}
+		else
 		{
 			for(int i = 0; i < 6; i++)
 			{
-				if(spawnAI.cannonLevel[i] == 1)
-				{
-					allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
-					cannonLevel[i] = 1;
-				}
-				else if(spawnAI.cannonLevel[i] == 2)
-				{
-					allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
-					cannonLevel[i] = 2;
-				}
-				else if(spawnAI.cannonLevel[i] == 3)
-				{
-					allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
-					cannonLevel[i] = 3;
-				}
+				allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
+				cannonLevel[i] = 1;
 			}
-		}
-
-		for(int i = 0; i < 6; i++)
-		{
-			spawnAI.spawn.cannonUpgraded[i] = false;
 		}
 	}
 

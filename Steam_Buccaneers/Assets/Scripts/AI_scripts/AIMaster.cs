@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class AIMaster : MonoBehaviour 
 {
@@ -90,7 +91,8 @@ public class AIMaster : MonoBehaviour
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
-		spawnAI.spawn.stopFightTimer = true;
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+			spawnAI.spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		this.GetComponent<AImove>().force = 10000f;
@@ -107,21 +109,24 @@ public class AIMaster : MonoBehaviour
 
 	public void killMarines()
 	{
-		spawnAI.spawn.stopSpawn = true;
-		for(int i = 0; i < spawnAI.spawn.marineShips.Length; i++)
+		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			Debug.Log("We are killing them now,");
-			if(i != arrayIndex)
+			spawnAI.spawn.stopSpawn = true;
+			for(int i = 0; i < spawnAI.spawn.marineShips.Length; i++)
 			{
-				Debug.Log("Its not this object");
-				if(spawnAI.spawn.marineShips[i] != null)
+				Debug.Log("We are killing them now,");
+				if(i != arrayIndex)
 				{
-					Debug.Log("Another one died.");
-					Destroy(spawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
-					Destroy(spawnAI.spawn.marineShips[i]);
-					spawnAI.spawn.marineShips[i] = null;
-					spawnAI.spawn.availableIndes[i] = true;
-					spawnAI.spawn.livingShips--;
+					Debug.Log("Its not this object");
+					if(spawnAI.spawn.marineShips[i] != null)
+					{
+						Debug.Log("Another one died.");
+						Destroy(spawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+						Destroy(spawnAI.spawn.marineShips[i]);
+						spawnAI.spawn.marineShips[i] = null;
+						spawnAI.spawn.availableIndes[i] = true;
+						spawnAI.spawn.livingShips--;
+					}
 				}
 			}
 		}
@@ -136,21 +141,23 @@ public class AIMaster : MonoBehaviour
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
 			Debug.Log("We are spawning scrap!");
 		}
-		spawnAI.spawn.marineShips[arrayIndex] = null;
-		Debug.Log("Deleted ship from array");
-		spawnAI.spawn.availableIndes[arrayIndex] = true;
-		Debug.Log("Made index available");
-		spawnAI.spawn.livingShips--;
-		spawnAI.spawn.stopSpawn = false;
-		spawnAI.spawn.stopFightTimer = false;
-		Destroy(this.GetComponent<AIPatroling>().target);
-		Debug.Log("Destroyd the target of this object");
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			spawnAI.spawn.marineShips[arrayIndex] = null;
+			Debug.Log("Deleted ship from array");
+			spawnAI.spawn.availableIndes[arrayIndex] = true;
+			Debug.Log("Made index available");
+			spawnAI.spawn.livingShips--;
+			spawnAI.spawn.stopSpawn = false;
+			spawnAI.spawn.stopFightTimer = false;
+			Destroy(this.GetComponent<AIPatroling>().target);
+		}
+
 		Destroy(this.gameObject);
-		Debug.Log("WeDestroyd this object");
+
 		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
-		Debug.Log("not the tutorial");
 	}
 }
