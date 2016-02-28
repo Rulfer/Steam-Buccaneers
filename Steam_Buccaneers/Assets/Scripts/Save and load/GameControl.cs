@@ -99,7 +99,7 @@ public class GameControl : MonoBehaviour {
 		if (storeName != "null") 
 		{
 			GameObject goP = GameObject.Find (storeName);
-			GameControl.control.shipPos = goP.transform.position+(Vector3.forward*3);
+			GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
 		} 
 		else 
 		{
@@ -143,7 +143,7 @@ public class GameControl : MonoBehaviour {
 		shipPos = FloatstoVector3(data.shipPos);
 		//Update gameobjects with loaded data
 		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-		goP.transform.position = FloatstoVector3(data.shipPos);
+		goP.transform.root.position = FloatstoVector3(data.shipPos);
 		goP.transform.rotation = Quaternion.Euler(0, 0,0);
 		goP.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
 		health = data.health;

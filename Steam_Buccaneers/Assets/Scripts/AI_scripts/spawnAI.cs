@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class spawnAI : MonoBehaviour
 {
+	public static spawnAI spawn;
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
@@ -27,6 +28,7 @@ public class spawnAI : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		spawn = this;
 		//Debug.Log(marineShips.Length + " this is aasdasd");
 		for(int i = 0; i < marineShips.Length; i++)
 		{

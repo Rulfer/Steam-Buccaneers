@@ -41,7 +41,6 @@ public class scrapRandomDirection : MonoBehaviour {
 	//If the object hits the player it means that the player picked it up.
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log ("Collide pls?");
 		if(other.tag == "Player")
 		{
 			GameControl.control.money += value; //Pay the player

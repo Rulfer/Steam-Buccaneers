@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AIMaster : MonoBehaviour 
 {
-	private spawnAI spawn;
+	//private spawnAI.spawnAI spawnAI.spawn;
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
@@ -30,7 +30,7 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 
-		spawn = GameObject.Find("SpawnsAI").GetComponent<spawnAI>();
+		//spawnAI.spawn = GameObject.Find("spawnAI.spawnsAI").GetComponent<spawnAI.spawnAI>();
 	}
 	
 	void Update () {
@@ -90,7 +90,7 @@ public class AIMaster : MonoBehaviour
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
-		spawn.stopFightTimer = true;
+		spawnAI.spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		this.GetComponent<AImove>().force = 10000f;
@@ -107,21 +107,21 @@ public class AIMaster : MonoBehaviour
 
 	public void killMarines()
 	{
-		spawn.stopSpawn = true;
-		for(int i = 0; i < spawn.marineShips.Length; i++)
+		spawnAI.spawn.stopSpawn = true;
+		for(int i = 0; i < spawnAI.spawn.marineShips.Length; i++)
 		{
 			Debug.Log("We are killing them now,");
 			if(i != arrayIndex)
 			{
 				Debug.Log("Its not this object");
-				if(spawn.marineShips[i] != null)
+				if(spawnAI.spawn.marineShips[i] != null)
 				{
 					Debug.Log("Another one died.");
-					Destroy(spawn.marineShips[i].GetComponent<AIPatroling>().target);
-					Destroy(spawn.marineShips[i]);
-					spawn.marineShips[i] = null;
-					spawn.availableIndes[i] = true;
-					spawn.livingShips--;
+					Destroy(spawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+					Destroy(spawnAI.spawn.marineShips[i]);
+					spawnAI.spawn.marineShips[i] = null;
+					spawnAI.spawn.availableIndes[i] = true;
+					spawnAI.spawn.livingShips--;
 				}
 			}
 		}
@@ -134,11 +134,11 @@ public class AIMaster : MonoBehaviour
 		{
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
 		}
-		spawn.marineShips[arrayIndex] = null;
-		spawn.availableIndes[arrayIndex] = true;
-		spawn.livingShips--;
-		spawn.stopSpawn = false;
-		spawn.stopFightTimer = false;
+		spawnAI.spawn.marineShips[arrayIndex] = null;
+		spawnAI.spawn.availableIndes[arrayIndex] = true;
+		spawnAI.spawn.livingShips--;
+		spawnAI.spawn.stopSpawn = false;
+		spawnAI.spawn.stopFightTimer = false;
 		Destroy(this.GetComponent<AIPatroling>().target);
 		Destroy(this.gameObject);
 		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
