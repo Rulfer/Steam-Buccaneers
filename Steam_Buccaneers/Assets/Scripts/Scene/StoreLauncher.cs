@@ -14,10 +14,9 @@ public class StoreLauncher : MonoBehaviour {
 			GameControl.control.Save (this.name);
 			//Write whatever scene we want to go to here
 			GameControl.control.ChangeScene("Shop");
-
-			GameObject.Find ("GameControl").GetComponent<spawnAI> ().enabled = false;
 		}
 
 		Debug.Log("Triggered!");
 	}
+
 }

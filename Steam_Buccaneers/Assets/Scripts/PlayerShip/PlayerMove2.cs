@@ -8,7 +8,7 @@ public class PlayerMove2 : MonoBehaviour
 	public static float force = 200.0f;
 	public static int turnSpeed = 50;
 	public static float dongerTurn = 0.50f;
-	Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+	Vector3 maxVelocity = new Vector3 (50f, 0.0f, 50f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
@@ -20,11 +20,10 @@ public class PlayerMove2 : MonoBehaviour
 	void Start () 
 	{
 		donger = GetComponent<Rigidbody>();
-
 	}
 
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		//Debug.Log (turnLeft);
 		//Debug.Log (Small_Ship.transform.position);

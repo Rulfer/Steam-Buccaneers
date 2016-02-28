@@ -9,7 +9,7 @@ public class swivelWeaponControl : MonoBehaviour
 
 	private Vector3 mousePos;
 	private Vector3 direction;
-	private float distanceFromObject;
+	//private float distanceFromObject;
 
 	// Use this for initialization
 	void Start () 
@@ -39,7 +39,7 @@ public class swivelWeaponControl : MonoBehaviour
 		//transform.rotation = Quaternion.Euler (0,0,Mathf.Atan2((mousePos.y - transform.rotation.y), (mousePos.x - transform.rotation.x))*Mathf.Rad2Deg);
 
 		//distanse mellom mus og swivelen
-		distanceFromObject = (Input.mousePosition - main.WorldToScreenPoint(transform.position)).magnitude;
+		//distanceFromObject = (Input.mousePosition - main.WorldToScreenPoint(transform.position)).magnitude;
 		//flytte seg mot musa
 		//GetComponent<Rigidbody>().AddForce(direction * speed * distanceFromObject * Time.deltaTime);
 	}

@@ -4,7 +4,6 @@ using System.Collections;
 public class OrbitPlanets : MonoBehaviour 
 {
 	//bool rayHit (Ray ray, out RaycastHit donger, float maxDistance = Mathf.Infinity);
-	Rigidbody rb;
 	float distance;
 	Ray ray;
 	RaycastHit hit;
@@ -14,8 +13,6 @@ public class OrbitPlanets : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		rb = GetComponent<Rigidbody>();
-		//ray = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
@@ -51,7 +48,7 @@ public class OrbitPlanets : MonoBehaviour
 		{
 			if (hit.transform.tag == ("endOfWorld"))
 			{
-				rotationSpeed = 100f;
+				rotationSpeed = 1f;
 				//Debug.Log ("dongeriSchlonger");
 			}
 			//Debug.Log (hit.transform.tag);

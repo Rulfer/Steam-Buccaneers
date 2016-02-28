@@ -38,7 +38,7 @@ public class AImove : MonoBehaviour {
 		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		
-    void Update () 
+    void FixedUpdate () 
 	{
 		if(this.GetComponent<AIavoid>().hitObject == false)
 		{

@@ -54,6 +54,11 @@ public class AIsideCanons : MonoBehaviour {
 				}
 			}
 		}
+
+		for(int i = 0; i < 6; i++)
+		{
+			spawnAI.spawn.cannonUpgraded[i] = false;
+		}
 	}
 
 	// Update is called once per frame
