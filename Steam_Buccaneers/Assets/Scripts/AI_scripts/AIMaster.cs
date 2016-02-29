@@ -37,16 +37,16 @@ public class AIMaster : MonoBehaviour
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(detectDistance < 60)
+		if(detectDistance < 600)
 		{
-			this.GetComponent<AImove>().maxVelocity.x = 50f;
-			this.GetComponent<AImove>().maxVelocity.z = 50f;
-			this.GetComponent<AImove>().force = 200f;
+			this.GetComponent<AImove>().maxVelocity.x = 350f;
+			this.GetComponent<AImove>().maxVelocity.z = 350f;
+			this.GetComponent<AImove>().force = 500f;
 		}
 
 		if(isBoss == false)
 		{
-			if(detectDistance < 100)
+			if(detectDistance < 1000)
 			{
 				if(detectedPlayer == false)
 				{

@@ -37,6 +37,7 @@ public class Respawn : MonoBehaviour
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
+				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			}
 			/*
 			respawnTime -= Time.deltaTime;

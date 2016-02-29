@@ -102,6 +102,14 @@ public class PlayerMove2 : MonoBehaviour
 		//}
 
 	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Planet")
+		{
+			GameControl.control.health = 0;
+		}
+	}
 	/*
 	void OutOfBounds ()
 	{
