@@ -59,7 +59,7 @@ public class GameControl : MonoBehaviour {
 	{
 		if (level == 0) 
 		{
-			Load ();
+			Save (storeName);
 		}
 	}
 
