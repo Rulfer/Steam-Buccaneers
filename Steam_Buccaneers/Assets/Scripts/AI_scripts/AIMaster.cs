@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class AIMaster : MonoBehaviour {
-	
+public class AIMaster : MonoBehaviour 
+{
+	//private spawnAI.spawnAI spawnAI.spawn;
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
@@ -16,6 +19,7 @@ public class AIMaster : MonoBehaviour {
 
 	private bool testedFleeing = false;
 	public bool detectedPlayer = false;
+	public bool isBoss = false;
 
 	public float aiHealth = 20;
 	public int arrayIndex;
@@ -26,6 +30,8 @@ public class AIMaster : MonoBehaviour {
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
+
+		//spawnAI.spawn = GameObject.Find("spawnAI.spawnsAI").GetComponent<spawnAI.spawnAI>();
 	}
 	
 	void Update () {
@@ -33,16 +39,26 @@ public class AIMaster : MonoBehaviour {
 
 		if(detectDistance < 60)
 		{
-			this.GetComponent<AImove>().maxVelocity.x = 3.5f;
-			this.GetComponent<AImove>().maxVelocity.z = 3.5f;
+			this.GetComponent<AImove>().maxVelocity.x = 50f;
+			this.GetComponent<AImove>().maxVelocity.z = 50f;
 			this.GetComponent<AImove>().force = 200f;
 		}
 
-		if(detectDistance < 100)
+		if(isBoss == false)
 		{
-			if(detectedPlayer == false)
-				deaktivatePatroling();
+			if(detectDistance < 100)
+			{
+				if(detectedPlayer == false)
+				{
+					Debug.Log("We must kill all other marines!");
+					deaktivatePatroling();
+					killMarines();
+				}
+			}
 		}
+
+		else
+			deaktivatePatroling();
 
 		if(testedFleeing == false)
 		{
@@ -63,7 +79,7 @@ public class AIMaster : MonoBehaviour {
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
 		else if(aiHealth <= aiHealthMat2)
-			aiModelObject.GetComponent<Renderer>().material =new Material(mat2);
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 
 		if(detectDistance > 500)
 			killAI();
@@ -75,6 +91,8 @@ public class AIMaster : MonoBehaviour {
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+			spawnAI.spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		this.GetComponent<AImove>().force = 10000f;
@@ -89,17 +107,57 @@ public class AIMaster : MonoBehaviour {
 		}
 	}
 
+	public void killMarines()
+	{
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			spawnAI.spawn.stopSpawn = true;
+			for(int i = 0; i < spawnAI.spawn.marineShips.Length; i++)
+			{
+				Debug.Log("We are killing them now,");
+				if(i != arrayIndex)
+				{
+					Debug.Log("Its not this object");
+					if(spawnAI.spawn.marineShips[i] != null)
+					{
+						Debug.Log("Another one died.");
+						Destroy(spawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+						Destroy(spawnAI.spawn.marineShips[i]);
+						spawnAI.spawn.marineShips[i] = null;
+						spawnAI.spawn.availableIndes[i] = true;
+						spawnAI.spawn.livingShips--;
+					}
+				}
+			}
+		}
+	}
+
 	private void killAI()
 	{
+		Debug.Log("We are killing this ai");
 		int temp = Random.Range(1, 7);
 		for(int i = 0; i < temp; i++)
 		{
-			Instantiate(scrap);
-			scrap.transform.position = this.transform.position;
+			Instantiate(scrap, this.transform.position, this.transform.rotation);
+			Debug.Log("We are spawning scrap!");
 		}
-		spawnAI.livingShips--;
-		spawnAI.availableIndes[arrayIndex]= false;
-		Destroy(this.GetComponent<AIPatroling>().target);
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			spawnAI.spawn.marineShips[arrayIndex] = null;
+			Debug.Log("Deleted ship from array");
+			spawnAI.spawn.availableIndes[arrayIndex] = true;
+			Debug.Log("Made index available");
+			spawnAI.spawn.livingShips--;
+			spawnAI.spawn.stopSpawn = false;
+			spawnAI.spawn.stopFightTimer = false;
+			Destroy(this.GetComponent<AIPatroling>().target);
+		}
+
 		Destroy(this.gameObject);
+
+		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
 	}
 }

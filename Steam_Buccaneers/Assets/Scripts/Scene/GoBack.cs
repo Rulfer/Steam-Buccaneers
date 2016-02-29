@@ -5,7 +5,7 @@ public class GoBack : MonoBehaviour {
 
 	public void clickButton()
 	{
-		GameControl.control.ChangeScene ("Scene1");
+		GameControl.control.ChangeScene ("world");
 	}
 		
 

@@ -27,15 +27,23 @@ public class gravityPull : MonoBehaviour
 			//Finner rigidbody til objektet som er inne i gravitasjonsfeltet.
 			//Finds the rigidbody to the object which is inside the gravitationalfield 
 			Rigidbody rb = c.attachedRigidbody;
+
+			if(rb == null)
+			{
+				Transform temp;
+				temp = c.transform.root;
+				rb = temp.GetComponent<Rigidbody>();
+			}
 			//Hvis objektet som er inne i gravitasjonsfeltet har en rigidbody,
 			//ikke er rigidbody-en til objektet scriptet er koblet til 
 			//eller at rigidboien allerede er lagt til i lista med rigidbodies,
 			//så kjøres dette.
 			//If the object which is inside the gravitationalfield has a rigidbody, is not the rigidbody to the object which holds this script and the rigidbody is not already added to the list this will run.
-			if (rb != null && rb != ownRb && !rbs.Contains(rb))
+			if (rb != null && rb != ownRb && !rbs.Contains(rb) && rb.tag != "Planet" && rb.name != "moon2")
 			{
 				//The new rigidbody will be added to the list
 				rbs.Add(rb);
+
 				//Regner ut avstanden mellom objektet med gravitasjon og det andre objektet.
 				//Calculates the distance between the object with the gravity and the other object.
 				Vector3 offset = transform.position - c.transform.position;

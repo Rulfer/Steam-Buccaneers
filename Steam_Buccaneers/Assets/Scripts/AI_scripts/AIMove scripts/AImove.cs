@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class AImove : MonoBehaviour {
-	public static AImove move;
 	private int targetPlanet;
 
 	public Rigidbody aiRigid;
@@ -21,7 +20,7 @@ public class AImove : MonoBehaviour {
 	public bool hitBomb = false;
 	public bool isPatroling = true;
 	private bool playerInFrontOfAI;
-	private bool isFleeing = false;
+	public bool isFleeing = false;
 
 	private GameObject player;
 	public Vector3 relativePoint;
@@ -30,7 +29,7 @@ public class AImove : MonoBehaviour {
 	/// We want the AI to move extra fast once spawned, and slower
 	/// when it has reached the player.
 	/// </summary>
-	public Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+	public Vector3 maxVelocity = new Vector3 (35f, 0.0f, 35f);
 
 
 	void Start ()
@@ -39,7 +38,7 @@ public class AImove : MonoBehaviour {
 		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		
-    void Update () 
+    void FixedUpdate () 
 	{
 		if(this.GetComponent<AIavoid>().hitObject == false)
 		{

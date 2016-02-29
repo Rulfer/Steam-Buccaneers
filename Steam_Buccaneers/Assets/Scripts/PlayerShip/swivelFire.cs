@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class swivelFire : MonoBehaviour 
@@ -23,16 +24,14 @@ public class swivelFire : MonoBehaviour
 	void Update () 
 	{
 		//Debug.Log ("fukku shittu");
-		if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && PlayerStatus.swivelAmmo > 0)
+		if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
 		{
 			AudioSource pewPew = GetComponent<AudioSource> ();
-			Debug.Log ("pew");
 			fireDelay = Time.time + fireRate;
 			Instantiate (cannonball, transform.position , transform.rotation);
 			pewPew.Play();
-			PlayerStatus.swivelAmmo -= 1;
-			Debug.Log (PlayerStatus.swivelAmmo);
-			//transform.TransformDirection(Vector3(0,0,shotSpeed));
+			GameControl.control.specialAmmo -= 1;
+			GameObject.Find("value_ammo_tab").GetComponent<Text>().text = GameControl.control.specialAmmo.ToString();
 		}
 	}
 }
