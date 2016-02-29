@@ -18,7 +18,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		distance = Vector3.Distance(transform.position, GameObject.Find("PlayerShip").transform.position);
 
-		if (distance >= 100)
+		if (distance >= 500)
 		{
 			Destroy(gameObject);
 		}
@@ -28,18 +28,17 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.tag == "Player") 
 		{
+			Debug.Log("We hit the player");
 			GameControl.control.health -= damageOutput;
-			Debug.Log("Player lost " + damageOutput + " health");
-			Destroy (this.gameObject);
 		}
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			Debug.Log ("Stuff" +other.transform.GetComponentInParent<AIMaster>().aiHealth);
+			Debug.Log("We hit an ai");
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-			Destroy(this.gameObject);
 		}
+
+		Destroy(this.gameObject);
 	}
 }

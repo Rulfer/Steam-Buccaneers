@@ -29,7 +29,7 @@ public class AImove : MonoBehaviour {
 	/// We want the AI to move extra fast once spawned, and slower
 	/// when it has reached the player.
 	/// </summary>
-	public Vector3 maxVelocity = new Vector3 (3.5f, 0.0f, 3.5f);
+	public Vector3 maxVelocity = new Vector3 (35f, 0.0f, 35f);
 
 
 	void Start ()
@@ -38,7 +38,7 @@ public class AImove : MonoBehaviour {
 		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		
-    void Update () 
+    void FixedUpdate () 
 	{
 		if(this.GetComponent<AIavoid>().hitObject == false)
 		{

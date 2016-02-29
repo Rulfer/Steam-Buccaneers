@@ -52,5 +52,10 @@ public class scrapRandomDirection : MonoBehaviour {
 	void kill()
 	{
 		Destroy(this.gameObject); //Destroy this object
+		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
+
 	}
 }

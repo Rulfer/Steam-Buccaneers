@@ -18,4 +18,5 @@ public class StoreLauncher : MonoBehaviour {
 
 		Debug.Log("Triggered!");
 	}
+
 }
