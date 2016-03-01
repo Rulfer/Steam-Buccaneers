@@ -37,16 +37,16 @@ public class AIMaster : MonoBehaviour
 	void Update () {
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(detectDistance < 600)
+		if(detectDistance < 60)
 		{
-			this.GetComponent<AImove>().maxVelocity.x = 350f;
-			this.GetComponent<AImove>().maxVelocity.z = 350f;
-			this.GetComponent<AImove>().force = 500f;
+//			this.GetComponent<AImove>().maxVelocity.x = 35f;
+//			this.GetComponent<AImove>().maxVelocity.z = 35f;
+			this.GetComponent<AImove>().force = 650f;
 		}
 
 		if(isBoss == false)
 		{
-			if(detectDistance < 1000)
+			if(detectDistance < 150)
 			{
 				if(detectedPlayer == false)
 				{
@@ -75,16 +75,16 @@ public class AIMaster : MonoBehaviour
 			}
 		}
 
-		if(aiHealth <= aiHealthMat3)
+		if(aiHealth <= aiHealthMat3) //Change the material to mat3 if the health is low enough
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
-		else if(aiHealth <= aiHealthMat2)
+		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 
-		if(detectDistance > 500)
+		if(detectDistance > 300)//If the distance is greater than this number, delete this AI
 			killAI();
 		
-		if(aiHealth <= 0)
+		if(aiHealth <= 0) //If the health if this AI is 0, delete this AI
 			killAI();
 	}
 
@@ -95,7 +95,7 @@ public class AIMaster : MonoBehaviour
 			spawnAI.spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
-		this.GetComponent<AImove>().force = 10000f;
+		this.GetComponent<AImove>().force = 1000f;
 	}
 
 	void OnTriggerEnter(Collider other)

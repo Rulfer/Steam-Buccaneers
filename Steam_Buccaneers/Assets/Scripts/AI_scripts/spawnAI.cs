@@ -43,6 +43,8 @@ public class spawnAI : MonoBehaviour
 
 	void Update()
 	{
+		float relativeOriginPosition = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and where the boss spawns
+		Debug.Log(relativeOriginPosition);
 		startFightTimer += Time.deltaTime;
 
 		if(stopFightTimer == true)
@@ -105,7 +107,7 @@ public class spawnAI : MonoBehaviour
 		//Debug.Log("We are going to set the level of  the cannons");
 		float relativeOriginPosition = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and where the boss spawns
 		//Debug.Log("Distance between player and origin is set: " + relativeOriginPosition);
-		float temp = Mathf.Floor(relativeOriginPosition * 0.1f); //10% of the distance is the new temp;
+		float temp = Mathf.Floor(relativeOriginPosition * 0.02f); //2% of the distance is the new temp;
 		//Debug.Log("the 10% of distance is set: " + temp);
 		int upgradedWapons = 0;
 		int ranNum;
