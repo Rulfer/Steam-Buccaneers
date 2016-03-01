@@ -4,7 +4,7 @@ using System.Collections;
 public class Projectile : MonoBehaviour 
 {
 	//public Vector3 test = PlayerMove2.donger.velocity;
-	private float projectileSpeed = 100;
+	private float projectileSpeed = 125;
 	private float distance;
 	public Rigidbody test;
 
