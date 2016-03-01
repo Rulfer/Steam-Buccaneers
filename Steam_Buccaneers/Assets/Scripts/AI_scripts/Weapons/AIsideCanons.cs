@@ -30,7 +30,7 @@ public class AIsideCanons : MonoBehaviour {
 	public static bool fireLeft = false;
 	public static bool fireRight = false;
 
-	private int detectDistance = 50;
+	private int detectDistance = 100;
 
 	// Use this for initialization
 	void Start () {
