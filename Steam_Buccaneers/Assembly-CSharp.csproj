@@ -52,12 +52,12 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogRigh.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\ScrapRandomDirection.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\SpawnAI.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\Weapons\aiSpecialWeapon.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\Weapons\bombHitSomething.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\scrapRandomDirection.cs" />
-     <Compile Include="Assets\Scripts\AI_scripts\spawnAI.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIspecialWeapon.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />

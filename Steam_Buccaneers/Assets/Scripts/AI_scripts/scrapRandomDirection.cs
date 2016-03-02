@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class scrapRandomDirection : MonoBehaviour {
+public class ScrapRandomDirection : MonoBehaviour {
 
 	private float randomDirectionX; //Random X direction
 	private float randomDirectionZ; //Random Z direction

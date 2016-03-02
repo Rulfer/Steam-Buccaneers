@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class spawnAI : MonoBehaviour
+public class SpawnAI : MonoBehaviour
 {
-	public static spawnAI spawn;
+	public static SpawnAI spawn;
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss

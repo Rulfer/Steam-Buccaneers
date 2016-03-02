@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bombHitSomething : MonoBehaviour {
+public class BombHitSomething : MonoBehaviour {
 	private float radius = 20F;
 	private float force = 10.0f;
 
