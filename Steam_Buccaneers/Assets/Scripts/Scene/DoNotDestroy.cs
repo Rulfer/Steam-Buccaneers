@@ -9,10 +9,4 @@ public class DoNotDestroy : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 	
 	}
-
-	void FixedUpdate () {
-//	
-//		this.transform.position = GameObject.FindGameObjectWithTag ("Player").gameObject.transform.position; 
-//		this.transform.Translate(Vector3.back * 11);
-	}
 }
