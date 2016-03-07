@@ -10,6 +10,9 @@ public class RotateCogLeft : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.Rotate(0, -50 * Time.deltaTime, 0);
+		if(this.transform.root.tag != "Player")
+			this.transform.Rotate(0, -50 * Time.deltaTime, 0);
+		else
+			this.transform.Rotate(-50 * Time.deltaTime, 0, 0);
 	}
 }

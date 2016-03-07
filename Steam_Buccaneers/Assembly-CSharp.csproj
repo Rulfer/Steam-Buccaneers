@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\RotateCogRigh.cs" />
+     <Compile Include="Assets\Scripts\AI_scripts\RotateEngineCog.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\SpawnAI.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" />
