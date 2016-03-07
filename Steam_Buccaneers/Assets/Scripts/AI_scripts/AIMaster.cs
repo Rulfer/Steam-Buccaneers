@@ -39,8 +39,6 @@ public class AIMaster : MonoBehaviour
 
 		if(detectDistance < 60)
 		{
-//			this.GetComponent<AImove>().maxVelocity.x = 35f;
-//			this.GetComponent<AImove>().maxVelocity.z = 35f;
 			this.GetComponent<AImove>().force = 650f;
 		}
 
@@ -102,7 +100,6 @@ public class AIMaster : MonoBehaviour
 	{
 		if(other.tag == "Planet")
 		{
-			Debug.Log("planet pls");
 			killAI();
 		}
 	}

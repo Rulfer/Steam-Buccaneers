@@ -9,14 +9,16 @@ public class SpawnAI : MonoBehaviour
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
 	public GameObject[] marineShips = new GameObject[10]; //Array holding all living Marines
-	public GameObject AI; //The Marine prefab
+	public GameObject Marine; //The Marine prefab
 	public GameObject Boss; //The Boss prefab
+	public GameObject Cargo;
 
 	public static int[] cannonLevel = new int[6];
 	public bool[] cannonUpgraded = new bool[6];
 	public bool[] availableIndes = new bool[10]; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
+	private bool livingCargo = false;
 
 	public static Vector3 spawnPosition; //Where the AI should spawn
 	public static Vector3 patrolPoint;
@@ -36,7 +38,9 @@ public class SpawnAI : MonoBehaviour
 		playerPoint = GameObject.FindGameObjectWithTag("Player");
 		origin = GameObject.Find("GameOrigin");
 		bossSpawn = GameObject.Find("BossSpawn");
-		spawnShip ();
+		//spawnShip ();
+		waitBeforeNewSpawn();
+		waitBeforeCargoSpawn();
 	}
 
 	void Update()
@@ -76,7 +80,12 @@ public class SpawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		Invoke ("checkShipStatus", 1);
+		InvokeRepeating ("checkShipStatus", 1, 1);
+	}
+
+	void waitBeforeCargoSpawn()
+	{
+		InvokeRepeating("checkShipStatus", 1, 10);
 	}
 
 	//Checks if we should spawn a new ship or not
@@ -87,10 +96,6 @@ public class SpawnAI : MonoBehaviour
 		{
 			spawnShip ();
 		}
-		else
-		{
-			waitBeforeNewSpawn();
-		}
 	}
 
 	void setCannonLevel()
@@ -99,27 +104,55 @@ public class SpawnAI : MonoBehaviour
 		float temp = Mathf.Floor(relativeOriginPosition * 0.02f); //2% of the distance is the new temp;
 		int upgradedWapons = 0;
 		int ranNum;
-
-		for(int i = 0; i < 6; i++)
+		if(livingCargo == false)
 		{
-			ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
-			if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
+			for(int i = 0; i < 6; i++)
 			{
-				ranNum = Random.Range(0, 101);
-				if(ranNum < temp*0.5)
+				ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
+				if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
 				{
-					cannonLevel[i] = 3;
+					ranNum = Random.Range(0, 101);
+					if(ranNum < temp*0.5)
+					{
+						cannonLevel[i] = 3;
+					}
+					else
+					{
+						cannonLevel[i] = 2;
+					}
+					upgradedWapons++;
+					cannonUpgraded[i] = true;
 				}
 				else
 				{
-					cannonLevel[i] = 2;
+					cannonLevel[i] = 1;
 				}
-				upgradedWapons++;
-				cannonUpgraded[i] = true;
 			}
-			else
+		}
+
+		else
+		{
+			for(int i = 0; i < 2; i++)
 			{
-				cannonLevel[i] = 1;
+				ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
+				if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
+				{
+					ranNum = Random.Range(0, 101);
+					if(ranNum < temp*0.5)
+					{
+						cannonLevel[i] = 3;
+					}
+					else
+					{
+						cannonLevel[i] = 2;
+					}
+					upgradedWapons++;
+					cannonUpgraded[i] = true;
+				}
+				else
+				{
+					cannonLevel[i] = 1;
+				}
 			}
 		}
 
@@ -130,7 +163,11 @@ public class SpawnAI : MonoBehaviour
 		{
 			while(upgradedWapons < 2) //There are too few upgraded cannons
 			{
-				ranNum = Random.Range(0, 6); //Create a random number from 0 to 5, as this is the array length
+				if(livingCargo == false)
+					ranNum = Random.Range(0, 6); //Create a random number from 0 to 5, as this is the array length
+				else
+					ranNum = Random.Range(0, 2);
+				
 				if(cannonUpgraded[ranNum] == false) //The cannon is not upgraded
 				{
 					cannonUpgraded[ranNum] = true; //It is now!
@@ -169,6 +206,20 @@ public class SpawnAI : MonoBehaviour
 		else posZ = playerPoint.transform.position.z - tempPosZ;
 		return new Vector3(posX, 0, posZ);
 
+	}
+
+
+	void spawnCargo()
+	{
+		if(livingCargo == false)
+		{
+			livingCargo = true;
+			setCannonLevel();
+
+			float test = playerPoint.transform.localPosition.z * 20;
+			Instantiate(Cargo);
+			Cargo.transform.position = new Vector3(playerPoint.transform.position.x, 0, test);
+		}
 	}
 
 
@@ -213,19 +264,18 @@ public class SpawnAI : MonoBehaviour
 				{
 					if(availableIndes[i] == true)
 					{		
-						GameObject temp = (Instantiate(AI));
+						GameObject temp = (Instantiate(Marine));
 						marineShips[i] = temp;
 						availableIndes[i] = false;
 						marineShips[i].transform.position = spawnPosition;
 
-						float aiOriginDistance = Vector3.Distance (AI.transform.position, origin.transform.position); //Distance between player and Origin
+						float aiOriginDistance = Vector3.Distance (Marine.transform.position, origin.transform.position); //Distance between player and Origin
 						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
 						if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20)
 						{
 							marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
 						}
 						marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
-						waitBeforeNewSpawn();
 						return;
 					}
 				}
@@ -249,8 +299,6 @@ public class SpawnAI : MonoBehaviour
 			stopFightTimer = true;
 			stopSpawn = true;
 		}
-
-		waitBeforeNewSpawn();
 	}
 }
 
