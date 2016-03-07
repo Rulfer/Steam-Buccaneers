@@ -20,6 +20,7 @@ public class AIMaster : MonoBehaviour
 	private bool testedFleeing = false;
 	public bool detectedPlayer = false;
 	public bool isBoss = false;
+	public bool isCargo = false;
 
 	public float aiHealth = 20;
 	public int arrayIndex;
@@ -39,7 +40,8 @@ public class AIMaster : MonoBehaviour
 
 		if(detectDistance < 60)
 		{
-			this.GetComponent<AImove>().force = 650f;
+			if(isCargo == false)
+				this.GetComponent<AImove>().force = 650f;
 		}
 
 		if(isBoss == false)
@@ -77,8 +79,10 @@ public class AIMaster : MonoBehaviour
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 
 		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
+		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
-
+			this.GetComponent<AImove>().isFleeing = false;
+		}
 		if(detectDistance > 300)//If the distance is greater than this number, delete this AI
 			killAI();
 		
@@ -93,7 +97,14 @@ public class AIMaster : MonoBehaviour
 			SpawnAI.spawn.stopFightTimer = true;
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
-		this.GetComponent<AImove>().force = 1000f;
+		if(isCargo == false)
+			this.GetComponent<AImove>().force = 1000f;
+		else
+		{
+			testedFleeing = true;
+			this.GetComponent<AImove>().flee();
+			this.GetComponent<AImove>().force = 650;
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -111,10 +122,25 @@ public class AIMaster : MonoBehaviour
 			SpawnAI.spawn.stopSpawn = true;
 			for(int i = 0; i < SpawnAI.spawn.marineShips.Length; i++)
 			{
-				Debug.Log("We are killing them now,");
-				if(i != arrayIndex)
+				if(isBoss == false && isCargo == false)
 				{
-					Debug.Log("Its not this object");
+					Debug.Log("We are killing them now,");
+					if(i != arrayIndex)
+					{
+						Debug.Log("Its not this object");
+						if(SpawnAI.spawn.marineShips[i] != null)
+						{
+							Debug.Log("Another one died.");
+							Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+							Destroy(SpawnAI.spawn.marineShips[i]);
+							SpawnAI.spawn.marineShips[i] = null;
+							SpawnAI.spawn.availableIndes[i] = true;
+							SpawnAI.spawn.livingShips--;
+						}
+					}
+				}
+				else
+				{
 					if(SpawnAI.spawn.marineShips[i] != null)
 					{
 						Debug.Log("Another one died.");
@@ -125,6 +151,7 @@ public class AIMaster : MonoBehaviour
 						SpawnAI.spawn.livingShips--;
 					}
 				}
+
 			}
 		}
 	}
@@ -132,7 +159,11 @@ public class AIMaster : MonoBehaviour
 	private void killAI()
 	{
 		Debug.Log("We are killing this ai");
-		int temp = Random.Range(1, 7);
+		int temp;
+		if(isCargo == false)
+			temp = Random.Range(1, 7);
+		else
+			temp = Random.Range(7, 15);
 		for(int i = 0; i < temp; i++)
 		{
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
@@ -140,13 +171,16 @@ public class AIMaster : MonoBehaviour
 		}
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			SpawnAI.spawn.marineShips[arrayIndex] = null;
-			Debug.Log("Deleted ship from array");
-			SpawnAI.spawn.availableIndes[arrayIndex] = true;
-			Debug.Log("Made index available");
-			SpawnAI.spawn.livingShips--;
-			SpawnAI.spawn.stopSpawn = false;
-			SpawnAI.spawn.stopFightTimer = false;
+			if(isCargo == false)
+			{
+				SpawnAI.spawn.marineShips[arrayIndex] = null;
+				SpawnAI.spawn.availableIndes[arrayIndex] = true;
+				SpawnAI.spawn.livingShips--;
+				SpawnAI.spawn.stopSpawn = false;
+				SpawnAI.spawn.stopFightTimer = false;
+			}
+			else
+				SpawnAI.spawn.livingCargo = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 

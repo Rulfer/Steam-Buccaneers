@@ -67,7 +67,7 @@ public class AIavoid : MonoBehaviour {
 				hitTimer = 0; //Restarts the timer
 			}
 
-			else if(objectHit.transform.tag == "shop") //A Shop is in front of the AI
+			else if(objectHit.transform.tag == "shopWall") //A shopWall is in front of the AI
 			{
 				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{
@@ -94,7 +94,7 @@ public class AIavoid : MonoBehaviour {
 
 		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the left of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shopWall" || objectHit.transform.tag == "aiShip") //The planet is to the left of the AI
 			{
 				hitObject = true;
 				hitTimer = 0;
@@ -113,7 +113,7 @@ public class AIavoid : MonoBehaviour {
 
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shop" || objectHit.transform.tag == "aiShip") //The planet is to the right of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shopWall" || objectHit.transform.tag == "aiShip") //The planet is to the right of the AI
 			{
 				hitObject = true;
 				hitTimer = 0;

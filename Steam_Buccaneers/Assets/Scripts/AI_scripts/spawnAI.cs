@@ -18,7 +18,7 @@ public class SpawnAI : MonoBehaviour
 	public bool[] availableIndes = new bool[10]; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
-	private bool livingCargo = false;
+	public bool livingCargo = false;
 
 	public static Vector3 spawnPosition; //Where the AI should spawn
 	public static Vector3 patrolPoint;
@@ -85,7 +85,7 @@ public class SpawnAI : MonoBehaviour
 
 	void waitBeforeCargoSpawn()
 	{
-		InvokeRepeating("checkShipStatus", 1, 10);
+		InvokeRepeating("spawnCargo", 1, 10);
 	}
 
 	//Checks if we should spawn a new ship or not
@@ -215,10 +215,18 @@ public class SpawnAI : MonoBehaviour
 		{
 			livingCargo = true;
 			setCannonLevel();
-
-			float test = playerPoint.transform.localPosition.z * 20;
+			setPatrolPoint();
+			Vector3 test = playerPoint.transform.position + Vector3.forward * 200;
 			Instantiate(Cargo);
-			Cargo.transform.position = new Vector3(playerPoint.transform.position.x, 0, test);
+			Cargo.transform.position = test;
+			Cargo.GetComponent<AIMaster>().isCargo = true;
+
+			float aiOriginDistance = Vector3.Distance (Cargo.transform.position, origin.transform.position); //Distance between player and Origin
+			Cargo.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
+			if(Cargo.GetComponent<AIMaster>().aiHealth < 20)
+			{
+				Cargo.GetComponent<AIMaster>().aiHealth = 20;
+			}
 		}
 	}
 
