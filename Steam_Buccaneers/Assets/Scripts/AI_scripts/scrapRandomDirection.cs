@@ -51,10 +51,11 @@ public class scrapRandomDirection : MonoBehaviour {
 
 	void kill()
 	{
-		if (GameObject.Find ("TutorialControl").activeInHierarchy == true)
+		Destroy(this.gameObject); //Destroy this object
+		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
-		Destroy(this.gameObject); //Destroy this object
+
 	}
 }

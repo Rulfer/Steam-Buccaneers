@@ -14,7 +14,7 @@ public class pickupScrap : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		scrapArray = GameObject.FindGameObjectsWithTag("scrap"); //Holds all scrap objects in this array
 		for(int i = 0; i < scrapArray.Length; i++)
 		{
