@@ -216,9 +216,13 @@ public class SpawnAI : MonoBehaviour
 			livingCargo = true;
 			setCannonLevel();
 			setPatrolPoint();
-			Vector3 test = playerPoint.transform.position + Vector3.forward * 200;
+			Vector3 playerPosition = playerPoint.transform.position;
+			Vector3 playerDirection = playerPoint.transform.forward;
+			Quaternion playerRotation = playerPoint.transform.rotation;
+			float spawnDistance = 200;
+			Vector3 spawnPos = playerPosition + playerDirection * spawnDistance *-1;
 			Instantiate(Cargo);
-			Cargo.transform.position = test;
+			Cargo.transform.position = spawnPos;
 			Cargo.GetComponent<AIMaster>().isCargo = true;
 
 			float aiOriginDistance = Vector3.Distance (Cargo.transform.position, origin.transform.position); //Distance between player and Origin
