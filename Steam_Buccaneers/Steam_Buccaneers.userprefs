@@ -2,28 +2,28 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\Respawn.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" Line="16" Column="28" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="110" Column="35" />
+      <File FileName="Assets\Scripts\PlayerShip\PlayerStatus.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI_scripts\AIMove scripts\AImove.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI_scripts\spawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" Line="5" Column="37" />
+      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\cameraController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\pickupScrap.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\playerBulletHit.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\PlayerRotate2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerStatus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\Projectile.cs" Line="7" Column="37" />
-      <File FileName="Assets\Scripts\PlayerShip\Respawn.cs" Line="40" Column="63" />
+      <File FileName="Assets\Scripts\PlayerShip\Projectile.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\Respawn.cs" Line="46" Column="12" />
       <File FileName="Assets\Scripts\PlayerShip\setWeapon.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\sideWeaponControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI_scripts\AIMaster.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\OrbitPlanets.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\OrbitMoons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="89" Column="25" />
+      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Scene\GoBack.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\swivelFire.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Shop\spesialAmmo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" Line="33" Column="34" />
+      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIsideCanons.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
