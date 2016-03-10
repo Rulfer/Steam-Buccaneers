@@ -44,7 +44,7 @@ public class AIMaster : MonoBehaviour
 				this.GetComponent<AImove>().force = 650f;
 		}
 
-		if(isBoss == false)
+		if(isBoss == false && isCargo == false)
 		{
 			if(detectDistance < 150)
 			{
@@ -124,13 +124,10 @@ public class AIMaster : MonoBehaviour
 			{
 				if(isBoss == false && isCargo == false)
 				{
-					Debug.Log("We are killing them now,");
 					if(i != arrayIndex)
 					{
-						Debug.Log("Its not this object");
 						if(SpawnAI.spawn.marineShips[i] != null)
 						{
-							Debug.Log("Another one died.");
 							Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
 							Destroy(SpawnAI.spawn.marineShips[i]);
 							SpawnAI.spawn.marineShips[i] = null;
@@ -143,7 +140,6 @@ public class AIMaster : MonoBehaviour
 				{
 					if(SpawnAI.spawn.marineShips[i] != null)
 					{
-						Debug.Log("Another one died.");
 						Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
 						Destroy(SpawnAI.spawn.marineShips[i]);
 						SpawnAI.spawn.marineShips[i] = null;
