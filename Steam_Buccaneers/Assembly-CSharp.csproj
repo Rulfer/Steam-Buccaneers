@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
+     <Compile Include="Assets\changeSliderValue.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
