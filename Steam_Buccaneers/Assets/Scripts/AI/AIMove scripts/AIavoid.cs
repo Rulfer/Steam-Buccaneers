@@ -5,11 +5,11 @@ public class AIavoid : MonoBehaviour {
 	private GameObject player;
 
 	public bool hitObject = false;
+	public bool hitLeft = false;
+	public bool hitRight = false;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
-	private Vector3 right;
-	private Vector3 left;
 
 	private float hitTimer;
 	private int detectDistance = 30;
@@ -22,22 +22,19 @@ public class AIavoid : MonoBehaviour {
 	void Update () 
 	{
 		fwd = this.transform.TransformDirection(Vector3.forward);
-		right = this.transform.TransformDirection(Vector3.right);
-		left = this.transform.TransformDirection(Vector3.left);
 
 		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
-		Debug.DrawRay(this.transform.position, right * detectDistance, Color.green);
-		Debug.DrawRay(this.transform.position, left * detectDistance, Color.blue);
 
 		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 
 		sensors();
 
 		hitTimer += Time.deltaTime;
-
-		if(hitTimer >= 1)
+		if(hitTimer >= 0.1f)
 		{
 			hitObject = false;
+			hitRight = false;
+			hitLeft = false;
 		}
 	}
 
@@ -92,16 +89,15 @@ public class AIavoid : MonoBehaviour {
 			this.GetComponent<AImove>().turnRight = false;
 		}
 
-		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
+		if(hitLeft == true)
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shopWall" || objectHit.transform.tag == "aiShip") //The planet is to the left of the AI
-			{
-				hitObject = true;
-				hitTimer = 0;
-				this.GetComponent<AImove>().turnRight = true;
-				this.GetComponent<AImove>().turnLeft = false;
-			}
+			hitLeft = false;
+			hitObject = true;
+			hitTimer = 0;
+			this.GetComponent<AImove>().turnRight = true;
+			this.GetComponent<AImove>().turnLeft = false;
 		}
+
 		else
 		{
 			if(forwards == false)
@@ -111,16 +107,14 @@ public class AIavoid : MonoBehaviour {
 			}
 		}
 
-		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
+		if(hitRight == true)
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "shopWall" || objectHit.transform.tag == "aiShip") //The planet is to the right of the AI
-			{
-				hitObject = true;
-				hitTimer = 0;
-				this.GetComponent<AImove>().turnLeft = true;
-				this.GetComponent<AImove>().turnRight = false;
-			}
+			hitObject = true;
+			hitTimer = 0;
+			this.GetComponent<AImove>().turnLeft = true;
+			this.GetComponent<AImove>().turnRight = false;
 		}
+
 		else
 		{
 			if(forwards == false && lefty == false)

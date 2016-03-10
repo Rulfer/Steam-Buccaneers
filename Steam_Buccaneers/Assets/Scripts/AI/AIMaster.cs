@@ -50,7 +50,6 @@ public class AIMaster : MonoBehaviour
 			{
 				if(detectedPlayer == false)
 				{
-					Debug.Log("We must kill all other marines!");
 					deaktivatePatroling();
 					killMarines();
 				}
@@ -154,7 +153,6 @@ public class AIMaster : MonoBehaviour
 
 	private void killAI()
 	{
-		Debug.Log("We are killing this ai");
 		int temp;
 		if(isCargo == false)
 			temp = Random.Range(1, 7);
@@ -163,8 +161,8 @@ public class AIMaster : MonoBehaviour
 		for(int i = 0; i < temp; i++)
 		{
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
-			Debug.Log("We are spawning scrap!");
 		}
+
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			if(isCargo == false)
