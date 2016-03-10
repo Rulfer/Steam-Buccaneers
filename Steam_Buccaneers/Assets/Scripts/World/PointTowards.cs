@@ -4,7 +4,7 @@ using System.Collections;
 public class PointTowards : MonoBehaviour 
 {
 
-	private GameObject goTarget;
+	public GameObject goTarget;
 
 	void Start()
 	{
@@ -13,6 +13,28 @@ public class PointTowards : MonoBehaviour
 
 	void Update () 
 	{
+		if (goTarget == null)
+		{
+			Debug.Log ("DialogNummer = " + GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber);
+			if (GameObject.Find("TutorialControl").GetComponent<Tutorial>().dialogNumber == 23)
+			{
+				int i = 0;
+				while (goTarget == null)
+				{
+					if (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i] != null)
+					{
+						goTarget = GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i];
+					}
+					i++;
+					Debug.Log ("Scrapnummer: " + i);
+				}
+			}
+			else
+			{
+				goTarget = GameObject.FindGameObjectWithTag ("shop");
+			}
+		}
+
 		PositionArrow();        
 	}
 

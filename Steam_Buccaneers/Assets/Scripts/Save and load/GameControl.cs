@@ -41,7 +41,7 @@ public class GameControl : MonoBehaviour {
 			health = 100;
 			money = 20;
 			hullUpgrade = 1;
-			specialAmmo = 1;
+			specialAmmo = 20;
 			thrusterUpgrade = 1;
 
 			for (int i = 0; i < canonUpgrades.Length; i ++)

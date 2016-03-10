@@ -10,7 +10,7 @@ public class Tutorial : MonoBehaviour
 	//Next button
 	public GameObject nextButton;
 	//Number that keeps track of progress
-	public static int dialogNumber;
+	public int dialogNumber;
 	//Holds gameobjects that holds scripts that is making shooting possible
 	public GameObject[] shootyThings;
 	//Text that says pause
@@ -31,7 +31,11 @@ public class Tutorial : MonoBehaviour
 	//Controls that outside actions are over
 	public bool enterStore = false;
 	//Compass
-	private GameObject Compass;
+	private PointTowards compass;
+	//Array that holds all scrap
+	public GameObject[] scrapHolder;
+	private int scrapCount;
+
 	void Awake()
 	{
 		DontDestroyOnLoad (gameObject);
@@ -44,6 +48,9 @@ public class Tutorial : MonoBehaviour
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
+
+
 		//Pause at startup
 		buttonEvents.pause ();
 		//Turn off shooting
@@ -199,11 +206,15 @@ public class Tutorial : MonoBehaviour
 			changeCharacterWindow ();
 			buttonEvents.pause ();
 			questInfo.text = "Destroy Marineship.";
+			compass.goTarget = GameObject.FindGameObjectWithTag("aiShip");
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
 			break;
 		case(23):
 			changeCharacterWindow ();
+			scrapHolder = (GameObject.FindGameObjectsWithTag ("scrap"));
+			scrapCount = scrapHolder.Length;
+			Debug.Log ("Scraps left to pick up: " + scrapCount);
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			nextButton.SetActive (true);
@@ -215,6 +226,7 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (false);
 			break;
 		case(25):
+			questInfo.text = "Enter store.";
 			enterStore = true;
 			break;
 		default:
@@ -249,6 +261,8 @@ public class Tutorial : MonoBehaviour
 	private void makeTutorialEnemy()
 	{
 		Instantiate (AI, this.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+
+		Debug.Log("New Target = " + AI);
 	}
 
 	private void changeCharacterWindow()
@@ -262,6 +276,17 @@ public class Tutorial : MonoBehaviour
 		{
 			shopKeeperCharacterWindow.SetActive (true);
 			marineCharacterWindow.SetActive (false);
+		}
+	}
+
+	public void countingDownScrap()
+	{
+		Debug.Log ("Scraps left to pick up: " + scrapCount);
+		scrapCount--;
+
+		if (scrapCount <= 0)
+		{
+			nextDialog ();
 		}
 	}
 			
