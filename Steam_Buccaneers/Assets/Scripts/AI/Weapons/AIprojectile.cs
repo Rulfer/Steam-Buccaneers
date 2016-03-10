@@ -33,7 +33,7 @@ public class AIprojectile : MonoBehaviour {
 		{
 			Debug.Log("We hit the player");
 			GameControl.control.health -= damageOutput;
-			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 7, 0.10f, 0.9f);
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 		}
 
 		if(other.tag == "aiShip") //The AI hit itself

@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EZCameraShake;
+
 
 public class BombHitSomething : MonoBehaviour {
 	private float radius = 20F;
 	private float force = 10.0f;
+
+	CameraShakeInstance shake;
+
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
 	{
 		if(other.tag == "Player") //It hit the player!
 		{
 			GameControl.control.health -= 10; //Remove 10 health from the player
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(2, 5, 0.10f, 0.8f);
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
