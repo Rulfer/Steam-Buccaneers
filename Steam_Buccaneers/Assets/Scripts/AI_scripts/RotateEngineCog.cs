@@ -20,7 +20,6 @@ public class RotateEngineCog : MonoBehaviour {
 			zspeed *= -1;
 		
 		speed = xspeed + zspeed;
-		Debug.Log("speed " + speed);
 		this.transform.Rotate(0, 5*Time.deltaTime * speed, 0);
 
 	}
