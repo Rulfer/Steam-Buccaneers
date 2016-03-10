@@ -25,13 +25,20 @@ public class Tutorial : MonoBehaviour
 	private gameButtons buttonEvents;
 	//AIship used to battle
 	public GameObject AI;
-
+	//Character vinduer
+	public GameObject shopKeeperCharacterWindow;
+	public GameObject marineCharacterWindow; 
+	//Controls that outside actions are over
+	public bool enterStore = false;
+	//Compass
+	private GameObject Compass;
 	void Awake()
 	{
 		DontDestroyOnLoad (gameObject);
 	}
 	void Start ()
 	{
+		marineCharacterWindow.SetActive (false);
 		//Initialize functions
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
@@ -48,8 +55,6 @@ public class Tutorial : MonoBehaviour
 		//Trigger dialog here
 		dialog (0);
 	}
-
-
 
 	private void dialogInArray()
 	{
@@ -185,14 +190,20 @@ public class Tutorial : MonoBehaviour
 			break;
 		case(20):
 			makeTutorialEnemy ();
+			changeCharacterWindow ();
+			break;
+		case(21):
+			changeCharacterWindow ();
 			break;
 		case(22):
+			changeCharacterWindow ();
 			buttonEvents.pause ();
-			questInfo.text = "Destory Marineship.";
+			questInfo.text = "Destroy Marineship.";
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
 			break;
 		case(23):
+			changeCharacterWindow ();
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			nextButton.SetActive (true);
@@ -202,6 +213,9 @@ public class Tutorial : MonoBehaviour
 			questInfo.text = "Pickup loot.";
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
+			break;
+		case(25):
+			enterStore = true;
 			break;
 		default:
 			break;
@@ -235,6 +249,20 @@ public class Tutorial : MonoBehaviour
 	private void makeTutorialEnemy()
 	{
 		Instantiate (AI, this.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+	}
+
+	private void changeCharacterWindow()
+	{
+		if (marineCharacterWindow.activeInHierarchy == false)
+		{
+			marineCharacterWindow.SetActive (true);
+			shopKeeperCharacterWindow.SetActive (false);
+		} 
+		else
+		{
+			shopKeeperCharacterWindow.SetActive (true);
+			marineCharacterWindow.SetActive (false);
+		}
 	}
 			
 }
