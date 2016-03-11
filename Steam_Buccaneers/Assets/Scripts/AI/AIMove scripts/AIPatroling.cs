@@ -13,7 +13,7 @@ public class AIPatroling : MonoBehaviour {
 	void Start () 
 	{
 		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		target.transform.position = spawnAI.patrolPoint;
+		target.transform.position = SpawnAI.patrolPoint;
 		//target.GetComponent<MeshRenderer>().enabled = false;
 	}
 

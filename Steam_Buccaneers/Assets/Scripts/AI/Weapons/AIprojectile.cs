@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EZCameraShake;
 
 public class AIprojectile : MonoBehaviour {
 	private float projectileSpeed = 175;
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
+
+	CameraShakeInstance shake;
 
 	// Use this for initialization
 	void Start () 
@@ -30,6 +33,7 @@ public class AIprojectile : MonoBehaviour {
 		{
 			Debug.Log("We hit the player");
 			GameControl.control.health -= damageOutput;
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 		}
 
 		if(other.tag == "aiShip") //The AI hit itself

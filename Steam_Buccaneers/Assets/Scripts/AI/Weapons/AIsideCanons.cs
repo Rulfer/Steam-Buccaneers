@@ -30,7 +30,7 @@ public class AIsideCanons : MonoBehaviour {
 	public static bool fireLeft = false;
 	public static bool fireRight = false;
 
-	private int detectDistance = 200;
+	private int detectDistance = 100;
 
 	// Use this for initialization
 	void Start () {
@@ -40,17 +40,17 @@ public class AIsideCanons : MonoBehaviour {
 			{
 				for(int i = 0; i < 6; i++)
 				{
-					if(spawnAI.cannonLevel[i] == 1)
+					if(SpawnAI.cannonLevel[i] == 1)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
 						cannonLevel[i] = 1;
 					}
-					else if(spawnAI.cannonLevel[i] == 2)
+					else if(SpawnAI.cannonLevel[i] == 2)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
 						cannonLevel[i] = 2;
 					}
-					else if(spawnAI.cannonLevel[i] == 3)
+					else if(SpawnAI.cannonLevel[i] == 3)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
 						cannonLevel[i] = 3;
@@ -60,7 +60,7 @@ public class AIsideCanons : MonoBehaviour {
 
 			for(int i = 0; i < 6; i++)
 			{
-				spawnAI.spawn.cannonUpgraded[i] = false;
+				SpawnAI.spawn.cannonUpgraded[i] = false;
 			}
 		}
 		else

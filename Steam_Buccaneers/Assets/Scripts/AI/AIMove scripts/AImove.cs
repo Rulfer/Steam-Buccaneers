@@ -12,8 +12,8 @@ public class AImove : MonoBehaviour {
 
 	private float distanceToPlayer;
 	private float distanceToObjective;
-	public float minDist = 20f;
-	public float maxDist = 40f;
+	float minDist = 20f;
+	float maxDist = 80f;
 
 	public bool turnLeft = false;
 	public bool turnRight = false;
@@ -29,7 +29,7 @@ public class AImove : MonoBehaviour {
 	/// We want the AI to move extra fast once spawned, and slower
 	/// when it has reached the player.
 	/// </summary>
-	public Vector3 maxVelocity = new Vector3 (35f, 0.0f, 35f);
+	public Vector3 maxVelocity;
 
 
 	void Start ()
