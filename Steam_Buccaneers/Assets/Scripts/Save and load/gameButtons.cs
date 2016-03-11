@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class gameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
@@ -9,9 +10,12 @@ public class gameButtons : MonoBehaviour {
 	{
 	if (Input.GetKeyDown (KeyCode.Escape))
 		{
-		setDifferent();
+		setDifferent ();
 		escMenu.SetActive(escMenuStatus);
-		pause();
+			if (SceneManager.GetActiveScene ().name != "Tutorial")
+			{
+				pause ();
+			}
 		}
 	}
 
@@ -25,8 +29,6 @@ public class gameButtons : MonoBehaviour {
 		{
 			Time.timeScale = 0;
 		}
-
-		Debug.Log (Time.timeScale);
 	}
 
 	public void resume()

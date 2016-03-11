@@ -3,7 +3,7 @@ using System.Collections;
 
 public class pickupScrap : MonoBehaviour {
 
-	private GameObject[] scrapArray; //Every scrap object on the scene
+	public GameObject[] scrapArray; //Every scrap object on the scene
 	private Vector3 temp; //the difference between player and scap position
 
 	private int pickupRange; //The range of the "magnet"

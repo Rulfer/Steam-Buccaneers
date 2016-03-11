@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class scrapRandomDirection : MonoBehaviour {
 
@@ -44,6 +45,7 @@ public class scrapRandomDirection : MonoBehaviour {
 		if(other.tag == "Player")
 		{
 			GameControl.control.money += value; //Pay the player
+			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
 			Debug.Log("Player scrap = " + GameControl.control.money);
 			kill();
 		}
@@ -54,7 +56,7 @@ public class scrapRandomDirection : MonoBehaviour {
 		Destroy(this.gameObject); //Destroy this object
 		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
 		{
-			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
 		}
 
 	}
