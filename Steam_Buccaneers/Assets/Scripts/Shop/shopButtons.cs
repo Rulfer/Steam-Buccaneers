@@ -17,6 +17,7 @@ public class shopButtons : MonoBehaviour {
 
 	private GameObject hull;
 	private GameObject thruster;
+	private Slider healthSlider;
 	private GameObject[] canons = new GameObject[6];
 
 	void Start()

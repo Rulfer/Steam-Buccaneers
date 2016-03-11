@@ -54,7 +54,7 @@ public class Respawn : MonoBehaviour
 	void RespawnPlayer()
 	{
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < shops.Length; i++)
 		{
 			distance = Vector3.Distance(shops[i].transform.position, player.transform.position);
 			if (distance < temp)

@@ -38,10 +38,10 @@ public class GameControl : MonoBehaviour {
 		//Sets start data
 		if (health == 0 && money == 0)
 		{
-			health = 20;
-			money = 120;
+			health = 50;
+			money = 20;
 			hullUpgrade = 1;
-			specialAmmo = 1;
+			specialAmmo = 20;
 			thrusterUpgrade = 1;
 
 			for (int i = 0; i < canonUpgrades.Length; i ++)
@@ -57,6 +57,7 @@ public class GameControl : MonoBehaviour {
 	//Runs when scene is loaded
 	void OnLevelWasLoaded(int level)
 	{
+		Debug.Log ("Level loaded");
 		if (level == 0) 
 		{
 			Save (storeName);
