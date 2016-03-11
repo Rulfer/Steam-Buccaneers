@@ -37,6 +37,7 @@ public class Respawn : MonoBehaviour
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
+				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			}
 			/*
 			respawnTime -= Time.deltaTime;
@@ -53,7 +54,7 @@ public class Respawn : MonoBehaviour
 	void RespawnPlayer()
 	{
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < shops.Length; i++)
 		{
 			distance = Vector3.Distance(shops[i].transform.position, player.transform.position);
 			if (distance < temp)

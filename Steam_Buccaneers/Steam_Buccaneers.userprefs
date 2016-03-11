@@ -1,17 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\Respawn.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI_scripts\AIMaster.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerShip\Respawn.cs" Line="27" Column="5" />
-      <File FileName="Assets\Scripts\AI_scripts\scrapRandomDirection.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\spawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI_scripts\AIMaster.cs" Line="141" Column="3" />
-      <File FileName="Assets\Scripts\PlayerShip\swivelFire.cs" Line="26" Column="124" />
-      <File FileName="Assets\Scripts\PlayerShip\swivelWeaponControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\sideWeaponControl.cs" Line="87" Column="95" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerStatus.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="44" Column="56" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerRotate2.cs" Line="57" Column="37" />
+      <File FileName="Assets\Scripts\AI_scripts\RotateEngineCog.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI_scripts\RotateCogRigh.cs" Line="1" Column="1" />
+      <File FileName="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" Line="4" Column="24" />
+      <File FileName="Assets\Scripts\AI_scripts\AIMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI_scripts\Weapons\AIprojectile.cs" Line="36" Column="79" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

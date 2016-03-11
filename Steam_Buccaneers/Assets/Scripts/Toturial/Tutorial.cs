@@ -10,7 +10,7 @@ public class Tutorial : MonoBehaviour
 	//Next button
 	public GameObject nextButton;
 	//Number that keeps track of progress
-	public static int dialogNumber;
+	public int dialogNumber;
 	//Holds gameobjects that holds scripts that is making shooting possible
 	public GameObject[] shootyThings;
 	//Text that says pause
@@ -25,6 +25,16 @@ public class Tutorial : MonoBehaviour
 	private gameButtons buttonEvents;
 	//AIship used to battle
 	public GameObject AI;
+	//Character vinduer
+	public GameObject shopKeeperCharacterWindow;
+	public GameObject marineCharacterWindow; 
+	//Controls that outside actions are over
+	public bool enterStore = false;
+	//Compass
+	private PointTowards compass;
+	//Array that holds all scrap
+	public GameObject[] scrapHolder;
+	private int scrapCount;
 
 	void Awake()
 	{
@@ -32,11 +42,15 @@ public class Tutorial : MonoBehaviour
 	}
 	void Start ()
 	{
+		marineCharacterWindow.SetActive (false);
 		//Initialize functions
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
+
+
 		//Pause at startup
 		buttonEvents.pause ();
 		//Turn off shooting
@@ -48,8 +62,6 @@ public class Tutorial : MonoBehaviour
 		//Trigger dialog here
 		dialog (0);
 	}
-
-
 
 	private void dialogInArray()
 	{
@@ -185,14 +197,24 @@ public class Tutorial : MonoBehaviour
 			break;
 		case(20):
 			makeTutorialEnemy ();
+			changeCharacterWindow ();
+			break;
+		case(21):
+			changeCharacterWindow ();
 			break;
 		case(22):
+			changeCharacterWindow ();
 			buttonEvents.pause ();
-			questInfo.text = "Destory Marineship.";
+			questInfo.text = "Destroy Marineship.";
+			compass.goTarget = GameObject.FindGameObjectWithTag("aiShip");
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
 			break;
 		case(23):
+			changeCharacterWindow ();
+			scrapHolder = (GameObject.FindGameObjectsWithTag ("scrap"));
+			scrapCount = scrapHolder.Length;
+			Debug.Log ("Scraps left to pick up: " + scrapCount);
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			nextButton.SetActive (true);
@@ -202,6 +224,10 @@ public class Tutorial : MonoBehaviour
 			questInfo.text = "Pickup loot.";
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
+			break;
+		case(25):
+			questInfo.text = "Enter store.";
+			enterStore = true;
 			break;
 		default:
 			break;
@@ -235,6 +261,33 @@ public class Tutorial : MonoBehaviour
 	private void makeTutorialEnemy()
 	{
 		Instantiate (AI, this.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
+
+		Debug.Log("New Target = " + AI);
+	}
+
+	private void changeCharacterWindow()
+	{
+		if (marineCharacterWindow.activeInHierarchy == false)
+		{
+			marineCharacterWindow.SetActive (true);
+			shopKeeperCharacterWindow.SetActive (false);
+		} 
+		else
+		{
+			shopKeeperCharacterWindow.SetActive (true);
+			marineCharacterWindow.SetActive (false);
+		}
+	}
+
+	public void countingDownScrap()
+	{
+		Debug.Log ("Scraps left to pick up: " + scrapCount);
+		scrapCount--;
+
+		if (scrapCount <= 0)
+		{
+			nextDialog ();
+		}
 	}
 			
 }
