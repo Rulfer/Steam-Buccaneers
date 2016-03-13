@@ -31,23 +31,22 @@ public class CastRays : MonoBehaviour {
 		{
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
-				this.transform.root.GetComponent<AIavoid>().hitRight = true;
+				this.transform.root.GetComponent<AImove>().turnLeft = true;
+				this.transform.root.GetComponent<AIavoid>().hitObject = true;
 			}
 			else
-			{
-				this.transform.root.GetComponent<AIavoid>().hitRight = false;
-			}
+				this.transform.root.GetComponent<AImove>().turnLeft = false;
 		}
 
-		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
+		else if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
 		{
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
-				this.transform.root.GetComponent<AIavoid>().hitLeft = true;
+				this.transform.root.GetComponent<AImove>().turnRight = true;
+				this.transform.root.GetComponent<AIavoid>().hitObject = true;
 			}
 			else
-				this.transform.root.GetComponent<AIavoid>().hitLeft = false;
-			
+				this.transform.root.GetComponent<AImove>().turnRight = false;
 		}
 	}
 }

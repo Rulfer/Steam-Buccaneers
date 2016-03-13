@@ -1,13 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EngineFlames.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\AIMove scripts\AIavoid.cs">
     <Files>
-      <File FileName="Assets\EngineFlames.cs" Line="29" Column="54" />
-      <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI\AIMove scripts\AImove.cs" Line="41" Column="21" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="85" Column="25" NotebookId="1" />
-      <File FileName="Assets\Scripts\AI\RotateEngineCog.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AImove.cs" Line="26" Column="31" />
+      <File FileName="Assets\EngineFlames.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" Line="72" Column="22" />
+      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="53" Column="26" />
+      <File FileName="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" Line="21" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" Line="26" Column="13" />
+      <File FileName="Assets\CastRays.cs" Line="46" Column="66" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
