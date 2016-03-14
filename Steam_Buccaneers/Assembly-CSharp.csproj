@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
+     <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
