@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerMove2 : MonoBehaviour 
 {
+	public static PlayerMove2 move;
 	public static Rigidbody donger;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public float force = 200.0f;
@@ -25,6 +26,7 @@ public class PlayerMove2 : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		move = this;
 		donger = GetComponent<Rigidbody>();
 	}
 
