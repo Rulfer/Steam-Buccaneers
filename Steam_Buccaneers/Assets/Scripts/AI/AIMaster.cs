@@ -44,7 +44,7 @@ public class AIMaster : MonoBehaviour
 				this.GetComponent<AImove>().force = 650f;
 		}
 
-		if(isBoss == false && isCargo == false)
+		if(isBoss == false)
 		{
 			if(detectDistance < 150)
 			{
@@ -56,7 +56,7 @@ public class AIMaster : MonoBehaviour
 			}
 		}
 
-		else
+		else 
 			deaktivatePatroling();
 
 		if(testedFleeing == false)

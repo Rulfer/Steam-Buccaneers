@@ -45,18 +45,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CastRays.cs" />
      <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
-     <Compile Include="Assets\EngineFlames.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\InnerMap.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\MapArrow.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\MapCanvasController.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\MapMarker.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\MarkerGroup.cs" />
+     <Compile Include="Assets\MiniMap\Scripts\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AImove.cs" />
+     <Compile Include="Assets\Scripts\AI\AIMove scripts\CastRays.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogRigh.cs" />
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
@@ -66,6 +71,7 @@
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
+     <Compile Include="Assets\Scripts\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />

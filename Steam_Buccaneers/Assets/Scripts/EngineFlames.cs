@@ -17,7 +17,8 @@ public class EngineFlames : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () 
+	{
 		xSpeed = rigi.velocity.x;
 		zSpeed = rigi.velocity.z;
 		if(xSpeed < 0)
@@ -25,7 +26,7 @@ public class EngineFlames : MonoBehaviour {
 		if(zSpeed < 0)
 			zSpeed *= -1;
 		speed = xSpeed + zSpeed;
-		tempZ = speed * Time.deltaTime * 0.1f;//Mathf.PingPong(oldScale, newScale, speed);
+		tempZ = speed * Time.deltaTime * 0.5f;//Mathf.PingPong(oldScale, newScale, speed);
 		this.transform.localScale = new Vector3(0.03f, 0.03f, tempZ);
 	}
 }
