@@ -34,7 +34,7 @@ public class AImove : MonoBehaviour {
 
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.Find("PlayerShip");
 		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		

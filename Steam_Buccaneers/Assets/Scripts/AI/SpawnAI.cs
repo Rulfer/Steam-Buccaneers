@@ -50,7 +50,7 @@ public class SpawnAI : MonoBehaviour
 		if(stopFightTimer == true)
 			startFightTimer = 0;
 		
-		if(startFightTimer > 20)
+		if(startFightTimer > 200)
 		{
 			startFightTimer = 0;
 			float temp = 10000;

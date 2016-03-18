@@ -7,6 +7,7 @@ public class AIprojectile : MonoBehaviour {
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
+	public GameObject explotion;
 
 	CameraShakeInstance shake;
 
@@ -42,7 +43,8 @@ public class AIprojectile : MonoBehaviour {
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 		}
-
+		Instantiate(explotion);
+		explotion.transform.position = this.transform.position;
 		Destroy(this.gameObject);
 	}
 }
