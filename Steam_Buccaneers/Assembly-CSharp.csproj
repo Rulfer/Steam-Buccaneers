@@ -97,7 +97,7 @@
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
-     <Compile Include="Assets\testChangingcolor.cs" />
+     <Compile Include="Assets\randomScaleMove.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">

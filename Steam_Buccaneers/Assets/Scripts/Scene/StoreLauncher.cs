@@ -11,14 +11,6 @@ public class StoreLauncher : MonoBehaviour {
 		{
 			//Saves the store name
 			GameControl.control.storeName = this.name;
-			if (SceneManager.GetActiveScene ().name == "Tutorial")
-			{
-				//Reset values
-				Debug.Log("Give back health and spessAmmo");
-				Debug.Log (GameControl.control.health);
-				GameControl.control.health = 100;
-				GameControl.control.specialAmmo = 20;
-			}
 			//Writes data to file in GameControl.cs
 			GameControl.control.Save (this.name);
 			//Write whatever scene we want to go to here

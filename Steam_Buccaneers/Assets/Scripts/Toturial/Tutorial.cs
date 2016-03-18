@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Tutorial : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class Tutorial : MonoBehaviour
 	private int scrapCount;
 	private ColorBlock cb;
 	private bool goingDown = true;
+	private float blinkingButtonSpeed;
 
 	void Awake()
 	{
@@ -71,6 +73,7 @@ public class Tutorial : MonoBehaviour
 		nextDialog ();
 		Debug.Log ("Store Scene");
 		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialog);
+		nextButton = GameObject.Find ("dialogue_next_shop");
 	}
 
 	void Start ()
@@ -94,37 +97,38 @@ public class Tutorial : MonoBehaviour
 		questInfo.text = "Talk to Shopkeeper.";
 		//Trigger dialog here
 		dialog (0);
+		//The speed the buttons blink at
+		blinkingButtonSpeed = 0.025f;
 	}
 
 	void Update()
 	{
-		if (dialogNumber == 28)
+		if (dialogNumber >= 28)
 		{
-			Debug.Log ("Start Blinking!");
-			Debug.Log ("Antall knapper: " + blinkingButtons.Length);
 			for ( int i = 0; i < blinkingButtons.Length; i ++)
 			{
-				Debug.Log ("Mengde rødfarge: " + blinkingButtons [i].colors.normalColor.r);
-				cb = blinkingButtons [i].colors;
-				if (blinkingButtons [i].colors.normalColor.g >= 1)
+				if (blinkingButtons [i] != null)
 				{
-					goingDown = true;
-				} 
-				else if (blinkingButtons [i].colors.normalColor.g <= 0)
-				{
-					goingDown = false;
-				}
+					cb = blinkingButtons [i].colors;
+					if (blinkingButtons [i].colors.normalColor.g >= 1)
+					{
+						goingDown = true;
+					} else if (blinkingButtons [i].colors.normalColor.g <= 0)
+					{
+						goingDown = false;
+					}
 
-				if (goingDown == true)
-				{
-					cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g- 0.01f, cb.normalColor.b- 0.01f);
-				} 
-				else
-				{
-					cb.normalColor = new Color(cb.normalColor.r, cb.normalColor.g+0.01f, cb.normalColor.b+0.01f);
+					if (goingDown == true)
+					{
+						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g - blinkingButtonSpeed, cb.normalColor.b - blinkingButtonSpeed);
+					} else
+					{
+						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g + blinkingButtonSpeed, cb.normalColor.b +blinkingButtonSpeed);
+					}
+					cb.pressedColor = cb.normalColor;
+					cb.highlightedColor = cb.normalColor;
+					blinkingButtons [i].colors = cb;
 				}
-
-				blinkingButtons [i].colors = cb;
 			}
 		}
 	}
@@ -186,13 +190,12 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[24] = "Fly over there, and pick it up.";//Shopkeeper
 		dialogTexts[25] = " And as promised I’ll fix your damage, just fly closer to me " +
 			"and i’ll open up a landing pad for you.";//Shopkeeper
-		
 		dialogTexts[26] = "Here is what I, and most other shops around this sun has to offer.";//Shopkeeper
 		dialogTexts[27] = "You see all these icons on the blueprint of your ship here?";
 		dialogTexts [28] = "These " +
 		"are upgradeable parts. I can do upgrades for each of your side cannons, increase the damage your hull can take, or your back " +
 		"thruster output. ";
-		dialogTexts[29] = "The icon in the middle is ammunition for your special weapon. " +
+		dialogTexts[29] = "The icon in the middle is ammunition for your special weapon. Feel free to get so that you have 20 . " +
 			"Confirm your purchase on the bottom of the screen.";//Shopkeeper
 		dialogTexts [30] = "To repair your ship, just press the button that says “Repair my vessel!” " +
 		"and drag the slider for how much you want to repair. ";//Shopkeeper
@@ -297,11 +300,13 @@ public class Tutorial : MonoBehaviour
 			enterStore = true;
 			break;
 		case(29):
-			for (int i = 0; i < blinkingButtons.Length; i++)
-			{
-				cb.normalColor = Color.white;
-				blinkingButtons [i].colors = cb;
-			}
+			clearButtons ();
+			blinkingButtons [0] = GameObject.Find ("special").GetComponent<Button> ();
+			nextButton.SetActive (false);
+			break;
+		case(30):
+			clearButtons ();
+			blinkingButtons [0] = GameObject.Find ("button_repair").GetComponent<Button>();
 			break;
 		default:
 			break;
@@ -363,6 +368,19 @@ public class Tutorial : MonoBehaviour
 		{
 			nextDialog ();
 		}
+	}
+
+	private void clearButtons()
+	{
+		for (int i = 0; i < blinkingButtons.Length; i++)
+		{
+			if (blinkingButtons [i] != null)
+			{
+				cb.normalColor = Color.white;
+				blinkingButtons [i].colors = cb;
+			}
+		}
+		Array.Clear (blinkingButtons, 0, blinkingButtons.Length);
 	}
 			
 }
