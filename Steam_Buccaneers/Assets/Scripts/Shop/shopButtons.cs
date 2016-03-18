@@ -84,17 +84,37 @@ public class shopButtons : MonoBehaviour {
 	public void openRepair()
 	{
 		repairMenu.SetActive(true);
+		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 33)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
 	}
 
 	public void buyHealth()
 	{
-			if (GameControl.control.health < (int)GameObject.Find("Slider_refill").GetComponent<Slider>().value && (int)GameObject.Find("value_cost_hp").GetComponent<updatePayment>().payment <= GameControl.control.money)
+		if (GameObject.Find ("TutorialControl") == null)
+		{
+			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value && (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment <= GameControl.control.money)
+			{
+				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
+				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
+				GameControl.control.money -= (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment;
+				GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+			}
+		} 
+		else
+		{
+			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
+			{
+				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
+				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
+
+				if (GameControl.control.health == 100)
 				{
-					GameControl.control.health = (int)GameObject.Find("Slider_refill").GetComponent<Slider>().value;
-					GameObject.Find("Slider_current_hp").GetComponent<Slider>().value = GameControl.control.health;
-					GameControl.control.money -= (int)GameObject.Find("value_cost_hp").GetComponent<updatePayment>().payment;
-					GameObject.Find("value_scraps").GetComponent<Text>().text = GameControl.control.money.ToString();
+					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 				}
+			}
+		}
 	}
 
 	public void buyUpgrade()
