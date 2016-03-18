@@ -15,7 +15,7 @@ public class updateHealth : MonoBehaviour {
 		void Update () 
 		{
 
-				sliderValue = GameObject.Find("Slider_refill").GetComponent<Slider>().value;
+		sliderValue = GameObject.Find("Slider_refill").GetComponent<Slider>().value;
 		Debug.Log(sliderValue);
 				if (sliderValue > GameControl.control.health)
 					{

@@ -180,8 +180,22 @@ public class shopButtons : MonoBehaviour {
 
 			if (this.gameObject.GetComponent<shopText>().noMoreUpgrade == false)
 			{
-				GameControl.control.money -= this.gameObject.GetComponent<shopText>().currentPrice;
-				GameObject.Find("value_scraps").GetComponent<Text>().text = GameControl.control.money.ToString();
+				if (GameObject.Find ("TutorialControl") == null)
+				{
+					GameControl.control.money -= this.gameObject.GetComponent<shopText> ().currentPrice;
+					GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+				} 
+				else
+				{
+					if (GameControl.control.specialAmmo > 20)
+					{
+						GameControl.control.money -= this.gameObject.GetComponent<shopText> ().currentPrice;
+						GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+					} else if (GameControl.control.specialAmmo == 20)
+					{
+						GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+					}
+				}
 				this.gameObject.GetComponent<shopText>().updateText(this.gameObject.GetComponent<shopText>().currentUpgradeName);
 				Debug.Log("This Works TM");
 			}

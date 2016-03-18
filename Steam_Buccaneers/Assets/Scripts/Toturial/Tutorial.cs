@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Tutorial : MonoBehaviour
 {
@@ -34,12 +35,47 @@ public class Tutorial : MonoBehaviour
 	private PointTowards compass;
 	//Array that holds all scrap
 	public GameObject[] scrapHolder;
+	//Array that holds shopbuttons that shall blink
+	private Button[] blinkingButtons = new Button[8];
 	private int scrapCount;
+	private ColorBlock cb;
+	private bool goingDown = true;
+	private float blinkingButtonSpeed;
 
 	void Awake()
 	{
 		DontDestroyOnLoad (gameObject);
 	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		if (level == 1)
+		{
+			loadShop ();
+		}
+	}
+
+	private void loadShop()
+	{
+		//Reassign textboxes in shop
+		dialogTextBox = GameObject.Find ("dialogue_ingame_shop").GetComponent<Text> ();
+		characterName = GameObject.Find ("dialogue_name_shop").GetComponent<Text> ();
+
+		blinkingButtons [0] = GameObject.Find ("thruster").GetComponent<Button> ();
+		blinkingButtons [1] = GameObject.Find ("cannonT1").GetComponent<Button> ();
+		blinkingButtons [2] = GameObject.Find ("cannonT2").GetComponent<Button> ();
+		blinkingButtons [3] = GameObject.Find ("cannonT3").GetComponent<Button> ();
+		blinkingButtons [4] = GameObject.Find ("cannonB1").GetComponent<Button> ();
+		blinkingButtons [5] = GameObject.Find ("cannonB2").GetComponent<Button> ();
+		blinkingButtons [6] = GameObject.Find ("cannonB3").GetComponent<Button> ();
+		blinkingButtons [7] = GameObject.Find ("hull").GetComponent<Button> ();
+
+		nextDialog ();
+		Debug.Log ("Store Scene");
+		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialog);
+		nextButton = GameObject.Find ("dialogue_next_shop");
+	}
+
 	void Start ()
 	{
 		marineCharacterWindow.SetActive (false);
@@ -61,6 +97,40 @@ public class Tutorial : MonoBehaviour
 		questInfo.text = "Talk to Shopkeeper.";
 		//Trigger dialog here
 		dialog (0);
+		//The speed the buttons blink at
+		blinkingButtonSpeed = 0.025f;
+	}
+
+	void Update()
+	{
+		if (dialogNumber >= 28)
+		{
+			for ( int i = 0; i < blinkingButtons.Length; i ++)
+			{
+				if (blinkingButtons [i] != null)
+				{
+					cb = blinkingButtons [i].colors;
+					if (blinkingButtons [i].colors.normalColor.g >= 1)
+					{
+						goingDown = true;
+					} else if (blinkingButtons [i].colors.normalColor.g <= 0)
+					{
+						goingDown = false;
+					}
+
+					if (goingDown == true)
+					{
+						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g - blinkingButtonSpeed, cb.normalColor.b - blinkingButtonSpeed);
+					} else
+					{
+						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g + blinkingButtonSpeed, cb.normalColor.b +blinkingButtonSpeed);
+					}
+					cb.pressedColor = cb.normalColor;
+					cb.highlightedColor = cb.normalColor;
+					blinkingButtons [i].colors = cb;
+				}
+			}
+		}
 	}
 
 	private void dialogInArray()
@@ -74,10 +144,10 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [2] = "Well, I have a the feeling you haven’t really flown one of these things before, am I right? "; //Shopkeeper
 		dialogTexts[3] = "So you have two options, either figuring out the controls for yourself, or let me help you. And at the moment, I can see one of them space cop types coming towards here on the radar. " +
 			"So I guess you don’t want to get shot into bits in an instant here."; //Shopkeeper
-		dialogTexts[4] = "Why would they bother me? But alright, just tell me the basics " +
+		dialogTexts[4] = "Why would they bother me?  But alright, just tell me the basics " +
 			"and let me be on my way.";//Player
 		dialogTexts [5] = "Well, that beautiful hunk of metal you’ve just bought ain’t exactly acquired legally, " +
-		"you see, and the previous captain, who incidentally is “missing” wasn’t the nicest of people in " +
+		"you see, and the previous captain, who incidentally is “missing”, wasn’t the nicest of people in " +
 		"this here space. ";//Shopkeeper
 		dialogTexts [6] = "Also you’re human, aren’t you? So add them together and you know them cops aren’t " +
 			"going to give you an easy time.";//Shopkeeper
@@ -96,7 +166,7 @@ public class Tutorial : MonoBehaviour
 			"those will rotate with the ship while you turn. so you might not hit your targets even " +
 			"though they are right next to you.";//Shopkeeper
 		dialogTexts[13] = "Gee, Einstein, could’ve figured that out on my own.";//Player
-		dialogTexts [14] = "Hey, keep your sassy human slang for your kin, most won’t take kindly to that " +
+		dialogTexts [14] = "Hey, keep your sassy human slang for your kin. Most won’t take kindly to that " +
 		"sort of language. "; //Shopkeeper
 		dialogTexts[15] = "Anyways, last but not least. The cannon on your roof right there, this is " +
 			"a special one. It is way more powerful than your regular cannons, and you can aim it around " +
@@ -118,22 +188,22 @@ public class Tutorial : MonoBehaviour
 		"You see those gears and other bits and bobs that’s left after that marine ship? " +
 		"This is what us traders take as payment. ";
 		dialogTexts[24] = "Fly over there, and pick it up.";//Shopkeeper
-		dialogTexts[25] = " And as promised i’ll fix your damage, just fly closer to me " +
+		dialogTexts[25] = " And as promised I’ll fix your damage, just fly closer to me " +
 			"and i’ll open up a landing pad for you.";//Shopkeeper
-		dialogTexts[26] = "Here is what i, and most other shops around this sun has to offer.";//Shopkeeper
+		dialogTexts[26] = "Here is what I, and most other shops around this sun has to offer.";//Shopkeeper
 		dialogTexts[27] = "You see all these icons on the blueprint of your ship here?";
-		dialogTexts[28] = "These " +
-			"are upgradeable parts,I can do upgrades for each of your side cannons, or I could " +
-			"increase the damage your hull can take before you’re blown to bits, or your back " +
-			"thruster output. The icon in the middle is ammunition for your special weapon. " +
+		dialogTexts [28] = "These " +
+		"are upgradeable parts. I can do upgrades for each of your side cannons, increase the damage your hull can take, or your back " +
+		"thruster output. ";
+		dialogTexts[29] = "The icon in the middle is ammunition for your special weapon. Feel free to get so that you have 20 . " +
 			"Confirm your purchase on the bottom of the screen.";//Shopkeeper
-		dialogTexts [29] = "To repair your ship, just press the button that says “Repair my vessel!” " +
+		dialogTexts [30] = "To repair your ship, just press the button that says “Repair my vessel!” " +
 		"and drag the slider for how much you want to repair. ";//Shopkeeper
-		dialogTexts[30] = "Then just confirm the amount, and " +
-			"i’ll fix it right away. And of course, to the top left you’ll see how much money " +
+		dialogTexts[31] = "Then just confirm the amount, and " +
+			"i’ll fix it right away. And of course, to the top right you’ll see how much money " +
 			"you’ve got.";//Shopkeeper
-		dialogTexts[31] = "Just fix up your ship right about now, and be on your way.";//Shopkeeper
-		dialogTexts[32] = "I guess that’s about it for what I can tell you, be on your way now. " +
+		dialogTexts[32] = "Just fix up your ship right about now, and be on your way.";//Shopkeeper
+		dialogTexts[33] = "I guess that’s about it for what I can tell you, be on your way now. " +
 			"And remember; Keep alive and keep flying, a living customer is a paying customer. " +
 			"Come back anytime should you need something.";//Shopkeeper
 
@@ -229,6 +299,15 @@ public class Tutorial : MonoBehaviour
 			questInfo.text = "Enter store.";
 			enterStore = true;
 			break;
+		case(29):
+			clearButtons ();
+			blinkingButtons [0] = GameObject.Find ("special").GetComponent<Button> ();
+			nextButton.SetActive (false);
+			break;
+		case(30):
+			clearButtons ();
+			blinkingButtons [0] = GameObject.Find ("button_repair").GetComponent<Button>();
+			break;
 		default:
 			break;
 		}
@@ -237,6 +316,7 @@ public class Tutorial : MonoBehaviour
 
 	public void nextDialog ()
 	{
+		Debug.Log ("NextDialog");
 		dialogNumber++;
 		dialog (dialogNumber);
 	}
@@ -288,6 +368,19 @@ public class Tutorial : MonoBehaviour
 		{
 			nextDialog ();
 		}
+	}
+
+	private void clearButtons()
+	{
+		for (int i = 0; i < blinkingButtons.Length; i++)
+		{
+			if (blinkingButtons [i] != null)
+			{
+				cb.normalColor = Color.white;
+				blinkingButtons [i].colors = cb;
+			}
+		}
+		Array.Clear (blinkingButtons, 0, blinkingButtons.Length);
 	}
 			
 }

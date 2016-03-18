@@ -44,7 +44,7 @@ public class AIMaster : MonoBehaviour
 				this.GetComponent<AImove>().force = 650f;
 		}
 
-		if(isBoss == false && isCargo == false)
+		if(isBoss == false)
 		{
 			if(detectDistance < 150)
 			{
@@ -56,7 +56,7 @@ public class AIMaster : MonoBehaviour
 			}
 		}
 
-		else
+		else 
 			deaktivatePatroling();
 
 		if(testedFleeing == false)
@@ -80,9 +80,10 @@ public class AIMaster : MonoBehaviour
 		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
 		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
+			this.GetComponent<DamagedAI>().startSmoking();
 			this.GetComponent<AImove>().isFleeing = false;
 		}
-		if(detectDistance > 300)//If the distance is greater than this number, delete this AI
+		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 			killAI();
 		
 		if(aiHealth <= 0) //If the health if this AI is 0, delete this AI
