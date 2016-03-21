@@ -51,12 +51,6 @@
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\InnerMap.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\MapArrow.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\MapCanvasController.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\MapMarker.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\MarkerGroup.cs" />
-     <Compile Include="Assets\MiniMap\Scripts\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
@@ -75,6 +69,12 @@
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
+     <Compile Include="Assets\Scripts\Minimap\InnerMap.cs" />
+     <Compile Include="Assets\Scripts\Minimap\MapArrow.cs" />
+     <Compile Include="Assets\Scripts\Minimap\MapCanvasController.cs" />
+     <Compile Include="Assets\Scripts\Minimap\MapMarker.cs" />
+     <Compile Include="Assets\Scripts\Minimap\MarkerGroup.cs" />
+     <Compile Include="Assets\Scripts\Minimap\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
