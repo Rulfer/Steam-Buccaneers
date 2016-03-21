@@ -72,6 +72,8 @@
      <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\EngineFlames.cs" />
+     <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
+     <Compile Include="Assets\Scripts\FX\rotate.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
@@ -103,6 +105,7 @@
      <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
+     <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
