@@ -5,6 +5,7 @@ public class DamagedAI : MonoBehaviour
 {
 	public static DamagedAI dmAI;
 	public GameObject[] smokeParticles;
+	public GameObject[] fireParticles;
 
 	//These 3 bools are set in the Inspector. 
 	public bool marine;
@@ -16,13 +17,8 @@ public class DamagedAI : MonoBehaviour
 		dmAI = this;
 		foreach(GameObject go in smokeParticles)
 			go.SetActive(false);
-
-//		if(this.gameObject.name == "Marine(Clone)")
-//			marine = true;
-//		else if(this.gameObject.name == "Boss(Clone)")
-//			boss = true;
-//		else
-//			cargo = true;
+		foreach(GameObject go in fireParticles)
+			go.SetActive(false);
 	}
 
 	public void startSmoking()
@@ -30,10 +26,21 @@ public class DamagedAI : MonoBehaviour
 		if(marine == true)
 			startMarineSmoke();
 	}
+	public void startFire()
+	{
+		if(marine == true)
+			startMarineFire();
+	}
 	
-	public void startMarineSmoke()
+	private void startMarineSmoke()
 	{
 		foreach(GameObject go in smokeParticles)
+			go.SetActive(true);
+	}
+
+	private void startMarineFire()
+	{
+		foreach(GameObject go in fireParticles)
 			go.SetActive(true);
 	}
 }

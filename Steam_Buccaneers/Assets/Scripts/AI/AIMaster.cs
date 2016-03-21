@@ -75,13 +75,15 @@ public class AIMaster : MonoBehaviour
 		}
 
 		if(aiHealth <= aiHealthMat3) //Change the material to mat3 if the health is low enough
+		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
+			this.GetComponent<DamagedAI>().startFire();
+		}
 
 		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
 		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 			this.GetComponent<DamagedAI>().startSmoking();
-			this.GetComponent<AImove>().isFleeing = false;
 		}
 		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 			killAI();
