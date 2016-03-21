@@ -32,7 +32,6 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.tag == "Player") 
 		{
-			Debug.Log("We hit the player");
 			GameControl.control.health -= damageOutput;
 			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 			Instantiate(explotion);
@@ -42,15 +41,18 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			Debug.Log("We hit an ai");
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Instantiate(explotion);
 			explotion.transform.position = this.transform.position;
 			Destroy(this.gameObject);
 		}
-//		Instantiate(explotion);
-//		explotion.transform.position = this.transform.position;
-//		Destroy(this.gameObject);
+
+		if(other.tag == "shop" || other.tag == "Planet")
+		{
+			Instantiate(explotion);
+			explotion.transform.position = this.transform.position;
+			Destroy(this.gameObject);
+		}
 	}
 }

@@ -60,7 +60,7 @@ public class MapMarker : MonoBehaviour
         markerImage.rectTransform.localPosition = Vector3.zero;
         markerImage.rectTransform.localScale = Vector3.one;
 		if(this.tag == "aiShip")
-			markerImage.rectTransform.sizeDelta = new Vector2(zoomMinimap.enemyScale, zoomMinimap.enemyScale);
+			markerImage.rectTransform.sizeDelta = new Vector2(ZoomMinimap.enemyScale, ZoomMinimap.enemyScale);
 		else 
 			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
         markerImage.gameObject.SetActive(false);
@@ -81,8 +81,8 @@ public class MapMarker : MonoBehaviour
 			changeScale = false;
 			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
 		}
-		if(this.tag == "aiShip" && markerSize != zoomMinimap.enemyScale)
-			markerImage.rectTransform.sizeDelta = new Vector2(zoomMinimap.enemyScale, zoomMinimap.enemyScale);
+		if(this.tag == "aiShip" && markerSize != ZoomMinimap.enemyScale)
+			markerImage.rectTransform.sizeDelta = new Vector2(ZoomMinimap.enemyScale, ZoomMinimap.enemyScale);
 	}
 
     void OnDestroy()

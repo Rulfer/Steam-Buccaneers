@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class zoomMinimap : MonoBehaviour
+public class ZoomMinimap : MonoBehaviour
 {
 	public GameObject Map;
 	public static float enemyScale = 6.5f;
