@@ -218,7 +218,6 @@ public class AImove : MonoBehaviour {
 	//The AI decided to flee due to lack of heath 
 	public void flee()
 	{
-		Debug.Log("WE ARE RUNNING AWAY!");
 		relativePoint = Transformation(player);
 
 		if(relativePoint.x >-0.1 && relativePoint.x <0.1)
