@@ -83,7 +83,7 @@ public class AIMaster : MonoBehaviour
 		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
 		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
-			this.GetComponent<DamagedAI>().startSmoking();
+			this.GetComponent<DamagedAI>().startSmoke();
 		}
 		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 			killAI();
