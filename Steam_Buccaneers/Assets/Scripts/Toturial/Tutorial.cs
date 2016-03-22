@@ -22,6 +22,12 @@ public class Tutorial : MonoBehaviour
 	private Text questInfo;
 	//Character names
 	private string[] character = new string[3];
+	private Vector2 nameLeftPos;
+	private Vector2 nameRightPos;
+	private string textColorPlayer;
+	private string textColorShopkeeper;
+	private string textColorMarine;
+	private Color tempColor;
 	//getting ahold of button functions
 	private gameButtons buttonEvents;
 	//AIship used to battle
@@ -94,6 +100,13 @@ public class Tutorial : MonoBehaviour
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
+		nameLeftPos = new Vector3(145.0f, -25.0f);
+		nameRightPos = new Vector3 (575.0f, -25.0f);
+
+		textColorPlayer = "#173E3CFF";
+		textColorShopkeeper = "#631911FF";
+		textColorMarine = "#323A46FF";
+
 
 		//Pause at startup
 		buttonEvents.pause ();
@@ -163,7 +176,7 @@ public class Tutorial : MonoBehaviour
 			"going to give you an easy time.";//Shopkeeper
 		dialogTexts [8] = "But anyways, the controls are simple, just press “W” to move your ship forward, " +
 			"and “A” and “D” turns you around. Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
-		dialogTexts [9] = " Just try that for a bit now, you got time before " +
+		dialogTexts [9] = "Just try that for a bit now, you got time before " +
 			"them cops arrive here.";//Shopkeeper
 		dialogTexts[10] = "Wow, is that it, and I couldn’t figure this out on myself how? " +
 			"Would’ve been my first guess anyway.";//Player
@@ -206,7 +219,7 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [31] = "These " +
 		"are upgradeable parts. I can do upgrades for each of your side cannons, increase the damage your hull can take, or your back " +
 		"thruster output. ";
-		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon. Feel free to get so that you have 20 . " +
+		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon. Feel free to get so that you have 20. " +
 			"Confirm your purchase on the bottom of the screen.";//Shopkeeper
 		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!” " +
 		"and drag the slider for how much you want to repair.";//Shopkeeper
@@ -218,10 +231,8 @@ public class Tutorial : MonoBehaviour
 			"And remember; Keep alive and keep flying, a living customer is a paying customer. " +
 			"Come back anytime should you need something.";//Shopkeeper
 
-		//Added 5 dialogs
 	}
 
-	//Need to recieve a parameter to decide which dialog to run
 	public void dialog (int stage)
 	{
 		//Player dialog: 1, 4, 9, 13, 17, 22
@@ -230,16 +241,33 @@ public class Tutorial : MonoBehaviour
 		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25)
 		{
 			setDialog (character [1], dialogTexts [stage]);
+			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameLeftPos)
+			{
+				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameLeftPos;
+			}
+			ColorUtility.TryParseHtmlString (textColorPlayer, out tempColor);
 		} 
 		else if (stage == 23)
 		{
 			setDialog (character [2], dialogTexts [stage]);
+			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
+			{
+				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
+			}
+			ColorUtility.TryParseHtmlString (textColorMarine, out tempColor);
 		} 
 		else
 		{
 			setDialog (character [0], dialogTexts [stage]);
+			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
+			{
+				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
+			}
+			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
 		}
 
+		characterName.color = tempColor;
+		dialogTextBox.color = tempColor;
 
 		//Pause, activate guns and other stuff here
 		switch (stage) 
