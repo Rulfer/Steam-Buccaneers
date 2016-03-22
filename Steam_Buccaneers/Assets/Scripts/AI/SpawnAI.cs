@@ -92,7 +92,7 @@ public class SpawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		//There are no living ships, therefore we spawn a new one
-		if(stopSpawn == false)
+		if(stopSpawn == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			spawnShip ();
 		}

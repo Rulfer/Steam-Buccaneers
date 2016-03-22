@@ -173,17 +173,17 @@ public class AIMaster : MonoBehaviour
 				SpawnAI.spawn.marineShips[arrayIndex] = null;
 				SpawnAI.spawn.availableIndes[arrayIndex] = true;
 				SpawnAI.spawn.livingShips--;
-				SpawnAI.spawn.stopSpawn = false;
-				SpawnAI.spawn.stopFightTimer = false;
 			}
 			else
 				SpawnAI.spawn.livingCargo = false;
+			SpawnAI.spawn.stopSpawn = false;
+			SpawnAI.spawn.stopFightTimer = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
 		Destroy(this.gameObject);
 
-		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		if (GameObject.Find ("TutorialControl") != null)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}

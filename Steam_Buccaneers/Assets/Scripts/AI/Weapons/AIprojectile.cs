@@ -34,8 +34,7 @@ public class AIprojectile : MonoBehaviour {
 		{
 			GameControl.control.health -= damageOutput;
 			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
-			Instantiate(explotion);
-			explotion.transform.position = this.transform.position;
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			Destroy(this.gameObject);
 		}
 
@@ -43,15 +42,14 @@ public class AIprojectile : MonoBehaviour {
 		{
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-			Instantiate(explotion);
-			explotion.transform.position = this.transform.position;
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			Destroy(this.gameObject);
 		}
 
 		if(other.tag == "shop" || other.tag == "Planet")
 		{
-			Instantiate(explotion);
-			explotion.transform.position = this.transform.position;
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
+			//explotion.transform.position = this.transform.position;
 			Destroy(this.gameObject);
 		}
 	}
