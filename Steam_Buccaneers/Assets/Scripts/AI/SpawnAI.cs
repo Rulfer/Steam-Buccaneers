@@ -221,8 +221,8 @@ public class SpawnAI : MonoBehaviour
 			Quaternion playerRotation = playerPoint.transform.rotation;
 			float spawnDistance = 200;
 			Vector3 spawnPos = playerPosition + playerDirection * spawnDistance *-1;
-			Instantiate(Cargo);
-			Cargo.transform.position = spawnPos;
+			Instantiate(Cargo, spawnPos, playerPoint.transform.rotation);
+			//Cargo.transform.position = spawnPos;
 			Cargo.GetComponent<AIMaster>().isCargo = true;
 
 			float aiOriginDistance = Vector3.Distance (Cargo.transform.position, origin.transform.position); //Distance between player and Origin

@@ -148,6 +148,10 @@ public class AIMaster : MonoBehaviour
 						SpawnAI.spawn.availableIndes[i] = true;
 						SpawnAI.spawn.livingShips--;
 					}
+					if(GameObject.Find("Cargo(Clone)") == true && isBoss == true)
+					{
+						Destroy(GameObject.Find("Cargo(Clone)").gameObject);
+					}
 				}
 
 			}
