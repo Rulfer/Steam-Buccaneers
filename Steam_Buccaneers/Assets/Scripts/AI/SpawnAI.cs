@@ -208,6 +208,63 @@ public class SpawnAI : MonoBehaviour
 
 	}
 
+	private Vector3 marineSpawnpoint()
+	{
+		bool foundSpawn = false;
+		Vector3 testerSpawnPos = new Vector3(0, 0, 0);
+
+		while(foundSpawn == false)
+		{
+			//Create random numbers between 100 and 200
+			float tempPosX = Random.Range(100f, 250f); //Random x position
+			float tempPosZ = Random.Range(100f, 250f); //andom z position
+			float posX;
+			float posZ;
+			//Creates a random variable from 1 to 10 (the last number is not included, aka 11).
+			//Use this number to determine if the variable should be positive or negative, just
+			//to create som variation in the spawnpositions of the AI.
+			float ranRangeX = Random.Range(1, 11);
+			if(ranRangeX > 5)
+			{
+				posX = tempPosX;
+			}
+			else posX = -tempPosX;
+
+			//Does the same to the Z position of the AI as we did with the X position just above this.
+			float ranRangeZ = Random.Range(1, 11);
+			if(ranRangeZ > 5)
+			{
+				posZ = tempPosZ;
+			}
+			else posZ = -tempPosZ;
+
+			testerSpawnPos = new Vector3 (posX+playerPoint.transform.position.x, 2, posZ+playerPoint.transform.position.z);
+
+			Collider[] colliders = Physics.OverlapSphere(testerSpawnPos, 10);
+			if(colliders.Length == 0)
+				foundSpawn = true; //Sets the position of the Marine relative to the player position
+		}
+
+		return testerSpawnPos;
+	}
+
+	private Vector3 cargoSpawnpoint()
+	{
+		bool foundSpawn = false;
+
+		Vector3 playerPosition = playerPoint.transform.position;
+		Vector3 playerDirection = playerPoint.transform.forward;
+		Quaternion playerRotation = playerPoint.transform.rotation;
+		float spawnDistance = 200;
+		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance *-1;
+
+		Collider[] colliders = Physics.OverlapSphere(spawnPos, 10);
+		if(colliders.Length == 0)
+			return spawnPos;
+		else
+			return marineSpawnpoint();
+	}
+
 
 	void spawnCargo()
 	{
@@ -216,12 +273,8 @@ public class SpawnAI : MonoBehaviour
 			livingCargo = true;
 			setCannonLevel();
 			setPatrolPoint();
-			Vector3 playerPosition = playerPoint.transform.position;
-			Vector3 playerDirection = playerPoint.transform.forward;
-			Quaternion playerRotation = playerPoint.transform.rotation;
-			float spawnDistance = 200;
-			Vector3 spawnPos = playerPosition + playerDirection * spawnDistance *-1;
-			Instantiate(Cargo, spawnPos, playerPoint.transform.rotation);
+
+			Instantiate(Cargo, cargoSpawnpoint(), playerPoint.transform.rotation);
 			//Cargo.transform.position = spawnPos;
 			Cargo.GetComponent<AIMaster>().isCargo = true;
 
@@ -247,39 +300,16 @@ public class SpawnAI : MonoBehaviour
 			{
 				livingShips++;
 
-				//Create random numbers between 100 and 200
-				float tempPosX = Random.Range(100f, 250f); //Random x position
-				float tempPosZ = Random.Range(100f, 250f); //andom z position
-				float posX;
-				float posZ;
-				//Creates a random variable from 1 to 10 (the last number is not included, aka 11).
-				//Use this number to determine if the variable should be positive or negative, just
-				//to create som variation in the spawnpositions of the AI.
-				float ranRangeX = Random.Range(1, 11);
-				if(ranRangeX > 5)
-				{
-					posX = tempPosX;
-				}
-				else posX = -tempPosX;
 
-				//Does the same to the Z position of the AI as we did with the X position just above this.
-				float ranRangeZ = Random.Range(1, 11);
-				if(ranRangeZ > 5)
-				{
-					posZ = tempPosZ;
-				}
-				else posZ = -tempPosZ;
-
-				spawnPosition = new Vector3(posX+playerPoint.transform.position.x, 2, posZ+playerPoint.transform.position.z); //Sets the position of the AI relative to the player position
 
 				for(int i = 0; i < marineShips.Length; i++)
 				{
 					if(availableIndes[i] == true)
 					{		
 						GameObject temp = (Instantiate(Marine));
+						temp.transform.position = marineSpawnpoint();
 						marineShips[i] = temp;
 						availableIndes[i] = false;
-						marineShips[i].transform.position = spawnPosition;
 
 						float aiOriginDistance = Vector3.Distance (Marine.transform.position, origin.transform.position); //Distance between player and Origin
 						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
