@@ -33,6 +33,10 @@ public class AIsideCanons : MonoBehaviour {
 
 	private int detectDistance = 100;
 
+	public AudioClip[] cannonFireSounds;
+	public AudioSource[] sourceLeft;
+	public AudioSource[] sourceRight;
+
 	// Use this for initialization
 	void Start () {
 		canons = this;
@@ -59,10 +63,33 @@ public class AIsideCanons : MonoBehaviour {
 					}
 				}
 			}
-
-			for(int i = 0; i < 6; i++)
+			else if(this.transform.root.name == "Boss(Clone)")
 			{
-				SpawnAI.spawn.cannonUpgraded[i] = false;
+				for(int i = 0; i < 6; i++)
+				{
+					SpawnAI.spawn.cannonUpgraded[i] = false;
+				}
+			}
+			else
+			{
+				for(int i = 0; i < 2; i++)
+				{
+					if(SpawnAI.cannonLevel[i] == 1)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
+						cannonLevel[i] = 1;
+					}
+					else if(SpawnAI.cannonLevel[i] == 2)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
+						cannonLevel[i] = 2;
+					}
+					else if(SpawnAI.cannonLevel[i] == 3)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
+						cannonLevel[i] = 3;
+					}
+				}
 			}
 		}
 		else
@@ -93,13 +120,22 @@ public class AIsideCanons : MonoBehaviour {
 			if(this.transform.root.name == "Boss(Clone)")
 			{
 				for(int i = 0; i < 6; i++)
+				{
 					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					int tempSound = Random.Range(0, 3);
+					sourceLeft[i].clip = cannonFireSounds[tempSound];
+					sourceLeft[i].Play();
+				}
 			}
 
 			else
 			{
-				for(int i = 0; i < 3; i++)
+				for(int i = 0; i < leftCannons.Length; i++)
 				{
+					int tempSound = Random.Range(0, 3);
+					sourceLeft[i].clip = cannonFireSounds[tempSound];
+					sourceLeft[i].Play();
+
 					if(cannonLevel[i] == 1)
 					{
 						Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
@@ -122,13 +158,22 @@ public class AIsideCanons : MonoBehaviour {
 			if(this.transform.root.name == "Boss(Clone)")
 			{
 				for(int i = 0; i < 6; i++)
+				{
 					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+					int tempSound = Random.Range(0, 3);
+					sourceLeft[i].clip = cannonFireSounds[tempSound];
+					sourceLeft[i].Play();
+				}
 			}
 
 			else
 			{
-				for(int i = 0; i < 3; i++)
+				for(int i = 0; i < rightCannons.Length; i++)
 				{
+					int tempSound = Random.Range(0, 3);
+					sourceLeft[i].clip = cannonFireSounds[tempSound];
+					sourceLeft[i].Play();
+
 					if(cannonLevel[i+3] == 1)
 					{
 						Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);

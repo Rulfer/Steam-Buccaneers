@@ -3,7 +3,7 @@ using System.Collections;
 
 public class sideWeaponControl : MonoBehaviour 
 {
-	public AudioSource pangPang;
+	//public AudioSource pangPang;
 	public GameObject cannonball;
 	public GameObject[] leftCannons;
 	public GameObject[] rightCannons;
@@ -21,16 +21,21 @@ public class sideWeaponControl : MonoBehaviour
 	public GameObject cannonball2;
 	public GameObject cannonball3;
 
+	public AudioClip[] cannonFireSounds;
+	public AudioSource[] sourceLeft;
+	public AudioSource[] sourceRight;
+
+
 	// Use this for initialization
 	void Start () 
 	{
-		//AudioSource pangPang = GetComponent<AudioSource> ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		AudioSource pangPang = GetComponent<AudioSource> ();
+		//AudioSource pangPang = GetComponent<AudioSource> ();
 		if (Input.GetKey (KeyCode.Q) && Time.time > fireDelayLeft && GameControl.control.health > 0) // && Inventory.mainAmmo > 0
 		{
 			//Debug.Log ("pang");
@@ -47,6 +52,11 @@ public class sideWeaponControl : MonoBehaviour
 			{
 				// fungerer ikke dette fordi left cannons blir på en måte lik cannonball som man skyter, så her blir "leftCannons[i] = gameobject dvs cannonball, og derfor
 				// spawner alle nye kuler på de som allerede finnes?
+
+				int tempSound = Random.Range(0, 3);
+				sourceLeft[i].clip = cannonFireSounds[tempSound];
+				sourceLeft[i].Play();
+
 				if(GameControl.control.canonUpgrades[i] == 1)
 				{
 					Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
@@ -58,9 +68,14 @@ public class sideWeaponControl : MonoBehaviour
 				else if(GameControl.control.canonUpgrades[i] == 3)
 				{
 					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
-				}				//Debug.Log ("Left pew");
+				}
+
+
+				//Debug.Log ("Left pew");
 				//Debug.Log (i);
+
 			}
+
 			//må finne ut av, array er mye ryddigere.
 			/*leftCannons[0]=(GameObject)Instantiate (cannonball, leftCannons[0].transform.position, transform.rotation);
 			leftCannons[1]=(GameObject)Instantiate (cannonball, leftCannons[1].transform.position, transform.rotation);
@@ -79,7 +94,7 @@ public class sideWeaponControl : MonoBehaviour
 
 			//Inventory.mainAmmo -= 1;
 			//Debug.Log (PlayerStatus.mainAmmo);
-			pangPang.Play();
+			//pangPang.Play();
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}
@@ -92,7 +107,6 @@ public class sideWeaponControl : MonoBehaviour
 			/*rightCannons[0]=(GameObject)Instantiate (cannonball, rightCannons[0].transform.position, transform.rotation);
 			rightCannons[1]=(GameObject)Instantiate (cannonball, rightCannons[1].transform.position, transform.rotation);
 			rightCannons[2]=(GameObject)Instantiate (cannonball, rightCannons[2].transform.position, transform.rotation);*/
-
 			for (int i = 0; i <= 2; i++)
 			{
 				if(GameControl.control.canonUpgrades[i+3] == 1)
@@ -107,17 +121,21 @@ public class sideWeaponControl : MonoBehaviour
 				{
 					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
 				}				//Debug.Log ("right pew");
+
+				int tempSound = Random.Range(0, 3);
+				sourceRight[i].clip = cannonFireSounds[tempSound];
+				sourceRight[i].Play();
 			}
-			/*
+
+			/** 
 			Instantiate (cannonball, cannonR1.transform.position, transform.rotation);
 			Instantiate (cannonball, cannonR2.transform.position, transform.rotation);
 			Instantiate (cannonball, cannonR3.transform.position, transform.rotation);*/
 			//Inventory.mainAmmo -= 1;
-			pangPang.Play();
+					//pangPang.Play();
 			//Debug.Log (PlayerStatus.mainAmmo);
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
-		}
-	
+		}	
 	}
 }

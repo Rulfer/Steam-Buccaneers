@@ -4,18 +4,20 @@ using System.Collections.Generic;
 
 public class SpawnAI : MonoBehaviour
 {
+	int maxMarines = 3;
+
 	public static SpawnAI spawn;
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
-	public GameObject[] marineShips = new GameObject[10]; //Array holding all living Marines
+	public GameObject[] marineShips = new GameObject[3]; //Array holding all living Marines
 	public GameObject Marine; //The Marine prefab
 	public GameObject Boss; //The Boss prefab
 	public GameObject Cargo;
 
 	public static int[] cannonLevel = new int[6];
 	public bool[] cannonUpgraded = new bool[6];
-	public bool[] availableIndes = new bool[10]; //Bool used to check the availability in the marineShips array
+	public bool[] availableIndes = new bool[3]; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
@@ -296,7 +298,7 @@ public class SpawnAI : MonoBehaviour
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
 		if(relativeBossPoint > 100) //We are too far away from the boss, so we spawn a regular AI.
 		{
-			if(livingShips < 10)
+			if(livingShips < maxMarines)
 			{
 				livingShips++;
 
