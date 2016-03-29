@@ -58,7 +58,7 @@ public class GameControl : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		Debug.Log ("Level loaded");
-		if (level == 0) 
+		if (level == 1) 
 		{
 			Save (storeName);
 		}
@@ -100,7 +100,8 @@ public class GameControl : MonoBehaviour {
 		if (storeName != "null") 
 		{
 			GameObject goP = GameObject.Find (storeName);
-			GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
+			Debug.Log ("Saving store: " + goP);
+			//GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
 		} 
 		else 
 		{

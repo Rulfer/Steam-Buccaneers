@@ -42,6 +42,12 @@ public class Tutorial : MonoBehaviour
 	//Array that holds all scrap
 	public GameObject[] scrapHolder;
 	private int scrapCount;
+	//Array that checks if controllbuttons are pressed
+	public bool[] wadCheck = new bool[3];
+	//Array that checks if fire-buttons are pressed
+	public bool[] qeCheck = new bool[2];
+	//Array taht checks if mouse1 is clicked
+	public bool mouse1Check;
 
 	//Everything with blinkingbuttons v
 	//Array that holds shopbuttons that shall blink
@@ -107,6 +113,12 @@ public class Tutorial : MonoBehaviour
 		textColorShopkeeper = "#631911FF";
 		textColorMarine = "#323A46FF";
 
+		wadCheck [0] = false;
+		wadCheck [1] = false;
+		wadCheck [2] = false;
+
+		qeCheck [0] = false;
+		qeCheck [1] = false;
 
 		//Pause at startup
 		buttonEvents.pause ();
@@ -182,7 +194,8 @@ public class Tutorial : MonoBehaviour
 			"Would’ve been my first guess anyway.";//Player
 		dialogTexts [11] = "Easy peasy. Now, you see you have some guns on either side of your ship there? " +
 			"You’ll fire the left side by pressing “Q” and the right side by pressing “E”. ";//Shopkeeper
-		dialogTexts[12] = "You’ve got infinite ammo for these, thanks to one of them fancy machines on board.";//Shopkeeper
+		dialogTexts[12] = "Both yourself and bullets can be affected by gravity. So your bullets might not go where you want them to go, if you are to close to a planet." +
+			" You’ve got infinite ammo for these, thanks to one of them fancy machines on board.";//Shopkeeper
 		dialogTexts[13] = "Just fire a couple of volleys from either side, you got enough ammo for " +
 			"them to last a lifetime, so don’t worry about wasting them.";//Shopkeeper
 		dialogTexts[14] = "Just remember now - those cannons hanging on the side of the ship, " +
@@ -240,32 +253,41 @@ public class Tutorial : MonoBehaviour
 		//Dialog runs here
 		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25)
 		{
+			//Sets dialog and character
 			setDialog (character [1], dialogTexts [stage]);
+			//Moves name closer to portrait
 			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameLeftPos)
 			{
 				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameLeftPos;
 			}
+			//Changes color on text which is closer to character
 			ColorUtility.TryParseHtmlString (textColorPlayer, out tempColor);
 		} 
 		else if (stage == 23)
 		{
+			//Sets dialog and character
 			setDialog (character [2], dialogTexts [stage]);
+			//Moves name closer to portrait
 			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
 			{
 				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
 			}
+			//Changes color on text which is closer to character
 			ColorUtility.TryParseHtmlString (textColorMarine, out tempColor);
 		} 
 		else
 		{
+			//Sets dialog and character
 			setDialog (character [0], dialogTexts [stage]);
+			//Moves name closer to portrait
 			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
 			{
 				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
 			}
+			//Changes color on text which is closer to character
 			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
 		}
-
+			
 		characterName.color = tempColor;
 		dialogTextBox.color = tempColor;
 
@@ -276,6 +298,7 @@ public class Tutorial : MonoBehaviour
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
 			questInfo.text = "Move using W A D.";
+			nextButton.SetActive (false);
 			break;
 		case(10):
 			buttonEvents.pause ();
@@ -285,6 +308,7 @@ public class Tutorial : MonoBehaviour
 		case(13):
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
+			nextButton.SetActive (false);
 			shootingAllowed (true, "GameObject");
 			questInfo.text = "Fire sidcanons using Q and E.";
 			break;
@@ -445,6 +469,25 @@ public class Tutorial : MonoBehaviour
 		foreach (GameObject i in shopButtons)
 		{
 			i.GetComponent<Button> ().enabled = possibleInteraction;
+		}
+	}
+
+	public void checkArray(bool[] array)
+	{
+
+		int k = 0;
+
+		for (int i = 0; i < array.Length; i++)
+		{
+			if (array[i] == true)
+			{
+				k++;
+			}
+		}
+
+		if (k == array.Length)
+		{
+			nextButton.SetActive (true);
 		}
 	}
 			
