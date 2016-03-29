@@ -4,20 +4,24 @@ using System.Collections.Generic;
 
 public class SpawnAI : MonoBehaviour
 {
-	int maxMarines = 5;
+	/**
+	 *The max number of living marines at any given time.
+	 *Adjust this number to change how many marines that can be alive/in scene at the same time. 
+	 */
+	public int maxMarines = 5;
 
 	public static SpawnAI spawn;
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
-	public GameObject[] marineShips = new GameObject[5]; //Array holding all living Marines
+	public GameObject[] marineShips; //Array holding all living Marines
 	public GameObject Marine; //The Marine prefab
 	public GameObject Boss; //The Boss prefab
-	public GameObject Cargo;
+	public GameObject Cargo; //The Cargo prefab
 
 	public static int[] cannonLevel = new int[6];
 	public bool[] cannonUpgraded = new bool[6];
-	public bool[] availableIndes = new bool[5]; //Bool used to check the availability in the marineShips array
+	public bool[] availableIndes; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
@@ -32,6 +36,10 @@ public class SpawnAI : MonoBehaviour
 	void Start ()
 	{
 		spawn = this;
+
+		marineShips = new GameObject[maxMarines];
+		availableIndes = new bool[maxMarines];
+
 		for(int i = 0; i < marineShips.Length; i++)
 		{
 			marineShips[i] = null;
@@ -72,7 +80,7 @@ public class SpawnAI : MonoBehaviour
 			if(tempI != 100)
 			{
 				marineShips[tempI].GetComponent<AIMaster>().deaktivatePatroling();
-				marineShips[tempI].GetComponent<AIMaster>().killMarines();
+				marineShips[tempI].GetComponent<AIMaster>().allAIFlee();
 			}
 		}
 	}
