@@ -7,14 +7,6 @@ public class ZoomMinimap : MonoBehaviour
 	public static float enemyScale = 6.5f;
 	private MapMarker[] mapScript;
 	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	public void zoomOut()
 	{

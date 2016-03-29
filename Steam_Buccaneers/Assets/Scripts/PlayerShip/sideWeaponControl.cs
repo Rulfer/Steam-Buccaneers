@@ -22,8 +22,8 @@ public class sideWeaponControl : MonoBehaviour
 	public GameObject cannonball3;
 
 	public AudioClip[] cannonFireSounds;
-	public AudioSource[] sourceLeft;
-	public AudioSource[] sourceRight;
+	public AudioSource sourceLeft;
+	public AudioSource sourceRight;
 
 
 	// Use this for initialization
@@ -47,15 +47,16 @@ public class sideWeaponControl : MonoBehaviour
 			 * Hvis jeg noengang får denne arrayen her til å fungere, som jeg veldig gjerne vil, så kan alle kanonene være prefabs i steden for hver sitt objekt, da
 			 * er det bare å ha forskjellige scripts til hver kanon, legge disse på prefabsa, og så pushe de inn i arrayen på riktig plass.
 			 */
+			int tempSound = Random.Range(0, 3);
+			sourceLeft.clip = cannonFireSounds[tempSound];
+			sourceLeft.Play();
 
 			for (int i = 0; i <= 2; i++)
 			{
 				// fungerer ikke dette fordi left cannons blir på en måte lik cannonball som man skyter, så her blir "leftCannons[i] = gameobject dvs cannonball, og derfor
 				// spawner alle nye kuler på de som allerede finnes?
 
-				int tempSound = Random.Range(0, 3);
-				sourceLeft[i].clip = cannonFireSounds[tempSound];
-				sourceLeft[i].Play();
+			
 
 				if(GameControl.control.canonUpgrades[i] == 1)
 				{
@@ -107,6 +108,11 @@ public class sideWeaponControl : MonoBehaviour
 			/*rightCannons[0]=(GameObject)Instantiate (cannonball, rightCannons[0].transform.position, transform.rotation);
 			rightCannons[1]=(GameObject)Instantiate (cannonball, rightCannons[1].transform.position, transform.rotation);
 			rightCannons[2]=(GameObject)Instantiate (cannonball, rightCannons[2].transform.position, transform.rotation);*/
+
+			int tempSound = Random.Range(0, 3);
+			sourceRight.clip = cannonFireSounds[tempSound];
+			sourceRight.Play();
+
 			for (int i = 0; i <= 2; i++)
 			{
 				if(GameControl.control.canonUpgrades[i+3] == 1)
@@ -122,9 +128,7 @@ public class sideWeaponControl : MonoBehaviour
 					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
 				}				//Debug.Log ("right pew");
 
-				int tempSound = Random.Range(0, 3);
-				sourceRight[i].clip = cannonFireSounds[tempSound];
-				sourceRight[i].Play();
+
 			}
 
 			/** 

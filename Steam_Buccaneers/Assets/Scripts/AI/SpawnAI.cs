@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 public class SpawnAI : MonoBehaviour
 {
-	int maxMarines = 3;
+	int maxMarines = 5;
 
 	public static SpawnAI spawn;
 	public GameObject playerPoint; //Player position
 	public GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
-	public GameObject[] marineShips = new GameObject[3]; //Array holding all living Marines
+	public GameObject[] marineShips = new GameObject[5]; //Array holding all living Marines
 	public GameObject Marine; //The Marine prefab
 	public GameObject Boss; //The Boss prefab
 	public GameObject Cargo;
 
 	public static int[] cannonLevel = new int[6];
 	public bool[] cannonUpgraded = new bool[6];
-	public bool[] availableIndes = new bool[3]; //Bool used to check the availability in the marineShips array
+	public bool[] availableIndes = new bool[5]; //Bool used to check the availability in the marineShips array
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
@@ -40,7 +40,6 @@ public class SpawnAI : MonoBehaviour
 		playerPoint = GameObject.FindGameObjectWithTag("Player");
 		origin = GameObject.Find("GameOrigin");
 		bossSpawn = GameObject.Find("BossSpawn");
-		//spawnShip ();
 		waitBeforeNewSpawn();
 		waitBeforeCargoSpawn();
 	}
