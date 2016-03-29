@@ -54,7 +54,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 	void kill()
 	{
 		Destroy(this.gameObject); //Destroy this object
-		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		if (GameObject.Find("TutorialControl") != null)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
 		}

@@ -9,11 +9,17 @@ public class AIprojectile : MonoBehaviour {
 	public Rigidbody test;
 	public GameObject explotion;
 
+	public AudioClip[] hitSounds;
+	private AudioSource source;
+
 	CameraShakeInstance shake;
+
+	private bool musicPlayer = false;
 
 	// Use this for initialization
 	void Start () 
 	{
+		source = this.GetComponent<AudioSource>();
 		test.AddForce (this.transform.right * projectileSpeed);
 	}
 	
@@ -32,19 +38,49 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.tag == "Player") 
 		{
-			Debug.Log("We hit the player");
+			int tempSound = Random.Range(0, 3);
+			source.clip = hitSounds[tempSound];
+			source.Play();
+
 			GameControl.control.health -= damageOutput;
 			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
+			this.GetComponent<MeshFilter>().mesh = null;
+			musicPlayer = true;
+			Destroy(this.gameObject, source.clip.length);
 		}
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			Debug.Log("We hit an ai");
+			int tempSound = Random.Range(0, 3);
+			source.clip = hitSounds[tempSound];
+			source.Play();
+
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
+			this.GetComponent<MeshFilter>().mesh = null;
+			musicPlayer = true;
+			Destroy(this.gameObject, source.clip.length);
 		}
-		Instantiate(explotion);
-		explotion.transform.position = this.transform.position;
+
+		if(other.tag == "shop" || other.tag == "Planet")
+		{
+			int tempSound = Random.Range(0, 3);
+			source.clip = hitSounds[tempSound];
+			source.Play();
+
+			Instantiate(explotion, this.transform.position, this.transform.rotation);
+			this.GetComponent<MeshFilter>().mesh = null;
+			musicPlayer = true;
+			Destroy(this.gameObject, source.clip.length);
+		}
+	}
+
+	void killProjectile()
+	{
 		Destroy(this.gameObject);
 	}
 }
