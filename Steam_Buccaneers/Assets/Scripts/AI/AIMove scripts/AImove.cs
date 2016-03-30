@@ -34,7 +34,7 @@ public class AImove : MonoBehaviour {
 
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+		player = GameObject.Find("PlayerShip");
 		aiRigid = this.GetComponent<Rigidbody>();
 	}
 		
@@ -151,7 +151,7 @@ public class AImove : MonoBehaviour {
 		//smoother turning, compared to the previous stuttering one.
 		if(relativePoint.x <= 0) //Player to the left
 		{
-			if(AIsideCanons.fireLeft == false) //The AI cant shoot at the player
+			if(AIsideCanons.canons.fireLeft == false) //The AI cant shoot at the player
 			{
 				if(relativePoint.z >= 0) //Player to the front-left
 				{
@@ -168,7 +168,7 @@ public class AImove : MonoBehaviour {
 
 		else if(relativePoint.x >= 0) //Player to the right
 		{
-			if(AIsideCanons.fireRight == false) //The AI cant shoot at the player
+			if(AIsideCanons.canons.fireRight == false) //The AI cant shoot at the player
 			{
 				if(relativePoint.z >= 0) //Player to the front-right
 				{
@@ -218,7 +218,6 @@ public class AImove : MonoBehaviour {
 	//The AI decided to flee due to lack of heath 
 	public void flee()
 	{
-		Debug.Log("WE ARE RUNNING AWAY!");
 		relativePoint = Transformation(player);
 
 		if(relativePoint.x >-0.1 && relativePoint.x <0.1)

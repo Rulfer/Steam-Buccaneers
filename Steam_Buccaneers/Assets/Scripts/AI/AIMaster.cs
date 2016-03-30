@@ -17,7 +17,7 @@ public class AIMaster : MonoBehaviour
 
 	public static float detectDistance;
 
-	private bool testedFleeing = false;
+	public bool testedFleeing = false;
 	public bool detectedPlayer = false;
 	public bool isBoss = false;
 	public bool isCargo = false;
@@ -27,15 +27,15 @@ public class AIMaster : MonoBehaviour
 	private int ranNum;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
-
-		//SpawnAI.spawn = GameObject.Find("SpawnAI.spawnsAI").GetComponent<SpawnAI.SpawnAI>();
 	}
 	
-	void Update () {
+	void Update () 
+	{
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
 		if(detectDistance < 60)
@@ -44,19 +44,20 @@ public class AIMaster : MonoBehaviour
 				this.GetComponent<AImove>().force = 650f;
 		}
 
-		if(isBoss == false && isCargo == false)
+		if(isBoss == false)
 		{
 			if(detectDistance < 150)
 			{
 				if(detectedPlayer == false)
 				{
 					deaktivatePatroling();
-					killMarines();
+					allAIFlee();
+					//killMarines();
 				}
 			}
 		}
 
-		else
+		else 
 			deaktivatePatroling();
 
 		if(testedFleeing == false)
@@ -75,14 +76,17 @@ public class AIMaster : MonoBehaviour
 		}
 
 		if(aiHealth <= aiHealthMat3) //Change the material to mat3 if the health is low enough
+		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
+			this.GetComponent<DamagedAI>().startFire();
+		}
 
 		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
 		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
-			this.GetComponent<AImove>().isFleeing = false;
+			this.GetComponent<DamagedAI>().startSmoke();
 		}
-		if(detectDistance > 300)//If the distance is greater than this number, delete this AI
+		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 			killAI();
 		
 		if(aiHealth <= 0) //If the health if this AI is 0, delete this AI
@@ -114,42 +118,127 @@ public class AIMaster : MonoBehaviour
 		}
 	}
 
-	public void killMarines()
+	public void allAIFlee()
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			SpawnAI.spawn.stopSpawn = true;
-			for(int i = 0; i < SpawnAI.spawn.marineShips.Length; i++)
+			if(isBoss == false && isCargo == false)
 			{
-				if(isBoss == false && isCargo == false)
+				int i = 0;
+				while(i < SpawnAI.spawn.maxMarines)
 				{
 					if(i != arrayIndex)
 					{
 						if(SpawnAI.spawn.marineShips[i] != null)
 						{
-							Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
-							Destroy(SpawnAI.spawn.marineShips[i]);
-							SpawnAI.spawn.marineShips[i] = null;
-							SpawnAI.spawn.availableIndes[i] = true;
-							SpawnAI.spawn.livingShips--;
+							SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
+							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
+							SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
+							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
+							Debug.Log("We are doing this!" + i);
 						}
+						Debug.Log("i" + i);
+					}
+					i++;
+				}
+				if(GameObject.Find("Cargo(Clone)") == true)
+				{
+					GameObject temp = GameObject.Find("Cargo(Clone)").gameObject;
+					temp.GetComponent<AIPatroling>().enabled = false;
+					temp.GetComponent<AImove>().isPatroling = false;
+					temp.GetComponent<AIMaster>().testedFleeing = true;
+					temp.GetComponent<AImove>().flee();
+				}
+			}
+
+			else if(isCargo == true)
+			{
+				if(testedFleeing == false)
+				{
+					int i = 0;
+
+					while(i < SpawnAI.spawn.maxMarines)
+					{
+						if(SpawnAI.spawn.marineShips[i] != null)
+						{
+							SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
+							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
+							SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
+							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
+						}
+						i++;
 					}
 				}
-				else
+			}
+
+			else if(isBoss == true)
+			{
+				int i = 0;
+				while(i < SpawnAI.spawn.maxMarines)
 				{
 					if(SpawnAI.spawn.marineShips[i] != null)
 					{
-						Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
-						Destroy(SpawnAI.spawn.marineShips[i]);
-						SpawnAI.spawn.marineShips[i] = null;
-						SpawnAI.spawn.availableIndes[i] = true;
-						SpawnAI.spawn.livingShips--;
+						SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
+						SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
+						SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
+						SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
 					}
+					i++;
 				}
-
+				if(GameObject.Find("Cargo(Clone)") == true)
+				{
+					GameObject temp = GameObject.Find("Cargo(Clone)").gameObject;
+					temp.GetComponent<AIPatroling>().enabled = false;
+					temp.GetComponent<AImove>().isPatroling = false;
+					temp.GetComponent<AIMaster>().testedFleeing = true;
+					temp.GetComponent<AImove>().flee();
+				}
 			}
 		}
 	}
+
+//	public void killMarines()
+//	{
+//		if(SceneManager.GetActiveScene().name != "Tutorial")
+//		{
+//			SpawnAI.spawn.stopSpawn = true;
+//			for(int i = 0; i < SpawnAI.spawn.marineShips.Length; i++)
+//			{
+//				if(isBoss == false && isCargo == false)
+//				{
+//					if(i != arrayIndex)
+//					{
+//						if(SpawnAI.spawn.marineShips[i] != null)
+//						{
+//							Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+//							Destroy(SpawnAI.spawn.marineShips[i]);
+//							SpawnAI.spawn.marineShips[i] = null;
+//							SpawnAI.spawn.availableIndes[i] = true;
+//							SpawnAI.spawn.livingShips--;
+//						}
+//					}
+//				}
+//				else
+//				{
+//					if(SpawnAI.spawn.marineShips[i] != null)
+//					{
+//						Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
+//						Destroy(SpawnAI.spawn.marineShips[i]);
+//						SpawnAI.spawn.marineShips[i] = null;
+//						SpawnAI.spawn.availableIndes[i] = true;
+//						SpawnAI.spawn.livingShips--;
+//					}
+//					if(GameObject.Find("Cargo(Clone)") == true && isBoss == true)
+//					{
+//						Destroy(GameObject.Find("Cargo(Clone)").gameObject);
+//					}
+//				}
+//
+//			}
+//		}
+//	}
+
 
 	private void killAI()
 	{
@@ -170,17 +259,17 @@ public class AIMaster : MonoBehaviour
 				SpawnAI.spawn.marineShips[arrayIndex] = null;
 				SpawnAI.spawn.availableIndes[arrayIndex] = true;
 				SpawnAI.spawn.livingShips--;
-				SpawnAI.spawn.stopSpawn = false;
-				SpawnAI.spawn.stopFightTimer = false;
 			}
 			else
 				SpawnAI.spawn.livingCargo = false;
+			SpawnAI.spawn.stopSpawn = false;
+			SpawnAI.spawn.stopFightTimer = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
 		Destroy(this.gameObject);
 
-		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		if (GameObject.Find ("TutorialControl") != null)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
