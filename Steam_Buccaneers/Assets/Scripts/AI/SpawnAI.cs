@@ -11,8 +11,8 @@ public class SpawnAI : MonoBehaviour
 	public int maxMarines = 5;
 
 	public static SpawnAI spawn;
-	public GameObject playerPoint; //Player position
-	public GameObject origin; //Position of players original startoint in the game
+	private GameObject playerPoint; //Player position
+	private GameObject origin; //Position of players original startoint in the game
 	private GameObject bossSpawn; //Spawnpoint of the boss
 	public GameObject[] marineShips; //Array holding all living Marines
 	public GameObject Marine; //The Marine prefab

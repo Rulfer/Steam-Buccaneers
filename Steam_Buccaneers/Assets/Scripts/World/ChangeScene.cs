@@ -59,7 +59,7 @@ public class ChangeScene : MonoBehaviour
 			part3Loaded = true;
 		}
 
-		Debug.Log(SceneManager.sceneCount);
+		//Debug.Log(SceneManager.sceneCount);
 
 	}
 

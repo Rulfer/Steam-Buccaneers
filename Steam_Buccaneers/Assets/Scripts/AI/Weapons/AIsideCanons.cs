@@ -34,8 +34,8 @@ public class AIsideCanons : MonoBehaviour {
 	private int detectDistance = 100;
 
 	public AudioClip[] cannonFireSounds;
-	public AudioSource[] sourceLeft;
-	public AudioSource[] sourceRight;
+	public AudioSource sourceLeft;
+	public AudioSource sourceRight;
 
 	// Use this for initialization
 	void Start () {
@@ -113,18 +113,18 @@ public class AIsideCanons : MonoBehaviour {
 
 		checkGunPosition();
 
-
 		if (fireLeft == true && Time.time > fireDelayLeft) { // && Inventory.mainAmmo > 0
 			fireDelayLeft = Time.time + fireRate;
+
+			int tempSound = Random.Range(0, 3);
+			sourceLeft.clip = cannonFireSounds[tempSound];
+			sourceLeft.Play();
 
 			if(this.transform.root.name == "Boss(Clone)")
 			{
 				for(int i = 0; i < 6; i++)
 				{
 					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
-					int tempSound = Random.Range(0, 3);
-					sourceLeft[i].clip = cannonFireSounds[tempSound];
-					sourceLeft[i].Play();
 				}
 			}
 
@@ -132,10 +132,6 @@ public class AIsideCanons : MonoBehaviour {
 			{
 				for(int i = 0; i < leftCannons.Length; i++)
 				{
-					int tempSound = Random.Range(0, 3);
-					sourceLeft[i].clip = cannonFireSounds[tempSound];
-					sourceLeft[i].Play();
-
 					if(cannonLevel[i] == 1)
 					{
 						Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
@@ -155,14 +151,15 @@ public class AIsideCanons : MonoBehaviour {
 		if (fireRight == true && Time.time > fireDelayRight) {				
 			fireDelayRight = Time.time + fireRate;
 
+			int tempSound = Random.Range(0, 3);
+			sourceRight.clip = cannonFireSounds[tempSound];
+			sourceRight.Play();
+
 			if(this.transform.root.name == "Boss(Clone)")
 			{
 				for(int i = 0; i < 6; i++)
 				{
 					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
-					int tempSound = Random.Range(0, 3);
-					sourceLeft[i].clip = cannonFireSounds[tempSound];
-					sourceLeft[i].Play();
 				}
 			}
 
@@ -170,10 +167,6 @@ public class AIsideCanons : MonoBehaviour {
 			{
 				for(int i = 0; i < rightCannons.Length; i++)
 				{
-					int tempSound = Random.Range(0, 3);
-					sourceLeft[i].clip = cannonFireSounds[tempSound];
-					sourceLeft[i].Play();
-
 					if(cannonLevel[i+3] == 1)
 					{
 						Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);
