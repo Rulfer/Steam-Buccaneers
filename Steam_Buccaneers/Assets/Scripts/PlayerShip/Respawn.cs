@@ -15,7 +15,6 @@ public class Respawn : MonoBehaviour
 
 	void Start () 
 	{
-		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		player = GameObject.Find("PlayerShip");
 		deathScreen.SetActive (showDeathScreen);
 	}
@@ -23,6 +22,7 @@ public class Respawn : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		//Debug.Log (GameControl.control.health);
 		//GameControl.control.health --;
 		if (GameControl.control.health <= 0)
