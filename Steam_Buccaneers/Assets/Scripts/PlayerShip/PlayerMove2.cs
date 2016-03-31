@@ -23,11 +23,20 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool hitBomb = false;
 	private float bombTimer = 0;
 
+	private GameObject TutorialControl;
+
 	// Use this for initialization
 	void Start () 
 	{
 		move = this;
 		donger = GetComponent<Rigidbody>();
+		if (GameObject.Find ("TutorialControl") != null)
+		{
+			TutorialControl = GameObject.Find ("TutorialControl");
+		} else
+		{
+			Destroy (TutorialControl);
+		}
 	}
 
 	// Update is called once per frame
@@ -50,47 +59,75 @@ public class PlayerMove2 : MonoBehaviour
 			}
 		}
 		//if (steerShip == true) {
-			if (hitBomb == false && GameControl.control.health > 0) {
-				if (Input.GetKey (KeyCode.W)) {
+			if (hitBomb == false && GameControl.control.health > 0) 
+			{
+				if (Input.GetKey (KeyCode.W)) 
+				{
+					if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [0] == false)
+						{
+							TutorialControl.GetComponent<Tutorial> ().wadCheck [0] = true;
+							TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
+						}
+
 					goingForward = true;
 					donger.AddForce (transform.forward * force * Time.deltaTime);
 					// Series of if tests
-					if (donger.velocity.x >= maxVelocity.x) { //|| -donger.velocity.x >= -maxVelocity.x)
+					if (donger.velocity.x >= maxVelocity.x) 
+					{ //|| -donger.velocity.x >= -maxVelocity.x)
 						// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
 						// in the z-axis, although it does in fact accelerate.
 						donger.velocity = new Vector3 (maxVelocity.x, 0.0f, donger.velocity.z);
 					}
 
-					if (donger.velocity.x <= -maxVelocity.x) {
+					if (donger.velocity.x <= -maxVelocity.x) 
+					{
 						donger.velocity = new Vector3 (-maxVelocity.x, 0.0f, donger.velocity.z);
 					}
 
-					if (donger.velocity.z >= maxVelocity.z) {
+					if (donger.velocity.z >= maxVelocity.z) 
+					{
 						donger.velocity = new Vector3 (donger.velocity.x, 0.0f, maxVelocity.z);
 					}
 
 					if (donger.velocity.z <= -maxVelocity.z) {
 						donger.velocity = new Vector3 (donger.velocity.x, 0.0f, -maxVelocity.z);
 					}
-				} else {
+				} 
+			else 
+			{
 					//donger.velocity = donger.velocity * 0.90f;
 					//goingForward = false;
 				}
 
 
-				if (Input.GetKey (KeyCode.A)) {
+			if (Input.GetKey (KeyCode.A)) 
+				{
+					if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [1] != true)
+					{
+						TutorialControl.GetComponent<Tutorial> ().wadCheck [1] = true;
+					TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
+					}
 					transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
 					turnLeft = true;
-				} else {
-					turnLeft = false;
-				}
+				} 
+			else 
+			{
+				turnLeft = false;
+			}
 
-				if (Input.GetKey (KeyCode.D)) {
+				if (Input.GetKey (KeyCode.D)) 
+				{
+				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [2] != true)
+				{
+					TutorialControl.GetComponent<Tutorial> ().wadCheck [2] = true;
+					TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
+				}
 					transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
 					turnRight = true;
 				}
 			// ALT DETTE ER NYTT
-			else {
+			else 
+				{
 					turnRight = false;
 				}
 					
