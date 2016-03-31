@@ -104,7 +104,7 @@ public class shopButtons : MonoBehaviour {
 		} 
 		else
 		{
-			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
+			if (GameControl.control.health <= (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
 			{
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
