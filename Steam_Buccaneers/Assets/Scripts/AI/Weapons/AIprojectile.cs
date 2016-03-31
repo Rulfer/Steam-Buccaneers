@@ -3,6 +3,8 @@ using System.Collections;
 using EZCameraShake;
 
 public class AIprojectile : MonoBehaviour {
+	private CheatCodesScript cheats;
+
 	private float projectileSpeed = 175;
 	public int damageOutput;
 	private float distance;
@@ -38,17 +40,20 @@ public class AIprojectile : MonoBehaviour {
 	{
 		if (other.tag == "Player") 
 		{
-			int tempSound = Random.Range(0, 3);
-			source.clip = hitSounds[tempSound];
-			source.Play();
+			if(CheatCodesScript.godMode == false)
+			{
+				int tempSound = Random.Range(0, 3);
+				source.clip = hitSounds[tempSound];
+				source.Play();
 
-			GameControl.control.health -= damageOutput;
-			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+				GameControl.control.health -= damageOutput;
+				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 
-			Instantiate(explotion, this.transform.position, this.transform.rotation);
-			this.GetComponent<MeshFilter>().mesh = null;
-			musicPlayer = true;
-			Destroy(this.gameObject, source.clip.length);
+				Instantiate(explotion, this.transform.position, this.transform.rotation);
+				this.GetComponent<MeshFilter>().mesh = null;
+				musicPlayer = true;
+				Destroy(this.gameObject, source.clip.length);
+			}
 		}
 
 		if(other.tag == "aiShip") //The AI hit itself
