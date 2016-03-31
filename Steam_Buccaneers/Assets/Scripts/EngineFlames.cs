@@ -61,7 +61,7 @@ public class EngineFlames : MonoBehaviour {
 		lowerZ = maxZ * 0.9f;
 		if(lowerZ < 0)
 			lowerZ = 0;
-		Debug.Log("lowerZ: " + lowerZ);
+//		Debug.Log("lowerZ: " + lowerZ);
 	}
 
 	private void setNewUpperScale()
@@ -79,7 +79,7 @@ public class EngineFlames : MonoBehaviour {
 		maxZ = speed * 0.2f * Time.deltaTime;
 		if(maxZ < 0)
 			maxZ = 0;
-		Debug.Log("maxZ: " + maxZ);
+		//Debug.Log("maxZ: " + maxZ);
 
 	}
 }
