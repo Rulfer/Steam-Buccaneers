@@ -21,6 +21,8 @@ public class MapMarker : MonoBehaviour
      */
     public bool isActive = true;
 
+	public bool changeScale = false;
+
     public Image MarkerImage
     {
         get
@@ -57,7 +59,10 @@ public class MapMarker : MonoBehaviour
         markerImage.sprite = markerSprite;
         markerImage.rectTransform.localPosition = Vector3.zero;
         markerImage.rectTransform.localScale = Vector3.one;
-        markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
+		if(this.tag == "aiShip")
+			markerImage.rectTransform.sizeDelta = new Vector2(ZoomMinimap.enemyScale, ZoomMinimap.enemyScale);
+		else 
+			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
         markerImage.gameObject.SetActive(false);
 	}
 
@@ -70,6 +75,14 @@ public class MapMarker : MonoBehaviour
         }
         MapCanvasController.Instance.checkIn(this);
         markerImage.rectTransform.rotation = Quaternion.identity;
+
+		if(changeScale == true)
+		{
+			changeScale = false;
+			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
+		}
+		if(this.tag == "aiShip" && markerSize != ZoomMinimap.enemyScale)
+			markerImage.rectTransform.sizeDelta = new Vector2(ZoomMinimap.enemyScale, ZoomMinimap.enemyScale);
 	}
 
     void OnDestroy()

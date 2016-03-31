@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIspecialWeapon : MonoBehaviour {
+public class AISpecialWeapon : MonoBehaviour {
 
 	public GameObject bomb;
 
