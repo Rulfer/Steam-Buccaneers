@@ -106,8 +106,8 @@ public class Tutorial : MonoBehaviour
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
-		nameLeftPos = new Vector3(145.0f, -25.0f);
-		nameRightPos = new Vector3 (575.0f, -25.0f);
+		nameLeftPos = new Vector3(115.0f, -25.0f);
+		nameRightPos = new Vector3 (525.0f, -25.0f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorShopkeeper = "#631911FF";
