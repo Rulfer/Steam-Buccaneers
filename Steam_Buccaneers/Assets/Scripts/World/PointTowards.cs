@@ -15,27 +15,30 @@ public class PointTowards : MonoBehaviour
 	{
 		if (goTarget == null)
 		{
-			Debug.Log ("DialogNummer = " + GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber);
-			if (GameObject.Find("TutorialControl").GetComponent<Tutorial>().dialogNumber == 23)
+			if(GameObject.Find("TutorialControl") != null)
 			{
-				int i = 0;
-				while (goTarget == null)
+				Debug.Log ("DialogNummer = " + GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber);
+				if (GameObject.Find("TutorialControl").GetComponent<Tutorial>().dialogNumber == 23)
 				{
-					if (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i] != null)
+					int i = 0;
+					while (goTarget == null)
 					{
-						goTarget = GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i];
+						if (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i] != null)
+						{
+							goTarget = GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().scrapHolder [i];
+						}
+						i++;
+						Debug.Log ("Scrapnummer: " + i);
 					}
-					i++;
-					Debug.Log ("Scrapnummer: " + i);
+				}
+				else
+				{
+					goTarget = GameObject.FindGameObjectWithTag ("shop");
 				}
 			}
-			else
-			{
-				goTarget = GameObject.FindGameObjectWithTag ("shop");
-			}
 		}
-
-		PositionArrow();        
+		else
+			PositionArrow();        
 	}
 
 	void PositionArrow()
