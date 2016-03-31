@@ -56,7 +56,12 @@ public class sideWeaponControl : MonoBehaviour
 				// fungerer ikke dette fordi left cannons blir på en måte lik cannonball som man skyter, så her blir "leftCannons[i] = gameobject dvs cannonball, og derfor
 				// spawner alle nye kuler på de som allerede finnes?
 
-			
+
+				//For tutorial. Sjekker om spiller har trykket skyteknappene
+				if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber == 13)
+				{
+					tutorialCheckIfFire (0);
+				}
 
 				if(GameControl.control.canonUpgrades[i] == 1)
 				{
@@ -112,6 +117,11 @@ public class sideWeaponControl : MonoBehaviour
 			int tempSound = Random.Range(0, 3);
 			sourceRight.clip = cannonFireSounds[tempSound];
 			sourceRight.Play();
+			//For tutorial. Sjekker om spiller har trykket skyteknappene
+			if (GameObject.Find ("TutorialControl") != null)
+			{
+				tutorialCheckIfFire (1);
+			}
 
 			for (int i = 0; i <= 2; i++)
 			{
@@ -141,5 +151,14 @@ public class sideWeaponControl : MonoBehaviour
 			//AudioSource pangPang = GetComponent<AudioSource> ();
 			//transform.Translate (Vector3.up/forwardSpeed);
 		}	
+	}
+
+	private void tutorialCheckIfFire(int nr)
+	{
+		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().qeCheck [nr] != true)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().qeCheck [nr] = true;
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().checkArray (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().qeCheck);
+		}
 	}
 }
