@@ -42,7 +42,6 @@ public class EngineFlames : MonoBehaviour {
 
 		if(goingDown == false)
 		{
-			Debug.Log("We are herpes");
 			this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
 		}
 		else
@@ -50,23 +49,20 @@ public class EngineFlames : MonoBehaviour {
 			this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
 		}
 
-		Debug.Log(goingDown);
 	}
 
 	private void setNewLowerScale()
 	{
 		goingDown = true;
 
-		Debug.Log("We are going down");
 		lowerZ = maxZ * 0.9f;
 		if(lowerZ < 0)
 			lowerZ = 0;
-		Debug.Log("lowerZ: " + lowerZ);
+//		Debug.Log("lowerZ: " + lowerZ);
 	}
 
 	private void setNewUpperScale()
 	{
-		Debug.Log("We are going up");
 		goingDown = false;
 
 		xSpeed = rigi.velocity.x;
@@ -79,7 +75,7 @@ public class EngineFlames : MonoBehaviour {
 		maxZ = speed * 0.2f * Time.deltaTime;
 		if(maxZ < 0)
 			maxZ = 0;
-		Debug.Log("maxZ: " + maxZ);
+		//Debug.Log("maxZ: " + maxZ);
 
 	}
 }

@@ -4,7 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class gameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
-	public GameObject escMenu;
+	private GameObject escMenu;
+
+	void OnEnable()
+	{
+		escMenu = GameObject.Find ("menu");
+	}
 
 	void Update()
 	{

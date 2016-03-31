@@ -32,6 +32,12 @@ public class swivelFire : MonoBehaviour
 			pewPew.Play();
 			GameControl.control.specialAmmo -= 1;
 			GameObject.Find("value_ammo_tab").GetComponent<Text>().text = GameControl.control.specialAmmo.ToString();
+
+			if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check == false && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber == 18)
+			{
+				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check = true;
+				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextButton.SetActive (true);
+			}
 		}
 	}
 }
