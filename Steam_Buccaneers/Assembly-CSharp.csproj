@@ -52,6 +52,7 @@
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
+     <Compile Include="Assets\LoadingScren.cs" />
      <Compile Include="Assets\PlayClickSound.cs" />
      <Compile Include="Assets\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
