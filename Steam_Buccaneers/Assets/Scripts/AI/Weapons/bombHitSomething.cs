@@ -5,7 +5,7 @@ using EZCameraShake;
 
 public class BombHitSomething : MonoBehaviour {
 	private float radius = 20F;
-	private float force = 10.0f;
+	private float force = 5.0f;
 
 	CameraShakeInstance shake;
 
