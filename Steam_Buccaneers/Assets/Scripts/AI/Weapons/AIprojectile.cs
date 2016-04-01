@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 public class AIprojectile : MonoBehaviour {
 	private CheatCodesScript cheats;
@@ -66,6 +67,10 @@ public class AIprojectile : MonoBehaviour {
 
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+			if(other.transform.name == "Boss(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth <= 0)
+			{
+				SceneManager.LoadScene("cog_screen");
+			}
 
 			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			this.GetComponent<MeshFilter>().mesh = null;

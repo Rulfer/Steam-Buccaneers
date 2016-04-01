@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 
 public class BombHitSomething : MonoBehaviour {
@@ -20,6 +21,10 @@ public class BombHitSomething : MonoBehaviour {
 		if(other.tag == "aiShip") //It hit the AI
 		{
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
+			if(other.transform.name == "Boss(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth <= 0)
+			{
+				SceneManager.LoadScene("cog_screen");
+			}
 		}
 		if(other.tag == "canonball") //A ball hit this object
 		{
