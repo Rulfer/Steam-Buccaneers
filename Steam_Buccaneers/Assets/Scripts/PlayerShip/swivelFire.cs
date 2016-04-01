@@ -19,24 +19,27 @@ public class swivelFire : MonoBehaviour
 		//AudioSource pewPew = GetComponent<AudioSource> ();
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		//Debug.Log ("fukku shittu");
-		if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
+		if (Input.GetButton("Fire2"))
 		{
-			AudioSource pewPew = GetComponent<AudioSource> ();
-			fireDelay = Time.time + fireRate;
-			Instantiate (cannonball, transform.position , transform.rotation);
-			pewPew.Play();
-			GameControl.control.specialAmmo -= 1;
-			GameObject.Find("value_ammo_tab").GetComponent<Text>().text = GameControl.control.specialAmmo.ToString();
-
-			if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check == false && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber == 18)
+			//Debug.Log ("fukku shittu");
+			if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
 			{
-				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check = true;
-				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextButton.SetActive (true);
+				AudioSource pewPew = GetComponent<AudioSource> ();
+				fireDelay = Time.time + fireRate;
+				Instantiate (cannonball, transform.position , transform.rotation);
+				pewPew.Play();
+				GameControl.control.specialAmmo -= 1;
+				GameObject.Find("value_ammo_tab").GetComponent<Text>().text = GameControl.control.specialAmmo.ToString();
+
+				if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check == false && GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().dialogNumber == 18)
+				{
+					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().mouse1Check = true;
+					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextButton.SetActive (true);
+				}
 			}
 		}
 	}
