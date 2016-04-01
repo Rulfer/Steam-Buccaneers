@@ -13,7 +13,7 @@ public class CheatCodesScript : MonoBehaviour
 	//public GameObject shop4;
 
 	public string stringToEdit = "";
-	private Rect windowRect = new Rect(10, 50, 200, 20);
+	private Rect windowRect = new Rect(10, 50, 500, 20);
 	private string cheatResult = "";
 
 	private bool startTyping = false;
@@ -115,6 +115,10 @@ public class CheatCodesScript : MonoBehaviour
 				godMode = !godMode;
 				cheatResult = "Cheat activated: No damage from bullets";
 				break;
+			case "help":
+			case "Help":
+			case "HELP":
+				cheatResult = "Try 'boss', 'shop1', 'shop2', 'shop3' and 'god'";
 			default:
 				cheatResult = "Error: Incorrect cheat code.";
 				break;
