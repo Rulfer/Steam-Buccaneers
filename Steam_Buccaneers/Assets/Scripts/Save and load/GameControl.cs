@@ -47,7 +47,7 @@ public class GameControl : MonoBehaviour {
 			for (int i = 0; i < canonUpgrades.Length; i ++)
 			{
 				
-				canonUpgrades[i] = 3;
+				canonUpgrades[i] = 1;
 			}
 		}
 		Debug.Log("Health = " + health);

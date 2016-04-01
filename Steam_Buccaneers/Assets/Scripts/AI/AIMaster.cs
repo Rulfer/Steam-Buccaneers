@@ -242,10 +242,6 @@ public class AIMaster : MonoBehaviour
 
 	private void killAI()
 	{
-		if(isBoss == true)
-		{
-			SceneManager.LoadScene("cog_screen");
-		}
 		int temp;
 		if(isCargo == false)
 			temp = Random.Range(1, 7);
