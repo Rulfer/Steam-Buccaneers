@@ -47,6 +47,8 @@ public class AIprojectile : MonoBehaviour {
 				source.Play();
 
 				GameControl.control.health -= damageOutput;
+				other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+
 				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 
 				Instantiate(explotion, this.transform.position, this.transform.rotation);
