@@ -5,7 +5,7 @@ using EZCameraShake;
 public class AIprojectile : MonoBehaviour {
 	private CheatCodesScript cheats;
 
-	private float projectileSpeed = 175;
+	public float projectileSpeed = 175;
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;

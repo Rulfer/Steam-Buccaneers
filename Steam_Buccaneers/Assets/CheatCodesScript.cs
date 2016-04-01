@@ -10,7 +10,7 @@ public class CheatCodesScript : MonoBehaviour
 	public GameObject shop1;
 	public GameObject shop2;
 	public GameObject shop3;
-	public GameObject shop4;
+	//public GameObject shop4;
 
 	public string stringToEdit = "";
 	private Rect windowRect = new Rect(10, 50, 200, 20);
@@ -41,6 +41,7 @@ public class CheatCodesScript : MonoBehaviour
 			{
 				killTimer += Time.deltaTime;
 				GUI.Label(windowRect, cheatResult);
+				Debug.Log("we are displaying shit");
 			}
 			else
 			{
@@ -78,8 +79,9 @@ public class CheatCodesScript : MonoBehaviour
 
 	void checkCheat()
 	{
-		if(SceneManager.GetActiveScene().name == "world")
+		if(SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Shop")
 		{
+			Debug.Log("Cheated)");
 			cheated = true;
 			switch(stringToEdit)
 			{
@@ -106,12 +108,6 @@ public class CheatCodesScript : MonoBehaviour
 			case "SHOP3":
 				player.transform.position = new Vector3 (shop3.transform.position.x, shop3.transform.position.y, shop3.transform.position.z - 100);
 				cheatResult = "Cheat activated: Teleporting to Shop 3.";
-				break;
-			case "shop4":
-			case "Shop4":
-			case "SHOP4":
-				player.transform.position = new Vector3 (shop4.transform.position.x, shop4.transform.position.y, shop4.transform.position.z - 100);
-				cheatResult = "Cheat activated: Teleporting to Shop 4.";
 				break;
 			case "God":
 			case "god":
