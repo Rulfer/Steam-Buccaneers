@@ -65,13 +65,14 @@ public class AIprojectile : MonoBehaviour {
 			source.clip = hitSounds[tempSound];
 			source.Play();
 
-			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-			if(other.transform.name == "Boss(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth <= 0)
+			Debug.Log(other.transform.root.name + " & " + (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput));
+			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
 			{
 				SceneManager.LoadScene("cog_screen");
+				Debug.Log("LOAD FFS!");
 			}
-
+			//other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			this.GetComponent<MeshFilter>().mesh = null;
 			musicPlayer = true;

@@ -67,8 +67,8 @@
      <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\RayCastPlayer.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
