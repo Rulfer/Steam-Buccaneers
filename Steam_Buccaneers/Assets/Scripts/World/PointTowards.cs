@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PointTowards : MonoBehaviour 
 {
@@ -8,7 +9,10 @@ public class PointTowards : MonoBehaviour
 
 	void Start()
 	{
-		goTarget = GameObject.FindGameObjectWithTag ("shop");
+		if(SceneManager.GetActiveScene().name == "Tutorial")
+			goTarget = GameObject.FindGameObjectWithTag ("shop");
+		else if(SceneManager.GetActiveScene().name != "Shop" && SceneManager.GetActiveScene().name != "Tutorial")
+			goTarget = GameObject.Find ("BossSpawn");
 	}
 
 	void Update () 
