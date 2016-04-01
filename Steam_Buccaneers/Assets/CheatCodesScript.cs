@@ -119,6 +119,7 @@ public class CheatCodesScript : MonoBehaviour
 			case "Help":
 			case "HELP":
 				cheatResult = "Try 'boss', 'shop1', 'shop2', 'shop3' and 'god'";
+				break;
 			default:
 				cheatResult = "Error: Incorrect cheat code.";
 				break;
