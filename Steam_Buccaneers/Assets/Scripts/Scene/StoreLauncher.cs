@@ -23,6 +23,7 @@ public class StoreLauncher : MonoBehaviour {
 					GameControl.control.Save (this.name);
 					//Write whatever scene we want to go to here
 					GameControl.control.ChangeScene("Shop");
+					ChangeScene.inShop = true;
 				}
 					
 			} 
@@ -45,6 +46,7 @@ public class StoreLauncher : MonoBehaviour {
 
 				//Write whatever scene we want to go to here
 				GameControl.control.ChangeScene ("Shop");
+				ChangeScene.inShop = true;
 			}
 		}
 	}

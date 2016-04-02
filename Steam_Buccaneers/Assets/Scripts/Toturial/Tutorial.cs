@@ -65,7 +65,7 @@ public class Tutorial : MonoBehaviour
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level == 2)
+		if (level == 1)
 		{
 			loadShop ();
 		}
@@ -207,7 +207,7 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [17] = "Anyways, last but not least. The cannon on your roof right there, this is " +
 		"a special one. ";
 		dialogTexts[18] = "It is way more powerful than your regular cannons, and you can aim it around " +
-			"using your mouse, and fire using “mouse 1”. Test it out.";//Shopkeeper
+			"using your mouse. To fire hold down Mouse2, then click Mouse1. Test it out.";//Shopkeeper
 		dialogTexts[19] = "Remember, it is a way more accurate and powerful way to take down your opponents, " +
 			"but this doesn’t have a lifetime worth of ammo supply, but don’t worry, just visit a shop " +
 			"every once in awhile to stock up.";//Shopkeeper
@@ -321,7 +321,8 @@ public class Tutorial : MonoBehaviour
 		case(18):
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
-			questInfo.text = "Fire special weapon using Mouse1.";
+			questInfo.text = "Fire special weapon using Mouse2, then Mouse1.";
+			nextButton.SetActive (false);
 			break;
 		case(19):
 			buttonEvents.pause ();
