@@ -85,7 +85,7 @@ public class AIMaster : MonoBehaviour
 	{
 		if(other.tag == "Planet")
 		{
-			killAI();
+			killAbsentAI();
 		}
 	}
 
