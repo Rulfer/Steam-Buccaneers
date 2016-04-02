@@ -46,7 +46,6 @@ public class ScrapRandomDirection : MonoBehaviour {
 		{
 			GameControl.control.money += value; //Pay the player
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
-			Debug.Log("Player scrap = " + GameControl.control.money);
 			kill();
 		}
 	}

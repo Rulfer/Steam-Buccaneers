@@ -6,12 +6,8 @@ public class CastRays : MonoBehaviour {
 	public Vector3 right;
 	public Vector3 left;
 
-	private int detectDistance = 30;
+	private int detectDistance = 50;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,16 +22,21 @@ public class CastRays : MonoBehaviour {
 
 	private void sensors()
 	{
+		bool hitLeft = false;
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
 		{
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
 				this.transform.root.GetComponent<AImove>().turnLeft = true;
-				this.transform.root.GetComponent<AIavoid>().hitObject = true;
+				this.transform.root.GetComponent<AIavoid>().hitSide = true;
+				hitLeft = true;
 			}
 			else
+			{
 				this.transform.root.GetComponent<AImove>().turnLeft = false;
+				hitLeft = false;
+			}
 		}
 
 		else if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
@@ -43,10 +44,20 @@ public class CastRays : MonoBehaviour {
 			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
 				this.transform.root.GetComponent<AImove>().turnRight = true;
-				this.transform.root.GetComponent<AIavoid>().hitObject = true;
+				this.transform.root.GetComponent<AIavoid>().hitSide = true;
 			}
 			else
+			{
 				this.transform.root.GetComponent<AImove>().turnRight = false;
+				if(hitLeft == false)
+					this.transform.root.GetComponent<AIavoid>().hitSide = false;
+			}
+		}
+		else
+		{
+			this.transform.root.GetComponent<AImove>().turnLeft = false;
+			this.transform.root.GetComponent<AImove>().turnRight = false;
+			this.transform.root.GetComponent<AIavoid>().hitSide = false;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RayCastPlayer : MonoBehaviour {
+public class ExtraCannonSensors : MonoBehaviour {
 
 	private Vector3 right;
 	private Vector3 left;

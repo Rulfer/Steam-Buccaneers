@@ -4,7 +4,8 @@ using System.Collections;
 public class AIavoid : MonoBehaviour {
 	private GameObject player;
 
-	public bool hitObject = false;
+	public bool hitFront = false;
+	public bool hitSide = false;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
@@ -45,6 +46,7 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = true;
 					this.GetComponent<AImove>().turnRight = false;
 				}
+				hitFront = true;
 			}
 
 			else if(objectHit.transform.tag == "shopWall") //A shopWall is in front of the AI
@@ -59,12 +61,14 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = false;
 					this.GetComponent<AImove>().turnRight = true;
 				}
+				hitFront = true;
 			}
 
 			else 
 			{
 				this.GetComponent<AImove>().turnLeft = false;
 				this.GetComponent<AImove>().turnRight = false;
+				hitFront = false;
 			}
 		}
 
@@ -72,6 +76,7 @@ public class AIavoid : MonoBehaviour {
 		{
 			this.GetComponent<AImove>().turnLeft = false;
 			this.GetComponent<AImove>().turnRight = false;
+			hitFront = false;
 		}
 	}
 }

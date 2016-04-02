@@ -32,12 +32,12 @@ public class shopButtons : MonoBehaviour {
 		canons[4] = GameObject.Find("cannonB2");
 		canons[5] = GameObject.Find("cannonB3");
 
-		//Set right icons
-	if (GameControl.control.hullUpgrade == 1)
+			//Set right icons
+		if (GameControl.control.hullUpgrade == 1)
 		{
 			hull.GetComponent<Image>().sprite = hullLvl1;
 		}
-	else if (GameControl.control.hullUpgrade == 2)
+		else if (GameControl.control.hullUpgrade == 2)
 		{
 			hull.GetComponent<Image>().sprite = hullLvl2;
 		}
@@ -49,17 +49,17 @@ public class shopButtons : MonoBehaviour {
 		for (int i = 0; i <6; i++)
 		{
 			if (GameControl.control.canonUpgrades[i] == 1)
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl1;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl1;
+			}
 			else if (GameControl.control.canonUpgrades[i] == 2)
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl2;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl2;
+			}
 			else
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl3;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl3;
+			}
 		}
 
 		if (GameControl.control.thrusterUpgrade == 1)

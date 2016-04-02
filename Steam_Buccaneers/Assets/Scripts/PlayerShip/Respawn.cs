@@ -22,7 +22,6 @@ public class Respawn : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		//Debug.Log (GameControl.control.health);
 		//GameControl.control.health --;
 		if (GameControl.control.health <= 0)
@@ -53,7 +52,7 @@ public class Respawn : MonoBehaviour
 
 	void RespawnPlayer()
 	{
-
+		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		for (int i = 0; i < shops.Length; i++)
 		{
 			distance = Vector3.Distance(shops[i].transform.position, player.transform.position);
