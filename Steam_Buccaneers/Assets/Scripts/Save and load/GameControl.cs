@@ -68,14 +68,14 @@ public class GameControl : MonoBehaviour {
 	void OnGUI()
 	{
 		//Only for debug purposes to see the saved posistions 
-		GUI.Label (new Rect (10, 220, 160, 30), "ShipPos: " + shipPos);
-		GUI.Label (new Rect (10, 240, 160, 30), "Last Store: " + storeName);
-		GUI.Label (new Rect (10, 260, 160, 30), "Health: " + health);
-		GUI.Label (new Rect (10, 280, 160, 39), "Money: " + money);
-		GUI.Label (new Rect (10, 300, 160, 30), "SpessAmmo: " + specialAmmo);
-		GUI.Label (new Rect (10, 320, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
-		GUI.Label (new Rect (10, 340, 160, 30), "Hullupgrade: " + hullUpgrade);
-		GUI.Label (new Rect (10, 360, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
+//		GUI.Label (new Rect (10, 220, 160, 30), "ShipPos: " + shipPos);
+//		GUI.Label (new Rect (10, 240, 160, 30), "Last Store: " + storeName);
+//		GUI.Label (new Rect (10, 260, 160, 30), "Health: " + health);
+//		GUI.Label (new Rect (10, 280, 160, 39), "Money: " + money);
+//		GUI.Label (new Rect (10, 300, 160, 30), "SpessAmmo: " + specialAmmo);
+//		GUI.Label (new Rect (10, 320, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
+//		GUI.Label (new Rect (10, 340, 160, 30), "Hullupgrade: " + hullUpgrade);
+//		GUI.Label (new Rect (10, 360, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
 	}
 
 	public void Save(string storesName)

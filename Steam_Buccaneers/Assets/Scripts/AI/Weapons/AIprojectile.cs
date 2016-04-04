@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 public class AIprojectile : MonoBehaviour {
 	private CheatCodesScript cheats;
 
-	private float projectileSpeed = 175;
+	public float projectileSpeed = 175;
 	public int damageOutput;
 	private float distance;
 	public Rigidbody test;
@@ -47,6 +48,8 @@ public class AIprojectile : MonoBehaviour {
 				source.Play();
 
 				GameControl.control.health -= damageOutput;
+				other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+
 				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 
 				Instantiate(explotion, this.transform.position, this.transform.rotation);
@@ -62,9 +65,14 @@ public class AIprojectile : MonoBehaviour {
 			source.clip = hitSounds[tempSound];
 			source.Play();
 
-			other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+			Debug.Log(other.transform.root.name + " & " + (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput));
+			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
+			{
+				SceneManager.LoadScene("cog_screen");
+				Debug.Log("LOAD FFS!");
+			}
+			//other.transform.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-
 			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			this.GetComponent<MeshFilter>().mesh = null;
 			musicPlayer = true;
