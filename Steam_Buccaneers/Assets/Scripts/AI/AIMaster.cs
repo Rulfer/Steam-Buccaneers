@@ -12,21 +12,23 @@ public class AIMaster : MonoBehaviour
 
 	public Material mat2;
 	public Material mat3;
-	private float aiHealthMat2;
-	private float aiHealthMat3;
 
-	public static float detectDistance;
+	public float aiHealthMat2;
+	public float aiHealthMat3;
+	public float aiHealth = 20;
+	public float detectDistance;
+	public float aiRadar = 200;
 
 	public bool testedFleeing = false;
 	public bool detectedPlayer = false;
 	public bool isBoss = false;
 	public bool isCargo = false;
+	public bool usingMat2 = false;
+	public bool usingMat3 = false;
 
-	public float aiHealth = 20;
 	public int arrayIndex;
 	private int ranNum;
 
-	// Use this for initialization
 	void Start () 
 	{
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
@@ -38,59 +40,28 @@ public class AIMaster : MonoBehaviour
 	{
 		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(detectDistance < 60)
+		if(detectDistance < aiRadar - 100)
 		{
 			if(isCargo == false)
-				this.GetComponent<AImove>().force = 650f;
+				this.GetComponent<AImove>().force = PlayerMove2.move.force;
 		}
 
 		if(isBoss == false)
 		{
-			if(detectDistance < 150)
+			if(detectedPlayer == false)
 			{
-				if(detectedPlayer == false)
+				if(detectDistance < aiRadar)
 				{
 					deaktivatePatroling();
 					allAIFlee();
-					//killMarines();
 				}
 			}
 		}
-
 		else 
 			deaktivatePatroling();
 
-		if(testedFleeing == false)
-		{
-			if(aiHealth <= (aiHealth*0.2))
-			{
-				int ranNum = Random.Range(1, 11);
-				{
-					if(ranNum > 9)
-					{
-						this.GetComponent<AImove>().flee();
-					}
-					testedFleeing = true;
-				}
-			}
-		}
-
-		if(aiHealth <= aiHealthMat3) //Change the material to mat3 if the health is low enough
-		{
-			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
-			this.GetComponent<DamagedAI>().startFire();
-		}
-
-		else if(aiHealth <= aiHealthMat2) //It's not low enough, lets check if its low enough for mat2 then
-		{
-			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
-			this.GetComponent<DamagedAI>().startSmoke();
-		}
 		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
-			killAI();
-		
-		if(aiHealth <= 0) //If the health if this AI is 0, delete this AI
-			killAI();
+			killAbsentAI();
 	}
 
 	public void deaktivatePatroling()
@@ -101,12 +72,12 @@ public class AIMaster : MonoBehaviour
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		if(isCargo == false)
-			this.GetComponent<AImove>().force = 1000f;
+			this.GetComponent<AImove>().force = PlayerMove2.move.force + 200;
 		else
 		{
 			testedFleeing = true;
 			this.GetComponent<AImove>().flee();
-			this.GetComponent<AImove>().force = 650;
+			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
 		}
 	}
 
@@ -114,7 +85,7 @@ public class AIMaster : MonoBehaviour
 	{
 		if(other.tag == "Planet")
 		{
-			killAI();
+			killAbsentAI();
 		}
 	}
 
@@ -239,18 +210,34 @@ public class AIMaster : MonoBehaviour
 //		}
 //	}
 
+	private void killAbsentAI()
+	{
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			if(isCargo == false)
+			{
+				SpawnAI.spawn.marineShips[arrayIndex] = null;
+				SpawnAI.spawn.availableIndes[arrayIndex] = true;
+				SpawnAI.spawn.livingShips--;
+			}
+			else
+				SpawnAI.spawn.livingCargo = false;
+			Destroy(this.GetComponent<AIPatroling>().target);
+		}
+		Destroy(this.gameObject);
+	}
 
-	private void killAI()
+
+	public void killAI()
 	{
 		int temp;
 		if(isCargo == false)
 			temp = Random.Range(1, 7);
 		else
 			temp = Random.Range(7, 15);
+		
 		for(int i = 0; i < temp; i++)
-		{
 			Instantiate(scrap, this.transform.position, this.transform.rotation);
-		}
 
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
@@ -272,6 +259,41 @@ public class AIMaster : MonoBehaviour
 		if (GameObject.Find ("TutorialControl") != null)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
+	}
+
+	public void changeMat3()
+	{
+		if(usingMat3 == false)
+		{
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
+			this.GetComponent<DamagedAI>().startFire();
+			usingMat3 = true;
+		}
+	}	
+
+	public void changeMat2()
+	{
+		if(usingMat2 = false)
+		{
+			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
+			this.GetComponent<DamagedAI>().startSmoke();
+			usingMat2 = true;
+		}
+	}
+
+	public void testFleeing()
+	{
+		if(testedFleeing == false && isBoss == false)
+		{
+			int ranNum = Random.Range(1, 11);
+			{
+				if(ranNum > 9)
+				{
+					this.GetComponent<AImove>().flee();
+				}
+				testedFleeing = true;
+			}
 		}
 	}
 }

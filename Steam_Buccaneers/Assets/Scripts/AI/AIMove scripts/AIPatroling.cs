@@ -5,29 +5,17 @@ using System.Collections;
 public class AIPatroling : MonoBehaviour {
 
 	public GameObject target;
-	private float distanceToObjective;
-
-
-//	private Script AIPatroling;
 
 	void Start () 
 	{
 		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		target.transform.position = SpawnAI.patrolPoint;
-		//target.GetComponent<MeshRenderer>().enabled = false;
 	}
 
 	void Update () 
 	{
-		// Choose the next destination point when the AI gets
-		// close to the current one.
-		distanceToObjective = Vector3.Distance (this.transform.position, target.transform.position); //distance between AI and player
-		if(GetComponent<AIavoid>().hitObject == false)
+		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false)
 			goToPoint();
-		if (distanceToObjective < 10f)
-		{
-			this.GetComponent<AIMaster>().deaktivatePatroling();
-		}
 
 	}
 
@@ -61,5 +49,4 @@ public class AIPatroling : MonoBehaviour {
 			this.GetComponent<AImove>().turnRight = false;
 		}
 	}
-
 }
