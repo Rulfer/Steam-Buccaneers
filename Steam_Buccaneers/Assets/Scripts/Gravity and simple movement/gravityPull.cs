@@ -8,6 +8,11 @@ public class gravityPull : MonoBehaviour
 	//Makes a rigidbody reference
 	Rigidbody ownRb;
 
+	private Transform temp;
+	private Rigidbody rb;
+	private Vector3 offset;
+	private Collider[] cols;
+
 	void Start()
 	{
 		//Stores this objects rigidbody in ownRb
@@ -17,7 +22,7 @@ public class gravityPull : MonoBehaviour
 	void FixedUpdate()
 	{
 		//Makes an array of colliders who holds all colliders which is inside the gravitationalfield.
-		Collider[] cols = Physics.OverlapSphere(transform.position, range);
+		cols = Physics.OverlapSphere(transform.position, range);
 		//Makes a list which holds all the rigidbodies
 		List<Rigidbody> rbs = new List<Rigidbody>();
 
@@ -26,11 +31,10 @@ public class gravityPull : MonoBehaviour
 		{
 			//Finner rigidbody til objektet som er inne i gravitasjonsfeltet.
 			//Finds the rigidbody to the object which is inside the gravitationalfield 
-			Rigidbody rb = c.attachedRigidbody;
+			rb = c.attachedRigidbody;
 
 			if(rb == null)
 			{
-				Transform temp;
 				temp = c.transform.root;
 				rb = temp.GetComponent<Rigidbody>();
 			}
@@ -39,14 +43,14 @@ public class gravityPull : MonoBehaviour
 			//eller at rigidboien allerede er lagt til i lista med rigidbodies,
 			//så kjøres dette.
 			//If the object which is inside the gravitationalfield has a rigidbody, is not the rigidbody to the object which holds this script and the rigidbody is not already added to the list this will run.
-			if (rb != null && rb != ownRb && !rbs.Contains(rb) && rb.tag != "Planet" && rb.name != "moon2")
+			if (rb != null && rb != ownRb && !rbs.Contains(rb) && rb.tag != "Planet")
 			{
 				//The new rigidbody will be added to the list
 				rbs.Add(rb);
 
 				//Regner ut avstanden mellom objektet med gravitasjon og det andre objektet.
 				//Calculates the distance between the object with the gravity and the other object.
-				Vector3 offset = transform.position - c.transform.position;
+				offset = transform.position - c.transform.position;
 				//Regner ut gravitasjonskrefter og dytter objektet mot objektet med gravitasjon.
 				//Calculates the gravitationalpowers and pulls that object towards the object with gravity.
 				rb.AddForce(offset / offset.sqrMagnitude * ownRb.mass);

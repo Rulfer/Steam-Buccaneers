@@ -33,7 +33,8 @@ public class PlayerMove2 : MonoBehaviour
 		if (GameObject.Find ("TutorialControl") != null)
 		{
 			TutorialControl = GameObject.Find ("TutorialControl");
-		} else
+		} 
+		else
 		{
 			Destroy (TutorialControl);
 		}
@@ -56,6 +57,9 @@ public class PlayerMove2 : MonoBehaviour
 			{
 				bombTimer = 0;
 				hitBomb = false;
+				this.transform.root.GetComponent<Rigidbody>().mass = 1;
+				this.transform.root.GetComponent<Rigidbody>().drag = 0.5f;
+				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
 		//if (steerShip == true) {

@@ -36,11 +36,13 @@ public class AImove : MonoBehaviour {
 	{
 		player = GameObject.Find("PlayerShip");
 		aiRigid = this.GetComponent<Rigidbody>();
+		force = PlayerMove2.move.force;
+		maxVelocity = PlayerMove2.move.maxVelocity;
 	}
 		
     void FixedUpdate () 
 	{
-		if(this.GetComponent<AIavoid>().hitObject == false)
+		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false)
 		{
 			if(isPatroling == false)
 			{
@@ -62,6 +64,9 @@ public class AImove : MonoBehaviour {
 			{
 				bombTimer = 0;
 				hitBomb = false;
+				this.transform.root.GetComponent<Rigidbody>().mass = 1;
+				this.transform.root.GetComponent<Rigidbody>().drag = 0.5f;
+				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
 			
