@@ -58,9 +58,7 @@ public class AIMaster : MonoBehaviour
 						isFighting = true;
 						deaktivatePatroling();
 					}
-					else if(SpawnAI.spawn.stopSpawn == false && isCargo == true)
-						deaktivatePatroling();
-					else if(SpawnAI.spawn.stopSpawn == true)
+					else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
 						thisAIFlee();
 				}
 			}
@@ -99,8 +97,11 @@ public class AIMaster : MonoBehaviour
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
-		if(SceneManager.GetActiveScene().name != "Tutorial")
+		if(SceneManager.GetActiveScene().name != "Tutorial" && isCargo == false)
+		{
 			SpawnAI.spawn.stopFightTimer = true;
+			SpawnAI.spawn.stopSpawn = true;
+		}
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		if(isCargo == false)
@@ -147,6 +148,7 @@ public class AIMaster : MonoBehaviour
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			SpawnAI.spawn.stopSpawn = true;
+			SpawnAI.spawn.stopFightTimer = true;
 			if(isBoss == false && isCargo == false)
 			{
 				int i = 0;
