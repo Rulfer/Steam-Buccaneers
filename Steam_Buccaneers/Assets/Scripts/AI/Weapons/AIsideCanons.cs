@@ -113,7 +113,8 @@ public class AIsideCanons : MonoBehaviour {
 
 		checkGunPosition();
 
-		if (fireLeft == true && Time.time > fireDelayLeft) { // && Inventory.mainAmmo > 0
+		if (fireLeft == true && Time.time > fireDelayLeft) 
+		{
 			fireDelayLeft = Time.time + fireRate;
 
 			int tempSound = Random.Range(0, 3);

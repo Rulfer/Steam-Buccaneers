@@ -45,9 +45,6 @@ public class SpawnAI : MonoBehaviour
 			marineShips[i] = null;
 			availableIndes[i] = true;
 		}
-//		playerPoint = GameObject.FindGameObjectWithTag("Player");
-//		origin = GameObject.Find("GameOrigin");
-//		bossSpawn = GameObject.Find("BossSpawn");
 		waitBeforeNewSpawn();
 		waitBeforeCargoSpawn();
 	}
@@ -305,7 +302,7 @@ public class SpawnAI : MonoBehaviour
 		patrolPoint = setPatrolPoint();
 		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
-		if(relativeBossPoint > 100) //We are too far away from the boss, so we spawn a regular AI.
+		if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
 		{
 			if(livingShips < maxMarines)
 			{

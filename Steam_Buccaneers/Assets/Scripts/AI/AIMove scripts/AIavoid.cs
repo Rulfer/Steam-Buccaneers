@@ -4,13 +4,14 @@ using System.Collections;
 public class AIavoid : MonoBehaviour {
 	private GameObject player;
 
-	public bool hitObject = false;
+	public bool hitFront = false;
+	public bool hitSide = false;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
 
 	private float hitTimer;
-	private int detectDistance = 30;
+	private int detectDistance = 60;
 
 	// Use this for initialization
 	void Start () {
@@ -26,13 +27,6 @@ public class AIavoid : MonoBehaviour {
 		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 
 		sensors();
-
-		hitTimer += Time.deltaTime;
-		if(hitTimer > 0.1f)
-		{
-			hitTimer = 0;
-			hitObject = false;
-		}
 	}
 
 	private void sensors()
@@ -52,8 +46,7 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = true;
 					this.GetComponent<AImove>().turnRight = false;
 				}
-				hitTimer = 0;
-				hitObject = true;
+				hitFront = true;
 			}
 
 			else if(objectHit.transform.tag == "shopWall") //A shopWall is in front of the AI
@@ -68,8 +61,14 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = false;
 					this.GetComponent<AImove>().turnRight = true;
 				}
-				hitTimer = 0;
-				hitObject = true;
+				hitFront = true;
+			}
+
+			else 
+			{
+				this.GetComponent<AImove>().turnLeft = false;
+				this.GetComponent<AImove>().turnRight = false;
+				hitFront = false;
 			}
 		}
 
@@ -77,6 +76,7 @@ public class AIavoid : MonoBehaviour {
 		{
 			this.GetComponent<AImove>().turnLeft = false;
 			this.GetComponent<AImove>().turnRight = false;
+			hitFront = false;
 		}
 	}
 }
