@@ -71,6 +71,9 @@ public class AIprojectile : MonoBehaviour {
 			source.clip = hitSounds[tempSound];
 			source.Play();
 
+			if(other.transform.root.name == "Cargo(Clone)")
+				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
+			
 			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
 			{
 				SceneManager.LoadScene("cog_screen");

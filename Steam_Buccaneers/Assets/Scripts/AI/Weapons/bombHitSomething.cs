@@ -20,6 +20,9 @@ public class BombHitSomething : MonoBehaviour {
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
+			if(other.transform.root.name == "Cargo(Clone)")
+				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
+			
 			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - 10) <= 0)
 			{
 				SceneManager.LoadScene("cog_screen");
