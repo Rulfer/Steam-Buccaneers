@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class Tutorial : MonoBehaviour
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (level == 1)
+		if (SceneManager.GetActiveScene().name == "Shop")
 		{
 			loadShop ();
 		}
