@@ -50,7 +50,9 @@
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
+     <Compile Include="Assets\GUIManager.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
+     <Compile Include="Assets\MinimapCameraScript.cs" />
      <Compile Include="Assets\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
@@ -117,6 +119,7 @@
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
+     <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
