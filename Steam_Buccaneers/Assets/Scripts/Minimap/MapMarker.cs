@@ -64,6 +64,7 @@ public class MapMarker : MonoBehaviour
 		else 
 			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
         markerImage.gameObject.SetActive(false);
+
 	}
 
 
@@ -79,7 +80,7 @@ public class MapMarker : MonoBehaviour
 		if(changeScale == true)
 		{
 			changeScale = false;
-			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, markerSize);
+			markerImage.rectTransform.sizeDelta = new Vector2(markerSize, 2);
 		}
 		if(this.tag == "aiShip" && markerSize != ZoomMinimap.enemyScale)
 			markerImage.rectTransform.sizeDelta = new Vector2(ZoomMinimap.enemyScale, ZoomMinimap.enemyScale);
