@@ -16,7 +16,6 @@ public class AIPatroling : MonoBehaviour {
 	{
 		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false)
 			goToPoint();
-
 	}
 
 
