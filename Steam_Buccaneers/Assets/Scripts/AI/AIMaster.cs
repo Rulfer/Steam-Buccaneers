@@ -25,6 +25,7 @@ public class AIMaster : MonoBehaviour
 	public bool isCargo = false;
 	public bool usingMat2 = false;
 	public bool usingMat3 = false;
+	private bool isFighting = false;
 
 	public int arrayIndex;
 	private int ranNum;
@@ -52,23 +53,55 @@ public class AIMaster : MonoBehaviour
 			{
 				if(detectDistance < aiRadar)
 				{
-					deaktivatePatroling();
-					allAIFlee();
+					if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+					{
+						isFighting = true;
+						deaktivatePatroling();
+					}
+					else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
+						thisAIFlee();
 				}
 			}
+			else
+			{
+				if(detectDistance > aiRadar + 50)
+					reactivatePatroling();
+			}
 		}
-		else 
+		else if(isBoss == true)
+		{
+			isFighting = true;
 			deaktivatePatroling();
+		}
 
 		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 			killAbsentAI();
 	}
 
+	public void reactivatePatroling()
+	{	
+		detectedPlayer = false;
+		testedFleeing = false;
+		if(isFighting == true)
+		{
+			isFighting = false;
+			SpawnAI.spawn.stopSpawn = false;
+			SpawnAI.spawn.stopFightTimer = false;
+		}
+		this.GetComponent<AIPatroling>().enabled = true;
+		this.GetComponent<AImove>().isPatroling = true;
+		this.GetComponent<AImove>().isFleeing = false;
+		this.GetComponent<AImove>().force = PlayerMove2.move.force;
+	}
+
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
-		if(SceneManager.GetActiveScene().name != "Tutorial")
+		if(SceneManager.GetActiveScene().name != "Tutorial" && isCargo == false)
+		{
 			SpawnAI.spawn.stopFightTimer = true;
+			SpawnAI.spawn.stopSpawn = true;
+		}
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		if(isCargo == false)
@@ -89,11 +122,33 @@ public class AIMaster : MonoBehaviour
 		}
 	}
 
+	public void thisAIFlee()
+	{
+		detectedPlayer = true;
+		testedFleeing = true;
+
+		if(isBoss == false && isCargo == false)
+		{
+			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AIPatroling>().enabled = false;
+			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isPatroling = false;
+			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().flee();
+		}
+		else if(isCargo == true)
+		{
+			GameObject temp = GameObject.Find("Cargo(Clone)").gameObject;
+			testedFleeing = true;
+			temp.GetComponent<AIPatroling>().enabled = false;
+			temp.GetComponent<AImove>().isPatroling = false;
+			temp.GetComponent<AImove>().flee();
+		}
+	}
+
 	public void allAIFlee()
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			SpawnAI.spawn.stopSpawn = true;
+			SpawnAI.spawn.stopFightTimer = true;
 			if(isBoss == false && isCargo == false)
 			{
 				int i = 0;
@@ -169,47 +224,6 @@ public class AIMaster : MonoBehaviour
 		}
 	}
 
-//	public void killMarines()
-//	{
-//		if(SceneManager.GetActiveScene().name != "Tutorial")
-//		{
-//			SpawnAI.spawn.stopSpawn = true;
-//			for(int i = 0; i < SpawnAI.spawn.marineShips.Length; i++)
-//			{
-//				if(isBoss == false && isCargo == false)
-//				{
-//					if(i != arrayIndex)
-//					{
-//						if(SpawnAI.spawn.marineShips[i] != null)
-//						{
-//							Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
-//							Destroy(SpawnAI.spawn.marineShips[i]);
-//							SpawnAI.spawn.marineShips[i] = null;
-//							SpawnAI.spawn.availableIndes[i] = true;
-//							SpawnAI.spawn.livingShips--;
-//						}
-//					}
-//				}
-//				else
-//				{
-//					if(SpawnAI.spawn.marineShips[i] != null)
-//					{
-//						Destroy(SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().target);
-//						Destroy(SpawnAI.spawn.marineShips[i]);
-//						SpawnAI.spawn.marineShips[i] = null;
-//						SpawnAI.spawn.availableIndes[i] = true;
-//						SpawnAI.spawn.livingShips--;
-//					}
-//					if(GameObject.Find("Cargo(Clone)") == true && isBoss == true)
-//					{
-//						Destroy(GameObject.Find("Cargo(Clone)").gameObject);
-//					}
-//				}
-//
-//			}
-//		}
-//	}
-
 	private void killAbsentAI()
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
@@ -249,8 +263,11 @@ public class AIMaster : MonoBehaviour
 			}
 			else
 				SpawnAI.spawn.livingCargo = false;
-			SpawnAI.spawn.stopSpawn = false;
-			SpawnAI.spawn.stopFightTimer = false;
+			if(isFighting == true)
+			{			
+				SpawnAI.spawn.stopSpawn = false;
+				SpawnAI.spawn.stopFightTimer = false;
+			}
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
