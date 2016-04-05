@@ -45,14 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CheatCodesScript.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
-     <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
+     <Compile Include="Assets\Animation\EZ Camera Shake\Demo\ShakeDemo.cs" />
+     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
+     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
+     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShaker.cs" />
+     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
+     <Compile Include="Assets\GUIManager.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
-     <Compile Include="Assets\PlayClickSound.cs" />
+     <Compile Include="Assets\MinimapCameraScript.cs" />
      <Compile Include="Assets\QuitScript.cs" />
      <Compile Include="Assets\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\scrapRandomDirection.cs" />
+     <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
      <Compile Include="Assets\Scripts\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
@@ -84,6 +85,7 @@
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
+     <Compile Include="Assets\Scripts\PlayClickSound.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PlayerStatus.cs" />
@@ -118,6 +120,7 @@
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
+     <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
