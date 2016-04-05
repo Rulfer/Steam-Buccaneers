@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using EZCameraShake;
+using UnityEngine.SceneManagement;
 
 
 public class BombHitSomething : MonoBehaviour {
@@ -19,7 +20,20 @@ public class BombHitSomething : MonoBehaviour {
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
+			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - 10) <= 0)
+			{
+				SceneManager.LoadScene("cog_screen");
+			}
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
+			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
+				other.transform.GetComponentInParent<AIMaster>().killAI();
+			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
+			{
+				other.GetComponentInParent<AIMaster>().changeMat3();
+				other.GetComponentInParent<AIMaster>().testFleeing();
+			}
+			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
+				other.GetComponentInParent<AIMaster>().changeMat2();
 		}
 		if(other.tag == "canonball") //A ball hit this object
 		{
@@ -53,6 +67,12 @@ public class BombHitSomething : MonoBehaviour {
 				if(rb != null) //The parent got the rigidbody!
 				{
 					rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
+					if(hit.tag == "aiShip" || hit.transform.root.name == "PlayerShip")
+					{
+						rb.mass = 5;
+						rb.drag = 5;
+						rb.angularDrag = 5;
+					}
 				}
 			}
 

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class AIsideCanons : MonoBehaviour {
 
+	public static AIsideCanons canons;
 	public GameObject cannonball1;
 	public GameObject cannonball2;
 	public GameObject cannonball3;
@@ -27,13 +28,18 @@ public class AIsideCanons : MonoBehaviour {
 	private Vector3 right;
 	private Vector3 left;
 
-	public static bool fireLeft = false;
-	public static bool fireRight = false;
+	public bool fireLeft = false;
+	public bool fireRight = false;
 
 	private int detectDistance = 100;
 
+	public AudioClip[] cannonFireSounds;
+	public AudioSource sourceLeft;
+	public AudioSource sourceRight;
+
 	// Use this for initialization
 	void Start () {
+		canons = this;
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			if(this.transform.root.name == "Marine(Clone)")
@@ -57,10 +63,33 @@ public class AIsideCanons : MonoBehaviour {
 					}
 				}
 			}
-
-			for(int i = 0; i < 6; i++)
+			else if(this.transform.root.name == "Boss(Clone)")
 			{
-				SpawnAI.spawn.cannonUpgraded[i] = false;
+				for(int i = 0; i < 6; i++)
+				{
+					SpawnAI.spawn.cannonUpgraded[i] = false;
+				}
+			}
+			else
+			{
+				for(int i = 0; i < 2; i++)
+				{
+					if(SpawnAI.cannonLevel[i] == 1)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
+						cannonLevel[i] = 1;
+					}
+					else if(SpawnAI.cannonLevel[i] == 2)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
+						cannonLevel[i] = 2;
+					}
+					else if(SpawnAI.cannonLevel[i] == 3)
+					{
+						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
+						cannonLevel[i] = 3;
+					}
+				}
 			}
 		}
 		else
@@ -84,17 +113,25 @@ public class AIsideCanons : MonoBehaviour {
 
 		checkGunPosition();
 
-
-		if (fireLeft == true && Time.time > fireDelayLeft) { // && Inventory.mainAmmo > 0
+		if (fireLeft == true && Time.time > fireDelayLeft) 
+		{
 			fireDelayLeft = Time.time + fireRate;
 
-			for(int i = 0; i < 3; i++)
+			int tempSound = Random.Range(0, 3);
+			sourceLeft.clip = cannonFireSounds[tempSound];
+			sourceLeft.Play();
+
+			if(this.transform.root.name == "Boss(Clone)")
 			{
-				if(this.transform.root.name == "Boss(Clone)")
+				for(int i = 0; i < 6; i++)
 				{
 					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
 				}
-				else
+			}
+
+			else
+			{
+				for(int i = 0; i < leftCannons.Length; i++)
 				{
 					if(cannonLevel[i] == 1)
 					{
@@ -115,13 +152,21 @@ public class AIsideCanons : MonoBehaviour {
 		if (fireRight == true && Time.time > fireDelayRight) {				
 			fireDelayRight = Time.time + fireRate;
 
-			for(int i = 0; i < 3; i++)
+			int tempSound = Random.Range(0, 3);
+			sourceRight.clip = cannonFireSounds[tempSound];
+			sourceRight.Play();
+
+			if(this.transform.root.name == "Boss(Clone)")
 			{
-				if(this.transform.root.name == "Boss(Clone)")
+				for(int i = 0; i < 6; i++)
 				{
 					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
 				}
-				else
+			}
+
+			else
+			{
+				for(int i = 0; i < rightCannons.Length; i++)
 				{
 					if(cannonLevel[i+3] == 1)
 					{
@@ -142,39 +187,42 @@ public class AIsideCanons : MonoBehaviour {
 
 	private void checkGunPosition()
 	{
-		RaycastHit objectHit;
+		if(this.transform.root.name != "Boss(Clone)")
+		{
+			RaycastHit objectHit;
 
-		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance)) //Raycast hit something
-		{
-			if(objectHit.transform.tag == "Player")//Hit the player
+			if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance)) //Raycast hit something
 			{
-				fireLeft = true;//The AI can now fire
+				if(objectHit.transform.tag == "Player")//Hit the player
+				{
+					fireLeft = true;//The AI can now fire
+				}
+				else //Hit something else than the player
+				{
+					fireLeft = false; //The AI cant fire anyway
+				}
 			}
-			else //Hit something else than the player
+			else //Hit nothing
 			{
-				fireLeft = false; //The AI cant fire anyway
-			}
-		}
-		else //Hit nothing
-		{
-			fireLeft = false; //The AI cant fire
-		}
-
-		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))//Raycast hit something
-		{
-			if(objectHit.transform.tag == "Player")//Hit the player
-			{
-				fireRight = true;//The AI can now fire
+				fireLeft = false; //The AI cant fire
 			}
 
-			else //Hit something else than the player
+			if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))//Raycast hit something
 			{
-				fireRight = false; //The AI cant fire anyway
+				if(objectHit.transform.tag == "Player")//Hit the player
+				{
+					fireRight = true;//The AI can now fire
+				}
+
+				else //Hit something else than the player
+				{
+					fireRight = false; //The AI cant fire anyway
+				}
 			}
-		}
-		else//Hit nothing
-		{
-			fireRight = false;//The AI cant fire
+			else//Hit nothing
+			{
+				fireRight = false;//The AI cant fire
+			}
 		}
 	}
 }

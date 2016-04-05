@@ -38,7 +38,7 @@ public class GameControl : MonoBehaviour {
 		//Sets start data
 		if (health == 0 && money == 0)
 		{
-			health = 50;
+			health = 100;
 			money = 20;
 			hullUpgrade = 1;
 			specialAmmo = 20;
@@ -58,7 +58,7 @@ public class GameControl : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		Debug.Log ("Level loaded");
-		if (level == 0) 
+		if (level == 1) 
 		{
 			Save (storeName);
 		}
@@ -68,14 +68,14 @@ public class GameControl : MonoBehaviour {
 	void OnGUI()
 	{
 		//Only for debug purposes to see the saved posistions 
-		GUI.Label (new Rect (10, 80, 160, 30), "ShipPos: " + shipPos);
-		GUI.Label (new Rect (10, 100, 160, 30), "Last Store: " + storeName);
-		GUI.Label (new Rect (10, 120, 160, 30), "Health: " + health);
-		GUI.Label (new Rect (10, 140, 160, 39), "Money: " + money);
-		GUI.Label (new Rect (10, 160, 160, 30), "SpessAmmo: " + specialAmmo);
-		GUI.Label (new Rect (10, 180, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
-		GUI.Label (new Rect (10, 200, 160, 30), "Hullupgrade: " + hullUpgrade);
-		GUI.Label (new Rect (10, 220, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
+//		GUI.Label (new Rect (10, 220, 160, 30), "ShipPos: " + shipPos);
+//		GUI.Label (new Rect (10, 240, 160, 30), "Last Store: " + storeName);
+//		GUI.Label (new Rect (10, 260, 160, 30), "Health: " + health);
+//		GUI.Label (new Rect (10, 280, 160, 39), "Money: " + money);
+//		GUI.Label (new Rect (10, 300, 160, 30), "SpessAmmo: " + specialAmmo);
+//		GUI.Label (new Rect (10, 320, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
+//		GUI.Label (new Rect (10, 340, 160, 30), "Hullupgrade: " + hullUpgrade);
+//		GUI.Label (new Rect (10, 360, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
 	}
 
 	public void Save(string storesName)
@@ -100,7 +100,8 @@ public class GameControl : MonoBehaviour {
 		if (storeName != "null") 
 		{
 			GameObject goP = GameObject.Find (storeName);
-			GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
+			Debug.Log ("Saving store: " + goP);
+			//GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
 		} 
 		else 
 		{

@@ -15,7 +15,6 @@ public class Respawn : MonoBehaviour
 
 	void Start () 
 	{
-		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		player = GameObject.Find("PlayerShip");
 		deathScreen.SetActive (showDeathScreen);
 	}
@@ -53,7 +52,7 @@ public class Respawn : MonoBehaviour
 
 	void RespawnPlayer()
 	{
-
+		shops = GameObject.FindGameObjectsWithTag ("shop"); 
 		for (int i = 0; i < shops.Length; i++)
 		{
 			distance = Vector3.Distance(shops[i].transform.position, player.transform.position);

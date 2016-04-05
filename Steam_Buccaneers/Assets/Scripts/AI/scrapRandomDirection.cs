@@ -46,7 +46,6 @@ public class ScrapRandomDirection : MonoBehaviour {
 		{
 			GameControl.control.money += value; //Pay the player
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
-			Debug.Log("Player scrap = " + GameControl.control.money);
 			kill();
 		}
 	}
@@ -54,7 +53,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 	void kill()
 	{
 		Destroy(this.gameObject); //Destroy this object
-		if (GameObject.Find ("TutorialControl").GetComponent<Tutorial>().isActiveAndEnabled == true)
+		if (GameObject.Find("TutorialControl") != null)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
 		}

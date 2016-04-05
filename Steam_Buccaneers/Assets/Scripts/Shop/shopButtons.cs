@@ -32,12 +32,12 @@ public class shopButtons : MonoBehaviour {
 		canons[4] = GameObject.Find("cannonB2");
 		canons[5] = GameObject.Find("cannonB3");
 
-		//Set right icons
-	if (GameControl.control.hullUpgrade == 1)
+			//Set right icons
+		if (GameControl.control.hullUpgrade == 1)
 		{
 			hull.GetComponent<Image>().sprite = hullLvl1;
 		}
-	else if (GameControl.control.hullUpgrade == 2)
+		else if (GameControl.control.hullUpgrade == 2)
 		{
 			hull.GetComponent<Image>().sprite = hullLvl2;
 		}
@@ -49,17 +49,17 @@ public class shopButtons : MonoBehaviour {
 		for (int i = 0; i <6; i++)
 		{
 			if (GameControl.control.canonUpgrades[i] == 1)
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl1;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl1;
+			}
 			else if (GameControl.control.canonUpgrades[i] == 2)
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl2;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl2;
+			}
 			else
-				{
-				canons[i].GetComponent<Image>().sprite = canonLvl3;
-				}
+			{
+			canons[i].GetComponent<Image>().sprite = canonLvl3;
+			}
 		}
 
 		if (GameControl.control.thrusterUpgrade == 1)
@@ -84,17 +84,37 @@ public class shopButtons : MonoBehaviour {
 	public void openRepair()
 	{
 		repairMenu.SetActive(true);
+		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 33)
+		{
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+		}
 	}
 
 	public void buyHealth()
 	{
-			if (GameControl.control.health < (int)GameObject.Find("Slider_refill").GetComponent<Slider>().value && (int)GameObject.Find("value_cost_hp").GetComponent<updatePayment>().payment <= GameControl.control.money)
+		if (GameObject.Find ("TutorialControl") == null)
+		{
+			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value && (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment <= GameControl.control.money)
+			{
+				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
+				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
+				GameControl.control.money -= (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment;
+				GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+			}
+		} 
+		else
+		{
+			if (GameControl.control.health <= (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
+			{
+				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
+				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
+
+				if (GameControl.control.health == 100)
 				{
-					GameControl.control.health = (int)GameObject.Find("Slider_refill").GetComponent<Slider>().value;
-					GameObject.Find("Slider_current_hp").GetComponent<Slider>().value = GameControl.control.health;
-					GameControl.control.money -= (int)GameObject.Find("value_cost_hp").GetComponent<updatePayment>().payment;
-					GameObject.Find("value_scraps").GetComponent<Text>().text = GameControl.control.money.ToString();
+					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 				}
+			}
+		}
 	}
 
 	public void buyUpgrade()
@@ -180,8 +200,22 @@ public class shopButtons : MonoBehaviour {
 
 			if (this.gameObject.GetComponent<shopText>().noMoreUpgrade == false)
 			{
-				GameControl.control.money -= this.gameObject.GetComponent<shopText>().currentPrice;
-				GameObject.Find("value_scraps").GetComponent<Text>().text = GameControl.control.money.ToString();
+				if (GameObject.Find ("TutorialControl") == null)
+				{
+					GameControl.control.money -= this.gameObject.GetComponent<shopText> ().currentPrice;
+					GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+				} 
+				else
+				{
+					if (GameControl.control.specialAmmo > 20)
+					{
+						GameControl.control.money -= this.gameObject.GetComponent<shopText> ().currentPrice;
+						GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
+					} else if (GameControl.control.specialAmmo == 20)
+					{
+						GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
+					}
+				}
 				this.gameObject.GetComponent<shopText>().updateText(this.gameObject.GetComponent<shopText>().currentUpgradeName);
 				Debug.Log("This Works TM");
 			}

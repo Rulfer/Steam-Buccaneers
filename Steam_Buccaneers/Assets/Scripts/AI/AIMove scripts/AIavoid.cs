@@ -4,15 +4,14 @@ using System.Collections;
 public class AIavoid : MonoBehaviour {
 	private GameObject player;
 
-	public bool hitObject = false;
-	public bool hitLeft = false;
-	public bool hitRight = false;
+	public bool hitFront = false;
+	public bool hitSide = false;
 
 	private Vector3 relativePlayerPoint;
 	private Vector3 fwd;
 
 	private float hitTimer;
-	private int detectDistance = 30;
+	private int detectDistance = 60;
 
 	// Use this for initialization
 	void Start () {
@@ -28,22 +27,10 @@ public class AIavoid : MonoBehaviour {
 		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 
 		sensors();
-
-		hitTimer += Time.deltaTime;
-		if(hitTimer >= 0.1f)
-		{
-			hitObject = false;
-			hitRight = false;
-			hitLeft = false;
-		}
 	}
 
 	private void sensors()
 	{
-		bool forwards = false;
-		bool lefty = false;
-
-
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, fwd, out objectHit, detectDistance))
 		{
@@ -59,9 +46,7 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = true;
 					this.GetComponent<AImove>().turnRight = false;
 				}
-				hitObject = true; //We hit something
-				forwards = true; //Sets this to true so the rest of the code knows this
-				hitTimer = 0; //Restarts the timer
+				hitFront = true;
 			}
 
 			else if(objectHit.transform.tag == "shopWall") //A shopWall is in front of the AI
@@ -76,52 +61,22 @@ public class AIavoid : MonoBehaviour {
 					this.GetComponent<AImove>().turnLeft = false;
 					this.GetComponent<AImove>().turnRight = true;
 				}
-				hitObject = true; //We hit something
-				forwards = true; //Sets this to true so the rest of the code knows this
-				hitTimer = 0; //Restarts the timer
+				hitFront = true;
 			}
-		}
 
-		else
-		{
-			forwards = false;
-			this.GetComponent<AImove>().turnLeft = false;
-			this.GetComponent<AImove>().turnRight = false;
-		}
-
-		if(hitLeft == true)
-		{
-			hitLeft = false;
-			hitObject = true;
-			hitTimer = 0;
-			this.GetComponent<AImove>().turnRight = true;
-			this.GetComponent<AImove>().turnLeft = false;
-		}
-
-		else
-		{
-			if(forwards == false)
-			{
-				this.GetComponent<AImove>().turnRight = false;
-				this.GetComponent<AImove>().turnLeft = false;
-			}
-		}
-
-		if(hitRight == true)
-		{
-			hitObject = true;
-			hitTimer = 0;
-			this.GetComponent<AImove>().turnLeft = true;
-			this.GetComponent<AImove>().turnRight = false;
-		}
-
-		else
-		{
-			if(forwards == false && lefty == false)
+			else 
 			{
 				this.GetComponent<AImove>().turnLeft = false;
 				this.GetComponent<AImove>().turnRight = false;
+				hitFront = false;
 			}
+		}
+
+		else
+		{
+			this.GetComponent<AImove>().turnLeft = false;
+			this.GetComponent<AImove>().turnRight = false;
+			hitFront = false;
 		}
 	}
 }

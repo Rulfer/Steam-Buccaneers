@@ -7,10 +7,15 @@ public class cameraController : MonoBehaviour
 	private float amountScrolled;
 	public float scrollBy;
 
+	private Vector3 PlayerPOS;
+	private GameObject player;
+	private GameObject camera;
+
 	// Use this for initialization
 	void Start () 
 	{
-		//scrollBy = 0.5;	
+		player = GameObject.Find("PlayerShip");	
+		camera = GameObject.Find("MainCamera");
 	}
 	
 	// Update is called once per frame
@@ -18,8 +23,8 @@ public class cameraController : MonoBehaviour
 	{
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
-		Vector3 PlayerPOS = GameObject.Find("PlayerShip").transform.transform.position;
-		GameObject.Find("MainCamera").transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway, (PlayerPOS.z)); 
+		PlayerPOS = player.transform.transform.position;
+		camera.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway, (PlayerPOS.z)); 
 
 		// Kamera zoom
 		float scrollDistance = Input.GetAxisRaw("Mouse ScrollWheel");
