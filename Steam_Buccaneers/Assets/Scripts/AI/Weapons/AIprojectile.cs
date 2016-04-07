@@ -99,9 +99,11 @@ public class AIprojectile : MonoBehaviour {
 		{
 			int tempSound = Random.Range(0, 3);
 			source.clip = hitSounds[tempSound];
-			source.Play();
+			if(this.gameObject != null)
+				source.Play();
 
 			Instantiate(explotion, this.transform.position, this.transform.rotation);
+			explotion.GetComponent<DeleteParticles>().killDuration = 2;
 			this.GetComponent<MeshFilter>().mesh = null;
 			Destroy(this.gameObject, source.clip.length);
 		}

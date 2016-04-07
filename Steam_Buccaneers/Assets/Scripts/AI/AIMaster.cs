@@ -9,6 +9,7 @@ public class AIMaster : MonoBehaviour
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
+	public GameObject boom;
 
 	public Material mat2;
 	public Material mat3;
@@ -279,6 +280,8 @@ public class AIMaster : MonoBehaviour
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
+		Instantiate(boom, this.transform.position, this.transform.rotation);
+		boom.GetComponent<DeleteParticles>().killDuration = 3;
 		Destroy(this.gameObject);
 
 		if (GameObject.Find ("TutorialControl") != null)
