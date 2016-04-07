@@ -53,13 +53,21 @@ public class AIMaster : MonoBehaviour
 			{
 				if(detectDistance < aiRadar)
 				{
-					if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+						{
+							isFighting = true;
+							deaktivatePatroling();
+						}
+						else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
+							thisAIFlee();
+					}
+					else
 					{
 						isFighting = true;
 						deaktivatePatroling();
 					}
-					else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
-						thisAIFlee();
 				}
 			}
 			else

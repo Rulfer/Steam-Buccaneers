@@ -21,7 +21,7 @@ public class ChangeScene : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (SceneManager.GetActiveScene ().name != "Tutorial" && SceneManager.GetActiveScene ().name != "Shop")
+		if (SceneManager.GetActiveScene ().name != "Tutorial" && SceneManager.GetActiveScene ().name != "Shop" && SceneManager.GetActiveScene ().name != "main_menu")
 		{
 			Debug.Log (inShop);
 			Debug.Log ("do i do anything?");

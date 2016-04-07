@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -50,9 +50,10 @@
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
+     <Compile Include="Assets\Continue.cs" />
      <Compile Include="Assets\GUIManager.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
-     <Compile Include="Assets\MinimapCameraScript.cs" />
+     <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\QuitScript.cs" />
      <Compile Include="Assets\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
@@ -75,11 +76,6 @@
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
-     <Compile Include="Assets\Scripts\Minimap\InnerMap.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapArrow.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapCanvasController.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapMarker.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MarkerGroup.cs" />
      <Compile Include="Assets\Scripts\Minimap\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Minimap\ZoomMinimap.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
@@ -117,16 +113,19 @@
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
+     <Compile Include="Assets\TreasureShip.cs" />
+     <Compile Include="Assets\WorldBorder.cs" />
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
+     <Compile Include="Assets\newGame.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
