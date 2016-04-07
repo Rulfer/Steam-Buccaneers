@@ -65,11 +65,11 @@ public class ChangeScene : MonoBehaviour
 		}
 
 		//Loads in scene 3, this is commented out for our game test
-		/*if (player.transform.position.z >= 9500 && part3Loaded == false)
+		if (player.transform.position.z >= 9500 && part3Loaded == false)
 		{
 			SceneManager.LoadScene("worldPt3", LoadSceneMode.Additive);
 			part3Loaded = true;
-		}*/
+		}
 
 		//Debug.Log(SceneManager.sceneCount);
 
@@ -91,11 +91,11 @@ public class ChangeScene : MonoBehaviour
 			part2Loaded = false;
 		}
 		//Unloads Scene 3, this is commented out for our game test
-	/*	if(player.transform.position.z < 9500 && part3Loaded == true)
+		if(player.transform.position.z < 9500 && part3Loaded == true)
 		{
 			SceneManager.UnloadScene("worldPt3");
 			part3Loaded = false;
-		}*/
+		}
 
 	}
 }

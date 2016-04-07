@@ -3,15 +3,29 @@ using System.Collections;
 
 public class TreasureShip : MonoBehaviour 
 {
-	Vector3 rotateVec = new Vector3 (0f,1f,1f);
+	Vector3 rotateVec; //= new Vector3 (1f,1f,1f);
 	Vector3 randomSpawnVec;
 	public GameObject scrap;
 	public GameObject player;
 	float deleteTimer;
 	float distanceAway;
+	int xRot;
+	int yRot;
+	int zRot;
 	// Use this for initialization
 	void Start () 
 	{
+//		xRot = Random.Range(-1,1);
+//		Mathf.RoundToInt(xRot);
+//		yRot = Random.Range(-1,1);
+//		Mathf.RoundToInt(yRot);
+//		zRot = Random.Range(-1,1);
+//		Mathf.RoundToInt(zRot);
+//		
+//		rotateVec = new Vector3 (xRot, yRot, zRot);
+		rotateVec = new Vector3 (Mathf.RoundToInt(Random.Range(-1,1)),
+			Mathf.RoundToInt(Random.Range(-1,1)), Mathf.RoundToInt(Random.Range(-1,1)));
+		
 		player = GameObject.Find("PlayerShip");
 
 		for(int i = 0; i < 20; i ++)
@@ -20,6 +34,7 @@ public class TreasureShip : MonoBehaviour
 				this.transform.position.z + Random.Range(-20f, 20f));
 			Instantiate (scrap, randomSpawnVec, this.transform.rotation);
 			deleteTimer = 60;
+
 
 			//Spawns the scrap around the treasure ship
 			//Instantiate (scrap, randomSpawnVec, this.transform.rotation);
