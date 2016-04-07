@@ -58,10 +58,15 @@ public class GameControl : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		Debug.Log ("Level loaded");
-		if (level == 1) 
+		if (SceneManager.GetActiveScene ().name == "Shop")
 		{
 			Save (storeName);
-		}
+		} 
+//		else if (SceneManager.GetActiveScene ().name == "WorldMaster")
+//		{
+//			Debug.Log ("Load WorldMaster");
+//			Load ();
+//		}
 	}
 
 	//Makes Gui on launch of program
