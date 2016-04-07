@@ -9,6 +9,7 @@ public class SpawnTreasureShip : MonoBehaviour
 	float xPos;
 	float zPos;
 	Vector3 spawnPos;
+	float spawnDistance;
 	//float timeLeft;
 
 	// Use this for initialization
@@ -52,9 +53,17 @@ public class SpawnTreasureShip : MonoBehaviour
 		xPos = player.transform.position.x + Random.Range(-500,500);
 		zPos = player.transform.position.z + Random.Range(-500,500);
 		spawnPos = new Vector3 (xPos, 0, zPos);
+		spawnDistance = Vector3.Distance (spawnPos, player.transform.position);
 
+		if (spawnDistance < 300)
+		{
+			SpawnTreasure();
+		}
 
+		else
+		{
 		Instantiate(treasureShip, spawnPos, player.transform.rotation);
 		GetTime();
+		}
 	}
 }

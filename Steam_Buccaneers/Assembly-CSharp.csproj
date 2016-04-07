@@ -54,7 +54,6 @@
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MinimapCameraScript.cs" />
      <Compile Include="Assets\QuitScript.cs" />
-     <Compile Include="Assets\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
@@ -75,11 +74,6 @@
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
-     <Compile Include="Assets\Scripts\Minimap\InnerMap.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapArrow.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapCanvasController.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MapMarker.cs" />
-     <Compile Include="Assets\Scripts\Minimap\MarkerGroup.cs" />
      <Compile Include="Assets\Scripts\Minimap\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Minimap\ZoomMinimap.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
@@ -117,6 +111,9 @@
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
+     <Compile Include="Assets\Scripts\World\RotateBackgroundElements.cs" />
+     <Compile Include="Assets\Scripts\World\SpawnTreasureShip.cs" />
+     <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
