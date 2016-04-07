@@ -81,7 +81,11 @@ public class AIprojectile : MonoBehaviour {
 
 			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
+			{
+				other.GetComponentInParent<DeadAI>().forcePos = this.transform.position;
 				other.transform.GetComponentInParent<AIMaster>().killAI();
+				other.GetComponentInParent<DeadAI>().createForce();
+			}
 			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
 			{
 				other.GetComponentInParent<AIMaster>().changeMat3();

@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\CastRays.cs" />
+     <Compile Include="Assets\Scripts\AI\DeadAI.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogRigh.cs" />
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
