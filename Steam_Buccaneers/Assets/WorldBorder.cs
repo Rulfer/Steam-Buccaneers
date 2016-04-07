@@ -20,8 +20,8 @@ public class WorldBorder : MonoBehaviour
 				GameControl.control.health = -1;
 			}
 			theText.text = "Return to the playable area!" + "\r\n";
-			theText.text += "You will die in       " + "     seconds.";
-			numberText.text = "\r\n" + "                                            " + (Mathf.Round(killDuration * 100f) / 100f).ToString();
+			theText.text += "You will die in         " + "seconds.";
+			numberText.text = (Mathf.Round(killDuration * 100f) / 100f).ToString();
 		}
 		else
 		{

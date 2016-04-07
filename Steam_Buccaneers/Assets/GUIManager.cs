@@ -5,25 +5,11 @@ public class GUIManager : MonoBehaviour {
 	public RenderTexture miniMapTexture;
 	public Material miniMapMaterial;
 
-	public Camera minimapCamera;
-
 	private float offset;
 
 	// Use this for initialization
 	void Awake () {
 		offset = 10;
-	}
-
-	public void zoomOut()
-	{
-		if(minimapCamera.orthographicSize < 500)
-			minimapCamera.orthographicSize += 50;
-	}
-
-	public void zoomIn()
-	{
-		if(minimapCamera.orthographicSize > 100)
-			minimapCamera.orthographicSize -= 50;
 	}
 	
 	// Update is called once per frame

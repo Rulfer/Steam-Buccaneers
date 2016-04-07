@@ -275,7 +275,7 @@ public class SpawnAI : MonoBehaviour
 
 	void spawnCargo()
 	{
-		if(livingCargo == false)
+		if(livingCargo == false && stopSpawn == false)
 		{
 			livingCargo = true;
 			setCannonLevel();
