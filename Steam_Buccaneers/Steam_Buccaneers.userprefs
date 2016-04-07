@@ -1,13 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUIManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World\ChangeScene.cs">
     <Files>
-      <File FileName="Assets\GUIManager.cs" Line="22" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Scene\GoBack.cs" Line="2" Column="26" />
+      <File FileName="Assets\Scripts\World\ChangeScene.cs" Line="3" Column="1" />
+      <File FileName="Assets\GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="56" Column="1" />
       <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\AIMove scripts\AImove.cs" Line="1" Column="1" />
       <File FileName="Assets\MinimapCameraScript.cs" Line="1" Column="1" />
       <File FileName="Assets\MiniMap\MaskShader.shader" Line="1" Column="1" />
+      <File FileName="Assets\newGame.cs" Line="9" Column="1" />
+      <File FileName="Assets\QuitScript.cs" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="74" Column="2" />
+      <File FileName="Assets\Scripts\AI\Weapons\AIsideCanons.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\Weapons\bombHitSomething.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
