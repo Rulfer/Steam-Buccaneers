@@ -263,7 +263,7 @@ public class SpawnAI : MonoBehaviour
 		Vector3 playerDirection = playerPoint.transform.forward;
 		Quaternion playerRotation = playerPoint.transform.rotation;
 		float spawnDistance = 200;
-		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance *-1;
+		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance;
 
 		Collider[] colliders = Physics.OverlapSphere(spawnPos, 10);
 		if(colliders.Length == 0)

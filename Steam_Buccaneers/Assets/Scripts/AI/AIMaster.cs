@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class AIMaster : MonoBehaviour 
 {
-	//private SpawnAI.SpawnAI SpawnAI.spawn;
 	public GameObject scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
@@ -35,12 +34,14 @@ public class AIMaster : MonoBehaviour
 	public AudioClip clip;
 	public AudioSource source;
 	public bool isDead = false;
+	public bool sourcePlaying = false;
 
 	void Start () 
 	{
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
+		source = this.GetComponent<AudioSource>();
 	}
 	
 	void Update () 
@@ -93,6 +94,15 @@ public class AIMaster : MonoBehaviour
 			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 				killAbsentAI();
 		}
+//		else
+//		{
+//			if(source.isPlaying == true)
+//			{
+//				sourcePlaying = true;
+//			}
+//			else
+//				sourcePlaying = false;
+//		}
 	}
 
 	public void reactivatePatroling()
@@ -291,6 +301,18 @@ public class AIMaster : MonoBehaviour
 		Instantiate(boom, this.transform.position, this.transform.rotation);
 		boom.GetComponent<DeleteParticles>().killDuration = 3;
 
+//		this.GetComponent<DeadAI>().axisOfRotation = this.GetComponent<Rigidbody>().angularVelocity;
+//		//this.GetComponent<DeadAI>().axisOfRotation = this.GetComponent<Rigidbody>().velocity.x ;
+//		float xSpeed = this.GetComponent<Rigidbody>().velocity.x;
+//		float zSpeed = this.GetComponent<Rigidbody>().velocity.z;
+//		if(xSpeed < 0)
+//			xSpeed *= -1;
+//		if(zSpeed < 0)
+//			zSpeed *= -1;
+//		float speed = xSpeed + zSpeed;
+//		this.GetComponent<DeadAI>().angularVelocity = speed;
+
+		this.GetComponent<DeadAI>().enabled = true;
 		deactivateAI();
 
 		source.clip = clip;
@@ -343,7 +365,7 @@ public class AIMaster : MonoBehaviour
 		this.GetComponent<AImove>().enabled = false;
 		this.GetComponent<AIavoid>().enabled = false;
 		this.GetComponent<AIPatroling>().enabled = false;
-		this.GetComponent<AIMaster>().enabled = false;
+		//this.GetComponent<AIMaster>().enabled = false;
 		this.GetComponent<DeadAI>().enabled = true;
 		kill.gameObject.SetActive(false);
 	}

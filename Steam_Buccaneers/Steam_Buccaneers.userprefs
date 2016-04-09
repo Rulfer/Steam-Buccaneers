@@ -1,17 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Minimap\ZoomMinimap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\DeadAI.cs">
     <Files>
-      <File FileName="Assets\Scripts\Minimap\ZoomMinimap.cs" Line="11" Column="8" />
-      <File FileName="Assets\Scripts\World\SpawnTreasureShip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\ChangeScene.cs" Line="1" Column="1" />
-      <File FileName="Assets\GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIMove scripts\AImove.cs" Line="1" Column="1" />
-      <File FileName="Assets\MinimapCameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\MiniMap\MaskShader.shader" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\TreasureShip.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="294" Column="1" />
+      <File FileName="Assets\Scripts\AI\Weapons\AIprojectile.cs" Line="45" Column="4" />
+      <File FileName="Assets\Scripts\AI\DeadAI.cs" Line="16" Column="16" NotebookId="1" />
+      <File FileName="Assets\Scripts\EngineFlames.cs" Line="69" Column="43" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI\ScrapRandomDirection.cs" Line="23" Column="26" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

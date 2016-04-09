@@ -6,12 +6,18 @@ public class DeadAI : MonoBehaviour {
 	GameObject playerPos;
 	float distance;
 	public Vector3 axisOfRotation;
-	public Vector3 angularVelocity;
+	public float angularVelocity;
+
+	private float rotateTimer = 0;
+	private float rotateDuration = 5;
 
 	// Use this for initialization
 	void Start () 
 	{
 		playerPos = GameObject.Find("PlayerShip");
+		axisOfRotation = Random.onUnitSphere;
+		angularVelocity = Random.Range (20, 40);
+
 	}
 
 	void Update()
@@ -21,8 +27,9 @@ public class DeadAI : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
-
-		this.transform.Rotate(axisOfRotation, angularVelocity * Time.smoothDeltaTime); //Rotates the object
+		rotateDuration -= Time.deltaTime;
+		if(rotateDuration > rotateTimer)
+			this.transform.Rotate(axisOfRotation, angularVelocity * Time.smoothDeltaTime * rotateDuration * 0.5f); //Rotates the object
 
 	}
 }

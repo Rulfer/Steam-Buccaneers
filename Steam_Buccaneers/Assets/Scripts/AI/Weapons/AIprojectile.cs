@@ -96,7 +96,7 @@ public class AIprojectile : MonoBehaviour {
 			}
 			else
 			{
-				if(other.GetComponent<AIMaster>().source.isPlaying == false)
+				if(other.GetComponentInParent<AIMaster>().source.isPlaying == false)
 				{
 					int tempSound = Random.Range(0, 3);
 					source.clip = hitSounds[tempSound];
