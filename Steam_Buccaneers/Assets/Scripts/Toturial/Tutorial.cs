@@ -104,7 +104,7 @@ public class Tutorial : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
-		buttonEvents = GameObject.Find ("Canvas_ingame").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
 		nameLeftPos = new Vector3(115.0f, -25.0f);

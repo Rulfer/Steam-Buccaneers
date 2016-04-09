@@ -6,6 +6,6 @@ public class newGame : MonoBehaviour {
 
 	public void starNewGame()
 	{
-		SceneManager.LoadScene ("Tutorial");
+		GameControl.control.ChangeScene ("Tutorial");
 	}
 }

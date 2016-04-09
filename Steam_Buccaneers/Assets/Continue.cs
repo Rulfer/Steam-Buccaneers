@@ -7,6 +7,6 @@ public class Continue : MonoBehaviour {
 	// Use this for initialization
 	public void startWorldMaster () 
 	{
-		SceneManager.LoadScene ("WorldMaster");
+		GameControl.control.ChangeScene ("WorldMaster");
 	}
 }

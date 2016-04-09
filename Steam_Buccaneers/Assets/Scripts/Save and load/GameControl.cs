@@ -20,6 +20,10 @@ public class GameControl : MonoBehaviour {
 	public int specialAmmo;
 	public int thrusterUpgrade;
 
+	public GameObject loadingCanvas;
+
+	private AsyncOperation async;
+
 	void Awake () 
 	{
 		//Using awake() here since it happens before Start(). Since this has to do with loading new scene and keeping the data, it is important to have it as early as possible.
@@ -184,7 +188,15 @@ public class GameControl : MonoBehaviour {
 	public void ChangeScene(string name)
 	{
 		//Changes scene to parameter
-		SceneManager.LoadScene (name);
+		loadingCanvas.SetActive(true);
+		StartCoroutine(LoadingScreen(name));
+	}
+
+	IEnumerator LoadingScreen(string sceneName)
+	{
+		async = SceneManager.LoadSceneAsync (sceneName);
+		Debug.Log ("Load progress = " + async.progress);
+		yield return async;
 	}
 
 	private float[] Vector3toFloats(Vector3 vec3)
