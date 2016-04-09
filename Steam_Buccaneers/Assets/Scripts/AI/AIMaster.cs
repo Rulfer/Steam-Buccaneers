@@ -10,7 +10,7 @@ public class AIMaster : MonoBehaviour
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
 	public GameObject boom;
-	public GameObject dummy;
+	public GameObject kill;
 
 	public Material mat2;
 	public Material mat3;
@@ -32,6 +32,10 @@ public class AIMaster : MonoBehaviour
 	public int arrayIndex;
 	private int ranNum;
 
+	public AudioClip clip;
+	public AudioSource source;
+	public bool isDead = false;
+
 	void Start () 
 	{
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
@@ -41,51 +45,54 @@ public class AIMaster : MonoBehaviour
 	
 	void Update () 
 	{
-		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
-
-		if(detectDistance < aiRadar - 100)
+		if(isDead == false)
 		{
-			if(isCargo == false)
-				this.GetComponent<AImove>().force = PlayerMove2.move.force;
-		}
+			detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(isBoss == false)
-		{
-			if(detectedPlayer == false)
+			if(detectDistance < aiRadar - 100)
 			{
-				if(detectDistance < aiRadar)
+				if(isCargo == false)
+					this.GetComponent<AImove>().force = PlayerMove2.move.force;
+			}
+
+			if(isBoss == false)
+			{
+				if(detectedPlayer == false)
 				{
-					if(SceneManager.GetActiveScene().name != "Tutorial")
+					if(detectDistance < aiRadar)
 					{
-						if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+						if(SceneManager.GetActiveScene().name != "Tutorial")
+						{
+							if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+							{
+								isFighting = true;
+								deaktivatePatroling();
+							}
+							else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
+								thisAIFlee();
+						}
+						else
 						{
 							isFighting = true;
 							deaktivatePatroling();
 						}
-						else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
-							thisAIFlee();
-					}
-					else
-					{
-						isFighting = true;
-						deaktivatePatroling();
 					}
 				}
+				else
+				{
+					if(detectDistance > aiRadar + 50)
+						reactivatePatroling();
+				}
 			}
-			else
+			else if(isBoss == true)
 			{
-				if(detectDistance > aiRadar + 50)
-					reactivatePatroling();
+				isFighting = true;
+				deaktivatePatroling();
 			}
-		}
-		else if(isBoss == true)
-		{
-			isFighting = true;
-			deaktivatePatroling();
-		}
 
-		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
-			killAbsentAI();
+			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
+				killAbsentAI();
+		}
 	}
 
 	public void reactivatePatroling()
@@ -281,13 +288,14 @@ public class AIMaster : MonoBehaviour
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
-		//Instantiate(boom, this.transform.position, this.transform.rotation);
-		//boom.GetComponent<DeleteParticles>().killDuration = 3;
-		Instantiate(dummy, this.transform.position, this.transform.rotation);
-		this.GetComponent<AImove>().enabled = false;
-		this.GetComponent<AIavoid>().enabled = false;
-		this.GetComponent<AIPatroling>().enabled = false;
-		Destroy(this.gameObject);
+		Instantiate(boom, this.transform.position, this.transform.rotation);
+		boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+		deactivateAI();
+
+		source.clip = clip;
+		source.Play();
+		isDead = true;
 
 		if (GameObject.Find ("TutorialControl") != null)
 		{
@@ -328,5 +336,15 @@ public class AIMaster : MonoBehaviour
 				testedFleeing = true;
 			}
 		}
+	}
+
+	private void deactivateAI()
+	{
+		this.GetComponent<AImove>().enabled = false;
+		this.GetComponent<AIavoid>().enabled = false;
+		this.GetComponent<AIPatroling>().enabled = false;
+		this.GetComponent<AIMaster>().enabled = false;
+		this.GetComponent<DeadAI>().enabled = true;
+		kill.gameObject.SetActive(false);
 	}
 }

@@ -3,19 +3,26 @@ using System.Collections;
 
 public class DeadAI : MonoBehaviour {
 
-	private Rigidbody rb;
-	public Vector3 forcePos;
-	public float force = 5;
+	GameObject playerPos;
+	float distance;
+	public Vector3 axisOfRotation;
+	public Vector3 angularVelocity;
+
 	// Use this for initialization
 	void Start () 
 	{
-		rb = this.GetComponent<Rigidbody>();
+		playerPos = GameObject.Find("PlayerShip");
 	}
-	
-	public void createForce()
+
+	void Update()
 	{
-		rb.constraints = RigidbodyConstraints.None;
-		rb.constraints = RigidbodyConstraints.FreezePositionY;
-		rb.AddExplosionForce(force, forcePos, 2);
+		distance = Vector3.Distance(transform.position, playerPos.transform.position);
+		if(distance >= 100)
+		{
+			Destroy(gameObject);
+		}
+
+		this.transform.Rotate(axisOfRotation, angularVelocity * Time.smoothDeltaTime); //Rotates the object
+
 	}
 }

@@ -32,6 +32,7 @@ public class AIprojectile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		
 		distance = Vector3.Distance(transform.position, player.transform.position);
 
 		if (distance >= 500)
@@ -67,10 +68,6 @@ public class AIprojectile : MonoBehaviour {
 
 		if(other.tag == "aiShip") //The AI hit itself
 		{
-			int tempSound = Random.Range(0, 3);
-			source.clip = hitSounds[tempSound];
-			source.Play();
-
 			if(other.transform.root.name == "Cargo(Clone)")
 				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
 			
@@ -79,21 +76,35 @@ public class AIprojectile : MonoBehaviour {
 				SceneManager.LoadScene("cog_screen");
 			}
 
-			other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
+			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
-				other.GetComponentInParent<DeadAI>().forcePos = this.transform.position;
-				other.transform.GetComponentInParent<AIMaster>().killAI();
-				other.GetComponentInParent<DeadAI>().createForce();
+				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+				if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
+				{
+					other.transform.GetComponentInParent<AIMaster>().killAI();
+				}
+				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
+				{
+					other.GetComponentInParent<AIMaster>().changeMat3();
+					other.GetComponentInParent<AIMaster>().testFleeing();
+				}
+				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
+					other.GetComponentInParent<AIMaster>().changeMat2();
+				int tempSound = Random.Range(0, 3);
+				source.clip = hitSounds[tempSound];
+				source.Play();
 			}
-			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
+			else
 			{
-				other.GetComponentInParent<AIMaster>().changeMat3();
-				other.GetComponentInParent<AIMaster>().testFleeing();
+				if(other.GetComponent<AIMaster>().source.isPlaying == false)
+				{
+					int tempSound = Random.Range(0, 3);
+					source.clip = hitSounds[tempSound];
+					source.Play();
+				}
 			}
-			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
-				other.GetComponentInParent<AIMaster>().changeMat2();
-			
+
+
 			Instantiate(explotion, this.transform.position, this.transform.rotation);
 			this.GetComponent<MeshFilter>().mesh = null;
 			Destroy(this.gameObject, source.clip.length);
