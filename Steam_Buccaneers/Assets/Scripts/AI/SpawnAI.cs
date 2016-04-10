@@ -27,7 +27,6 @@ public class SpawnAI : MonoBehaviour
 	public bool livingCargo = false;
 
 	public static Vector3 spawnPosition; //Where the AI should spawn
-	public static Vector3 patrolPoint;
 
 	public int livingShips = 0;
 	public float startFightTimer = 0;
@@ -161,28 +160,6 @@ public class SpawnAI : MonoBehaviour
 				}
 			}
 		}
-
-		//Just add a bunch of tests like these to create definite upgraded guns criterias.
-		//By that I mean you can add more tests to guarantee that a minimum ammount of
-		//cannons are upgraded, and to what lvl.
-
-//		if(relativeOriginPosition > 200 && upgradedWapons < 2) //We need some guaranteed lvl2 weapons
-//		{
-//			while(upgradedWapons < 2) //There are too few upgraded cannons
-//			{
-//				if(livingCargo == false)
-//					ranNum = Random.Range(0, 6); //Create a random number from 0 to 5, as this is the array length
-//				else
-//					ranNum = Random.Range(0, 2);
-//				
-//				if(cannonUpgraded[ranNum] == false) //The cannon is not upgraded
-//				{
-//					cannonUpgraded[ranNum] = true; //It is now!
-//					cannonLevel[ranNum] = 2; //Set it to lvl 2
-//					upgradedWapons++; //Update ammount of upgraded weapons
-//				}
-//			}
-//		}
 	}
 
 	private Vector3 setPatrolPoint()
@@ -279,12 +256,12 @@ public class SpawnAI : MonoBehaviour
 		{
 			livingCargo = true;
 			setCannonLevel();
-			setPatrolPoint();
 
 			Instantiate(Cargo, cargoSpawnpoint(), playerPoint.transform.rotation);
 			//Cargo.transform.position = spawnPos;
 			Cargo.GetComponent<AIMaster>().isCargo = true;
-
+			Cargo.GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			Cargo.GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
 			float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 			Cargo.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
 			if(Cargo.GetComponent<AIMaster>().aiHealth < 20)
@@ -298,8 +275,7 @@ public class SpawnAI : MonoBehaviour
 	void spawnShip ()
 	{
 		Debug.Log("Spaning MARINE");
-		setCannonLevel();
-		patrolPoint = setPatrolPoint();
+
 		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
 		if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
@@ -307,8 +283,7 @@ public class SpawnAI : MonoBehaviour
 			if(livingShips < maxMarines)
 			{
 				livingShips++;
-
-
+				setCannonLevel();
 
 				for(int i = 0; i < marineShips.Length; i++)
 				{
@@ -318,7 +293,9 @@ public class SpawnAI : MonoBehaviour
 						temp.transform.position = marineSpawnpoint();
 						marineShips[i] = temp;
 						availableIndes[i] = false;
-
+						//marineShips[i].GetComponent<AIPatroling>().targetPos = patrolPoint;
+						marineShips[i].GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+						marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
 						float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
 						Debug.Log("Marine health: " + marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth);
