@@ -66,6 +66,5 @@ public class ShipHitObject : MonoBehaviour
 				}
 			}
 		}
-		Debug.Log("You lost " + healthLost + " due to a hit and run");
 	}
 }
