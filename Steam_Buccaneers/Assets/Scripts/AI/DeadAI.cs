@@ -23,7 +23,7 @@ public class DeadAI : MonoBehaviour {
 	void Update()
 	{
 		distance = Vector3.Distance(transform.position, playerPos.transform.position);
-		if(distance >= 100)
+		if(distance >= 250)
 		{
 			Destroy(gameObject);
 		}

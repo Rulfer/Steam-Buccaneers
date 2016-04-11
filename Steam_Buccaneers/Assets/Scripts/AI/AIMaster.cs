@@ -42,6 +42,7 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 		source = this.GetComponent<AudioSource>();
+		aiHealth = 1;
 	}
 	
 	void Update () 
