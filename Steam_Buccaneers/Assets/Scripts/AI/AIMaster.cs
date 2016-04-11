@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AIMaster : MonoBehaviour 
 {
-	public GameObject scrap;
+	public GameObject[] scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
 	public GameObject boom;
@@ -279,7 +279,9 @@ public class AIMaster : MonoBehaviour
 			temp = Random.Range(7, 15);
 		
 		for(int i = 0; i < temp; i++)
-			Instantiate(scrap, this.transform.position, this.transform.rotation);
+		{
+			Instantiate(scrap[Random.Range(0,4)], this.transform.position, this.transform.rotation);
+		}
 
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{

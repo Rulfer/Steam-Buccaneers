@@ -90,24 +90,36 @@ public class AIprojectile : MonoBehaviour {
 				}
 				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
 					other.GetComponentInParent<AIMaster>().changeMat2();
+				Instantiate(explotion, this.transform.position, this.transform.rotation);
+				this.GetComponent<MeshFilter>().mesh = null;
 				int tempSound = Random.Range(0, 3);
 				source.clip = hitSounds[tempSound];
 				source.Play();
+				Destroy(this.gameObject, source.clip.length);
 			}
 			else
 			{
 				if(other.GetComponentInParent<AIMaster>().source.isPlaying == false)
 				{
+					Instantiate(explotion, this.transform.position, this.transform.rotation);
+					this.GetComponent<MeshFilter>().mesh = null;
 					int tempSound = Random.Range(0, 3);
 					source.clip = hitSounds[tempSound];
 					source.Play();
+					Destroy(this.gameObject, source.clip.length);
+				}
+				else
+				{
+					Instantiate(explotion, this.transform.position, this.transform.rotation);
+					this.GetComponent<MeshFilter>().mesh = null;
+					Destroy(this.gameObject);
 				}
 			}
 
 
-			Instantiate(explotion, this.transform.position, this.transform.rotation);
-			this.GetComponent<MeshFilter>().mesh = null;
-			Destroy(this.gameObject, source.clip.length);
+//			Instantiate(explotion, this.transform.position, this.transform.rotation);
+//			this.GetComponent<MeshFilter>().mesh = null;
+//			Destroy(this.gameObject, source.clip.length);
 		}
 
 		if(other.tag == "shop" || other.tag == "Planet")

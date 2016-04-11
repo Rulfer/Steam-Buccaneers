@@ -10,7 +10,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 
 	private Rigidbody scrapRigid;
 
-	private int speed = 2500000;
+	private int speed = 1500000;
 	private int value; //How much money the player get from pickin up this scrap
 	public int killTimer = 2; //Changed in unity editor. Used to destroy this object after a given time
 

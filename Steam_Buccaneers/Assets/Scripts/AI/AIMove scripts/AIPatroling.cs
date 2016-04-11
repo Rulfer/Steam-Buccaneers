@@ -26,7 +26,6 @@ public class AIPatroling : MonoBehaviour {
 	void goToPoint()
 	{
 		Vector3 relativePoint = transform.InverseTransformPoint(target.transform.position);
-		Debug.Log("Point is " + relativePoint);
 		if(relativePoint.x >-0.1 && relativePoint.x < 0.1)
 		{
 			if(relativePoint.z >= 0)
