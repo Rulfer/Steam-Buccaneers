@@ -51,8 +51,7 @@ public class AIprojectile : MonoBehaviour {
 		{
 			if(CheatCodesScript.godMode == false)
 			{
-				int tempSound = Random.Range(0, 3);
-				source.clip = hitSounds[tempSound];
+				source.clip = hitSounds[Random.Range(0, 3)];
 				source.Play();
 
 				GameControl.control.health -= damageOutput;
@@ -92,8 +91,7 @@ public class AIprojectile : MonoBehaviour {
 					other.GetComponentInParent<AIMaster>().changeMat2();
 				Instantiate(explotion, this.transform.position, this.transform.rotation);
 				this.GetComponent<MeshFilter>().mesh = null;
-				int tempSound = Random.Range(0, 3);
-				source.clip = hitSounds[tempSound];
+				source.clip = hitSounds[Random.Range(0, 3)];
 				source.Play();
 				Destroy(this.gameObject, source.clip.length);
 			}
@@ -103,8 +101,7 @@ public class AIprojectile : MonoBehaviour {
 				{
 					Instantiate(explotion, this.transform.position, this.transform.rotation);
 					this.GetComponent<MeshFilter>().mesh = null;
-					int tempSound = Random.Range(0, 3);
-					source.clip = hitSounds[tempSound];
+					source.clip = hitSounds[Random.Range(0, 3)];
 					source.Play();
 					Destroy(this.gameObject, source.clip.length);
 				}
@@ -115,17 +112,11 @@ public class AIprojectile : MonoBehaviour {
 					Destroy(this.gameObject);
 				}
 			}
-
-
-//			Instantiate(explotion, this.transform.position, this.transform.rotation);
-//			this.GetComponent<MeshFilter>().mesh = null;
-//			Destroy(this.gameObject, source.clip.length);
 		}
 
 		if(other.tag == "shop" || other.tag == "Planet")
 		{
-			int tempSound = Random.Range(0, 3);
-			source.clip = hitSounds[tempSound];
+			source.clip = hitSounds[Random.Range(0, 3)];
 			if(this.gameObject != null)
 				source.Play();
 
