@@ -17,7 +17,7 @@ public class OrbitMeteorsInner : MonoBehaviour
 	void FixedUpdate () 
 	{
 		//this.transform.position = this.transform.parent.position;
-		this.transform.RotateAround (this.transform.parent.position, Vector3.up, .5f);
+		this.transform.RotateAround (this.transform.parent.position, Vector3.up, .25f);
 		this.transform.Rotate(rotateLocalVec * Random.Range(.5f,1f));
 	}
 }
