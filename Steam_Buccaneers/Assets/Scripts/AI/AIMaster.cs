@@ -95,15 +95,6 @@ public class AIMaster : MonoBehaviour
 			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 				killAbsentAI();
 		}
-//		else
-//		{
-//			if(source.isPlaying == true)
-//			{
-//				sourcePlaying = true;
-//			}
-//			else
-//				sourcePlaying = false;
-//		}
 	}
 
 	public void reactivatePatroling()

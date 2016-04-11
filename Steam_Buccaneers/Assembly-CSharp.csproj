@@ -45,11 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShaker.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Continue.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\GUIManager.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MusicControl.cs" />
