@@ -115,6 +115,7 @@
      <Compile Include="Assets\Scripts\World\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\World\SpawnTreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
+     <Compile Include="Assets\ShipHitObject.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />

@@ -42,7 +42,6 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 		source = this.GetComponent<AudioSource>();
-		aiHealth = 1;
 	}
 	
 	void Update () 
@@ -294,17 +293,6 @@ public class AIMaster : MonoBehaviour
 
 		Instantiate(boom, this.transform.position, this.transform.rotation);
 		boom.GetComponent<DeleteParticles>().killDuration = 3;
-
-//		this.GetComponent<DeadAI>().axisOfRotation = this.GetComponent<Rigidbody>().angularVelocity;
-//		//this.GetComponent<DeadAI>().axisOfRotation = this.GetComponent<Rigidbody>().velocity.x ;
-//		float xSpeed = this.GetComponent<Rigidbody>().velocity.x;
-//		float zSpeed = this.GetComponent<Rigidbody>().velocity.z;
-//		if(xSpeed < 0)
-//			xSpeed *= -1;
-//		if(zSpeed < 0)
-//			zSpeed *= -1;
-//		float speed = xSpeed + zSpeed;
-//		this.GetComponent<DeadAI>().angularVelocity = speed;
 
 		this.GetComponent<DeadAI>().enabled = true;
 		deactivateAI();
