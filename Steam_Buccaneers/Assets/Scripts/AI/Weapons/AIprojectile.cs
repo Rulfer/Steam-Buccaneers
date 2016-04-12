@@ -57,7 +57,7 @@ public class AIprojectile : MonoBehaviour {
 				GameControl.control.health -= damageOutput;
 				other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
 
-				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f); //This actually instantiates the camera shake. Do NOT remove this line of code. 
 
 				Instantiate(explotion, this.transform.position, this.transform.rotation);
 				this.GetComponent<MeshFilter>().mesh = null;
