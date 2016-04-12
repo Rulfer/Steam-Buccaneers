@@ -7,7 +7,6 @@ public class TreasureShip : MonoBehaviour
 	Vector3 randomSpawnVec;
 	public GameObject scrap;
 	public GameObject player;
-	float deleteTimer;
 	float distanceAway;
 	int xRot;
 	int yRot;
@@ -33,7 +32,7 @@ public class TreasureShip : MonoBehaviour
 			randomSpawnVec  = new Vector3 (this.transform.position.x + Random.Range(-20f, 20f), 0f, 
 				this.transform.position.z + Random.Range(-20f, 20f));
 			Instantiate (scrap, randomSpawnVec, this.transform.rotation);
-			deleteTimer = 60;
+
 
 
 			//Spawns the scrap around the treasure ship
@@ -43,19 +42,7 @@ public class TreasureShip : MonoBehaviour
 
 	
 	}
-	/*
-	void Timer ()
-	{
-		//timeLeft = nextSpawnIn;
-		//timeLeft -= Time.deltaTime;
-		deleteTimer -= Time.deltaTime;
 
-		if (deleteTimer <= 0f)
-		{
-			Destroy (gameObject);
-		}
-
-	}*/
 	
 	// Update is called once per frame
 	void Update () 
