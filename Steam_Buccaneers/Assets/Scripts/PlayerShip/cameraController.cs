@@ -24,7 +24,7 @@ public class cameraController : MonoBehaviour
 	void Update () 
 	{
 
-		if(Input.GetKeyDown
+		//if(Input.GetKeyDown
 
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
