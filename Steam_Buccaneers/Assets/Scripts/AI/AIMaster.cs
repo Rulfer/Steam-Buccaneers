@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class AIMaster : MonoBehaviour 
 {
-	//private SpawnAI.SpawnAI SpawnAI.spawn;
-	public GameObject scrap;
+	public GameObject[] scrap;
 	public GameObject aiModelObject;
 	private GameObject playerPoint;
+	public GameObject boom;
+	public GameObject kill;
 
 	public Material mat2;
 	public Material mat3;
@@ -30,60 +31,69 @@ public class AIMaster : MonoBehaviour
 	public int arrayIndex;
 	private int ranNum;
 
+	public AudioClip clip;
+	public AudioSource source;
+	public bool isDead = false;
+	public bool sourcePlaying = false;
+
 	void Start () 
 	{
 		playerPoint = GameObject.FindGameObjectWithTag ("Player"); //As the player is a prefab, I had to add it to the variable this way
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
+		source = this.GetComponent<AudioSource>();
 	}
 	
 	void Update () 
 	{
-		detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
-
-		if(detectDistance < aiRadar - 100)
+		if(isDead == false)
 		{
-			if(isCargo == false)
-				this.GetComponent<AImove>().force = PlayerMove2.move.force;
-		}
+			detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
 
-		if(isBoss == false)
-		{
-			if(detectedPlayer == false)
+			if(detectDistance < aiRadar - 100)
 			{
-				if(detectDistance < aiRadar)
+				if(isCargo == false)
+					this.GetComponent<AImove>().force = PlayerMove2.move.force;
+			}
+
+			if(isBoss == false)
+			{
+				if(detectedPlayer == false)
 				{
-					if(SceneManager.GetActiveScene().name != "Tutorial")
+					if(detectDistance < aiRadar)
 					{
-						if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+						if(SceneManager.GetActiveScene().name != "Tutorial")
+						{
+							if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+							{
+								isFighting = true;
+								deaktivatePatroling();
+							}
+							else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
+								thisAIFlee();
+						}
+						else
 						{
 							isFighting = true;
 							deaktivatePatroling();
 						}
-						else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
-							thisAIFlee();
-					}
-					else
-					{
-						isFighting = true;
-						deaktivatePatroling();
 					}
 				}
+				else
+				{
+					if(detectDistance > aiRadar + 50)
+						reactivatePatroling();
+				}
 			}
-			else
+			else if(isBoss == true)
 			{
-				if(detectDistance > aiRadar + 50)
-					reactivatePatroling();
+				isFighting = true;
+				deaktivatePatroling();
 			}
-		}
-		else if(isBoss == true)
-		{
-			isFighting = true;
-			deaktivatePatroling();
-		}
 
-		if(detectDistance > 350)//If the distance is greater than this number, delete this AI
-			killAbsentAI();
+			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
+				killAbsentAI();
+		}
 	}
 
 	public void reactivatePatroling()
@@ -259,7 +269,9 @@ public class AIMaster : MonoBehaviour
 			temp = Random.Range(7, 15);
 		
 		for(int i = 0; i < temp; i++)
-			Instantiate(scrap, this.transform.position, this.transform.rotation);
+		{
+			Instantiate(scrap[Random.Range(0,4)], this.transform.position, this.transform.rotation);
+		}
 
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
@@ -279,7 +291,15 @@ public class AIMaster : MonoBehaviour
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
-		Destroy(this.gameObject);
+		Instantiate(boom, this.transform.position, this.transform.rotation);
+		boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+		this.GetComponent<DeadAI>().enabled = true;
+		deactivateAI();
+
+		source.clip = clip;
+		source.Play();
+		isDead = true;
 
 		if (GameObject.Find ("TutorialControl") != null)
 		{
@@ -320,5 +340,15 @@ public class AIMaster : MonoBehaviour
 				testedFleeing = true;
 			}
 		}
+	}
+
+	private void deactivateAI()
+	{
+		this.GetComponent<AImove>().enabled = false;
+		this.GetComponent<AIavoid>().enabled = false;
+		this.GetComponent<AIPatroling>().enabled = false;
+		//this.GetComponent<AIMaster>().enabled = false;
+		this.GetComponent<DeadAI>().enabled = true;
+		kill.gameObject.SetActive(false);
 	}
 }

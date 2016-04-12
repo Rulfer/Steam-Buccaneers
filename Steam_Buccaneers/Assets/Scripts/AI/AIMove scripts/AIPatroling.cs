@@ -5,17 +5,21 @@ using System.Collections;
 public class AIPatroling : MonoBehaviour {
 
 	public GameObject target;
+//	public GameObject targetPos;
 
 	void Start () 
 	{
-		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		target.transform.position = SpawnAI.patrolPoint;
+//		target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+//		target.transform.position = targetPos;
 	}
 
 	void Update () 
 	{
 		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false)
-			goToPoint();
+		{
+			if(target != null)
+				goToPoint();
+		}
 	}
 
 
