@@ -20,7 +20,7 @@ public class StoreLauncher : MonoBehaviour {
 					//Saves the store name
 					GameControl.control.storeName = this.name;
 					//Writes data to file in GameControl.cs
-					GameControl.control.Save (this.name);
+					GameControl.control.Save ("null");
 					//Write whatever scene we want to go to here
 					GameControl.control.ChangeScene("Shop");
 					ChangeScene.inShop = true;
@@ -33,6 +33,7 @@ public class StoreLauncher : MonoBehaviour {
 				//Saves the store name
 				GameControl.control.storeName = this.name;
 				//Writes data to file in GameControl.cs
+				Debug.Log(GameObject.Find(this.name));
 				GameControl.control.Save (this.name);
 
 				AI = GameObject.FindGameObjectsWithTag("aiShip");

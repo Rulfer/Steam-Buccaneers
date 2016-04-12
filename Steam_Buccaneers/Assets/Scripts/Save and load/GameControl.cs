@@ -20,8 +20,13 @@ public class GameControl : MonoBehaviour {
 	public int specialAmmo;
 	public int thrusterUpgrade;
 
+	public GameObject loadingCanvas;
+
+	private AsyncOperation async;
+
 	void Awake () 
 	{
+		
 		//Using awake() here since it happens before Start(). Since this has to do with loading new scene and keeping the data, it is important to have it as early as possible.
 		//if controller doesnt exists it will be made.
 		if (control == null) 
@@ -58,15 +63,12 @@ public class GameControl : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		Debug.Log ("Level loaded");
-		if (SceneManager.GetActiveScene ().name == "Shop")
+
+		if (SceneManager.GetActiveScene ().name == "WorldMaster")
 		{
-			Save (storeName);
-		} 
-//		else if (SceneManager.GetActiveScene ().name == "WorldMaster")
-//		{
-//			Debug.Log ("Load WorldMaster");
-//			Load ();
-//		}
+			Debug.Log ("Load WorldMaster");
+			Load ();
+		}
 	}
 
 	//Makes Gui on launch of program
@@ -102,16 +104,22 @@ public class GameControl : MonoBehaviour {
 	{
 		//Updates controller with current data. Here posstions to player
 		//First checks if it is a storesave. If it is not, it will save player position instead of store.
-		if (storeName != "null") 
+		Debug.Log("Store = " + storeName);
+		if (storeName == "exit_store")
 		{
-			GameObject goP = GameObject.Find (storeName);
-			Debug.Log ("Saving store: " + goP);
-			//GameControl.control.shipPos = goP.transform.position+(Vector3.forward*70);
+
+		} 
+		else if (storeName == "null")
+		{
+			GameControl.control.shipPos = new Vector3 (0, 0, 2963);
 		} 
 		else 
 		{
-			GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-			GameControl.control.shipPos = goP.transform.position;
+			Debug.Log (GameObject.Find (storeName));
+			GameObject goP = GameObject.Find (storeName);
+			Debug.Log ("Saving store: " + goP);
+			GameControl.control.shipPos = goP.transform.position + (Vector3.forward * 70);
+			Debug.Log ("Saving pos: " + GameControl.control.shipPos);
 		}
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
 		//Writes data to file in GameControl.cs
@@ -133,13 +141,15 @@ public class GameControl : MonoBehaviour {
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.ohhijohnny")) 
 		{
 			//Makes binaryformatter to be able to convert binary into data
-			BinaryFormatter bf = new BinaryFormatter ();
+			BinaryFormatter bf = new BinaryFormatter();
 			//Opens file. Application.persistentDataPath is unity general savingplace for files. (Somewhere in appdata on windows)
 			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.ohhijohnny", FileMode.Open);
+			Debug.Log ("Load savefile");
 			//Deserializes the binaryfile to playerdata. 
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			//Close file after reading
 			file.Close ();
+			Debug.Log ("Write data");
 			loadData(data);
 		}
 	}
@@ -148,23 +158,46 @@ public class GameControl : MonoBehaviour {
 	{
 		//sets lokal data posisions to what we read of.
 		shipPos = FloatstoVector3(data.shipPos);
+		Debug.Log ("Set shippos = " + shipPos);
 		//Update gameobjects with loaded data
 		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+		Debug.Log ("Player ship = " + goP);
 		goP.transform.root.position = FloatstoVector3(data.shipPos);
+		Debug.Log ("Player ship position = " + goP.transform.root.position);
 		goP.transform.rotation = Quaternion.Euler(0, 0,0);
+		Debug.Log ("Set shiprotation = " + goP.transform.rotation);
 		goP.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
+		Debug.Log ("Set shipvelocity = " + goP.GetComponentInParent<Rigidbody>().velocity);
 		health = data.health;
 		money = data.money;
+		Debug.Log ("Player health and money = " + health + ", " + money);
 		canonUpgrades = data.canonUpgrades;
+		Debug.Log ("Canonupgrades = " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3]+ ", " + canonUpgrades[4]+ ", " + canonUpgrades[5]);
 		hullUpgrade = data.hullUpgrade;
+		Debug.Log ("HullUpgrade = " + hullUpgrade);
 		specialAmmo = data.specialAmmo;
+		Debug.Log ("Spess ammo = " + specialAmmo);
 		thrusterUpgrade = data.thrusterUpgrade;
+		Debug.Log ("Thruster = " + thrusterUpgrade);
+	}
+
+	public void newGame()
+	{
+		File.Delete (Application.persistentDataPath + "/playerInfo.ohhijohnny");
 	}
 
 	public void ChangeScene(string name)
 	{
 		//Changes scene to parameter
-		SceneManager.LoadScene (name);
+		loadingCanvas.SetActive(true);
+		StartCoroutine(LoadingScreen(name));
+	}
+
+	IEnumerator LoadingScreen(string sceneName)
+	{
+		async = SceneManager.LoadSceneAsync (sceneName);
+		Debug.Log ("Load progress = " + async.progress);
+		yield return async;
 	}
 
 	private float[] Vector3toFloats(Vector3 vec3)
