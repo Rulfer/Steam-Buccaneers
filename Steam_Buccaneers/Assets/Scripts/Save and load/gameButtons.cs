@@ -7,15 +7,33 @@ public class gameButtons : MonoBehaviour {
 	public GameObject escMenu;
 	private int i = 0;
 
+	void OnLevelWasLoaded(int level)
+	{
+		i = 0;
+	}
+
 	void Update()
 	{
 		if (i == 1)
 		{
-			escMenu = GameObject.Find ("menu");
-			GameObject.Find ("menu").SetActive (false);
-			Debug.Log (escMenu + "Is alive!");
-			i++;
+			Debug.Log (SceneManager.GetActiveScene ().name);
+			if (SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene ().name != "Shop")
+			{
+				escMenu = GameObject.Find ("menu");
+				GameObject.Find ("menu").SetActive (false);
+				Debug.Log (escMenu + "Is alive!");
+				i++;
+			}
+
 		}
+		if (i == 10)
+		{
+			if (GameControl.control.loadingCanvas.activeSelf == true)
+			{
+				GameControl.control.loadingCanvas.SetActive (false);
+			}
+		}
+
 		//Debug.Log (escMenu);
 	if (Input.GetKeyDown (KeyCode.Escape))
 		{

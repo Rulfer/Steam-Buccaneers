@@ -55,6 +55,6 @@ public class PointTowards : MonoBehaviour
 		//   a full projection onto the plane
 
 		float fAngle = Mathf.Atan2 (v3Pos.x, v3Pos.y);
-		this.transform.localEulerAngles = new Vector3(0.0f, 0.0f, (-fAngle * Mathf.Rad2Deg)+180.0f);
+		this.transform.localEulerAngles = new Vector3(0.0f, 0.0f, (-fAngle * Mathf.Rad2Deg));
 	}
 }
