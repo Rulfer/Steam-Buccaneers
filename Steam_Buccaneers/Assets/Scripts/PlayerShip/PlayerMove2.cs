@@ -15,10 +15,6 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool goingForward = false;
 
 	public bool steerShip;
-	Ray ray;
-	RaycastHit hit;
-	Vector3 rayDown = new Vector3 (0f, -1f, 0f);
-	LayerMask layer = 1 << 8;
 
 	public static bool hitBomb = false;
 	private float bombTimer = 0;
@@ -48,13 +44,7 @@ public class PlayerMove2 : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		//Debug.Log (steerShip);
-		//OutOfBounds ();
-		//Debug.Log (turnLeft);
-		//Debug.Log (Small_Ship.transform.position);
-		//Debug.Log ("x: " + donger.velocity.x);
-		//Debug.Log ("z: " + donger.velocity.z);
-		//Debug.Log (maxVelocity.x);
+
 		if(hitBomb == true)
 		{
 			bombTimer += Time.deltaTime;
@@ -203,48 +193,5 @@ public class PlayerMove2 : MonoBehaviour
 			GameControl.control.health = 0;
 		}
 	}
-	/*
-	void OutOfBounds ()
-	{
-		if (Physics.Raycast(this.transform.position, rayDown, out hit, Mathf.Infinity, layer))
-		{
-			if (hit.transform.tag == ("playerBorder"))
-			{
-				steerShip = true;
-			}
-		}
-			
-		else
-		{
-			steerShip = false;
-			if (donger.transform.position.x > 0) 
-			{
-				if (donger.transform.localEulerAngles.y <= 0f || donger.transform.localEulerAngles.y >= 270f) 
-				{
-					turnLeft = true;
-					transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
-					if (donger.transform.localEulerAngles.y <= 270f) 
-					{
-						turnLeft = false;
-					}
-				}
-			}
-			//donger.AddForce(transform.forward * force*Time.deltaTime);
 
-
-			if (donger.transform.position.x < 0)
-			{
-				turnRight = false;
-				if (donger.transform.localEulerAngles.y >= 0f || donger.transform.localEulerAngles.y <= 90f)
-				{
-					turnRight = true;
-					transform.Rotate(Vector3.up, turnSpeed*Time.deltaTime);
-					if (donger.transform.localEulerAngles.y >= 90f)
-					{
-						turnRight = false;
-					}
-				}
-			}
-		}
-	}*/
 }
