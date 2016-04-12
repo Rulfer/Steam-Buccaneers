@@ -99,12 +99,12 @@ public class Tutorial : MonoBehaviour
 
 	void Start ()
 	{
-		marineCharacterWindow.SetActive (false);
+		//marineCharacterWindow.SetActive (false);
 		//Initialize functions
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
-		buttonEvents = GameObject.Find ("Canvas_ingame").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
 		nameLeftPos = new Vector3(115.0f, -25.0f);
@@ -295,6 +295,10 @@ public class Tutorial : MonoBehaviour
 		//Pause, activate guns and other stuff here
 		switch (stage) 
 		{
+		case(1):
+			GameObject.Find ("Portrett2_marine").GetComponent<Animator> ().SetBool ("isAngryMarine", true);
+			Debug.Log ("Change mood");
+			break;
 		case(9):
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
