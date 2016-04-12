@@ -448,8 +448,9 @@ public class Tutorial : MonoBehaviour
 
 	public void countingDownScrap()
 	{
-		Debug.Log ("Scraps left to pick up: " + scrapCount);
+
 		scrapCount--;
+		Debug.Log ("Scraps left to pick up: " + scrapCount);
 
 		if (scrapCount <= 0)
 		{

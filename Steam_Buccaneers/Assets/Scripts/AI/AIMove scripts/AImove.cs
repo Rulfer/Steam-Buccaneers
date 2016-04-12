@@ -24,11 +24,6 @@ public class AImove : MonoBehaviour {
 
 	private GameObject player;
 	public Vector3 relativePoint;
-	/// <summary>
-	/// Is now changed via AIMaster.cs.
-	/// We want the AI to move extra fast once spawned, and slower
-	/// when it has reached the player.
-	/// </summary>
 	public Vector3 maxVelocity;
 
 

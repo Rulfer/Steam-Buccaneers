@@ -16,7 +16,7 @@ public class BombHitSomething : MonoBehaviour {
 		if(other.tag == "Player") //It hit the player!
 		{
 			GameControl.control.health -= 10; //Remove 10 health from the player
-			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(2, 5, 0.10f, 0.8f);
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(2, 5, 0.10f, 0.8f); //This actually instantiates the camera shake. Do NOT remove this line of code. 
 		}
 		if(other.tag == "aiShip") //It hit the AI
 		{
