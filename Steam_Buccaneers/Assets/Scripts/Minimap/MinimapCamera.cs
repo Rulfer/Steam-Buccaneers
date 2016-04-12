@@ -9,8 +9,8 @@ public class MinimapCamera : MonoBehaviour {
 	public RenderTexture minimapTexture;
 	public GameObject ingameCanvas;
 	public GameObject minimap;
+	public GameObject mapCanvas;
 	public LayerMask bigMapLayer;
-	public LayerMask[] minimapLayer;
 	// Use this for initialization
 	void Start () 
 	{
@@ -39,14 +39,15 @@ public class MinimapCamera : MonoBehaviour {
 		isMinimap = false;
 		Time.timeScale = 0;
 		ortSize = this.GetComponent<Camera>().orthographicSize;
-		this.transform.position = new Vector3(0, 700, 7220);
-		this.transform.rotation = Quaternion.Euler(90, -90, 0);
-		this.GetComponent<Camera>().orthographicSize = 4000;
+		//this.transform.position = new Vector3(0, 700, 7220);
+		//this.transform.rotation = Quaternion.Euler(90, -90, 0);
+		//this.GetComponent<Camera>().orthographicSize = 4000;
 		this.GetComponent<Camera>().targetTexture = null;
-	//	this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
-		this.GetComponent<Camera>().cullingMask = bigMapLayer;
-		ingameCanvas.SetActive(false);
-		minimap.SetActive(false);
+		this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
+	//	this.GetComponent<Camera>().cullingMask = bigMapLayer;
+	//	ingameCanvas.SetActive(false);
+		mapCanvas.SetActive(true);
+	//	minimap.SetActive(false);
 	}
 
 	void deactivateBigMap()
@@ -55,6 +56,7 @@ public class MinimapCamera : MonoBehaviour {
 		Time.timeScale = 1;
 		ingameCanvas.SetActive(true);
 		minimap.SetActive(true);
+		mapCanvas.SetActive(false);
 		this.transform.rotation = Quaternion.Euler(90, 0, 0);
 		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
