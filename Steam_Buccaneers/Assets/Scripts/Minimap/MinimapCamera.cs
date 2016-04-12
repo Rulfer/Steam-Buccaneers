@@ -9,13 +9,14 @@ public class MinimapCamera : MonoBehaviour {
 	public RenderTexture minimapTexture;
 	public GameObject ingameCanvas;
 	public GameObject minimap;
+	public LayerMask bigMapLayer;
+	public LayerMask[] minimapLayer;
 	// Use this for initialization
 	void Start () 
 	{
 		player = GameObject.Find("PlayerShip");
 		yPos = 500;
 		StartCoroutine(PauseCoroutine());
-
 	}
 
 	IEnumerator PauseCoroutine()
@@ -38,10 +39,12 @@ public class MinimapCamera : MonoBehaviour {
 		isMinimap = false;
 		Time.timeScale = 0;
 		ortSize = this.GetComponent<Camera>().orthographicSize;
-		this.transform.position = new Vector3(0, 500, 7220);
+		this.transform.position = new Vector3(0, 700, 7220);
 		this.transform.rotation = Quaternion.Euler(90, -90, 0);
 		this.GetComponent<Camera>().orthographicSize = 4000;
 		this.GetComponent<Camera>().targetTexture = null;
+	//	this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
+		this.GetComponent<Camera>().cullingMask = bigMapLayer;
 		ingameCanvas.SetActive(false);
 		minimap.SetActive(false);
 	}
@@ -50,11 +53,13 @@ public class MinimapCamera : MonoBehaviour {
 	{
 		isMinimap = true;
 		Time.timeScale = 1;
+		ingameCanvas.SetActive(true);
+		minimap.SetActive(true);
 		this.transform.rotation = Quaternion.Euler(90, 0, 0);
 		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
-		ingameCanvas.SetActive(true);
-		minimap.SetActive(true);
+		this.GetComponent<Camera>().cullingMask = 1 << 8 | 1 << 9 | 1 << 10;
+
 	}
 
 	// Update is called once per frame
@@ -63,18 +68,4 @@ public class MinimapCamera : MonoBehaviour {
 		if(isMinimap)
 			this.transform.position = new Vector3(player.transform.position.x, yPos, player.transform.position.z);
 	}
-
-//	void makeMap()
-//	{
-//		isMap = !isMap;
-//		if(isMap == true)
-//		{
-//			this.GetComponent<Camera>().orthographic = true;
-//			this.GetComponent<Camera>().farClipPlane = 8800;
-//			this.GetComponent<Camera>().fieldOfView = 90;
-//			this.GetComponent<Camera>().cullingMask = "Minimap";
-//			this.transform.position = new Vector3 (0, 5585, 6765);
-//			this.transform.rotation = Quaternion.Euler(90, -90, 0);
-//		}
-//	}
 }
