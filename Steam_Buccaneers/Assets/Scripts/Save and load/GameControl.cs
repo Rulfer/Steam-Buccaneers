@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour {
 
 	void Awake () 
 	{
+		
 		//Using awake() here since it happens before Start(). Since this has to do with loading new scene and keeping the data, it is important to have it as early as possible.
 		//if controller doesnt exists it will be made.
 		if (control == null) 

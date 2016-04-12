@@ -295,6 +295,10 @@ public class Tutorial : MonoBehaviour
 		//Pause, activate guns and other stuff here
 		switch (stage) 
 		{
+		case(1):
+			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isHappyBoss", true);
+			Debug.Log ("Change mood");
+			break;
 		case(9):
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
