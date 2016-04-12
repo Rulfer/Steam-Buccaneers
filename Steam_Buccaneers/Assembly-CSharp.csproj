@@ -45,21 +45,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Animation\EZ Camera Shake\Demo\ShakeDemo.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\CameraShaker.cs" />
-     <Compile Include="Assets\Animation\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Continue.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
+     <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\GUIManager.cs" />
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MusicControl.cs" />
+     <Compile Include="Assets\OrbitMeteorsOuter.cs" />
      <Compile Include="Assets\QuitScript.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AImove.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\CastRays.cs" />
+     <Compile Include="Assets\Scripts\AI\DeadAI.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogRigh.cs" />
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
@@ -109,12 +110,14 @@
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\World\OrbitMeteorsInner.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
-     <Compile Include="Assets\Scripts\World\OrbitPlanets.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
      <Compile Include="Assets\Scripts\World\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\World\SpawnTreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
+     <Compile Include="Assets\ShipHitObject.cs" />
+     <Compile Include="Assets\TreasurePlanet.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />

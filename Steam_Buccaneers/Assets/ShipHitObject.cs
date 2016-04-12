@@ -41,7 +41,7 @@ public class ShipHitObject : MonoBehaviour
 			healthLost *= -1;
 		if(healthLost > 1)
 		{
-			if(col.transform.tag == "Player")
+			if(col.transform.name == "PlayerShip")
 				GameControl.control.health -= healthLost;
 			if(col.transform.tag == "aiShip")
 			{
