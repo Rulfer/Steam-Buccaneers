@@ -7,6 +7,7 @@ public class MinimapCamera : MonoBehaviour {
 	private bool isMinimap = true;
 	private float ortSize;
 	public RenderTexture minimapTexture;
+	public RenderTexture bigmapTexture;
 	public GameObject ingameCanvas;
 	public GameObject minimap;
 	public GameObject mapCanvas;
@@ -42,11 +43,12 @@ public class MinimapCamera : MonoBehaviour {
 		//this.transform.position = new Vector3(0, 700, 7220);
 		//this.transform.rotation = Quaternion.Euler(90, -90, 0);
 		//this.GetComponent<Camera>().orthographicSize = 4000;
-		this.GetComponent<Camera>().targetTexture = null;
+		this.GetComponent<Camera>().targetTexture = bigmapTexture;
 		this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
 	//	this.GetComponent<Camera>().cullingMask = bigMapLayer;
 	//	ingameCanvas.SetActive(false);
 		mapCanvas.SetActive(true);
+		mapCanvas.transform.position = new Vector3(this.transform.position.x, -300, this.transform.position.z);
 	//	minimap.SetActive(false);
 	}
 
@@ -62,6 +64,16 @@ public class MinimapCamera : MonoBehaviour {
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
 		this.GetComponent<Camera>().cullingMask = 1 << 8 | 1 << 9 | 1 << 10;
 
+	}
+
+	void OnGUI () 
+	{
+		if(isMinimap == false)
+		{
+			if(Event.current.type == EventType.Repaint)
+				//Graphics.DrawTexture(new Rect(0,0, 128, 128), miniMapTexture, miniMapMaterial);
+				Graphics.DrawTexture(new Rect(Screen.width / 1.13f, Screen.height / 9.7f, Screen.width / 9.5f, Screen.width / 9.5f), miniMapTexture, miniMapMaterial);
+		}
 	}
 
 	// Update is called once per frame
