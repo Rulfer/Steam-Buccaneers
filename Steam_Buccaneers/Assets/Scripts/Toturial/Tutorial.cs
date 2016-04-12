@@ -99,7 +99,7 @@ public class Tutorial : MonoBehaviour
 
 	void Start ()
 	{
-		marineCharacterWindow.SetActive (false);
+		//marineCharacterWindow.SetActive (false);
 		//Initialize functions
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
@@ -296,7 +296,7 @@ public class Tutorial : MonoBehaviour
 		switch (stage) 
 		{
 		case(1):
-			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isHappyBoss", true);
+			GameObject.Find ("Portrett2_marine").GetComponent<Animator> ().SetBool ("isAngryMarine", true);
 			Debug.Log ("Change mood");
 			break;
 		case(9):
