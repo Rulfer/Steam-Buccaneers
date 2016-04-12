@@ -23,6 +23,7 @@ public class CastRays : MonoBehaviour {
 	private void sensors()
 	{
 		bool hitLeft = false;
+		bool hitRight = false;
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
 		{
@@ -34,7 +35,9 @@ public class CastRays : MonoBehaviour {
 			}
 			else
 			{
-				this.transform.root.GetComponent<AImove>().turnLeft = false;
+				if(this.transform.root.GetComponent<AIavoid>().hitSide == true)
+					this.transform.root.GetComponent<AImove>().turnLeft = false;
+				this.transform.root.GetComponent<AIavoid>().hitSide = false;
 				hitLeft = false;
 			}
 		}
@@ -45,19 +48,26 @@ public class CastRays : MonoBehaviour {
 			{
 				this.transform.root.GetComponent<AImove>().turnRight = true;
 				this.transform.root.GetComponent<AIavoid>().hitSide = true;
+				hitRight = true;
 			}
 			else
 			{
-				this.transform.root.GetComponent<AImove>().turnRight = false;
+				if(this.transform.root.GetComponent<AIavoid>().hitSide == true)
+					this.transform.root.GetComponent<AImove>().turnRight = false;
 				if(hitLeft == false)
 					this.transform.root.GetComponent<AIavoid>().hitSide = false;
 			}
 		}
 		else
 		{
-			this.transform.root.GetComponent<AImove>().turnLeft = false;
-			this.transform.root.GetComponent<AImove>().turnRight = false;
-			this.transform.root.GetComponent<AIavoid>().hitSide = false;
+			if(this.transform.root.GetComponent<AIavoid>().hitSide == true)
+			{
+				if(hitLeft == true)
+					this.transform.root.GetComponent<AImove>().turnLeft = false;
+				if(hitRight == true)
+					this.transform.root.GetComponent<AImove>().turnRight = false;
+				this.transform.root.GetComponent<AIavoid>().hitSide = false;
+			}
 		}
 	}
 }

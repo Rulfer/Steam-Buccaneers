@@ -15,8 +15,7 @@ public class EngineFlames : MonoBehaviour {
 	private float scalingspeed;
 	private float maxZ;
 	private float lowerZ;
-//	private float tempScaleUpperLimit;
-//	private float tempScaleLowerLimit;
+
 	// Use this for initialization
 	void Start () {
 		rigi = this.transform.root.GetComponent<Rigidbody>();
@@ -28,27 +27,52 @@ public class EngineFlames : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if(this.gameObject.transform.localScale.z >= maxZ)
+		if(this.transform.root.name == "PlayerShip")
 		{
-			goingDown = true;
-			setNewLowerScale();
-		}
+			if(this.gameObject.transform.localScale.z >= maxZ)
+			{
+				goingDown = true;
+				setNewLowerScale();
+			}
 
-		else if(this.gameObject.transform.localScale.z <= lowerZ)
-		{
-			goingDown = false;
-			setNewUpperScale();
-		}
+			else if(this.gameObject.transform.localScale.z <= lowerZ)
+			{
+				goingDown = false;
+				setNewUpperScale();
+			}
 
-		if(goingDown == false)
-		{
-			this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
+			if(goingDown == false)
+			{
+				this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
+			}
+			else
+			{
+				this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
+			}
 		}
 		else
 		{
-			this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
-		}
+			if(this.gameObject.transform.localScale.z >= maxZ)
+			{
+				goingDown = true;
+				setNewLowerScale();
+			}
 
+			else if(this.gameObject.transform.localScale.z <= lowerZ)
+			{
+				goingDown = false;
+				setNewUpperScale();
+			}
+
+			if(goingDown == false)
+			{
+				this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
+			}
+			else
+			{
+				this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
+			}
+		}
 	}
 
 	private void setNewLowerScale()

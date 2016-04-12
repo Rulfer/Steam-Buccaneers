@@ -11,6 +11,8 @@ public class cameraController : MonoBehaviour
 	private GameObject player;
 	private GameObject camera;
 
+	private bool isMap = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -21,6 +23,9 @@ public class cameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+		//if(Input.GetKeyDown
+
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
 		PlayerPOS = player.transform.transform.position;
