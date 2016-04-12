@@ -234,11 +234,9 @@ public class SpawnAI : MonoBehaviour
 
 	private Vector3 cargoSpawnpoint()
 	{
-		bool foundSpawn = false;
-
 		Vector3 playerPosition = playerPoint.transform.position;
 		Vector3 playerDirection = playerPoint.transform.forward;
-		Quaternion playerRotation = playerPoint.transform.rotation;
+		//Quaternion playerRotation = playerPoint.transform.rotation;
 		float spawnDistance = 200;
 		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance;
 
