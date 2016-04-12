@@ -319,7 +319,7 @@ public class AIMaster : MonoBehaviour
 
 	public void changeMat2()
 	{
-		if(usingMat2 = false)
+		if(usingMat2 == false)
 		{
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 			this.GetComponent<DamagedAI>().startSmoke();

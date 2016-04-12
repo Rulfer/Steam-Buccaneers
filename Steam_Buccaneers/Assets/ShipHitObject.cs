@@ -41,9 +41,9 @@ public class ShipHitObject : MonoBehaviour
 			healthLost *= -1;
 		if(healthLost > 1)
 		{
-			if(col.transform.tag == "Player")
+			if(col.transform.name == "PlayerShip")
 				GameControl.control.health -= healthLost;
-			if(col.transform.tag == "aiShip")
+			if(col.transform.tag == "Boss(Clone)" || col.transform.tag == "Marine(Clone)" || col.transform.tag == "Cargo(Clone)" )
 			{
 				if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
 				{
@@ -52,9 +52,9 @@ public class ShipHitObject : MonoBehaviour
 				if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 				{
 					col.transform.GetComponent<AIMaster>().aiHealth -= healthLost;
-					if(col.transform.transform.GetComponent<AIMaster>().aiHealth <= 0)
+					if(col.transform.GetComponent<AIMaster>().aiHealth <= 0)
 					{
-						col.transform.transform.GetComponent<AIMaster>().killAI();
+						col.transform.GetComponent<AIMaster>().killAI();
 					}
 					else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat3)
 					{

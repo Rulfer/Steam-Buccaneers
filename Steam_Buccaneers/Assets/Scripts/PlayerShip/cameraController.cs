@@ -9,15 +9,13 @@ public class cameraController : MonoBehaviour
 
 	private Vector3 PlayerPOS;
 	private GameObject player;
-	private GameObject camera;
-
-	private bool isMap = false;
+	private GameObject gameCamera;
 
 	// Use this for initialization
 	void Start () 
 	{
 		player = GameObject.Find("PlayerShip");	
-		//camera = GameObject.Find("MainCamera");
+		//gameCamera = GameObject.Find("MaingameCamera");
 	}
 	
 	// Update is called once per frame
