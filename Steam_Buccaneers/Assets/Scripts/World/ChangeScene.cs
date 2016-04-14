@@ -24,11 +24,11 @@ public class ChangeScene : MonoBehaviour
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && SceneManager.GetActiveScene ().name != "Shop" && SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene().name != "loading_screen")
 		{
 			Debug.Log (inShop);
-			Debug.Log ("do i do anything?");
+			//Debug.Log ("do i do anything?");
 
 			if (inShop != true)
 			{
-				Debug.Log ("do i do anything2?");
+				//Debug.Log ("do i do anything2?");
 				LoadScenes ();
 				UnloadScenes ();
 			} else
@@ -44,7 +44,7 @@ public class ChangeScene : MonoBehaviour
 
 	void LoadScenes ()
 	{
-		Debug.Log ("do i do anything3?");
+		//Debug.Log ("do i do anything3?");
 		player = GameObject.Find ("PlayerShip");
 
 		//Loads in scene 1
@@ -59,7 +59,7 @@ public class ChangeScene : MonoBehaviour
 			player.transform.position.z <= 12000 && part3Loaded == true && part2Loaded == false ||
 			player.transform.position.z >= 3000 && player.transform.position.z < 12000 && part2Loaded == false)
 		{
-			Debug.Log("hello, it is you im looking for");
+			//Debug.Log("hello, it is you im looking for");
 			SceneManager.LoadScene("worldPt2", LoadSceneMode.Additive);
 			part2Loaded = true;
 		}

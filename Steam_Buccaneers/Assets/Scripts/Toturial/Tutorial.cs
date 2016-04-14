@@ -296,7 +296,11 @@ public class Tutorial : MonoBehaviour
 		switch (stage) 
 		{
 		case(1):
-			GameObject.Find ("Portrett2_marine").GetComponent<Animator> ().SetBool ("isAngryMarine", true);
+			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", true);
+			Debug.Log ("Change mood");
+			break;
+		case(2):
+			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", false);
 			Debug.Log ("Change mood");
 			break;
 		case(9):
