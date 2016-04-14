@@ -17,6 +17,7 @@ public class OrbitMoons : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		Debug.Log("Paused pls");
 		distance = Vector3.Distance(this.transform.position, this.transform.parent.position);
 		transform.RotateAround (this.transform.parent.position, transform.up, 3f / distance);
 	}

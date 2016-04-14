@@ -314,6 +314,7 @@ public class AIMaster : MonoBehaviour
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 			this.GetComponent<DamagedAI>().startFire();
 			usingMat3 = true;
+			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
 		}
 	}	
 
@@ -324,6 +325,7 @@ public class AIMaster : MonoBehaviour
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 			this.GetComponent<DamagedAI>().startSmoke();
 			usingMat2 = true;
+			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
 		}
 	}
 
