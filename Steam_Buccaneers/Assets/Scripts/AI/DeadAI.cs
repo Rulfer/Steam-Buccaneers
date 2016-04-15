@@ -4,6 +4,8 @@ using System.Collections;
 public class DeadAI : MonoBehaviour {
 
 	GameObject playerPos;
+	public GameObject newMesh;
+	public GameObject currentMesh;
 	float distance;
 	public Vector3 axisOfRotation;
 	public float angularVelocity;
@@ -17,6 +19,9 @@ public class DeadAI : MonoBehaviour {
 		playerPos = GameObject.Find("PlayerShip");
 		axisOfRotation = Random.onUnitSphere;
 		angularVelocity = Random.Range (20, 40);
+		this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		currentMesh.GetComponent<MeshCollider>().enabled = false;
+		newMesh.GetComponent<MeshCollider>().enabled = true;
 
 	}
 

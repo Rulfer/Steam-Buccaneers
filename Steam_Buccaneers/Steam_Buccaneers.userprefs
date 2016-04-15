@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TreasurePlanet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Minimap\MinimapCamera.cs">
     <Files>
-      <File FileName="Assets\TreasurePlanet.cs" Line="41" Column="4" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="35" Column="29" />
+      <File FileName="Assets\Scripts\Minimap\MinimapCamera.cs" Line="54" Column="3" />
+      <File FileName="Assets\TreasurePlanet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Save and load\gameButtons.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="1" Column="1" />
@@ -14,14 +15,9 @@
       <File FileName="Assets\Scripts\World\PointTowards.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\SpawnTreasureShip.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\TreasureShip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\pickupScrap.cs" Line="25" Column="2" />
-      <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="16" Column="11" />
-      <File FileName="Assets\Scripts\Shop\monies.cs" Line="12" Column="2" />
-      <File FileName="Assets\Scripts\Shop\updatePayment.cs" Line="15" Column="2" />
-      <File FileName="Assets\Scripts\Shop\updateHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CheatCodesScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\ScrapRandomDirection.cs" Line="38" Column="3" />
+      <File FileName="Assets\Scripts\PlayerShip\pickupScrap.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shop\monies.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
