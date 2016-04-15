@@ -15,6 +15,7 @@ public class WorldBorder : MonoBehaviour
 		if(isTrespassing == true)
 		{
 			killDuration -= Time.deltaTime;
+			Debug.Log("killDuration = " + killDuration);
 			if(killTimer > killDuration)
 			{
 				GameControl.control.health = -1;
@@ -23,27 +24,25 @@ public class WorldBorder : MonoBehaviour
 			theText.text += "You will die in         " + "seconds.";
 			numberText.text = (Mathf.Round(killDuration * 100f) / 100f).ToString();
 		}
-		else
-		{
-			killDuration = 20;
-			theText.text = "";
-			numberText.text = "";
-		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("wat hit me " + other.transform.root.name);
 		if(other.transform.root.name == "PlayerShip")
 		{
 			isTrespassing = true;
+			Debug.Log("wat hit me " + other.transform.root.name);
+
 		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		if(other.tag == "Player")
+		if(other.transform.root.name == "PlayerShip")
 		{
+			killDuration = 20;
+			theText.text = "";
+			numberText.text = "";
 			isTrespassing = false;
 		}
 	}
