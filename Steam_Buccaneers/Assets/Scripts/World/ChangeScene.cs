@@ -26,11 +26,6 @@ public class ChangeScene : MonoBehaviour
 
 			if (inShop != true)
 			{
-			Debug.Log (inShop);
-			//Debug.Log ("do i do anything?");
-
-			if (inShop != true)
-			{
 				//Debug.Log ("do i do anything2?");
 				LoadScenes ();
 				UnloadScenes ();
