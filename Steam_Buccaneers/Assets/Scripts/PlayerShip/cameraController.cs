@@ -21,7 +21,6 @@ public class cameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		//if(Input.GetKeyDown
 
 		// låser kamera til player

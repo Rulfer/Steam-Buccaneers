@@ -21,12 +21,18 @@ public class AIprojectile : MonoBehaviour {
 
 	CameraShakeInstance shake;
 
+	private Vector3 axisOfRotation;
+	private float angularVelocity;
+
 	// Use this for initialization
 	void Start () 
 	{
 		source = this.GetComponent<AudioSource>();
 		test.AddForce (this.transform.right * projectileSpeed);
 		player = GameObject.Find("PlayerShip");
+
+		axisOfRotation = Random.onUnitSphere;
+		angularVelocity = Random.Range (600, 750);
 	}
 	
 	// Update is called once per frame
@@ -34,7 +40,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		
 		distance = Vector3.Distance(transform.position, player.transform.position);
-
+		this.transform.Rotate(axisOfRotation, angularVelocity * Time.smoothDeltaTime); //Rotates the object
 		if (distance >= 500)
 		{
 			Destroy(gameObject);
