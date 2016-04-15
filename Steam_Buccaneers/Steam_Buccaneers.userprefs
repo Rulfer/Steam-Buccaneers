@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Minimap\MinimapCamera.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\Weapons\AIprojectile.cs">
     <Files>
-      <File FileName="Assets\Scripts\Minimap\MinimapCamera.cs" Line="54" Column="3" />
+      <File FileName="Assets\Scripts\World\SpawnTreasureShip.cs" Line="47" Column="36" />
+      <File FileName="Assets\Scripts\Minimap\MinimapCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\TreasurePlanet.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="1" Column="1" />
@@ -13,11 +14,11 @@
       <File FileName="Assets\Continue.cs" Line="1" Column="1" />
       <File FileName="Assets\newGame.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\PointTowards.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\SpawnTreasureShip.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\TreasureShip.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\pickupScrap.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Shop\monies.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\Weapons\AIprojectile.cs" Line="24" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
