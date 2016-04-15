@@ -14,7 +14,7 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool turnRight = false;
 	public static bool goingForward = false;
 
-	public bool steerShip;
+	public static bool steerShip = true;
 
 	public static bool hitBomb = false;
 	private float bombTimer = 0;
@@ -57,7 +57,7 @@ public class PlayerMove2 : MonoBehaviour
 				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
-		//if (steerShip == true) {
+		if (steerShip == true) {
 		if (hitBomb == false && GameControl.control.health > 0) 
 		{
 			if (Input.GetKey (KeyCode.W)) 
@@ -156,7 +156,7 @@ public class PlayerMove2 : MonoBehaviour
 			if(clip != 2)
 				playEndSound();
 		}
-
+		}
 	}
 
 	private void playStartSound()
