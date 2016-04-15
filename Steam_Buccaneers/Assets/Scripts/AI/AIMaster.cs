@@ -81,6 +81,8 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
+					if(SpawnAI.spawn.stopSpawn == false)
+						reactivatePatroling();
 					if(detectDistance > aiRadar + 50)
 						reactivatePatroling();
 				}

@@ -1,8 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ShipHitObject.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets\ShipHitObject.cs" Line="47" Column="172" />
+      <File FileName="Assets\Scripts\Particle Effects\DamagedPlayer.cs" Line="8" Column="36" />
+      <File FileName="Assets\changeMaterial.cs" Line="23" Column="15" />
+      <File FileName="Assets\Scripts\AI\Weapons\AIprojectile.cs" Line="64" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
