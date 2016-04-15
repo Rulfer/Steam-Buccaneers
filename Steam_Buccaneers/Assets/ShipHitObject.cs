@@ -7,6 +7,7 @@ public class ShipHitObject : MonoBehaviour
 
 	private Vector3 currentVel;
 	private Vector3 newVel;
+	public GameObject sparkSimulation;
 
 	void Update()
 	{
@@ -41,6 +42,8 @@ public class ShipHitObject : MonoBehaviour
 			healthLost *= -1;
 		if(healthLost > 1)
 		{
+			ContactPoint contact = col.contacts[0];
+			Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation);
 			if(col.transform.name == "PlayerShip")
 				GameControl.control.health -= healthLost;
 			if(col.transform.tag == "Boss(Clone)" || col.transform.tag == "Marine(Clone)" || col.transform.tag == "Cargo(Clone)" )
