@@ -8,10 +8,12 @@ public class changeMaterial : MonoBehaviour {
 	private float material2Limit;
 	private float material3Limit;
 	private float fullHealth;
+	private Material currentMat;
 
 	// Use this for initialization
 	void Start () 
 	{
+		currentMat = playerMat [0];
 		//Calculates moments of material change
 		fullHealth = 100;
 		material2Limit = fullHealth * 0.66f;
@@ -26,6 +28,7 @@ public class changeMaterial : MonoBehaviour {
 		if (GameControl.control.health > material2Limit && GameControl.control.health > material3Limit)
 		{
 			setNewMaterial (0);
+
 		} 
 		else if (GameControl.control.health < material2Limit && GameControl.control.health > material3Limit)
 		{
@@ -39,10 +42,16 @@ public class changeMaterial : MonoBehaviour {
 
 	private void setNewMaterial(int matNr)
 	{
+		GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setAngry ("Player");
+
 		//Changes material that fits health.
-		if (GetComponent<Renderer> ().material != playerMat [matNr])
+		if (playerMat[matNr].name != currentMat.name)
 		{
+			GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setHappy ("Enemy");
+			Debug.Log (playerMat [matNr].name);
+			Debug.Log (currentMat.name);
 			GetComponent<Renderer> ().material = new Material (playerMat [matNr]);
+			currentMat = playerMat [matNr];
 		}
 	}
 
