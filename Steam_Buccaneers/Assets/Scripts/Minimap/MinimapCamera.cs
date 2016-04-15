@@ -11,9 +11,12 @@ public class MinimapCamera : MonoBehaviour {
 	public RenderTexture bigmapTexture;
 	public GameObject ingameCanvas;
 	public GameObject minimap;
+	public GameObject minimapBackground;
+	public GameObject animationCanvas;
 	public GameObject renderPlane;
 	public GameObject renderPlaneBackground;
 	public LayerMask bigMapLayer;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -52,6 +55,8 @@ public class MinimapCamera : MonoBehaviour {
 		//ingameCanvas.SetActive(false);
 		renderPlane.SetActive(true);
 		renderPlaneBackground.SetActive(true);
+		minimapBackground.SetActive(false);
+		animationCanvas.SetActive(false);
 		//mapCanvas.transform.position = new Vector3(this.transform.position.x, -300, this.transform.position.z);
 		//minimap.SetActive(false);
 	}
@@ -64,6 +69,8 @@ public class MinimapCamera : MonoBehaviour {
 		minimap.SetActive(true);
 		renderPlane.SetActive(false);
 		renderPlaneBackground.SetActive(false);
+		minimapBackground.SetActive(true);
+		animationCanvas.SetActive(true);
 		this.transform.rotation = Quaternion.Euler(90, 0, 0);
 		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
