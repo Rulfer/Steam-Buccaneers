@@ -33,7 +33,8 @@ public class WorldBorder : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "Player")
+		Debug.Log("wat hit me " + other.transform.root.name);
+		if(other.transform.root.name == "PlayerShip")
 		{
 			isTrespassing = true;
 		}
