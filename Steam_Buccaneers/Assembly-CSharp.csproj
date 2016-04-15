@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CombatAnimationController.cs" />
      <Compile Include="Assets\Continue.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
@@ -123,6 +124,7 @@
      <Compile Include="Assets\changeMaterial.cs" />
      <Compile Include="Assets\changeSliderValue.cs" />
      <Compile Include="Assets\newGame.cs" />
+     <Compile Include="Assets\playerAnimationBoolController.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
