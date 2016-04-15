@@ -11,7 +11,7 @@ public class DamagedAI : MonoBehaviour
 		foreach(GameObject go in smokeParticles)
 			go.SetActive(false);
 		foreach(GameObject go in fireParticles)
-			go.SetActive(false);
+			go.SetActive(false);		
 	}
 
 	public void startSmoke()

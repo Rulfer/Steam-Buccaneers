@@ -9,18 +9,20 @@ public class cameraController : MonoBehaviour
 
 	private Vector3 PlayerPOS;
 	private GameObject player;
-	private GameObject camera;
+	private GameObject gameCamera;
 
 	// Use this for initialization
 	void Start () 
 	{
 		player = GameObject.Find("PlayerShip");	
-		//camera = GameObject.Find("MainCamera");
+		//gameCamera = GameObject.Find("MaingameCamera");
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		//if(Input.GetKeyDown
+
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
 		PlayerPOS = player.transform.transform.position;
