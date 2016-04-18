@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AIFlee.cs" />
+     <Compile Include="Assets\AudioController.cs" />
      <Compile Include="Assets\CombatAnimationController.cs" />
      <Compile Include="Assets\Continue.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />

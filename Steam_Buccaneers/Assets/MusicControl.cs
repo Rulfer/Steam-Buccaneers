@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MusicControl : MonoBehaviour
 {
-	public AudioSource mainCamSource;
+	private AudioSource mainCamSource;
 	private GameObject player;
 	private AudioSource thisAudioSource;
 
@@ -14,6 +14,7 @@ public class MusicControl : MonoBehaviour
 	void Start()
 	{
 		thisAudioSource = this.GetComponent<AudioSource>();
+		mainCamSource = GameObject.Find("CameraChild").GetComponent<AudioSource>();
 		player = GameObject.Find("PlayerShip");
 	}
 		
