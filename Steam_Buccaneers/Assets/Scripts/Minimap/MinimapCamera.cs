@@ -9,6 +9,7 @@ public class MinimapCamera : MonoBehaviour {
 	private float ortSize;
 	public RenderTexture minimapTexture;
 	public RenderTexture bigmapTexture;
+	public GameObject extraBackground;
 	public GameObject minimapCanvas;
 	public GameObject minimapBackground;
 	public GameObject animationCanvas;
@@ -52,6 +53,7 @@ public class MinimapCamera : MonoBehaviour {
 		this.GetComponent<Camera>().cullingMask = bigMapLayer;
 		minimapCanvas.SetActive(false);
 		renderPlane.SetActive(true);
+		extraBackground.SetActive(true);
 		renderPlaneBackground.SetActive(true);
 		minimapBackground.SetActive(false);
 		animationCanvas.SetActive(false);
@@ -63,6 +65,7 @@ public class MinimapCamera : MonoBehaviour {
 		Time.timeScale = 1;
 		minimapCanvas.SetActive(true);
 		renderPlane.SetActive(false);
+		extraBackground.SetActive(false);
 		renderPlaneBackground.SetActive(false);
 		minimapBackground.SetActive(true);
 		animationCanvas.SetActive(true);
