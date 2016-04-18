@@ -47,7 +47,7 @@ public class ShipHitObject : MonoBehaviour
 			Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
 			if(col.transform.name == "PlayerShip")
 				GameControl.control.health -= healthLost;
-			if(col.transform.tag == "Boss(Clone)" || col.transform.tag == "Marine(Clone)" || col.transform.tag == "Cargo(Clone)" )
+			if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" )
 			{
 				if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
 				{
