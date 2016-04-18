@@ -9,8 +9,7 @@ public class MinimapCamera : MonoBehaviour {
 	private float ortSize;
 	public RenderTexture minimapTexture;
 	public RenderTexture bigmapTexture;
-	public GameObject ingameCanvas;
-	public GameObject minimap;
+	public GameObject minimapCanvas;
 	public GameObject minimapBackground;
 	public GameObject animationCanvas;
 	public GameObject renderPlane;
@@ -50,23 +49,19 @@ public class MinimapCamera : MonoBehaviour {
 		this.transform.rotation = Quaternion.Euler(90, -90, 0);
 		this.GetComponent<Camera>().orthographicSize = 7000;
 		this.GetComponent<Camera>().targetTexture = bigmapTexture;
-		//this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
 		this.GetComponent<Camera>().cullingMask = bigMapLayer;
-		//ingameCanvas.SetActive(false);
+		minimapCanvas.SetActive(false);
 		renderPlane.SetActive(true);
 		renderPlaneBackground.SetActive(true);
 		minimapBackground.SetActive(false);
 		animationCanvas.SetActive(false);
-		//mapCanvas.transform.position = new Vector3(this.transform.position.x, -300, this.transform.position.z);
-		//minimap.SetActive(false);
 	}
 
 	void deactivateBigMap()
 	{
 		isMinimap = true;
 		Time.timeScale = 1;
-		ingameCanvas.SetActive(true);
-		minimap.SetActive(true);
+		minimapCanvas.SetActive(true);
 		renderPlane.SetActive(false);
 		renderPlaneBackground.SetActive(false);
 		minimapBackground.SetActive(true);
