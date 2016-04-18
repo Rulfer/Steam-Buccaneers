@@ -62,7 +62,7 @@ public class BombHitSomething : MonoBehaviour {
 		foreach(Collider hit in colliders) //We will do the same check for every object in the array
 		{
 			Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
-			if(hit.tag == "Player") //If we hit the player
+			if(hit.transform.root.name == "PlayerShip") //If we hit the player
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
