@@ -9,7 +9,15 @@ public class BombHitSomething : MonoBehaviour {
 	private float force = 10.0f;
 
 	CameraShakeInstance shake;
+	public GameObject explosion;
 
+	public AudioClip[] clips;
+	private AudioSource source;
+
+	void Start()
+	{
+		source = this.GetComponent<AudioSource>();
+	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
 	{
@@ -85,6 +93,11 @@ public class BombHitSomething : MonoBehaviour {
 			}
 		}
 
-		Destroy(this.gameObject); //Destroys this object
+		Instantiate(explosion, this.transform.position, this.transform.rotation);
+		source.clip = clips[Random.Range(0, 5)];
+		source.Play();
+		this.GetComponent<MeshCollider>().enabled = false;
+		this.GetComponent<MeshRenderer>().enabled = false;
+		Destroy(this.gameObject, source.clip.length); //Destroys this object
 	}
 }
