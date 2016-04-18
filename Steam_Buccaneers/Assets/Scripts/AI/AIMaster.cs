@@ -134,14 +134,6 @@ public class AIMaster : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.tag == "Planet")
-		{
-			killAbsentAI();
-		}
-	}
-
 	public void thisAIFlee()
 	{
 		detectedPlayer = true;
@@ -354,5 +346,16 @@ public class AIMaster : MonoBehaviour
 		//this.GetComponent<AIMaster>().enabled = false;
 		this.GetComponent<DeadAI>().enabled = true;
 		kill.gameObject.SetActive(false);
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Planet")
+		{
+			if(isFighting == true)
+				killAI();
+			else
+				killAbsentAI();
+		}
 	}
 }
