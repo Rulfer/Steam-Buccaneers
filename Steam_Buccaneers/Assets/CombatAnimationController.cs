@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CombatAnimationController : MonoBehaviour {
 
@@ -17,20 +18,22 @@ public class CombatAnimationController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (GameObject.Find ("SpawnsAI").GetComponent<SpawnAI> ().stopSpawn == true)
+		if (SceneManager.GetActiveScene ().name != "Tutorial")
 		{
-			enemyCharacterWindow.SetActive (true);
-			playerCharacterWindow.SetActive (true);
-		} 
-		else if (enemyCharacterWindow.activeSelf == true)
-		{
-			//After battle remove stuff
-			enemyCharacterWindow.SetActive (false);
-			playerCharacterWindow.SetActive (false);
-
-			if (combatBoss == true)
+			if (GameObject.Find ("SpawnsAI").GetComponent<SpawnAI> ().stopSpawn == true)
 			{
-				combatBoss = false;
+				enemyCharacterWindow.SetActive (true);
+				playerCharacterWindow.SetActive (true);
+			} else if (enemyCharacterWindow.activeSelf == true)
+			{
+				//After battle remove stuff
+				enemyCharacterWindow.SetActive (false);
+				playerCharacterWindow.SetActive (false);
+
+				if (combatBoss == true)
+				{
+					combatBoss = false;
+				}
 			}
 		}
 

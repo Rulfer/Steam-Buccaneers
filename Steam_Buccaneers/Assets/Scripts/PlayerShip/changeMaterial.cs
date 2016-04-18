@@ -9,11 +9,12 @@ public class changeMaterial : MonoBehaviour {
 	private float material3Limit;
 	private float fullHealth;
 	private Material currentMat;
+	private bool firstTimeCheck = false;
 
 	// Use this for initialization
 	void Start () 
 	{
-		currentMat = playerMat [0];
+		currentMat = GameObject.Find("Player_Ship_Collected").GetComponent<MeshRenderer>().material;
 		//Calculates moments of material change
 		fullHealth = 100;
 		material2Limit = fullHealth * 0.66f;
@@ -42,7 +43,17 @@ public class changeMaterial : MonoBehaviour {
 
 	private void setNewMaterial(int matNr)
 	{
-		GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setAngry ("Player");
+		Debug.Log ("Material change = " + matNr);
+		Debug.Log (playerMat [matNr].name);
+		Debug.Log (currentMat.name);
+		if (firstTimeCheck == true)
+		{
+			GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setAngry ("Player");
+		} 
+		else
+		{
+			firstTimeCheck = true;
+		}
 
 		//Changes material that fits health.
 		if (playerMat[matNr].name != currentMat.name)
