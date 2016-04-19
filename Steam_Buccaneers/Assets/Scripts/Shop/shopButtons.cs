@@ -14,6 +14,7 @@ public class shopButtons : MonoBehaviour {
 	public Sprite thrusterLvl1;
 	public Sprite thrusterLvl2;
 	public Sprite thrusterLvl3;
+	private Slider[] sliders;
 
 	private GameObject hull;
 	private GameObject thruster;
@@ -32,6 +33,9 @@ public class shopButtons : MonoBehaviour {
 		canons[4] = GameObject.Find("cannonB2");
 		canons[5] = GameObject.Find("cannonB3");
 
+		sliders =repairMenu.GetComponentsInChildren<Slider> ();
+		sliders [0].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
+		sliders[1].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
 			//Set right icons
 		if (GameControl.control.hullUpgrade == 1)
 		{
@@ -131,6 +135,8 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.hullUpgrade ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.hullUpgrade);
+					sliders [0].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
+					sliders[1].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
 				}
 				break;
 

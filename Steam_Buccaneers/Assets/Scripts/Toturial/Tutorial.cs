@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
 	//Text that says pause
 	public GameObject pauseText;
 	//Array that hold the tutorial dialog
-	private string[] dialogTexts = new string[37];
+	private string[] dialogTexts = new string[43];
 	//Holds quest information
 	private Text questInfo;
 	//Character names
@@ -36,6 +36,11 @@ public class Tutorial : MonoBehaviour
 	//Character vinduer
 	public GameObject shopKeeperCharacterWindow;
 	public GameObject marineCharacterWindow; 
+	private GameObject bossCharacterWindow;
+	//dialog deler
+	private GameObject talkBubble;
+	private GameObject avatarWindow;
+	private GameObject avatarWindow2;
 	//Controls that outside actions are over
 	public bool enterStore = false;
 	//Compass
@@ -66,9 +71,13 @@ public class Tutorial : MonoBehaviour
 
 	void OnLevelWasLoaded(int level)
 	{
-		if (SceneManager.GetActiveScene().name == "Shop")
+		if (SceneManager.GetActiveScene ().name == "Shop")
 		{
 			loadShop ();
+		} 
+		else if (SceneManager.GetActiveScene ().name == "WorldMaster")
+		{
+			loadWorldMaster ();
 		}
 	}
 
@@ -97,8 +106,31 @@ public class Tutorial : MonoBehaviour
 		nextButton = GameObject.Find ("dialogue_next_shop");
 	}
 
+	private void loadWorldMaster()
+	{
+		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
+		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
+		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
+		pauseText = GameObject.Find ("pause");
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+
+		marineCharacterWindow = GameObject.Find ("Portrett2_marine");
+		shopKeeperCharacterWindow = GameObject.Find ("Portrett2_shopkeeper");
+		bossCharacterWindow = GameObject.Find ("Portrett2_boss");
+
+		nextButton = GameObject.Find ("dialogue_next");
+		nextButton.GetComponent<Button> ().onClick.AddListener (nextDialog);
+
+		talkBubble = GameObject.Find ("bubble_ingame");
+		avatarWindow = GameObject.Find ("avatar1");
+		avatarWindow2 = GameObject.Find ("avatar2");
+
+		buttonEvents.pause ();
+	}
+
 	void Start ()
 	{
+		Debug.Log ("Start tutorial");
 		//marineCharacterWindow.SetActive (false);
 		//Initialize functions
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
@@ -137,9 +169,9 @@ public class Tutorial : MonoBehaviour
 
 	void Update()
 	{
-		if (dialogNumber >= 31)
+		if (dialogNumber >= 31 && dialogNumber < 35)
 		{
-			for ( int i = 0; i < blinkingButtons.Length; i ++)
+			for (int i = 0; i < blinkingButtons.Length; i++)
 			{
 				if (blinkingButtons [i] != null)
 				{
@@ -147,14 +179,15 @@ public class Tutorial : MonoBehaviour
 					if (blinkingButtons [i].colors.normalColor.a >= 1)
 					{
 						goingDown = true;
-					} else if (blinkingButtons [i].colors.normalColor.a <= 0.25)
+					} 
+					else if (blinkingButtons [i].colors.normalColor.a <= 0.25)
 					{
 						goingDown = false;
 					}
 
 					if (goingDown == true)
 					{
-						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, cb.normalColor.a - blinkingButtonSpeed );
+						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, cb.normalColor.a - blinkingButtonSpeed);
 					} 
 					else
 					{
@@ -165,6 +198,13 @@ public class Tutorial : MonoBehaviour
 					blinkingButtons [i].colors = cb;
 				}
 			}
+		} 
+		else if (dialogNumber == 35 && SceneManager.GetActiveScene().name == "WorldMaster")
+		{
+			talkBubble.SetActive (true);
+			avatarWindow.SetActive (true);
+			avatarWindow2.SetActive (true);
+			nextDialog ();
 		}
 	}
 
@@ -240,19 +280,32 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[34] = "Then just confirm the amount, and " +
 			"i’ll fix it right away. And of course, to the top right you’ll see how much money " +
 			"you’ve got.";//Shopkeeper
-		dialogTexts[35] = "Just fix up your ship right about now, and be on your way.";//Shopkeeper
-		dialogTexts[36] = "I guess that’s about it for what I can tell you, be on your way now. " +
+		dialogTexts[35] = "I guess that’s about it for what I can tell you, be on your way now. " +
 			"And remember; Keep alive and keep flying, a living customer is a paying customer. " +
 			"Come back anytime should you need something.";//Shopkeeper
+		
+		dialogTexts [36] = "Oh, and one more thing. You are never far from one of my shops, just " +
+			"the funky music and you will get there!";//Shopkeeper
+		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
+			"I want to get this done with!";//Player
+		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. " +
+		"You know, you could lose that attitude, I don't think Sir Spikypillow will appreciate it. " +
+			"He is quite posh from what I've heard.";//Shopkeeper
+		dialogTexts [39] = "Sir Spikypillow? Seriously?!?!?";//Player
+		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
+			"Now shit it and get going!";//Shopkeeper
+		dialogTexts [41] = "...";//Player
 
 	}
 
+
+
 	public void dialog (int stage)
 	{
-		//Player dialog: 1, 4, 9, 13, 17, 22
+		//Player dialog: 1, 5, 10, 15, 20, 25, 38, 40, 42
 		//Marine dialog: 20
 		//Dialog runs here
-		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25)
+		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25|| stage == 37 || stage == 39 || stage == 41)
 		{
 			//Sets dialog and character
 			setDialog (character [1], dialogTexts [stage]);
@@ -369,6 +422,7 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (false);
 			break;
 		case(28):
+			compass.goTarget = GameObject.Find ("shop1");
 			questInfo.text = "Enter store.";
 			enterStore = true;
 			break;
@@ -386,18 +440,26 @@ public class Tutorial : MonoBehaviour
 			blinkingButtons [0].enabled = true;
 			break;
 		case(34):
-			changeButtonInteractivity (false);
-			clearButtons ();
-			nextButton.SetActive (true);
-			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
-			GameObject.Find ("button_x").GetComponent<Button> ().enabled = false;
-			break;
-		case(35):
 			blinkingButtons [0] = GameObject.Find ("button_v").GetComponent<Button> ();
 			nextButton.SetActive (false);
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = true;
 			GameObject.Find ("button_x").GetComponent<Button> ().enabled = true;
 			changeButtonInteractivity (true);
+			break;
+		case(36):
+			changeCharacterWindow ();
+			bossCharacterWindow.SetActive (false);
+			questInfo.text = "Talk to shopkeeper.";
+			pauseText.SetActive (true);
+			break;
+		case(42):
+			questInfo.text = "Find ancient cog!";
+			talkBubble.SetActive (false);
+			avatarWindow.SetActive (false);
+			avatarWindow2.SetActive (false);
+			pauseText.SetActive (false);
+			buttonEvents.pause ();
+			Destroy (this.gameObject);
 			break;
 		default:
 			break;
@@ -407,8 +469,8 @@ public class Tutorial : MonoBehaviour
 
 	public void nextDialog ()
 	{
-		Debug.Log ("NextDialog");
 		dialogNumber++;
+		Debug.Log ("NextDialog " + dialogNumber);
 		dialog (dialogNumber);
 	}
 
@@ -438,6 +500,8 @@ public class Tutorial : MonoBehaviour
 
 	private void changeCharacterWindow()
 	{
+		Debug.Log (marineCharacterWindow + " marine");
+		Debug.Log (shopKeeperCharacterWindow + " shopkeeper");
 		if (marineCharacterWindow.activeInHierarchy == false)
 		{
 			marineCharacterWindow.SetActive (true);
