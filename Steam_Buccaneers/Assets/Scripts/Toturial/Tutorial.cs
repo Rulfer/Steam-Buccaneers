@@ -293,7 +293,7 @@ public class Tutorial : MonoBehaviour
 			"He is quite posh from what I've heard.";//Shopkeeper
 		dialogTexts [39] = "Sir Spikypillow? Seriously?!?!?";//Player
 		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
-			"Now shit it and get going!";//Shopkeeper
+			"Now shut it and get going!";//Shopkeeper
 		dialogTexts [41] = "...";//Player
 
 	}

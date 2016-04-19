@@ -35,17 +35,20 @@ public class MinimapCamera : MonoBehaviour
 	}
 
 	IEnumerator PauseCoroutine()
-	{
-		while(true)
+	{	
+		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(Input.GetKeyDown(KeyCode.M))
+			while(true)
 			{
-				if(!isMinimap)
-					deactivateBigMap();
-				else
-					activateBigMap();
+				if(Input.GetKeyDown(KeyCode.M))
+				{
+					if(!isMinimap)
+						deactivateBigMap();
+					else
+						activateBigMap();
+				}
+				yield return null;
 			}
-			yield return null;
 		}
 	}
 
