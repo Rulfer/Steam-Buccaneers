@@ -88,7 +88,7 @@ public class AudioController : MonoBehaviour
 	{
 		if(!one)
 		{
-			backgroundSource.volume -= Time.deltaTime;
+			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
 				backgroundSource.clip = clips[0];
@@ -103,7 +103,7 @@ public class AudioController : MonoBehaviour
 		{
 			if(backgroundSource.volume < 1)
 			{
-				backgroundSource.volume += Time.deltaTime;
+				backgroundSource.volume += Time.deltaTime * 2;
 			}
 			else
 			{
@@ -116,7 +116,7 @@ public class AudioController : MonoBehaviour
 	{
 		if(!two)
 		{
-			backgroundSource.volume -= Time.deltaTime;
+			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
 				backgroundSource.clip = clips[1];
@@ -130,7 +130,7 @@ public class AudioController : MonoBehaviour
 		{
 			if(backgroundSource.volume < 1)
 			{
-				backgroundSource.volume += Time.deltaTime;
+				backgroundSource.volume += Time.deltaTime * 2;
 			}
 			else
 			{
@@ -143,7 +143,7 @@ public class AudioController : MonoBehaviour
 	{
 		if(!three)
 		{
-			backgroundSource.volume -= Time.deltaTime;
+			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
 				backgroundSource.clip = clips[2];
@@ -158,7 +158,7 @@ public class AudioController : MonoBehaviour
 		{
 			if(backgroundSource.volume < 1)
 			{
-				backgroundSource.volume += Time.deltaTime;
+				backgroundSource.volume += Time.deltaTime * 2;
 			}
 			else
 			{
