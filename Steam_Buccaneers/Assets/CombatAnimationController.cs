@@ -18,13 +18,31 @@ public class CombatAnimationController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (SceneManager.GetActiveScene ().name != "Tutorial")
+		if (SceneManager.GetActiveScene ().name != "Tutorial" && GameObject.Find("TutorialControl") == null)
 		{
 			if (GameObject.Find ("SpawnsAI").GetComponent<SpawnAI> ().stopSpawn == true)
 			{
+				if (GameObject.Find ("Boss(Clone)"))
+				{
+					combatBoss = true;
+				}
+
+				if (combatBoss == true)
+				{
+					bossAnimation.SetActive (true);
+					marineAnimation.SetActive (false);
+				} 
+				else
+				{
+					bossAnimation.SetActive (false);
+					marineAnimation.SetActive (true);
+				}
+
 				enemyCharacterWindow.SetActive (true);
 				playerCharacterWindow.SetActive (true);
-			} else if (enemyCharacterWindow.activeSelf == true)
+				shopKeeperAnimation.SetActive (false);
+			} 
+			else if (enemyCharacterWindow.activeSelf == true)
 			{
 				//After battle remove stuff
 				enemyCharacterWindow.SetActive (false);
@@ -48,22 +66,26 @@ public class CombatAnimationController : MonoBehaviour {
 			}
 			playerAnimation.GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
 		} 
-		else if (character == "Marine")
+		else if (character == "Enemy")
 		{
-			if (marineAnimation.GetComponent<Animator> ().GetBool ("isAngryMarine") == true)
+			if (combatBoss == false)
 			{
-				marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", false);
-			}
-			marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", true);
-		}
-		else if (character == "Boss")
-		{
-			if (bossAnimation.GetComponent<Animator> ().GetBool ("isAngryBoss") == true)
+				if (marineAnimation.GetComponent<Animator> ().GetBool ("isAngryMarine") == true)
+				{
+					marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", false);
+				}
+				marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", true);
+			} 
+			else
 			{
-				bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", false);
+				if (bossAnimation.GetComponent<Animator> ().GetBool ("isAngryBoss") == true)
+				{
+					bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", false);
+				}
+				bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
 			}
-			bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
-		}
+
+					}
 
 	}
 

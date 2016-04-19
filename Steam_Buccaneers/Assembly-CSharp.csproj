@@ -48,6 +48,7 @@
      <Compile Include="Assets\ChangeBool.cs" />
      <Compile Include="Assets\CombatAnimationController.cs" />
      <Compile Include="Assets\Continue.cs" />
+     <Compile Include="Assets\DelayStartShopkeeperPointing.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />

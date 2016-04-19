@@ -1,13 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CombatAnimationController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GUIManager.cs">
     <Files>
-      <File FileName="Assets\CombatAnimationController.cs" Line="98" Column="2" />
-      <File FileName="Assets\Scripts\AI\Weapons\AIprojectile.cs" Line="27" Column="43" />
+      <File FileName="Assets\Scripts\Save and load\gameButtons.cs" Line="31" Column="1" />
+      <File FileName="Assets\Scripts\Shop\shopText.cs" Line="66" Column="13" />
+      <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="128" Column="59" />
+      <File FileName="Assets\Scripts\Shop\updateHealth.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\changeMaterial.cs" Line="50" Column="101" />
-      <File FileName="Assets\ChangeBool.cs" Line="50" Column="37" />
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="321" Column="19" />
+      <File FileName="Assets\Scripts\PlayerShip\changeMaterial.cs" Line="66" Column="4" />
+      <File FileName="Assets\FindMissingScripts.cs" Line="1" Column="1" />
+      <File FileName="Assets\GUIManager.cs" Line="16" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\setWeapon.cs" Line="10" Column="3" />
+      <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="126" Column="32" />
+      <File FileName="Assets\Scripts\Scene\GoBack.cs" Line="10" Column="30" />
+      <File FileName="Assets\Scripts\Scene\StoreLauncher.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="163" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

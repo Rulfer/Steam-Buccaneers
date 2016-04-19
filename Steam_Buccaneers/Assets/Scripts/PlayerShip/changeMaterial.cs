@@ -63,6 +63,7 @@ public class changeMaterial : MonoBehaviour {
 			Debug.Log (currentMat.name);
 			GetComponent<Renderer> ().material = new Material (playerMat [matNr]);
 			currentMat = playerMat [matNr];
+
 		}
 	}
 
