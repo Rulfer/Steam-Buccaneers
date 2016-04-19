@@ -81,10 +81,13 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
-					if(SpawnAI.spawn.stopSpawn == false)
-						reactivatePatroling();
-					if(detectDistance > aiRadar + 50)
-						reactivatePatroling();
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(SpawnAI.spawn.stopSpawn == false)
+							reactivatePatroling();
+						if(detectDistance > aiRadar + 50)
+							reactivatePatroling();
+					}
 				}
 			}
 			else if(isBoss == true)
