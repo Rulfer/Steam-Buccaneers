@@ -139,7 +139,7 @@ public class AIprojectile : MonoBehaviour {
 			}
 		}
 
-		if(other.tag == "shop" || other.tag == "Planet")
+		if(other.tag == "shop" || other.tag == "Planet" || other.tag == "asteroid")
 		{
 			source.clip = hitSounds[Random.Range(0, 3)];
 			if(this.gameObject != null)
