@@ -117,6 +117,7 @@
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\World\ObjectiveButtons.cs" />
      <Compile Include="Assets\Scripts\World\OpenCloseObjectives.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMeteorsInner.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />

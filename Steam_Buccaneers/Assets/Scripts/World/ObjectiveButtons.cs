@@ -1,0 +1,54 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class ObjectiveButtons : MonoBehaviour {
+
+	private PointTowards compassNeedle;
+
+	void Start()
+	{
+		compassNeedle = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
+	}
+
+	public void PirateLord () 
+	{
+		compassNeedle.goTarget = GameObject.Find ("BossSpawn");
+	}
+
+	public void Shop () 
+	{
+		float distance;
+		float temp = 1000000000;
+		int tempI = 0;
+		GameObject[] shops = GameObject.FindGameObjectsWithTag ("shop"); 
+		for (int i = 0; i < shops.Length; i++)
+		{
+			distance = Vector3.Distance(shops[i].transform.position, GameObject.Find("PlayerShip").transform.position);
+			if (distance < temp)
+			{
+				temp = distance;
+				tempI = i;
+			}
+		}
+		compassNeedle.goTarget = shops [tempI];
+	}
+
+	public void Treasure()
+	{
+		//Wait for treasures to be done
+//		float distance;
+//		float temp = 1000000000;
+//		int tempI = 0;
+//		GameObject[] treasure = GameObject.FindGameObjectsWithTag ("shop"); 
+//		for (int i = 0; i < treasure.Length; i++)
+//		{
+//			distance = Vector3.Distance(treasure[i].transform.position, GameObject.Find("PlayerShip").transform.position);
+//			if (distance < temp)
+//			{
+//				temp = distance;
+//				tempI = i;
+//			}
+//		}
+//		compassNeedle.goTarget = treasure [tempI];
+	}
+}
