@@ -62,11 +62,9 @@ public class GameControl : MonoBehaviour {
 	//Runs when scene is loaded
 	void OnLevelWasLoaded(int level)
 	{
-		Debug.Log ("Level loaded");
 
 		if (SceneManager.GetActiveScene ().name == "WorldMaster")
 		{
-			Debug.Log ("Load WorldMaster");
 			Load ();
 		}
 	}
@@ -104,7 +102,6 @@ public class GameControl : MonoBehaviour {
 	{
 		//Updates controller with current data. Here posstions to player
 		//First checks if it is a storesave. If it is not, it will save player position instead of store.
-		Debug.Log("Store = " + storeName);
 		if (storeName == "exit_store")
 		{
 
@@ -115,11 +112,8 @@ public class GameControl : MonoBehaviour {
 		} 
 		else 
 		{
-			Debug.Log (GameObject.Find (storeName));
 			GameObject goP = GameObject.Find (storeName);
-			Debug.Log ("Saving store: " + goP);
 			GameControl.control.shipPos = goP.transform.position + (Vector3.forward * 70);
-			Debug.Log ("Saving pos: " + GameControl.control.shipPos);
 		}
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
 		//Writes data to file in GameControl.cs
@@ -144,12 +138,10 @@ public class GameControl : MonoBehaviour {
 			BinaryFormatter bf = new BinaryFormatter();
 			//Opens file. Application.persistentDataPath is unity general savingplace for files. (Somewhere in appdata on windows)
 			FileStream file = File.Open (Application.persistentDataPath + "/playerInfo.ohhijohnny", FileMode.Open);
-			Debug.Log ("Load savefile");
 			//Deserializes the binaryfile to playerdata. 
 			PlayerData data = (PlayerData)bf.Deserialize (file);
 			//Close file after reading
 			file.Close ();
-			Debug.Log ("Write data");
 			loadData(data);
 		}
 	}
@@ -158,27 +150,17 @@ public class GameControl : MonoBehaviour {
 	{
 		//sets lokal data posisions to what we read of.
 		shipPos = FloatstoVector3(data.shipPos);
-		Debug.Log ("Set shippos = " + shipPos);
 		//Update gameobjects with loaded data
 		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
-		Debug.Log ("Player ship = " + goP);
 		goP.transform.root.position = FloatstoVector3(data.shipPos);
-		Debug.Log ("Player ship position = " + goP.transform.root.position);
 		goP.transform.rotation = Quaternion.Euler(0, 0,0);
-		Debug.Log ("Set shiprotation = " + goP.transform.rotation);
 		goP.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
-		Debug.Log ("Set shipvelocity = " + goP.GetComponentInParent<Rigidbody>().velocity);
 		health = data.health;
 		money = data.money;
-		Debug.Log ("Player health and money = " + health + ", " + money);
 		canonUpgrades = data.canonUpgrades;
-		Debug.Log ("Canonupgrades = " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3]+ ", " + canonUpgrades[4]+ ", " + canonUpgrades[5]);
 		hullUpgrade = data.hullUpgrade;
-		Debug.Log ("HullUpgrade = " + hullUpgrade);
 		specialAmmo = data.specialAmmo;
-		Debug.Log ("Spess ammo = " + specialAmmo);
 		thrusterUpgrade = data.thrusterUpgrade;
-		Debug.Log ("Thruster = " + thrusterUpgrade);
 	}
 
 	public void newGame()
