@@ -46,9 +46,7 @@ public class AImove : MonoBehaviour {
 					checkPlayerPosition ();
 				}
 				else
-				{
-					flee();
-				}
+					this.GetComponent<AIFlee>().flee();
 			}
 		}
 
@@ -214,52 +212,52 @@ public class AImove : MonoBehaviour {
 			turnLeft = false;
 		}
 	}
-
+		
 	//The AI decided to flee due to lack of heath 
-	public void flee()
-	{
-		relativePoint = Transformation(player);
-
-		if(relativePoint.x >-0.1 && relativePoint.x <0.1)
-		{
-			if(relativePoint.z <= 0)
-			{
-				turnLeft = false;
-				turnRight = false;
-			}
-			else if(relativePoint.z >= 0)
-			{
-				if(PlayerMove2.turnLeft == true)
-				{
-					turnRight = true;
-					turnLeft = false;
-				}
-
-				else if(PlayerMove2.turnRight == true)
-				{
-					turnLeft = true;
-					turnRight = false;
-				}
-
-				else
-				{
-					turnLeft = true;
-					turnRight = false;
-				}
-			}
-		}
-		if (relativePoint.x <= 0)
-		{
-			turnRight = true;
-			turnLeft = false;
-		}
-		else if (relativePoint.x >= 0) 
-		{
-			turnRight = false;
-			turnLeft = true;
-		}
-		isFleeing = true;
-	}
+//	public void flee()
+//	{
+//		relativePoint = Transformation(player);
+//
+//		if(relativePoint.x >-0.1 && relativePoint.x <0.1)
+//		{
+//			if(relativePoint.z <= 0)
+//			{
+//				turnLeft = false;
+//				turnRight = false;
+//			}
+//			else if(relativePoint.z >= 0)
+//			{
+//				if(PlayerMove2.turnLeft == true)
+//				{
+//					turnRight = true;
+//					turnLeft = false;
+//				}
+//
+//				else if(PlayerMove2.turnRight == true)
+//				{
+//					turnLeft = true;
+//					turnRight = false;
+//				}
+//
+//				else
+//				{
+//					turnLeft = true;
+//					turnRight = false;
+//				}
+//			}
+//		}
+//		if (relativePoint.x <= 0)
+//		{
+//			turnRight = true;
+//			turnLeft = false;
+//		}
+//		else if (relativePoint.x >= 0) 
+//		{
+//			turnRight = false;
+//			turnLeft = true;
+//		}
+//		isFleeing = true;
+//	}
 
 
 	//Runs a test and returns the result in a float variable.
