@@ -8,14 +8,14 @@ public class MinimapCamera : MonoBehaviour
 	public float yPos;
 	public bool isMinimap = true;
 	private float ortSize;
-	public RenderTexture minimapTexture;
-	public RenderTexture bigmapTexture;
-	public GameObject extraBackground;
-	public GameObject minimapCanvas;
-	public GameObject minimapBackground;
-	public GameObject animationCanvas;
-	public GameObject renderPlane;
-	public GameObject renderPlaneBackground;
+	public RenderTexture minimapTexture; //minimapTexture.renderTexture
+	public RenderTexture bigmapTexture; //bigmapTexture.renderTexture
+	public GameObject extraBackground; //map_world_bg (1)
+	public GameObject minimapCanvas; //MiniMap in Canvas_Ingame
+	public GameObject minimapBackground; //_GUIManager
+	public GameObject animationCanvas; //dialogue_elements in Canvas_Ingame
+	public GameObject renderPlane; //map_world_bg
+	public GameObject renderPlaneBackground; //Plane
 
 	public GameObject[] shops;
 	public GameObject[] diamonds;
