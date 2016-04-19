@@ -81,6 +81,8 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
+					if(SpawnAI.spawn.stopSpawn == false)
+						reactivatePatroling();
 					if(detectDistance > aiRadar + 50)
 						reactivatePatroling();
 				}
@@ -127,16 +129,8 @@ public class AIMaster : MonoBehaviour
 		else
 		{
 			testedFleeing = true;
-			this.GetComponent<AImove>().flee();
+			this.GetComponent<AImove>().isFleeing = true;
 			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
-		}
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.tag == "Planet")
-		{
-			killAbsentAI();
 		}
 	}
 
@@ -149,7 +143,7 @@ public class AIMaster : MonoBehaviour
 		{
 			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AIPatroling>().enabled = false;
 			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isPatroling = false;
-			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().flee();
+			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isFleeing = true;
 		}
 		else if(isCargo == true)
 		{
@@ -157,7 +151,7 @@ public class AIMaster : MonoBehaviour
 			testedFleeing = true;
 			temp.GetComponent<AIPatroling>().enabled = false;
 			temp.GetComponent<AImove>().isPatroling = false;
-			temp.GetComponent<AImove>().flee();
+			temp.GetComponent<AImove>().isFleeing = true;
 		}
 	}
 
@@ -179,7 +173,7 @@ public class AIMaster : MonoBehaviour
 							SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
 							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
 							SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
-							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
+							SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isFleeing = true;
 							Debug.Log("We are doing this!" + i);
 						}
 						Debug.Log("i" + i);
@@ -192,7 +186,7 @@ public class AIMaster : MonoBehaviour
 					temp.GetComponent<AIPatroling>().enabled = false;
 					temp.GetComponent<AImove>().isPatroling = false;
 					temp.GetComponent<AIMaster>().testedFleeing = true;
-					temp.GetComponent<AImove>().flee();
+					temp.GetComponent<AImove>().isFleeing = true;
 				}
 			}
 
@@ -209,7 +203,7 @@ public class AIMaster : MonoBehaviour
 							SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
 							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
 							SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
-							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
+							SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isFleeing = true;
 						}
 						i++;
 					}
@@ -226,7 +220,7 @@ public class AIMaster : MonoBehaviour
 						SpawnAI.spawn.marineShips[i].GetComponent<AIPatroling>().enabled = false;
 						SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isPatroling = false;
 						SpawnAI.spawn.marineShips[i].GetComponent<AIMaster>().testedFleeing = true;
-						SpawnAI.spawn.marineShips[i].GetComponent<AImove>().flee();
+						SpawnAI.spawn.marineShips[i].GetComponent<AImove>().isFleeing = true;
 					}
 					i++;
 				}
@@ -236,7 +230,7 @@ public class AIMaster : MonoBehaviour
 					temp.GetComponent<AIPatroling>().enabled = false;
 					temp.GetComponent<AImove>().isPatroling = false;
 					temp.GetComponent<AIMaster>().testedFleeing = true;
-					temp.GetComponent<AImove>().flee();
+					temp.GetComponent<AImove>().isFleeing = true;
 				}
 			}
 		}
@@ -337,7 +331,7 @@ public class AIMaster : MonoBehaviour
 			{
 				if(ranNum > 9)
 				{
-					this.GetComponent<AImove>().flee();
+					this.GetComponent<AImove>().isFleeing = true;
 				}
 				testedFleeing = true;
 			}
@@ -352,5 +346,16 @@ public class AIMaster : MonoBehaviour
 		//this.GetComponent<AIMaster>().enabled = false;
 		this.GetComponent<DeadAI>().enabled = true;
 		kill.gameObject.SetActive(false);
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Planet")
+		{
+			if(isFighting == true)
+				killAI();
+			else
+				killAbsentAI();
+		}
 	}
 }
