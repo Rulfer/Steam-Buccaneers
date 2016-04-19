@@ -21,6 +21,7 @@ public class AudioController : MonoBehaviour
 		one = true;
 		backgroundSource = GameObject.Find("CameraChild").GetComponent<AudioSource>();
 		backgroundSource.clip = clips[0];
+		backgroundSource.Play();
 		combatSource = GameObject.Find("CombatMusic").GetComponent<AudioSource>();
 		combatSource.volume = 0;
 		backgroundSource.volume = 1;
