@@ -45,10 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ChangeBool.cs" />
-     <Compile Include="Assets\CombatAnimationController.cs" />
-     <Compile Include="Assets\Continue.cs" />
-     <Compile Include="Assets\DelayStartShopkeeperPointing.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
@@ -58,7 +54,6 @@
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\OrbitMeteorsOuter.cs" />
-     <Compile Include="Assets\QuitScript.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
@@ -75,6 +70,9 @@
      <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
+     <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
+     <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
+     <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
      <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
      <Compile Include="Assets\Scripts\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
@@ -102,9 +100,12 @@
      <Compile Include="Assets\Scripts\Save and load\GameControl.cs" />
      <Compile Include="Assets\Scripts\Save and load\gameButtons.cs" />
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
+     <Compile Include="Assets\Scripts\Scene\Continue.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
+     <Compile Include="Assets\Scripts\Scene\QuitScript.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
+     <Compile Include="Assets\Scripts\Scene\newGame.cs" />
      <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\changeSliderValue.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
@@ -116,6 +117,7 @@
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\World\OpenCloseObjectives.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMeteorsInner.cs" />
      <Compile Include="Assets\Scripts\World\OrbitMoons.cs" />
      <Compile Include="Assets\Scripts\World\PointTowards.cs" />
@@ -125,7 +127,6 @@
      <Compile Include="Assets\ShipHitObject.cs" />
      <Compile Include="Assets\TreasurePlanet.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
-     <Compile Include="Assets\newGame.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
