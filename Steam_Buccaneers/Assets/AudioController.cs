@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour 
 {
@@ -37,48 +38,51 @@ public class AudioController : MonoBehaviour
 			songTwo();
 		if(GameObject.Find("PlayerShip").transform.position.z > 12000)
 			songThree();
-		if(SpawnAI.spawn.stopSpawn == true) //The spawning has topped, so a combat is ongoing
+		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
+			if(SpawnAI.spawn.stopSpawn == true) //The spawning has topped, so a combat is ongoing
 			{
-				if(!combatSource.isPlaying) //If it's not playing, start playing the combat song
-					combatSource.Play();
-				volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
-				combatSource.volume = volumeCounter; //Sets the volum
-				backgroundSource.volume = 1 - combatSource.volume; //Decrese background song based on combat song volume
-				if(volumeCounter >= 1) //The combat volume has reached 1
+				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 				{
-					counter = 0; //Reset the counter
-					volumeCounter = 0; //Reset the conter
-					backgroundSource.volume = 0; //Set the volume of background source to 0
-					backgroundSource.Stop(); //Stop the background source
+					if(!combatSource.isPlaying) //If it's not playing, start playing the combat song
+						combatSource.Play();
+					volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
+					combatSource.volume = volumeCounter; //Sets the volum
+					backgroundSource.volume = 1 - combatSource.volume; //Decrese background song based on combat song volume
+					if(volumeCounter >= 1) //The combat volume has reached 1
+					{
+						counter = 0; //Reset the counter
+						volumeCounter = 0; //Reset the conter
+						backgroundSource.volume = 0; //Set the volume of background source to 0
+						backgroundSource.Stop(); //Stop the background source
+					}
 				}
 			}
-		}
-		else
-		{
-			if(combatSource.isPlaying)
+			else
 			{
-				if(counter < 1)
-					counter += Time.deltaTime;
-				if(counter >= 1)
+				if(combatSource.isPlaying)
 				{
-					if(!backgroundSource.isPlaying)
+					if(counter < 1)
+						counter += Time.deltaTime;
+					if(counter >= 1)
 					{
-						resetCounter = Time.time;
-						volumeCounter = 0;
-						backgroundSource.Play();
-					}
-					counter += Time.smoothDeltaTime;
+						if(!backgroundSource.isPlaying)
+						{
+							resetCounter = Time.time;
+							volumeCounter = 0;
+							backgroundSource.Play();
+						}
+						counter += Time.smoothDeltaTime;
 
-					combatSource.volume = 2-counter;
-					backgroundSource.volume = 1 - backgroundSource.volume;
-					if(counter >= 2)
-					{
-						counter = 0;
-						volumeCounter = 0;
-						combatSource.volume = 0;
-						combatSource.Stop();
+						combatSource.volume = 2-counter;
+						backgroundSource.volume = 1 - backgroundSource.volume;
+						if(counter >= 2)
+						{
+							counter = 0;
+							volumeCounter = 0;
+							combatSource.volume = 0;
+							combatSource.Stop();
+						}
 					}
 				}
 			}
