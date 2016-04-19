@@ -3,13 +3,12 @@ using System.Collections;
 
 public class AudioController : MonoBehaviour 
 {
-	public AudioClip[] clips;
-
 	private AudioSource backgroundSource;
 	private AudioSource combatSource;
 
 	private float counter = 0;
 	private float volumeCounter = 0;
+	private float resetCounter;
 
 	// Use this for initialization
 	void Start ()
@@ -44,15 +43,21 @@ public class AudioController : MonoBehaviour
 		{
 			if(combatSource.isPlaying)
 			{
-				counter += Time.deltaTime;
+				if(counter < 1)
+					counter += Time.deltaTime;
 				if(counter >= 1)
 				{
 					if(!backgroundSource.isPlaying)
+					{
+						resetCounter = Time.time;
+						volumeCounter = 0;
 						backgroundSource.Play();
-					volumeCounter += Time.deltaTime;
-					backgroundSource.volume = volumeCounter;
-					combatSource.volume = 1 - backgroundSource.volume;
-					if(volumeCounter >= 0.99f)
+					}
+					counter += Time.smoothDeltaTime;
+
+					combatSource.volume = 2-counter;
+					backgroundSource.volume = 1 - backgroundSource.volume;
+					if(counter >= 2)
 					{
 						counter = 0;
 						volumeCounter = 0;
@@ -62,5 +67,8 @@ public class AudioController : MonoBehaviour
 				}
 			}
 		}
+
+		Debug.Log("combatSource.volume = " + combatSource.volume);
+
 	}
 }
