@@ -4,15 +4,20 @@ using System.Collections;
 public class PlayerMove2 : MonoBehaviour 
 {
 	public static PlayerMove2 move;
-	public static Rigidbody donger;
+	public static Rigidbody player;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public float force = 200.0f;
+	private float boostingForce = 500f;
 	public int turnSpeed = 50;
-	public float dongerTurn = 0.50f;
+	public float playerTurn = 0.50f;
 	public Vector3 maxVelocity = new Vector3 (500f, 0.0f, 500f);
+	private Vector3 maxBoostVelocity = new Vector3 (1000f, 0f, 1000f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
+	public bool isBoosting = false;
+	private float boostCooldownTimer = 3f;
+	private bool boostCooledDown;
 
 	public static bool steerShip = true;
 
@@ -29,7 +34,7 @@ public class PlayerMove2 : MonoBehaviour
 	void Start () 
 	{
 		move = this;
-		donger = GetComponent<Rigidbody>();
+		player = GetComponent<Rigidbody>();
 		if (GameObject.Find ("TutorialControl") != null)
 		{
 			TutorialControl = GameObject.Find ("TutorialControl");
@@ -45,6 +50,16 @@ public class PlayerMove2 : MonoBehaviour
 	void FixedUpdate () 
 	{
 
+		if (boostCooldownTimer < 3f || isBoosting == false)
+		{
+			boostCooldownTimer +=Time.deltaTime;
+			if (boostCooldownTimer >= 3f)
+			{
+				boostCooldownTimer = 3f;
+			}
+
+		}
+
 		if(hitBomb == true)
 		{
 			bombTimer += Time.deltaTime;
@@ -57,9 +72,15 @@ public class PlayerMove2 : MonoBehaviour
 				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
-		if (steerShip == true) {
+
+		//if (steerShip == true) 
+		//{
 		if (hitBomb == false && GameControl.control.health > 0) 
 		{
+			if (Input.GetKey (KeyCode.LeftShift))
+				{
+					Boost();
+				}
 			if (Input.GetKey (KeyCode.W)) 
 			{
 				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [0] == false)
@@ -68,27 +89,27 @@ public class PlayerMove2 : MonoBehaviour
 					TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
 				}
 				goingForward = true;
-				donger.AddForce (transform.forward * force * Time.deltaTime);
+				player.AddForce (transform.forward * force * Time.deltaTime);
 				// Series of if tests
-				if (donger.velocity.x >= maxVelocity.x) 
-				{ //|| -donger.velocity.x >= -maxVelocity.x)
+				if (player.velocity.x >= maxVelocity.x) 
+				{ //|| -player.velocity.x >= -maxVelocity.x)
 					// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
 					// in the z-axis, although it does in fact accelerate.
-					donger.velocity = new Vector3 (maxVelocity.x, 0.0f, donger.velocity.z);
+					player.velocity = new Vector3 (maxVelocity.x, 0.0f, player.velocity.z);
 				}
 
-				if (donger.velocity.x <= -maxVelocity.x) 
+				if (player.velocity.x <= -maxVelocity.x) 
 				{
-					donger.velocity = new Vector3 (-maxVelocity.x, 0.0f, donger.velocity.z);
+					player.velocity = new Vector3 (-maxVelocity.x, 0.0f, player.velocity.z);
 				}
 
-				if (donger.velocity.z >= maxVelocity.z) 
+				if (player.velocity.z >= maxVelocity.z) 
 				{
-					donger.velocity = new Vector3 (donger.velocity.x, 0.0f, maxVelocity.z);
+					player.velocity = new Vector3 (player.velocity.x, 0.0f, maxVelocity.z);
 				}
 
-				if (donger.velocity.z <= -maxVelocity.z) {
-					donger.velocity = new Vector3 (donger.velocity.x, 0.0f, -maxVelocity.z);
+				if (player.velocity.z <= -maxVelocity.z) {
+					player.velocity = new Vector3 (player.velocity.x, 0.0f, -maxVelocity.z);
 				}
 			} 
 			else
@@ -97,7 +118,7 @@ public class PlayerMove2 : MonoBehaviour
 			}
 //		else 
 //		{
-//				//donger.velocity = donger.velocity * 0.90f;
+//				//player.velocity = player.velocity * 0.90f;
 //				//goingForward = false;
 //			}
 
@@ -156,7 +177,7 @@ public class PlayerMove2 : MonoBehaviour
 			if(clip != 2)
 				playEndSound();
 		}
-		}
+		//}
 	}
 
 	private void playStartSound()
@@ -193,5 +214,42 @@ public class PlayerMove2 : MonoBehaviour
 			GameControl.control.health = 0;
 		}
 	}
+
+	void Boost()
+	{
+		//Setting the players maximum velocity to a higher amount
+		maxVelocity = maxBoostVelocity;
+
+		//if the player is not in combat, boost is active as long as the player uses it
+		while (SpawnAI.spawn.stopSpawn != true)
+		{
+			isBoosting = true;
+			Debug.Log ("beleoelge");
+
+			//maxVelocity = maxBoostVelocity;
+			//propelling the player forward at double the speed
+			player.AddForce (transform.forward * force*2 * Time.deltaTime);
+
+			// Testing if the player is in combat
+			break;
+		}
+
+		while (SpawnAI.spawn.stopSpawn == true)
+		{
+			isBoosting = true;
+			while (boostCooldownTimer >=0)
+			{
+				
+				player.AddForce (transform.forward * force*2 * Time.deltaTime);
+				boostCooldownTimer -= Time.deltaTime;
+				//return boostCooldownTimer;
+
+			}
+			break;
+			//bool boostCooledDown
+		}
+
+	}
+
 
 }
