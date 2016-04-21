@@ -6,11 +6,11 @@ public class PlayerMove2 : MonoBehaviour
 	public static PlayerMove2 move;
 	public static Rigidbody player;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
-	public float force = 200.0f;
+	public float force;
 	private float boostingForce = 500f;
 	public int turnSpeed = 50;
 	public float playerTurn = 0.50f;
-	public Vector3 maxVelocity = new Vector3 (500f, 0.0f, 500f);
+	public Vector3 maxVelocity;
 	private Vector3 maxBoostVelocity = new Vector3 (1000f, 0f, 1000f);
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
@@ -43,7 +43,21 @@ public class PlayerMove2 : MonoBehaviour
 		{
 			Destroy (TutorialControl);
 		}
+
 		source = this.GetComponent<AudioSource>();
+
+		if (GameControl.control.thrusterUpgrade == 2)
+		{
+			force = 1400;
+			maxVelocity = new Vector3 (force * 10, 0, force * 10);
+			Debug.Log ("Skift fart " + force);
+		} 
+		else if (GameControl.control.thrusterUpgrade == 3)
+		{
+			force = 1900;
+			maxVelocity = new Vector3 (force * 10, 0, force * 10);
+			Debug.Log ("Skift fart " + force);
+		}
 	}
 
 	// Update is called once per frame
