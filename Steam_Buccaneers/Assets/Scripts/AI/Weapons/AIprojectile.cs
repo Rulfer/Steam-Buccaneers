@@ -88,9 +88,12 @@ public class AIprojectile : MonoBehaviour {
 			}
 			if(other.transform.root.name == "Marine(Clone)")
 			{
-				if(SpawnAI.spawn.stopSpawn == false)
+				if(SceneManager.GetActiveScene().name != "Tutorial")
 				{
-					other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+					if(SpawnAI.spawn.stopSpawn == false)
+					{
+						other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+					}
 				}
 			}
 
