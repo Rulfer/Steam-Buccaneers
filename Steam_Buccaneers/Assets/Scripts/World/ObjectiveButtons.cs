@@ -36,19 +36,19 @@ public class ObjectiveButtons : MonoBehaviour {
 	public void Treasure()
 	{
 		//Wait for treasures to be done
-//		float distance;
-//		float temp = 1000000000;
-//		int tempI = 0;
-//		GameObject[] treasure = GameObject.FindGameObjectsWithTag ("shop"); 
-//		for (int i = 0; i < treasure.Length; i++)
-//		{
-//			distance = Vector3.Distance(treasure[i].transform.position, GameObject.Find("PlayerShip").transform.position);
-//			if (distance < temp)
-//			{
-//				temp = distance;
-//				tempI = i;
-//			}
-//		}
-//		compassNeedle.goTarget = treasure [tempI];
+		float distance;
+		float temp = 1000000000;
+		int tempI = 0;
+		GameObject[] treasure = GameObject.FindGameObjectsWithTag ("TreasurePlanet"); 
+		for (int i = 0; i < treasure.Length; i++)
+		{
+			distance = Vector3.Distance(treasure[i].transform.position, GameObject.Find("PlayerShip").transform.position);
+			if (distance < temp)
+			{
+				temp = distance;
+				tempI = i;
+			}
+		}
+		compassNeedle.goTarget = treasure [tempI];
 	}
 }
