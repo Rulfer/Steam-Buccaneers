@@ -86,6 +86,13 @@ public class AIprojectile : MonoBehaviour {
 					SceneManager.LoadScene("cog_screen");
 				}
 			}
+			if(other.transform.root.name == "Marine(Clone)")
+			{
+				if(SpawnAI.spawn.stopSpawn == false)
+				{
+					other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+				}
+			}
 
 			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
