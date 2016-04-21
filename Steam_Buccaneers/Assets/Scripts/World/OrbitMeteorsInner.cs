@@ -24,6 +24,7 @@ public class OrbitMeteorsInner : MonoBehaviour
 			// vi må se på hvilken fart spiller har, og hva den nye farta er, slik som bård gjør
 			crashdamage = Mathf.RoundToInt (PlayerMove2.player.velocity.magnitude);
 			GameControl.control.health -= crashdamage;
+			other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
 		}
 		/*
 		if (other.tag == "aiShip")

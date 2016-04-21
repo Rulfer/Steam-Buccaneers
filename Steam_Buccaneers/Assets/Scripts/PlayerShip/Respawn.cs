@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Respawn : MonoBehaviour 
 {
@@ -11,6 +12,20 @@ public class Respawn : MonoBehaviour
 	public GameObject deathScreen;
 	private bool showDeathScreen = false;
 	//float respawnTime = 5;
+
+	//dialog stuff
+	private int deathTalkNumber = 0;
+	private string[] characters = new string[2];
+	private string[] deathDialog = new string[5];
+	private GameObject nextButton;
+	private Text characterName;
+	private Text dialogTextBox;
+	private string textColorPlayer;
+	private string textColorShopkeeper;	
+	private Vector2 nameLeftPos;
+	private Vector2 nameRightPos;
+	private Color tempColor;
+	public GameObject dialogGui;
 
 
 	void Start () 
@@ -38,13 +53,7 @@ public class Respawn : MonoBehaviour
 				deathScreen.SetActive (showDeathScreen);
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			}
-			/*
-			respawnTime -= Time.deltaTime;
-			if (respawnTime < 0)
-			{
-				RespawnPlayer();
-				respawnTime = 5;
-			}*/
+		
 		}
 
 	
@@ -60,9 +69,6 @@ public class Respawn : MonoBehaviour
 			{
 				temp = distance;
 				tempI = i;
-				//Debug.Log (spawnCoord);
-				//player.transform.position = spawnCoord;
-				//player.transform.position.z -= 100;
 			}
 
 		}
@@ -70,11 +76,82 @@ public class Respawn : MonoBehaviour
 		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
-		GameControl.control.health = 20;
-		//Debug.Log (tempI);
-		//Debug.Log (shops[tempI].transform.name);
-	
+		GameControl.control.health = 100;
+
+		if (GameControl.control.firstDeath == false)
+		{
+			setDeathData ();
+			teachDeath (0);
+		}
 		
+	}
+
+	private void setDeathData ()
+	{
+		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
+		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
+		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
+		nextButton = GameObject.Find ("dialogue_next_shop");
+		nameLeftPos = new Vector3(115.0f, -25.0f);
+		nameRightPos = new Vector3 (525.0f, -25.0f);
+
+		textColorPlayer = "#173E3CFF";
+		textColorShopkeeper = "#631911FF";
+
+		characters [0] = "Shopkeeper";
+		characters [1] = "Player";
+
+		deathDialog [0] = "So, you decided to get yourself killed? Luckily I was there to help you out! I've fixed the ship for you, so you can be on your way!";
+		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this!";
+		deathDialog [2] = "Of cause! It's already taken car of, no worries!";
+	}
+
+	private void teachDeath(int dialog)
+	{		
+		if (dialog == 1 )
+		{
+			//Sets dialog and character
+			setDialog (characters[1], deathDialog [dialog]);
+			//Moves name closer to portrait
+			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameLeftPos)
+			{
+				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameLeftPos;
+			}
+			//Changes color on text which is closer to character
+			ColorUtility.TryParseHtmlString (textColorPlayer, out tempColor);
+		} 
+		else
+		{
+			//Sets dialog and character
+			setDialog (characters [0], deathDialog [dialog]);
+			//Moves name closer to portrait
+			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
+			{
+				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
+			}
+			//Changes color on text which is closer to character
+			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
+		}
+
+		switch (dialog)
+		{
+		case(0):
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void setDialog (string character, string text)
+	{
+		characterName.text = character;
+		dialogTextBox.text = text;
+	}
+
+	public void nextDialogDeath()
+	{
+		deathTalkNumber++;
+		teachDeath (deathTalkNumber);
 	}
 
 }
