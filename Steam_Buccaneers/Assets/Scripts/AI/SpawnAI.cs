@@ -25,6 +25,7 @@ public class SpawnAI : MonoBehaviour
 	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
+	public bool trespassingWorldBorder = false;
 
 	public static Vector3 spawnPosition; //Where the AI should spawn
 
@@ -97,7 +98,7 @@ public class SpawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		//There are no living ships, therefore we spawn a new one
-		if(stopSpawn == false && GameObject.Find("Boss(Clone)") == null)
+		if(trespassingWorldBorder == false && stopSpawn == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			spawnShip ();
 		}
@@ -250,7 +251,7 @@ public class SpawnAI : MonoBehaviour
 
 	void spawnCargo()
 	{
-		if(livingCargo == false && stopSpawn == false)
+		if(livingCargo == false && stopSpawn == false && trespassingWorldBorder == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			livingCargo = true;
 			setCannonLevel();

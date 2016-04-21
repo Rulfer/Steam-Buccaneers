@@ -8,10 +8,6 @@ public class GoBack : MonoBehaviour {
 		GameControl.control.Save ("exit_store");
 		GameControl.control.ChangeScene ("WorldMaster");
 		ChangeScene.inShop = false;
-		if (GameObject.Find ("TutorialControl") != null)
-		{
-			Destroy (GameObject.Find ("TutorialControl").gameObject);
-		}
 	}
 		
 

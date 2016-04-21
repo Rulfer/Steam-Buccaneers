@@ -24,9 +24,12 @@ public class AIprojectile : MonoBehaviour {
 	private Vector3 axisOfRotation;
 	private float angularVelocity;
 
+	private CombatAnimationController characterWindows;
+
 	// Use this for initialization
 	void Start () 
 	{
+		characterWindows = GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController>();
 		source = this.GetComponent<AudioSource>();
 		test.AddForce (this.transform.right * projectileSpeed);
 		player = GameObject.Find("PlayerShip");
@@ -62,6 +65,8 @@ public class AIprojectile : MonoBehaviour {
 
 				GameControl.control.health -= damageOutput;
 				other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+				if(GameControl.control.health <= 0)
+					other.GetComponentInParent<DeadPlayer>().enabled = true;
 
 				CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f); //This actually instantiates the camera shake. Do NOT remove this line of code. 
 
@@ -71,30 +76,44 @@ public class AIprojectile : MonoBehaviour {
 			}
 		}
 
-		if(other.tag == "aiShip") //The AI hit itself
+		if(other.tag == "aiShip") //The projectile hit an AI
 		{
 			if(other.transform.root.name == "Cargo(Clone)")
 				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
 			
-			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
+			if(other.transform.root.name == "Boss(Clone)")
 			{
-				SceneManager.LoadScene("cog_screen");
+				if ((other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
+					SceneManager.LoadScene("cog_screen");
+			}
+			if(other.transform.root.name == "Marine(Clone)")
+			{
+				if(SpawnAI.spawn.stopSpawn == false)
+				{
+					other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+				}
 			}
 
 			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
 				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
-				if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
+				if (other.transform.GetComponentInParent<AIMaster> ().aiHealth <= 0)
+					other.transform.GetComponentInParent<AIMaster> ().killAI ();
+				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat3)
 				{
-					other.transform.GetComponentInParent<AIMaster>().killAI();
-				}
-				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
+					if (other.GetComponentInParent<AIMaster> ().usingMat3 != true)
+						characterWindows.setHappy ("Player");
+					other.GetComponentInParent<AIMaster> ().changeMat3 ();
+					other.GetComponentInParent<AIMaster> ().testFleeing ();
+
+				} 
+				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat2)
 				{
-					other.GetComponentInParent<AIMaster>().changeMat3();
-					other.GetComponentInParent<AIMaster>().testFleeing();
+					if (other.GetComponentInParent<AIMaster> ().usingMat2 != true)
+						characterWindows.setHappy ("Player");
+					other.GetComponentInParent<AIMaster> ().changeMat2 ();
 				}
-				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
-					other.GetComponentInParent<AIMaster>().changeMat2();
+				characterWindows.setAngry ("Enemy");
 				Instantiate(explotion, this.transform.position, this.transform.rotation);
 				this.GetComponent<MeshFilter>().mesh = null;
 				source.clip = hitSounds[Random.Range(0, 3)];
@@ -120,7 +139,7 @@ public class AIprojectile : MonoBehaviour {
 			}
 		}
 
-		if(other.tag == "shop" || other.tag == "Planet")
+		if(other.tag == "shop" || other.tag == "Planet" || other.tag == "asteroid")
 		{
 			source.clip = hitSounds[Random.Range(0, 3)];
 			if(this.gameObject != null)

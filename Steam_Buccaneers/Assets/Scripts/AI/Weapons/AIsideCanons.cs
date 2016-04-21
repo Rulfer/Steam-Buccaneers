@@ -193,7 +193,7 @@ public class AIsideCanons : MonoBehaviour {
 
 			if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance)) //Raycast hit something
 			{
-				if(objectHit.transform.tag == "Player")//Hit the player
+				if(objectHit.transform.root.name == "PlayerShip")//Hit the player
 				{
 					fireLeft = true;//The AI can now fire
 				}
@@ -209,7 +209,7 @@ public class AIsideCanons : MonoBehaviour {
 
 			if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))//Raycast hit something
 			{
-				if(objectHit.transform.tag == "Player")//Hit the player
+				if(objectHit.transform.root.name == "PlayerShip")//Hit the player
 				{
 					fireRight = true;//The AI can now fire
 				}

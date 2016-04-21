@@ -27,7 +27,7 @@ public class CastRays : MonoBehaviour {
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "Moon" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
 				this.transform.root.GetComponent<AImove>().turnLeft = true;
 				this.transform.root.GetComponent<AIavoid>().hitSide = true;
@@ -44,7 +44,7 @@ public class CastRays : MonoBehaviour {
 
 		else if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "Moon" || objectHit.transform.tag == "aiShip" || objectHit.transform.tag == "shopWall") //The planet is in front of the AI
 			{
 				this.transform.root.GetComponent<AImove>().turnRight = true;
 				this.transform.root.GetComponent<AIavoid>().hitSide = true;

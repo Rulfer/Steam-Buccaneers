@@ -22,7 +22,6 @@ public class DeadAI : MonoBehaviour {
 		this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 		currentMesh.GetComponent<MeshCollider>().enabled = false;
 		newMesh.GetComponent<MeshCollider>().enabled = true;
-
 	}
 
 	void Update()
