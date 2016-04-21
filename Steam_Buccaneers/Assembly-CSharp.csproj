@@ -130,6 +130,7 @@
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\ShipHitObject.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
+     <Compile Include="Assets\animateSun.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
