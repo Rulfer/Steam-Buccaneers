@@ -74,6 +74,8 @@ public class PlayerMove2 : MonoBehaviour
 
 		}
 
+
+
 		if(hitBomb == true)
 		{
 			bombTimer += Time.deltaTime;
@@ -92,9 +94,15 @@ public class PlayerMove2 : MonoBehaviour
 		if (hitBomb == false && GameControl.control.health > 0) 
 		{
 			if (Input.GetKey (KeyCode.LeftShift))
-				{
-					Boost();
-				}
+			{
+				Boost();
+			}
+
+			else 
+			{
+				isBoosting = false;
+			}
+				
 			if (Input.GetKey (KeyCode.W)) 
 			{
 				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [0] == false)
@@ -232,34 +240,36 @@ public class PlayerMove2 : MonoBehaviour
 	void Boost()
 	{
 		//Setting the players maximum velocity to a higher amount
-		maxVelocity = maxBoostVelocity;
+		maxVelocity *= 2;
 
 		//if the player is not in combat, boost is active as long as the player uses it
-		while (SpawnAI.spawn.stopSpawn != true)
+		if (SpawnAI.spawn.stopSpawn != true)
 		{
 			isBoosting = true;
-			Debug.Log ("beleoelge");
+			Debug.Log ("beleoelge " + SpawnAI.spawn.stopSpawn);
 
 			//maxVelocity = maxBoostVelocity;
 			//propelling the player forward at double the speed
 			player.AddForce (transform.forward * force*2 * Time.deltaTime);
 
 			// Testing if the player is in combat
-			break;
+
 		}
 
-		while (SpawnAI.spawn.stopSpawn == true)
+		if (SpawnAI.spawn.stopSpawn == true)
 		{
 			isBoosting = true;
-			while (boostCooldownTimer >=0)
+			boostCooldownTimer -= Time.time;
+			if (boostCooldownTimer >=0)
 			{
+				Debug.Log ("Gabeldigokk " + SpawnAI.spawn.stopSpawn);
 				
 				player.AddForce (transform.forward * force*2 * Time.deltaTime);
-				boostCooldownTimer -= Time.deltaTime;
+				Debug.Log (boostCooldownTimer + " " + boostCooledDown);
 				//return boostCooldownTimer;
 
 			}
-			break;
+
 			//bool boostCooledDown
 		}
 
