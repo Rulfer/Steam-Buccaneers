@@ -6,15 +6,20 @@ public class DamagedPlayer : MonoBehaviour
 	public static DamagedPlayer dmPlayer;
 	public GameObject[] smokeParticles;
 	public GameObject[] fireParticles;
-	public bool isSmoking = false;
-	public bool isBurning = false;
+	public bool isSmoking = true;
+	public bool isBurning = true;
 	// Use this for initialization
 	void Start () {
 		dmPlayer = this;
-		foreach(GameObject go in smokeParticles)
-			go.SetActive(false);
-		foreach(GameObject go in fireParticles)
-			go.SetActive(false);
+		isSmoking = true;
+		isBurning = true;
+		this.GetComponentInChildren<changeMaterial>().checkPlayerHealth();
+//		foreach(GameObject go in smokeParticles)
+//			go.SetActive(false);
+//		foreach(GameObject go in fireParticles)
+//			go.SetActive(false);
+//
+//
 	}
 
 	public void startSmoke()
@@ -36,6 +41,7 @@ public class DamagedPlayer : MonoBehaviour
 		isSmoking = false;
 		foreach(GameObject go in smokeParticles)
 			go.SetActive(false);
+		Debug.Log("hello smoke");
 	}
 
 	public void removeFire()
