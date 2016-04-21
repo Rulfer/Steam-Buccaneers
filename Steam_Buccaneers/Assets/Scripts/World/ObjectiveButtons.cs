@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class ObjectiveButtons : MonoBehaviour {
 
 	private PointTowards compassNeedle;
+	private Text questInfo;
 
 	void Start()
 	{
 		compassNeedle = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
+		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 	}
 
 	public void PirateLord () 
 	{
 		compassNeedle.goTarget = GameObject.Find ("BossSpawn");
+		questInfo.text = "Find ancient cog!";
 	}
 
 	public void Shop () 
@@ -31,6 +36,7 @@ public class ObjectiveButtons : MonoBehaviour {
 			}
 		}
 		compassNeedle.goTarget = shops [tempI];
+		questInfo.text = "Go to shop!";
 	}
 
 	public void Treasure()
@@ -50,5 +56,6 @@ public class ObjectiveButtons : MonoBehaviour {
 			}
 		}
 		compassNeedle.goTarget = treasure [tempI];
+		questInfo.text = "Find treasure planet!";
 	}
 }
