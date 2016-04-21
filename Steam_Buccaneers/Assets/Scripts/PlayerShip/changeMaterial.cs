@@ -14,7 +14,7 @@ public class changeMaterial : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		currentMat = GameObject.Find("Player_Ship_Collected").GetComponent<MeshRenderer>().material;
+		currentMat = GameObject.Find("Player_Ship_Collected").GetComponentInParent<MeshRenderer>().material;
 		//Calculates moments of material change
 		fullHealth = 100;
 		material2Limit = fullHealth * 0.66f;
@@ -29,15 +29,26 @@ public class changeMaterial : MonoBehaviour {
 		if (GameControl.control.health > material2Limit && GameControl.control.health > material3Limit)
 		{
 			setNewMaterial (0);
-
+			if(this.GetComponentInParent<DamagedPlayer>().isSmoking == true)
+				this.GetComponentInParent<DamagedPlayer>().removeSmoke();
+			if(this.GetComponentInParent<DamagedPlayer>().isBurning == true)
+				this.GetComponentInParent<DamagedPlayer>().removeFire();
 		} 
 		else if (GameControl.control.health < material2Limit && GameControl.control.health > material3Limit)
 		{
 			setNewMaterial (1);
+			if(this.GetComponentInParent<DamagedPlayer>().isSmoking == false)
+				this.GetComponentInParent<DamagedPlayer>().startSmoke();
+			if(this.GetComponentInParent<DamagedPlayer>().isBurning == true)
+				this.GetComponentInParent<DamagedPlayer>().removeFire();
 		} 
 		else if (GameControl.control.health < material2Limit && GameControl.control.health < material3Limit)
 		{
 			setNewMaterial (2);
+			if(this.GetComponentInParent<DamagedPlayer>().isSmoking == false)
+				this.GetComponentInParent<DamagedPlayer>().startSmoke();
+			if(this.GetComponentInParent<DamagedPlayer>().isBurning == false)
+				this.GetComponentInParent<DamagedPlayer>().startFire();
 		}
 	}
 
@@ -48,7 +59,7 @@ public class changeMaterial : MonoBehaviour {
 		Debug.Log (currentMat.name);
 		if (firstTimeCheck == true)
 		{
-			GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setAngry ("Player");
+			GameObject.Find ("dialogue_elements").GetComponentInParent<CombatAnimationController> ().setAngry ("Player");
 		} 
 		else
 		{
@@ -58,10 +69,10 @@ public class changeMaterial : MonoBehaviour {
 		//Changes material that fits health.
 		if (playerMat[matNr].name != currentMat.name)
 		{
-			GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().setHappy ("Enemy");
+			GameObject.Find ("dialogue_elements").GetComponentInParent<CombatAnimationController> ().setHappy ("Enemy");
 			Debug.Log (playerMat [matNr].name);
 			Debug.Log (currentMat.name);
-			GetComponent<Renderer> ().material = new Material (playerMat [matNr]);
+			GetComponentInParent<Renderer> ().material = new Material (playerMat [matNr]);
 			currentMat = playerMat [matNr];
 
 		}
