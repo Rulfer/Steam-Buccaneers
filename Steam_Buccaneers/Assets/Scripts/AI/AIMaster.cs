@@ -66,7 +66,6 @@ public class AIMaster : MonoBehaviour
 						{
 							if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
 							{
-								isFighting = true;
 								deaktivatePatroling();
 							}
 							else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
@@ -74,7 +73,6 @@ public class AIMaster : MonoBehaviour
 						}
 						else
 						{
-							isFighting = true;
 							deaktivatePatroling();
 						}
 					}
@@ -92,7 +90,6 @@ public class AIMaster : MonoBehaviour
 			}
 			else if(isBoss == true)
 			{
-				isFighting = true;
 				deaktivatePatroling();
 			}
 
@@ -120,6 +117,8 @@ public class AIMaster : MonoBehaviour
 	public void deaktivatePatroling()
 	{
 		detectedPlayer = true;
+		isFighting = true;
+
 		if(SceneManager.GetActiveScene().name != "Tutorial" && isCargo == false)
 		{
 			SpawnAI.spawn.stopFightTimer = true;

@@ -19,6 +19,7 @@ public class GameControl : MonoBehaviour {
 	public int hullUpgrade;
 	public int specialAmmo;
 	public int thrusterUpgrade;
+	public bool firstDeath = false;
 
 	public GameObject loadingCanvas;
 
@@ -125,6 +126,7 @@ public class GameControl : MonoBehaviour {
 		data.hullUpgrade = hullUpgrade;
 		data.specialAmmo = specialAmmo;
 		data.thrusterUpgrade = thrusterUpgrade;
+		data.firstDeath = firstDeath;
 
 		return data;
 	}
@@ -161,6 +163,7 @@ public class GameControl : MonoBehaviour {
 		hullUpgrade = data.hullUpgrade;
 		specialAmmo = data.specialAmmo;
 		thrusterUpgrade = data.thrusterUpgrade;
+		firstDeath = data.firstDeath;
 	}
 
 	public void newGame()
@@ -218,4 +221,5 @@ class PlayerData
 	public int hullUpgrade;
 	public int specialAmmo;
 	public int thrusterUpgrade;
+	public bool firstDeath = false;
 }
