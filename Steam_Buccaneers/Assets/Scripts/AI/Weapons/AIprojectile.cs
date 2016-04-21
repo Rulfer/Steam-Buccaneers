@@ -84,9 +84,7 @@ public class AIprojectile : MonoBehaviour {
 			if(other.transform.root.name == "Boss(Clone)")
 			{
 				if ((other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
-				{
 					SceneManager.LoadScene("cog_screen");
-				}
 			}
 			if(other.transform.root.name == "Marine(Clone)")
 			{
