@@ -31,6 +31,7 @@ public class WorldBorder : MonoBehaviour
 		if(other.transform.root.name == "PlayerShip")
 		{
 			isTrespassing = true;
+			SpawnAI.spawn.trespassingWorldBorder = true;
 			Debug.Log("wat hit me " + other.transform.root.name);
 
 		}
@@ -40,6 +41,8 @@ public class WorldBorder : MonoBehaviour
 	{
 		if(other.transform.root.name == "PlayerShip")
 		{
+			SpawnAI.spawn.trespassingWorldBorder = false;
+
 			killDuration = 20;
 			theText.text = "";
 			numberText.text = "";
