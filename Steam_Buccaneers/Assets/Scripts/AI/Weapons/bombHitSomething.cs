@@ -9,7 +9,15 @@ public class BombHitSomething : MonoBehaviour {
 	private float force = 10.0f;
 
 	CameraShakeInstance shake;
+	public GameObject explosion;
 
+	public AudioClip[] clips;
+	private AudioSource source;
+
+	void Start()
+	{
+		source = this.GetComponent<AudioSource>();
+	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
 	{
@@ -54,7 +62,7 @@ public class BombHitSomething : MonoBehaviour {
 		foreach(Collider hit in colliders) //We will do the same check for every object in the array
 		{
 			Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
-			if(hit.tag == "Player") //If we hit the player
+			if(hit.transform.root.name == "PlayerShip") //If we hit the player
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
@@ -85,6 +93,11 @@ public class BombHitSomething : MonoBehaviour {
 			}
 		}
 
-		Destroy(this.gameObject); //Destroys this object
+		Instantiate(explosion, this.transform.position, this.transform.rotation);
+		source.clip = clips[Random.Range(0, 5)];
+		source.Play();
+		this.GetComponent<MeshCollider>().enabled = false;
+		this.GetComponent<MeshRenderer>().enabled = false;
+		Destroy(this.gameObject, source.clip.length); //Destroys this object
 	}
 }

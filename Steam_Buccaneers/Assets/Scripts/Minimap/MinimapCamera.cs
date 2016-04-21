@@ -1,43 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class MinimapCamera : MonoBehaviour {
+public class MinimapCamera : MonoBehaviour 
+{
 	public static MinimapCamera miniCam;
-	private GameObject player;
 	public float yPos;
 	public bool isMinimap = true;
 	private float ortSize;
-	public RenderTexture minimapTexture;
-	public RenderTexture bigmapTexture;
-	public GameObject ingameCanvas;
-	public GameObject minimap;
-	public GameObject minimapBackground;
-	public GameObject animationCanvas;
-	public GameObject renderPlane;
-	public GameObject renderPlaneBackground;
-	public LayerMask bigMapLayer;
+	public RenderTexture minimapTexture; //minimapTexture.renderTexture
+	public RenderTexture bigmapTexture; //bigmapTexture.renderTexture
+	public GameObject extraBackground; //map_world_bg (1)
+	public GameObject minimapCanvas; //MiniMap in Canvas_Ingame
+	public GameObject minimapBackground; //_GUIManager
+	public GameObject animationCanvas; //dialogue_elements in Canvas_Ingame
+	public GameObject renderPlane; //map_world_bg
+	public GameObject renderPlaneBackground; //Plane
+
+	public GameObject[] shops;
+	public GameObject[] diamonds;
+	public GameObject[] moonIcons;
+	private GameObject[] moons;
+	private GameObject player;
+	private GameObject boss;
 
 	// Use this for initialization
 	void Start () 
 	{
 		miniCam = this;
-		player = GameObject.Find("PlayerShip");
 		yPos = 500;
 		StartCoroutine(PauseCoroutine());
+		player = GameObject.Find("map_icon_player");
+		boss = GameObject.Find("map_icon_boss");
 	}
 
 	IEnumerator PauseCoroutine()
-	{
-		while(true)
+	{	
+		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(Input.GetKeyDown(KeyCode.M))
+			while(true)
 			{
-				if(!isMinimap)
-					deactivateBigMap();
-				else
-					activateBigMap();
+				if(Input.GetKeyDown(KeyCode.M))
+				{
+					if(!isMinimap)
+						deactivateBigMap();
+					else
+						activateBigMap();
+				}
+				yield return null;
 			}
-			yield return null;
 		}
 	}
 
@@ -48,26 +59,43 @@ public class MinimapCamera : MonoBehaviour {
 		ortSize = this.GetComponent<Camera>().orthographicSize;
 		this.transform.position = new Vector3(0, 700, 7220);
 		this.transform.rotation = Quaternion.Euler(90, -90, 0);
-		this.GetComponent<Camera>().orthographicSize = 7000;
+		this.GetComponent<Camera>().orthographicSize = 8000;
 		this.GetComponent<Camera>().targetTexture = bigmapTexture;
-		//this.GetComponent<Camera>().cullingMask = ~(1 >> 10); //This turned out to be a happy little accident
-		this.GetComponent<Camera>().cullingMask = bigMapLayer;
-		//ingameCanvas.SetActive(false);
+		this.GetComponent<Camera>().cullingMask = 1 << 10 | 1 << 11;
+		minimapCanvas.SetActive(false);
 		renderPlane.SetActive(true);
+		extraBackground.SetActive(true);
 		renderPlaneBackground.SetActive(true);
 		minimapBackground.SetActive(false);
 		animationCanvas.SetActive(false);
-		//mapCanvas.transform.position = new Vector3(this.transform.position.x, -300, this.transform.position.z);
-		//minimap.SetActive(false);
+		boss.transform.localScale = new Vector3(21, 21, 21);
+		player.transform.localScale = new Vector3(600, 600, 600);
+		foreach(GameObject go in shops)
+			go.transform.localScale = new Vector3 (20, 20, 20);
+		foreach(GameObject go in diamonds)
+			go.transform.localScale = new Vector3 (20, 20, 20);
+
+		foreach(GameObject go in moonIcons)
+			go.name = go.name.Replace("_icon", "");
+
+		moons = GameObject.FindGameObjectsWithTag("Moon");
+		foreach(GameObject icon in moonIcons)
+		{
+			foreach(GameObject moon in moons)
+			{
+				if(icon.name == moon.name)
+					icon.transform.position = moon.transform.position;
+			}
+		}
 	}
 
 	void deactivateBigMap()
 	{
 		isMinimap = true;
 		Time.timeScale = 1;
-		ingameCanvas.SetActive(true);
-		minimap.SetActive(true);
+		minimapCanvas.SetActive(true);
 		renderPlane.SetActive(false);
+		extraBackground.SetActive(false);
 		renderPlaneBackground.SetActive(false);
 		minimapBackground.SetActive(true);
 		animationCanvas.SetActive(true);
@@ -75,18 +103,15 @@ public class MinimapCamera : MonoBehaviour {
 		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
 		this.GetComponent<Camera>().cullingMask = 1 << 8 | 1 << 9 | 1 << 10;
-
+		boss.transform.localScale = new Vector3(4.1f, 4.1f, 4.1f);
+		player.transform.localScale = new Vector3(99.2f, 99.2f, 99.2f);
+		foreach(GameObject go in shops)
+			go.transform.localScale = new Vector3 (10.55f, 10.55f, 10.55f);
+		foreach(GameObject go in diamonds)
+			go.transform.localScale = new Vector3 (14.4f, 14.4f, 14.4f);
+		foreach(GameObject go in moonIcons)
+			go.transform.name = go.transform.name + "_icon";
 	}
-
-//	void OnGUI () 
-//	{
-//		if(isMinimap == false)
-//		{
-//			if(Event.current.type == EventType.Repaint)
-//				//Graphics.DrawTexture(new Rect(0,0, 128, 128), miniMapTexture, miniMapMaterial);
-//				Graphics.DrawTexture(new Rect(Screen.width / 1.13f, Screen.height / 9.7f, Screen.width / 9.5f, Screen.width / 9.5f), miniMapTexture, miniMapMaterial);
-//		}
-//	}
 
 	// Update is called once per frame
 	void Update ()

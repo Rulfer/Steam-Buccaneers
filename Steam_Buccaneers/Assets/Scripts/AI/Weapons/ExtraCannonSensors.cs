@@ -30,7 +30,7 @@ public class ExtraCannonSensors : MonoBehaviour {
 
 		if(Physics.Raycast(this.transform.position, left, out objectHit, detectDistance)) //Raycast hit something
 		{
-			if(objectHit.transform.tag == "Player" || objectHit.transform.tag == "aiShip")//Hit the player or the AI
+			if(objectHit.transform.root.name == "PlayerShip" || objectHit.transform.tag == "aiShip")//Hit the player or the AI
 			{
 				bossGunners.GetComponent<AIsideCanons>().fireRight = true;//The AI can now fire
 			}
@@ -46,7 +46,7 @@ public class ExtraCannonSensors : MonoBehaviour {
 
 		if(Physics.Raycast(this.transform.position, right, out objectHit, detectDistance))//Raycast hit something
 		{
-			if(objectHit.transform.tag == "Player" || objectHit.transform.tag == "aiShip")//Hit the player or the AI
+			if(objectHit.transform.root.name == "PlayerShip" || objectHit.transform.tag == "aiShip")//Hit the player or the AI
 			{
 				bossGunners.GetComponent<AIsideCanons>().fireLeft = true;//The AI can now fire
 			}
