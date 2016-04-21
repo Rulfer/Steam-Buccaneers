@@ -74,14 +74,13 @@ public class AIprojectile : MonoBehaviour {
 			}
 		}
 
-		if(other.tag == "aiShip") //The AI hit itself
+		if(other.tag == "aiShip") //The projectile hit an AI
 		{
 			if(other.transform.root.name == "Cargo(Clone)")
 				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
 			
 			if(other.transform.root.name == "Boss(Clone)")
 			{
-				characterWindows.combatBoss = true;
 				if ((other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
 				{
 					SceneManager.LoadScene("cog_screen");
@@ -92,15 +91,11 @@ public class AIprojectile : MonoBehaviour {
 			{
 				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 				if (other.transform.GetComponentInParent<AIMaster> ().aiHealth <= 0)
-				{
 					other.transform.GetComponentInParent<AIMaster> ().killAI ();
-				} 
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat3)
 				{
 					if (other.GetComponentInParent<AIMaster> ().usingMat3 != true)
-					{
 						characterWindows.setHappy ("Player");
-					}
 					other.GetComponentInParent<AIMaster> ().changeMat3 ();
 					other.GetComponentInParent<AIMaster> ().testFleeing ();
 
@@ -108,9 +103,7 @@ public class AIprojectile : MonoBehaviour {
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat2)
 				{
 					if (other.GetComponentInParent<AIMaster> ().usingMat2 != true)
-					{
 						characterWindows.setHappy ("Player");
-					}
 					other.GetComponentInParent<AIMaster> ().changeMat2 ();
 				}
 				characterWindows.setAngry ("Enemy");
