@@ -21,9 +21,15 @@ public class OrbitMeteorsInner : MonoBehaviour
 	{
 		if(other.tag == "Player")
 		{
-			crashdamage = Mathf.RoundToInt (PlayerMove2.donger.velocity.magnitude);
+			// vi må se på hvilken fart spiller har, og hva den nye farta er, slik som bård gjør
+			crashdamage = Mathf.RoundToInt (PlayerMove2.player.velocity.magnitude);
 			GameControl.control.health -= crashdamage;
 		}
+		/*
+		if (other.tag == "aiShip")
+		{
+
+		}*/
 	}
 	
 	// Update is called once per frame
