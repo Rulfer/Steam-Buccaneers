@@ -22,7 +22,6 @@ public class SpawnAI : MonoBehaviour
 	public static int[] cannonLevel = new int[6];
 	public bool[] cannonUpgraded = new bool[6];
 	public bool[] availableIndes; //Bool used to check the availability in the marineShips array
-	public bool stopSpawn = false; //Stops the spawning when a combat is going on
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
 	public bool trespassingWorldBorder = false;
@@ -98,7 +97,7 @@ public class SpawnAI : MonoBehaviour
 	void checkShipStatus ()
 	{
 		//There are no living ships, therefore we spawn a new one
-		if(trespassingWorldBorder == false && stopSpawn == false && GameObject.Find("Boss(Clone)") == null)
+		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			spawnShip ();
 		}
@@ -251,7 +250,7 @@ public class SpawnAI : MonoBehaviour
 
 	void spawnCargo()
 	{
-		if(livingCargo == false && stopSpawn == false && trespassingWorldBorder == false && GameObject.Find("Boss(Clone)") == null)
+		if(livingCargo == false && GameControl.control.isFighting == false && trespassingWorldBorder == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			livingCargo = true;
 			setCannonLevel();
@@ -324,7 +323,7 @@ public class SpawnAI : MonoBehaviour
 			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 2, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 100; //Sets the health
 			stopFightTimer = true;
-			stopSpawn = true;
+			GameControl.control.isFighting = true;
 		}
 	}
 }
