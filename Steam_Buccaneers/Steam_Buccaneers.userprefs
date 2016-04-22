@@ -1,16 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\Respawn.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\AudioController.cs">
     <Files>
-      <File FileName="Assets\Scripts\World\ObjectiveButtons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Save and load\GameControl.cs" Line="166" Column="32" />
-      <File FileName="Assets\Scripts\Animation\CombatAnimationController.cs" Line="96" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Shop\shopButtons.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="318" Column="67" />
-      <File FileName="Assets\Scripts\PlayerShip\Respawn.cs" Line="28" Column="30" />
-      <File FileName="Assets\Scripts\PlayerShip\changeMaterial.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\World\OrbitMoons.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Minimap\MinimapCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\RotateCogRigh.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\RotateCogLeft.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\RotateEngineCog.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\AudioController.cs" Line="75" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
