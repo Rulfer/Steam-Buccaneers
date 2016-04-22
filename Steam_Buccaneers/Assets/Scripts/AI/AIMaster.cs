@@ -42,6 +42,9 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 		source = this.GetComponent<AudioSource>();
+
+		if(this.transform.name == "Boss(Clone)")
+			kill.gameObject.SetActive(false);
 	}
 	
 	void Update () 
@@ -79,10 +82,13 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
-					if(GameControl.control.isFighting == false)
-						reactivatePatroling();
-					if(detectDistance > aiRadar + 50)
-						reactivatePatroling();
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(GameControl.control.isFighting == false)
+							reactivatePatroling();
+						if(detectDistance > aiRadar + 50)
+							reactivatePatroling();
+					}
 				}
 			}
 			else if(isBoss == true)
