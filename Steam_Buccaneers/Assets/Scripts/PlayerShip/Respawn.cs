@@ -29,6 +29,11 @@ public class Respawn : MonoBehaviour
 	public GameObject portrett1;
 	public GameObject portrett2;
 
+	private float timer;
+
+	private bool isDead = false;
+	private bool isPaused = false;
+
 
 	void Start () 
 	{
@@ -43,22 +48,41 @@ public class Respawn : MonoBehaviour
 		//GameControl.control.health --;
 		if (GameControl.control.health <= 0)
 		{
-			PlayerMove2.turnLeft = false;
-			PlayerMove2.turnRight = false;
-			showDeathScreen = true;
-			//Debug.Log("You are dead, press space to respawn at closest shop");
-			deathScreen.SetActive (showDeathScreen);
+			if (isDead == false)
+			{
+				PlayerMove2.turnLeft = false;
+				PlayerMove2.turnRight = false;
+				showDeathScreen = true;
+				deathScreen.SetActive (showDeathScreen);
+				GameControl.control.isFighting = false;
+				player.GetComponent<DeadPlayer>().enabled = true;
+				isDead = true;
+			} 
+			else if (isDead == true)
+			{
+				if (timer <= 3)
+				{
+					timer += Time.deltaTime;
+				} 
+				else
+				{
+					if (isPaused == false)
+					{
+						GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+						isPaused = true;
+					}
+				}
+			}
 			if (Input.GetKey(KeyCode.Space))
 			{
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+				player.GetComponent<DeadPlayer> ().enabled = false;
 			}
-		
+			player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
-
-	
 	}
 
 	void RespawnPlayer()
@@ -79,16 +103,20 @@ public class Respawn : MonoBehaviour
 		player.transform.position = spawnCoord;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
 		GameControl.control.health = 100;
+		player.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
 
 		if (GameControl.control.firstDeath == false)
 		{
-			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
 			dialogGui.SetActive (true);
 			portrett1.SetActive (true);
 			portrett2.SetActive (true);
 			setDeathData ();
 			teachDeath (0);
-
+		} 
+		else
+		{
+			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isDead = false;
 		}
 		
 	}
@@ -173,6 +201,8 @@ public class Respawn : MonoBehaviour
 				dialogGui.transform.GetChild (i).gameObject.SetActive (false);
 			}
 			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isDead = false;
+			GameControl.control.firstDeath = true;
 		}
 	}
 
