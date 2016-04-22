@@ -91,11 +91,11 @@ public class AIMaster : MonoBehaviour
 					}
 				}
 			}
-			else if(isBoss == true)
+			else if(isBoss == true && GameControl.control.talkedWithBoss == true)
 			{
 				deaktivatePatroling();
 			}
-
+				
 			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 				killAbsentAI();
 		}
