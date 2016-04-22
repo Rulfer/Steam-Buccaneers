@@ -73,7 +73,7 @@ public class PlayerMove2 : MonoBehaviour
 
 		}*/
 		Debug.Log (boostCooldownTimer + " " + boostCooledDown);
-		if (SpawnAI.spawn.stopSpawn == true && isBoosting == true)
+		if (GameControl.control.isFighting == true && isBoosting == true)
 		{
 			//boostCooldownTimer -= Time.deltaTime;
 		}
@@ -87,9 +87,7 @@ public class PlayerMove2 : MonoBehaviour
 			}
 
 		}
-
-
-
+			
 		if(hitBomb == true)
 		{
 			bombTimer += Time.deltaTime;
@@ -281,11 +279,11 @@ public class PlayerMove2 : MonoBehaviour
 			else
 			{
 				//if the player is not in combat, boost is active as long as the player uses it
-				if (SpawnAI.spawn.stopSpawn != true)
+				if (GameControl.control.isFighting != true)
 				{
 					maxVelocity *= 2;
 					isBoosting = true;
-					Debug.Log ("beleoelge " + SpawnAI.spawn.stopSpawn);
+					Debug.Log ("beleoelge " + GameControl.control.isFighting);
 
 					//propelling the player forward at double the speed
 					player.AddForce (transform.forward * force*2 * Time.deltaTime);
@@ -297,11 +295,11 @@ public class PlayerMove2 : MonoBehaviour
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
 			//if the player is not in combat, boost is active as long as the player uses it
-			if (SpawnAI.spawn.stopSpawn != true)
+			if (GameControl.control.isFighting != true)
 			{
 				maxVelocity *= 2;
 				isBoosting = true;
-				Debug.Log ("beleoelge " + SpawnAI.spawn.stopSpawn);
+				Debug.Log ("beleoelge " + GameControl.control.isFighting);
 
 				//propelling the player forward at double the speed
 				player.AddForce (transform.forward * force*2 * Time.deltaTime);
@@ -310,18 +308,18 @@ public class PlayerMove2 : MonoBehaviour
 
 			}
 
-			if (SpawnAI.spawn.stopSpawn == true && boostCooledDown == true)
+			if (GameControl.control.isFighting == true && boostCooledDown == true)
 			{
 				//boostCooldownTimer -= Time.deltaTime;
 				if (boostCooledDown == true)
 				{
-					Debug.Log ("Gabeldigokk2 " + SpawnAI.spawn.stopSpawn);
+					Debug.Log ("Gabeldigokk2 " + GameControl.control.isFighting);
 					maxVelocity *= 2;
 					if (boostCooldownTimer >= 0)
 					//for (float i = 3f; i > 0f; i -= Time.deltaTime)
 					{
 						//boostCooldownTimer = i;
-						//Debug.Log ("Gabeldigokk " + SpawnAI.spawn.stopSpawn);
+						//Debug.Log ("Gabeldigokk " + GameControl.control.isFighting);
 						isBoosting = true;
 						player.AddForce (transform.forward * force*2 * Time.deltaTime);
 						boostCooldownTimer -= Time.fixedDeltaTime;

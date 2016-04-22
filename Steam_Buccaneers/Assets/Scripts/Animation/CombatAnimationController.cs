@@ -20,7 +20,7 @@ public class CombatAnimationController : MonoBehaviour {
 	{
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && GameObject.Find("TutorialControl") == null)
 		{
-			if (GameObject.Find ("SpawnsAI").GetComponent<SpawnAI> ().stopSpawn == true)
+			if (GameControl.control.isFighting == true)
 			{
 				if (GameObject.Find ("Boss(Clone)"))
 				{

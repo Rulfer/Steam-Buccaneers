@@ -22,10 +22,10 @@ public class MusicControl : MonoBehaviour
 	void Update () 
 	{
 		sourceDistance = Vector3.Distance (this.transform.position, player.transform.position); //Distance between player and where the boss spawns
-		if(SpawnAI.spawn.stopSpawn == true) //A fight is ongoing, so we dont want to play the shop-song
+		if(GameControl.control.isFighting == true) //A fight is ongoing, so we dont want to play the shop-song
 			thisAudioSource.volume = 0;
 		
-		else if(sourceDistance < 500 && SpawnAI.spawn.stopSpawn == false)
+		else if(sourceDistance < 500 && GameControl.control.isFighting == false)
 		{
 			if(startSource == true)
 			{
