@@ -78,7 +78,7 @@ public class BombHitSomething : MonoBehaviour {
 				if(rb != null) //The parent got the rigidbody!
 				{
 					rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
-					if(hit.tag == "aiShip" || hit.transform.root.name == "PlayerShip")
+					if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "PlayerShip")
 					{
 						rb.mass = 5;
 						rb.drag = 5;
