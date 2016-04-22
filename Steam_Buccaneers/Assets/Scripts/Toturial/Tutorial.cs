@@ -349,14 +349,7 @@ public class Tutorial : MonoBehaviour
 		//Pause, activate guns and other stuff here
 		switch (stage) 
 		{
-		case(1):
-			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", true);
-			Debug.Log ("Change mood");
-			break;
-		case(2):
-			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", false);
-			Debug.Log ("Change mood");
-			break;
+
 		case(9):
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
@@ -391,6 +384,14 @@ public class Tutorial : MonoBehaviour
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			questInfo.text = "Talk to Shopkeeper.";
+			break;
+		case(20):
+			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
+			Debug.Log ("Change mood");
+			break;
+		case(21):
+			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", true);
+			Debug.Log ("Change mood");
 			break;
 		case(23):
 			makeTutorialEnemy ();
