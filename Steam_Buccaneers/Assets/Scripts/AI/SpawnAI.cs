@@ -85,22 +85,12 @@ public class SpawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		InvokeRepeating ("checkShipStatus", 1, 1);
+		InvokeRepeating ("spawnShip", 1, 1);
 	}
 
 	void waitBeforeCargoSpawn()
 	{
 		InvokeRepeating("spawnCargo", 1, 10);
-	}
-
-	//Checks if we should spawn a new ship or not
-	void checkShipStatus ()
-	{
-		//There are no living ships, therefore we spawn a new one
-		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null)
-		{
-			spawnShip ();
-		}
 	}
 
 	void setCannonLevel()
@@ -272,55 +262,55 @@ public class SpawnAI : MonoBehaviour
 
 	void spawnShip ()
 	{
-		Debug.Log("Spaning MARINE");
-
-		//float relativePoint = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
-		if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
+		Debug.Log("Relativebosspoint is " + relativeBossPoint);
+		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null)
 		{
-			if(livingShips < maxMarines)
+			if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
 			{
-				livingShips++;
-				setCannonLevel();
-
-				for(int i = 0; i < marineShips.Length; i++)
+				if(livingShips < maxMarines)
 				{
-					if(availableIndes[i] == true)
-					{		
-						GameObject temp = (Instantiate(Marine));
-						temp.transform.position = marineSpawnpoint();
-						marineShips[i] = temp;
-						availableIndes[i] = false;
-						//marineShips[i].GetComponent<AIPatroling>().targetPos = patrolPoint;
-						marineShips[i].GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-						marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
-						float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
-						marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
-						Debug.Log("Marine health: " + marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth);
-						if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20)
-						{
-							marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
+					livingShips++;
+					setCannonLevel();
+
+					for(int i = 0; i < marineShips.Length; i++)
+					{
+						if(availableIndes[i] == true)
+						{		
+							GameObject temp = (Instantiate(Marine));
+							temp.transform.position = marineSpawnpoint();
+							marineShips[i] = temp;
+							availableIndes[i] = false;
+							//marineShips[i].GetComponent<AIPatroling>().targetPos = patrolPoint;
+							marineShips[i].GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+							marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
+							float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
+							marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
+							Debug.Log("Marine health: " + marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth);
+							if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20)
+							{
+								marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
+							}
+							marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
+							return;
 						}
-						marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
-						return;
 					}
 				}
 			}
 		}
 
-		else //We should spawn the boss
+		if(relativeBossPoint < 200 && GameObject.Find("Boss(Clone)") == null)//We should spawn the boss
 		{
-			for(int i = 0; i < marineShips.Length; i++)
-			{
-				if(marineShips[i] != null)
-				{
-					marineShips[i].GetComponent<AImove>().isPatroling = false;
-					marineShips[i].GetComponent<AImove>().isFleeing = true;
-				}
-			}
-			Instantiate(Boss);
+//			for(int i = 0; i < marineShips.Length; i++)
+//			{
+//				if(marineShips[i] != null)
+//				{
+//					marineShips[i].GetComponent<AImove>().isPatroling = false;
+//					marineShips[i].GetComponent<AImove>().isFleeing = true;
+//				}
+//			}
+			Instantiate(Boss, bossSpawn.transform.position, bossSpawn.transform.rotation);
 			Boss.GetComponent<AIMaster>().isBoss = true;
-			Boss.transform.position = new Vector3(bossSpawn.transform.position.x, 2, bossSpawn.transform.position.z); //Spawn the boss at the boss's spawn point
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 100; //Sets the health
 			stopFightTimer = true;
 			GameControl.control.isFighting = true;
