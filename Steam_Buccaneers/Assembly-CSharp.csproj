@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AIFlee.cs" />
      <Compile Include="Assets\AudioController.cs" />
      <Compile Include="Assets\DeadPlayer.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
@@ -57,6 +56,7 @@
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
+     <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AImove.cs" />
@@ -67,11 +67,11 @@
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
      <Compile Include="Assets\Scripts\AI\ScrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\AI\SpawnAI.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
@@ -130,7 +130,6 @@
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\ShipHitObject.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
-     <Compile Include="Assets\animateSun.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
