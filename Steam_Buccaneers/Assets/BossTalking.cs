@@ -9,6 +9,7 @@ public class BossTalking : MonoBehaviour
 	private Vector3 relativePoint;
 	private int turnSpeed;
 	public bool faced = false;
+	private bool firstTime = true;
 
 	bool turnLeft;
 	bool turnRight;
@@ -54,12 +55,22 @@ public class BossTalking : MonoBehaviour
 
 	void facePlayer()
 	{
-		playerPoint.GetComponent<PlayerMove2>().enabled = false;
-		playerPoint.GetComponent<Rigidbody>().mass = 5;
-		playerPoint.GetComponent<Rigidbody>().angularDrag = 5;
-		playerPoint.GetComponent<Rigidbody>().drag = 5;
+		if(firstTime == true)
+		{
+			playerPoint.GetComponent<PlayerMove2>().enabled = false;
+			playerPoint.GetComponent<Rigidbody>().mass = 5;
+			playerPoint.GetComponent<Rigidbody>().angularDrag = 5;
+			playerPoint.GetComponent<Rigidbody>().drag = 5;
 
-		GameControl.control.isFighting = true;
+			GameControl.control.isFighting = true;
+
+			foreach(GameObject go in SpawnAI.spawn.marineShips)
+			{
+				if(go.GetComponent<AIMaster>().isFighting == true)
+					go.GetComponent<AIMaster>().reactivatePatroling();
+					
+			}
+		}
 
 		relativePoint = transform.InverseTransformPoint(playerPoint.transform.position);
 
