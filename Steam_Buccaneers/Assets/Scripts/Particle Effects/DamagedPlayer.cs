@@ -13,13 +13,6 @@ public class DamagedPlayer : MonoBehaviour
 		dmPlayer = this;
 		isSmoking = true;
 		isBurning = true;
-		this.GetComponentInChildren<changeMaterial>().checkPlayerHealth();
-//		foreach(GameObject go in smokeParticles)
-//			go.SetActive(false);
-//		foreach(GameObject go in fireParticles)
-//			go.SetActive(false);
-//
-//
 	}
 
 	public void startSmoke()
