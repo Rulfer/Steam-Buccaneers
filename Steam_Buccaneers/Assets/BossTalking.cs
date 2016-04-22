@@ -59,6 +59,8 @@ public class BossTalking : MonoBehaviour
 		playerPoint.GetComponent<Rigidbody>().angularDrag = 5;
 		playerPoint.GetComponent<Rigidbody>().drag = 5;
 
+		GameControl.control.isFighting = true;
+
 		relativePoint = transform.InverseTransformPoint(playerPoint.transform.position);
 
 		bool playerInFrontOfAI = isFacingPlayer ();
