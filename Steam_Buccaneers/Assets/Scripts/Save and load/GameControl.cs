@@ -21,6 +21,7 @@ public class GameControl : MonoBehaviour {
 	public int thrusterUpgrade;
 	public bool firstDeath = false;
 	public bool isFighting = false;
+	public bool talkedWithBoss = false;
 
 	public GameObject loadingCanvas;
 

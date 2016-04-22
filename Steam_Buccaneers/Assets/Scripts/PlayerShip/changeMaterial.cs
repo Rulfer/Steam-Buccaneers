@@ -56,7 +56,6 @@ public class changeMaterial : MonoBehaviour {
 	{
 		Debug.Log ("Material change = " + matNr);
 		Debug.Log (playerMat [matNr].name);
-		Debug.Log (currentMat.name);
 		if (firstTimeCheck == true)
 		{
 			GameObject.Find ("dialogue_elements").GetComponentInParent<CombatAnimationController> ().setAngry ("Player");

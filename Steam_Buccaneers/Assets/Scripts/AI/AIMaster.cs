@@ -79,13 +79,10 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
-					if(SceneManager.GetActiveScene().name != "Tutorial")
-					{
-						if(GameControl.control.isFighting == false)
-							reactivatePatroling();
-						if(detectDistance > aiRadar + 50)
-							reactivatePatroling();
-					}
+					if(GameControl.control.isFighting == false)
+						reactivatePatroling();
+					if(detectDistance > aiRadar + 50)
+						reactivatePatroling();
 				}
 			}
 			else if(isBoss == true)
