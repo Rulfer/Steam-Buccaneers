@@ -90,7 +90,7 @@ public class AIprojectile : MonoBehaviour {
 			{
 				if(SceneManager.GetActiveScene().name != "Tutorial")
 				{
-					if(SpawnAI.spawn.stopSpawn == false)
+					if(GameControl.control.isFighting == false)
 					{
 						other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
 					}
