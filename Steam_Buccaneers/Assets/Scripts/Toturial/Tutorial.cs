@@ -100,10 +100,11 @@ public class Tutorial : MonoBehaviour
 		shopButtons = GameObject.FindGameObjectsWithTag ("button");
 		changeButtonInteractivity (false);
 
-		nextDialog ();
+
 		Debug.Log ("Store Scene");
 		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialog);
 		nextButton = GameObject.Find ("dialogue_next_shop");
+		nextDialog ();
 	}
 
 	private void loadWorldMaster()

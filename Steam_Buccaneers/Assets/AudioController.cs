@@ -31,7 +31,7 @@ public class AudioController : MonoBehaviour
 
 	void Update()
 	{
-		if(SpawnAI.spawn.stopSpawn == false)
+		if(GameControl.control.isFighting == false)
 		{
 			if(GameObject.Find("PlayerShip").transform.position.z < 4000)
 			{
@@ -44,7 +44,7 @@ public class AudioController : MonoBehaviour
 		}
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(SpawnAI.spawn.stopSpawn == true) //The spawning has topped, so a combat is ongoing
+			if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
 			{
 				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 				{
