@@ -26,7 +26,7 @@ public class AIMaster : MonoBehaviour
 	public bool isCargo = false;
 	public bool usingMat2 = false;
 	public bool usingMat3 = false;
-	private bool isFighting = false;
+	public bool isFighting = false;
 
 	public int arrayIndex;
 	private int ranNum;
@@ -255,7 +255,15 @@ public class AIMaster : MonoBehaviour
 				SpawnAI.spawn.livingCargo = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
 		}
-		Destroy(this.gameObject);
+		Instantiate(boom, this.transform.position, this.transform.rotation);
+		boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+		this.GetComponent<DeadAI>().enabled = true;
+		deactivateAI();
+
+		source.clip = clip;
+		source.Play();
+		isDead = true;
 	}
 
 
