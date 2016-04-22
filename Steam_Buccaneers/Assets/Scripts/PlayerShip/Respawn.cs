@@ -75,6 +75,10 @@ public class Respawn : MonoBehaviour
 			}
 			if (Input.GetKey(KeyCode.Space))
 			{
+				if (isPaused == false)
+				{
+					GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+				}
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
