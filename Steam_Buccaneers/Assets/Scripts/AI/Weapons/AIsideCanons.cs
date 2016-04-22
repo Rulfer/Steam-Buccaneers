@@ -149,7 +149,8 @@ public class AIsideCanons : MonoBehaviour {
 			}
 		}
 
-		if (fireRight == true && Time.time > fireDelayRight) {				
+		if (fireRight == true && Time.time > fireDelayRight) 
+		{				
 			fireDelayRight = Time.time + fireRate;
 
 			int tempSound = Random.Range(0, 3);
@@ -164,7 +165,7 @@ public class AIsideCanons : MonoBehaviour {
 				}
 			}
 
-			else
+			else if(this.transform.root.name == "Marine(Clone)")
 			{
 				for(int i = 0; i < rightCannons.Length; i++)
 				{
@@ -180,6 +181,21 @@ public class AIsideCanons : MonoBehaviour {
 					{
 						Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
 					}
+				}
+			}
+			else if(this.transform.root.name == "Cargo(Clone)")
+			{
+				if(cannonLevel[1] == 1)
+				{
+					Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation);
+				}
+				else if(cannonLevel[1] == 2)
+				{
+					Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation);
+				}
+				else if(cannonLevel[1] == 3)
+				{
+					Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation);
 				}
 			}
 		}

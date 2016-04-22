@@ -17,7 +17,10 @@ public class OrbitMoons : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		distance = Vector3.Distance(this.transform.position, this.transform.parent.position);
-		transform.RotateAround (this.transform.parent.position, transform.up, 3f / distance);
+		if(MinimapCamera.miniCam.isMinimap == true)
+		{
+			distance = Vector3.Distance(this.transform.position, this.transform.parent.position);
+			transform.RotateAround (this.transform.parent.position, transform.up, 3f / distance);
+		}
 	}
 }

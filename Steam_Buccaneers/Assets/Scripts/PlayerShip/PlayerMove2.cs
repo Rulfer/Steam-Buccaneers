@@ -245,7 +245,7 @@ public class PlayerMove2 : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Planet")
+		if (other.tag == "Planet" || other.tag == "Moon")
 		{
 			GameControl.control.health = 0;
 		}
