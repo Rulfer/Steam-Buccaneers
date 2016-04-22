@@ -16,7 +16,7 @@ public class CombatAnimationController : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && GameObject.Find("TutorialControl") == null)
 		{
@@ -85,7 +85,7 @@ public class CombatAnimationController : MonoBehaviour {
 				bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
 			}
 
-					}
+		}
 
 	}
 

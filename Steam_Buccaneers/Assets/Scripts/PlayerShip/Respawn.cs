@@ -26,6 +26,8 @@ public class Respawn : MonoBehaviour
 	private Vector2 nameRightPos;
 	private Color tempColor;
 	public GameObject dialogGui;
+	public GameObject portrett1;
+	public GameObject portrett2;
 
 
 	void Start () 
@@ -80,17 +82,40 @@ public class Respawn : MonoBehaviour
 
 		if (GameControl.control.firstDeath == false)
 		{
+			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			dialogGui.SetActive (true);
+			portrett1.SetActive (true);
+			portrett2.SetActive (true);
 			setDeathData ();
 			teachDeath (0);
+
 		}
 		
 	}
 
 	private void setDeathData ()
 	{
+
+		for (int i = 0; i < dialogGui.transform.childCount; i++)
+		{
+			dialogGui.transform.GetChild (i).gameObject.SetActive (true);
+		}
+
+		for (int i = 0; i < portrett2.transform.childCount; i++)
+		{
+			portrett2.transform.GetChild (i).gameObject.SetActive (true);
+		}
+
+		portrett2.transform.GetChild (1).transform.GetChild (2).gameObject.SetActive (true);
+		GameObject.Find ("Portrett2_marine").SetActive (false);
+		if (GameObject.Find ("Portrett2_boss"))
+		{
+			GameObject.Find ("Portrett2_boss").SetActive (false);
+		}
+
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
-		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
+		GameObject.Find ("dialogue_next").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
 		nextButton = GameObject.Find ("dialogue_next_shop");
 		nameLeftPos = new Vector3(115.0f, -25.0f);
 		nameRightPos = new Vector3 (525.0f, -25.0f);
@@ -103,7 +128,7 @@ public class Respawn : MonoBehaviour
 
 		deathDialog [0] = "So, you decided to get yourself killed? Luckily I was there to help you out! I've fixed the ship for you, so you can be on your way!";
 		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this!";
-		deathDialog [2] = "Of cause! It's already taken car of, no worries!";
+		deathDialog [2] = "Of cause! It's already taken care of, no worries!";
 	}
 
 	private void teachDeath(int dialog)
@@ -133,12 +158,21 @@ public class Respawn : MonoBehaviour
 			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
 		}
 
-		switch (dialog)
+		characterName.color = tempColor;
+		dialogTextBox.color = tempColor;
+
+		if (dialog == 3)
 		{
-		case(0):
-			break;
-		default:
-			break;
+			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
+			setDialog (characters [0], deathDialog [dialog-1]);
+		} 
+		else if (dialog == 4)
+		{
+			for (int i = 0; i < dialogGui.transform.childCount; i++)
+			{
+				dialogGui.transform.GetChild (i).gameObject.SetActive (false);
+			}
+			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
 		}
 	}
 
