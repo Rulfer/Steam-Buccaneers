@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove2 : MonoBehaviour 
 {
@@ -17,7 +18,7 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool goingForward = false;
 	public bool isBoosting = false;
 	private float boostCooldownTimer = 3f;
-	private bool boostCooledDown;
+	private bool boostCooledDown = true;
 
 	public static bool steerShip = true;
 
@@ -62,20 +63,31 @@ public class PlayerMove2 : MonoBehaviour
 
 	// Update is called once per frame
 	void FixedUpdate () 
-	{
-
-		if (boostCooldownTimer < 3f || isBoosting == false)
+	{/*
+		if(SceneManager.GetActiveScene().name == "Tutorial")
 		{
-			boostCooldownTimer +=Time.deltaTime;
+			if (GameObject.Find ("Marine(Clone)"))
+			{
+
+			}
+
+		}*/
+		Debug.Log (boostCooldownTimer + " " + boostCooledDown);
+		if (GameControl.control.isFighting == true && isBoosting == true)
+		{
+			//boostCooldownTimer -= Time.deltaTime;
+		}
+		if (boostCooldownTimer < 3f && isBoosting == false)
+		{
+			boostCooldownTimer +=Time.deltaTime/2;
 			if (boostCooldownTimer >= 3f)
 			{
 				boostCooldownTimer = 3f;
+				boostCooledDown = true;
 			}
 
 		}
-
-
-
+			
 		if(hitBomb == true)
 		{
 			bombTimer += Time.deltaTime;
@@ -93,15 +105,15 @@ public class PlayerMove2 : MonoBehaviour
 		//{
 		if (hitBomb == false && GameControl.control.health > 0) 
 		{
-			if (Input.GetKey (KeyCode.LeftShift))
+			if (Input.GetKey (KeyCode.LeftShift) && boostCooledDown == true)
 			{
 				Boost();
 			}
 
-			else 
-			{
-				isBoosting = false;
-			}
+//			else 
+//			{
+//				isBoosting = false;
+//			}
 				
 			if (Input.GetKey (KeyCode.W)) 
 			{
@@ -231,7 +243,7 @@ public class PlayerMove2 : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Planet")
+		if (other.tag == "Planet" || other.tag == "Moon")
 		{
 			GameControl.control.health = 0;
 		}
@@ -239,41 +251,90 @@ public class PlayerMove2 : MonoBehaviour
 
 	void Boost()
 	{
-		//Setting the players maximum velocity to a higher amount
-		maxVelocity *= 2;
-
-		//if the player is not in combat, boost is active as long as the player uses it
-		if (SpawnAI.spawn.stopSpawn != true)
+		if(SceneManager.GetActiveScene().name == "Tutorial")
 		{
-			isBoosting = true;
-			Debug.Log ("beleoelge " + SpawnAI.spawn.stopSpawn);
-
-			//maxVelocity = maxBoostVelocity;
-			//propelling the player forward at double the speed
-			player.AddForce (transform.forward * force*2 * Time.deltaTime);
-
-			// Testing if the player is in combat
-
-		}
-
-		if (SpawnAI.spawn.stopSpawn == true)
-		{
-			isBoosting = true;
-			boostCooldownTimer -= Time.time;
-			if (boostCooldownTimer >=0)
+			if (GameObject.Find ("Marine(Clone)"))
 			{
-				Debug.Log ("Gabeldigokk " + SpawnAI.spawn.stopSpawn);
-				
+				if (boostCooledDown == true)
+				{
+				maxVelocity *= 2;
+				//boostCooldownTimer -= Time.deltaTime;
+				while (boostCooldownTimer >= 0)
+					{
+						isBoosting = true;
+						player.AddForce (transform.forward * force*2 * Time.deltaTime);
+						boostCooldownTimer -= Time.deltaTime;
+					}
+				}
+				if(boostCooldownTimer <= 0f)
+				{
+					boostCooldownTimer = 0f;
+					isBoosting = false;
+					boostCooledDown = false;
+				}
+
+				//bool boostCooledDown	
+			}
+
+			else
+			{
+				//if the player is not in combat, boost is active as long as the player uses it
+				if (GameControl.control.isFighting != true)
+				{
+					maxVelocity *= 2;
+					isBoosting = true;
+					Debug.Log ("beleoelge " + GameControl.control.isFighting);
+
+					//propelling the player forward at double the speed
+					player.AddForce (transform.forward * force*2 * Time.deltaTime);
+				}
+			}
+		}
+		//Setting the players maximum velocity to a higher amount
+
+		if(SceneManager.GetActiveScene().name != "Tutorial")
+		{
+			//if the player is not in combat, boost is active as long as the player uses it
+			if (GameControl.control.isFighting != true)
+			{
+				maxVelocity *= 2;
+				isBoosting = true;
+				Debug.Log ("beleoelge " + GameControl.control.isFighting);
+
+				//propelling the player forward at double the speed
 				player.AddForce (transform.forward * force*2 * Time.deltaTime);
-				Debug.Log (boostCooldownTimer + " " + boostCooledDown);
-				//return boostCooldownTimer;
+
+				// Testing if the player is in combat
 
 			}
 
-			//bool boostCooledDown
+			if (GameControl.control.isFighting == true && boostCooledDown == true)
+			{
+				//boostCooldownTimer -= Time.deltaTime;
+				if (boostCooledDown == true)
+				{
+					Debug.Log ("Gabeldigokk2 " + GameControl.control.isFighting);
+					maxVelocity *= 2;
+					if (boostCooldownTimer >= 0)
+					//for (float i = 3f; i > 0f; i -= Time.deltaTime)
+					{
+						//boostCooldownTimer = i;
+						//Debug.Log ("Gabeldigokk " + GameControl.control.isFighting);
+						isBoosting = true;
+						player.AddForce (transform.forward * force*2 * Time.deltaTime);
+						boostCooldownTimer -= Time.fixedDeltaTime;
+					}
+				}
+				if(boostCooldownTimer <= 0f)
+				{
+					boostCooldownTimer = 0f;
+					isBoosting = false;
+					boostCooledDown = false;
+				}
+
+				//bool boostCooledDown
+			}
 		}
-
 	}
-
-
+	
 }

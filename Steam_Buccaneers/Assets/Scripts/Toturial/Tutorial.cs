@@ -100,10 +100,11 @@ public class Tutorial : MonoBehaviour
 		shopButtons = GameObject.FindGameObjectsWithTag ("button");
 		changeButtonInteractivity (false);
 
-		nextDialog ();
+
 		Debug.Log ("Store Scene");
 		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialog);
 		nextButton = GameObject.Find ("dialogue_next_shop");
+		nextDialog ();
 	}
 
 	private void loadWorldMaster()
@@ -229,7 +230,7 @@ public class Tutorial : MonoBehaviour
 			"going to give you an easy time.";//Shopkeeper
 		dialogTexts [8] = "But anyways, the controls are simple, just press “W” to move your ship forward, " +
 			"and “A” and “D” turns you around. Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
-		dialogTexts [9] = "Just try that for a bit now, you got time before " +
+		dialogTexts [9] = "You can also boost your ship by pressing “Shift”. Just try that for a bit now, you got time before " +
 			"them cops arrive here.";//Shopkeeper
 		dialogTexts[10] = "Wow, is that it, and I couldn’t figure this out on myself how? " +
 			"Would’ve been my first guess anyway.";//Player

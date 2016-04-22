@@ -8,6 +8,7 @@ public class GoBack : MonoBehaviour {
 		GameControl.control.Save ("exit_store");
 		GameControl.control.ChangeScene ("WorldMaster");
 		ChangeScene.inShop = false;
+		GameControl.control.isFighting = false;
 	}
 		
 

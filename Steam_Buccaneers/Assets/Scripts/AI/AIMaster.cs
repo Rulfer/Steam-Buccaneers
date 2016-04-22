@@ -64,11 +64,11 @@ public class AIMaster : MonoBehaviour
 					{
 						if(SceneManager.GetActiveScene().name != "Tutorial")
 						{
-							if(SpawnAI.spawn.stopSpawn == false && isCargo == false)
+							if(GameControl.control.isFighting == false && isCargo == false)
 							{
 								deaktivatePatroling();
 							}
-							else if(SpawnAI.spawn.stopSpawn == true && isCargo == false)
+							else if(GameControl.control.isFighting == true && isCargo == false)
 								thisAIFlee();
 						}
 						else
@@ -79,13 +79,10 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
-					if(SceneManager.GetActiveScene().name != "Tutorial")
-					{
-						if(SpawnAI.spawn.stopSpawn == false)
-							reactivatePatroling();
-						if(detectDistance > aiRadar + 50)
-							reactivatePatroling();
-					}
+					if(GameControl.control.isFighting == false)
+						reactivatePatroling();
+					if(detectDistance > aiRadar + 50)
+						reactivatePatroling();
 				}
 			}
 			else if(isBoss == true)
@@ -105,7 +102,7 @@ public class AIMaster : MonoBehaviour
 		if(isFighting == true)
 		{
 			isFighting = false;
-			SpawnAI.spawn.stopSpawn = false;
+			GameControl.control.isFighting = false;
 			SpawnAI.spawn.stopFightTimer = false;
 		}
 		this.GetComponent<AIPatroling>().enabled = true;
@@ -122,7 +119,7 @@ public class AIMaster : MonoBehaviour
 		if(SceneManager.GetActiveScene().name != "Tutorial" && isCargo == false)
 		{
 			SpawnAI.spawn.stopFightTimer = true;
-			SpawnAI.spawn.stopSpawn = true;
+			GameControl.control.isFighting = true;
 		}
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
@@ -161,7 +158,7 @@ public class AIMaster : MonoBehaviour
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			SpawnAI.spawn.stopSpawn = true;
+			GameControl.control.isFighting = true;
 			SpawnAI.spawn.stopFightTimer = true;
 			if(isBoss == false && isCargo == false)
 			{
@@ -281,7 +278,7 @@ public class AIMaster : MonoBehaviour
 				SpawnAI.spawn.livingCargo = false;
 			if(isFighting == true)
 			{			
-				SpawnAI.spawn.stopSpawn = false;
+				GameControl.control.isFighting = false;
 				SpawnAI.spawn.stopFightTimer = false;
 			}
 			Destroy(this.GetComponent<AIPatroling>().target);
@@ -352,7 +349,7 @@ public class AIMaster : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "Planet")
+		if(other.tag == "Planet" || other.tag == "Moon")
 		{
 			if(isFighting == true)
 				killAI();

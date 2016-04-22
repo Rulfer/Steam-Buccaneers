@@ -49,6 +49,9 @@ public class ShipHitObject : MonoBehaviour
 				GameControl.control.health -= healthLost;
 			if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" )
 			{
+				if(col.transform.name == "Cargo(Clone)")
+					col.transform.GetComponent<AIMaster>().thisAIFlee();
+				
 				if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
 				{
 					SceneManager.LoadScene("cog_screen");

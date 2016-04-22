@@ -6,7 +6,8 @@ public class AudioController : MonoBehaviour
 {
 	private AudioSource backgroundSource;
 	private AudioSource combatSource;
-	public AudioClip[] clips;
+	public AudioClip[] backgroundClips;
+	public AudioClip[] combatClips;
 
 	private float counter = 0;
 	private float volumeCounter = 0;
@@ -21,7 +22,7 @@ public class AudioController : MonoBehaviour
 	{
 		one = true;
 		backgroundSource = GameObject.Find("CameraChild").GetComponent<AudioSource>();
-		backgroundSource.clip = clips[0];
+		backgroundSource.clip = backgroundClips[0];
 		backgroundSource.Play();
 		combatSource = GameObject.Find("CombatMusic").GetComponent<AudioSource>();
 		combatSource.volume = 0;
@@ -30,58 +31,47 @@ public class AudioController : MonoBehaviour
 
 	void Update()
 	{
-		if(GameObject.Find("PlayerShip").transform.position.z < 4000)
+		if(GameControl.control.isFighting == false)
 		{
-			songOne();
+			if(GameObject.Find("PlayerShip").transform.position.z < 4000)
+			{
+				songOne();
+			}
+			if(GameObject.Find("PlayerShip").transform.position.z > 4200 && GameObject.Find("PlayerShip").transform.position.z < 11350)
+				songTwo();
+			if(GameObject.Find("PlayerShip").transform.position.z > 12000)
+				songThree();
 		}
-		if(GameObject.Find("PlayerShip").transform.position.z > 4200 && GameObject.Find("PlayerShip").transform.position.z < 11350)
-			songTwo();
-		if(GameObject.Find("PlayerShip").transform.position.z > 12000)
-			songThree();
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(SpawnAI.spawn.stopSpawn == true) //The spawning has topped, so a combat is ongoing
+			if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
 			{
 				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 				{
-					if(!combatSource.isPlaying) //If it's not playing, start playing the combat song
-						combatSource.Play();
 					volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
 					combatSource.volume = volumeCounter; //Sets the volum
-					backgroundSource.volume = 1 - combatSource.volume; //Decrese background song based on combat song volume
 					if(volumeCounter >= 1) //The combat volume has reached 1
 					{
 						counter = 0; //Reset the counter
 						volumeCounter = 0; //Reset the conter
-						backgroundSource.volume = 0; //Set the volume of background source to 0
-						backgroundSource.Stop(); //Stop the background source
 					}
 				}
 			}
 			else
 			{
-				if(combatSource.isPlaying)
+				if(combatSource.volume > 0.01f)
 				{
 					if(counter < 1)
 						counter += Time.deltaTime;
 					if(counter >= 1)
 					{
-						if(!backgroundSource.isPlaying)
-						{
-							resetCounter = Time.time;
-							volumeCounter = 0;
-							backgroundSource.Play();
-						}
 						counter += Time.smoothDeltaTime;
-
 						combatSource.volume = 2-counter;
-						backgroundSource.volume = 1 - backgroundSource.volume;
 						if(counter >= 2)
 						{
 							counter = 0;
 							volumeCounter = 0;
 							combatSource.volume = 0;
-							combatSource.Stop();
 						}
 					}
 				}
@@ -96,8 +86,10 @@ public class AudioController : MonoBehaviour
 			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
-				backgroundSource.clip = clips[0];
+				backgroundSource.clip = backgroundClips[0];
+				combatSource.clip = combatClips[0];
 				backgroundSource.Play();
+				combatSource.Play();
 
 				one = true;
 				two = false;
@@ -124,8 +116,12 @@ public class AudioController : MonoBehaviour
 			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
-				backgroundSource.clip = clips[1];
+				backgroundSource.clip = backgroundClips[1];
+				combatSource.clip = combatClips[1];
+
 				backgroundSource.Play();
+				combatSource.Play();
+
 				two = true;
 				one = false;
 				three = false;
@@ -151,8 +147,10 @@ public class AudioController : MonoBehaviour
 			backgroundSource.volume -= Time.deltaTime * 2;
 			if(backgroundSource.volume <= 0)
 			{
-				backgroundSource.clip = clips[2];
+				backgroundSource.clip = backgroundClips[2];
+				combatSource.clip = combatClips[2];
 				backgroundSource.Play();
+				combatSource.Play();
 
 				three = true;
 				one = false;

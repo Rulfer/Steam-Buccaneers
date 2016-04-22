@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AIFlee.cs" />
      <Compile Include="Assets\AudioController.cs" />
      <Compile Include="Assets\DeadPlayer.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
@@ -57,6 +56,7 @@
      <Compile Include="Assets\Graphics\shop\Cursor.cs" />
      <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
+     <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AImove.cs" />

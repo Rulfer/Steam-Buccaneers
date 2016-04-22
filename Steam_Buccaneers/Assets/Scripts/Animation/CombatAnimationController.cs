@@ -16,11 +16,11 @@ public class CombatAnimationController : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && GameObject.Find("TutorialControl") == null)
 		{
-			if (GameObject.Find ("SpawnsAI").GetComponent<SpawnAI> ().stopSpawn == true)
+			if (GameControl.control.isFighting == true)
 			{
 				if (GameObject.Find ("Boss(Clone)"))
 				{
@@ -85,7 +85,7 @@ public class CombatAnimationController : MonoBehaviour {
 				bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
 			}
 
-					}
+		}
 
 	}
 

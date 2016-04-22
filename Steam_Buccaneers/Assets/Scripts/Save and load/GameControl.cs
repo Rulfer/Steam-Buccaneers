@@ -20,6 +20,8 @@ public class GameControl : MonoBehaviour {
 	public int specialAmmo;
 	public int thrusterUpgrade;
 	public bool firstDeath = false;
+	public bool isFighting = false;
+	public bool talkedWithBoss = false;
 
 	public GameObject loadingCanvas;
 
@@ -109,12 +111,12 @@ public class GameControl : MonoBehaviour {
 		} 
 		else if (storeName == "null")
 		{
-			GameControl.control.shipPos = new Vector3 (0, 0, 2963);
+			GameControl.control.shipPos = new Vector3 (0, 0, 2980);
 		} 
 		else 
 		{
 			GameObject goP = GameObject.Find (storeName);
-			GameControl.control.shipPos = goP.transform.position + (Vector3.forward * 70);
+			GameControl.control.shipPos = goP.transform.position + (Vector3.forward * 100);
 		}
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
 		//Writes data to file in GameControl.cs
