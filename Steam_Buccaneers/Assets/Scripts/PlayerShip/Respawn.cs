@@ -52,8 +52,6 @@ public class Respawn : MonoBehaviour
 			{
 				PlayerMove2.turnLeft = false;
 				PlayerMove2.turnRight = false;
-				showDeathScreen = true;
-				deathScreen.SetActive (showDeathScreen);
 				GameControl.control.isFighting = false;
 				player.GetComponent<DeadPlayer>().enabled = true;
 				isDead = true;
@@ -70,6 +68,8 @@ public class Respawn : MonoBehaviour
 					{
 						GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
 						isPaused = true;
+						showDeathScreen = true;
+						deathScreen.SetActive (showDeathScreen);
 					}
 				}
 			}
@@ -139,8 +139,11 @@ public class Respawn : MonoBehaviour
 		}
 
 		portrett2.transform.GetChild (1).transform.GetChild (2).gameObject.SetActive (true);
-		GameObject.Find ("Portrett2_marine").SetActive (false);
-		if (GameObject.Find ("Portrett2_boss"))
+		if (GameObject.Find ("Portrett2_marine"))
+		{
+			GameObject.Find ("Portrett2_marine").SetActive (false);
+		}
+			if (GameObject.Find ("Portrett2_boss"))
 		{
 			GameObject.Find ("Portrett2_boss").SetActive (false);
 		}
