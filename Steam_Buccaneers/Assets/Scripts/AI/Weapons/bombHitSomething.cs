@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class BombHitSomething : MonoBehaviour {
 	private float radius = 20F;
 	private float force = 10.0f;
+	private float distance;
 
 	CameraShakeInstance shake;
 	public GameObject explosion;
+	GameObject playerPos;
 
 	public AudioClip[] clips;
 	private AudioSource source;
@@ -17,6 +19,7 @@ public class BombHitSomething : MonoBehaviour {
 	void Start()
 	{
 		source = this.GetComponent<AudioSource>();
+		playerPos = GameObject.Find("PlayerShip");
 	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
