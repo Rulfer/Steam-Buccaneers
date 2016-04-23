@@ -14,6 +14,8 @@ public class swivelFire : MonoBehaviour
 	bool fired = false;
 	float loadTimer = 0;
 	float loadDuration;
+	public Texture2D aimed;
+	public Texture2D regular;
 
 	void Start () 
 	{
@@ -26,7 +28,9 @@ public class swivelFire : MonoBehaviour
 	{
 		if (Input.GetButton("Fire2"))
 		{
-			
+			Cursor.SetCursor(aimed, Vector2.zero, CursorMode.Auto);
+
+
 			//Debug.Log ("fukku shittu");
 			if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
 			{
@@ -44,6 +48,11 @@ public class swivelFire : MonoBehaviour
 					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextButton.SetActive (true);
 				}
 			}
+		}
+
+		else
+		{
+			Cursor.SetCursor(regular, Vector2.zero, CursorMode.Auto);
 		}
 		if(Input.GetButtonDown("Fire2"))
 		{

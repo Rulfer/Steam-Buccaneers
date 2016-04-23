@@ -53,7 +53,7 @@
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\GUIManager.cs" />
-     <Compile Include="Assets\Graphics\shop\Cursor.cs" />
+     <Compile Include="Assets\Graphics\shop\SetCursorPosition.cs" />
      <Compile Include="Assets\MusicControl.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
