@@ -8,6 +8,7 @@ public class Respawn : MonoBehaviour
 	int tempI;
 	private float distance;
 	public GameObject[] shops;
+	private GameObject[] bombs;
 	private GameObject player;
 	public GameObject deathScreen;
 	private bool showDeathScreen = false;
@@ -102,6 +103,11 @@ public class Respawn : MonoBehaviour
 			}
 
 		}
+
+		bombs = GameObject.FindGameObjectsWithTag("bomb");
+		foreach(GameObject go in bombs)
+			Destroy(go);
+
 		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,shops[tempI].transform.position.y,shops[tempI].transform.position.z - 100);
 		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;

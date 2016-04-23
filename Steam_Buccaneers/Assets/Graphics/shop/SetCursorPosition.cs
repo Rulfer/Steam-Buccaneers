@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-public class Cursor : MonoBehaviour {
+public class SetCursorPosition : MonoBehaviour {
 
 	public Texture2D cursorImage;
 

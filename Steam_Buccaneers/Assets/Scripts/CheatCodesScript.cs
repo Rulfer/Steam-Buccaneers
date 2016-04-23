@@ -120,6 +120,12 @@ public class CheatCodesScript : MonoBehaviour
 			case "HELP":
 				cheatResult = "Try 'boss', 'shop1', 'shop2', 'shop3' and 'god'";
 				break;
+			case "money":
+			case "Money":
+			case "MONEY":
+				GameControl.control.money += 100;
+				cheatResult = "Gained 100 scraps."; 
+				break;
 			default:
 				cheatResult = "Error: Incorrect cheat code.";
 				break;
