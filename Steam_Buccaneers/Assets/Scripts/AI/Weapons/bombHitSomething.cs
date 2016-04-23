@@ -69,7 +69,7 @@ public class BombHitSomething : MonoBehaviour {
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
-			if(hit.tag == "aiShip") //If we hit the aiShip
+			if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an aiShip
 			{
 				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
 			}
@@ -81,7 +81,13 @@ public class BombHitSomething : MonoBehaviour {
 				if(rb != null) //The parent got the rigidbody!
 				{
 					rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
-					if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "PlayerShip")
+					if(hit.transform.root.name == "PlayerShip")
+					{
+						rb.mass = 5;
+						rb.drag = 5;
+						rb.angularDrag = 5;
+					}
+					if(hit.transform.root.name == "Boss(Clone)")
 					{
 						rb.mass = 5;
 						rb.drag = 5;
