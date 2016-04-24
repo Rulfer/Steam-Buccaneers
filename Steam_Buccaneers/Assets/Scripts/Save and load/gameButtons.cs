@@ -51,6 +51,7 @@ public class gameButtons : MonoBehaviour {
 
 	public void pause()
 	{
+		Debug.Log ("Pause game");
 		if(Time.timeScale == 0)
 		{
 			Time.timeScale = 1;

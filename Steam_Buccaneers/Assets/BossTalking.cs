@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossTalking : MonoBehaviour 
 {
@@ -17,7 +18,7 @@ public class BossTalking : MonoBehaviour
 	private Text dialogTextBox;
 	private Text characterName;
 	//Next button
-	private GameObject nextButton;
+	public GameObject nextButton;
 	//Number that keeps track of progress
 	public int dialogNumber;
 	//Array that hold the tutorial dialog
@@ -33,8 +34,6 @@ public class BossTalking : MonoBehaviour
 	private Color tempColor;
 	//getting ahold of button functions
 	private gameButtons buttonEvents;
-	//Character vinduer
-	private GameObject bossCharacterWindow;
 
 	bool turnLeft;
 	bool turnRight;
@@ -51,7 +50,7 @@ public class BossTalking : MonoBehaviour
 		turnSpeed = PlayerMove2.move.turnSpeed-1;
 	}
 
-	void findAllDialogElements()
+	public void findAllDialogElements()
 	{
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		buttonEvents.pause ();
@@ -62,12 +61,10 @@ public class BossTalking : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
-		bossCharacterWindow = GameObject.Find ("Portrett2_boss");
 		nextButton = GameObject.Find ("dialogue_next");
-		nextButton.GetComponent<Button> ().onClick.AddListener (nextDialogBoss);
 
 		nameLeftPos = new Vector3(115.0f, -25.0f);
-		nameRightPos = new Vector3 (600.0f, -25.0f);
+		nameRightPos = new Vector3 (480.0f, -25.0f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorBoss = "#4F3430FF";
@@ -78,7 +75,7 @@ public class BossTalking : MonoBehaviour
 
 	void setDialog()
 	{
-		characters [0] = "Boss";
+		characters [0] = "Sir Spikypillow";
 		characters [1] = "Player";
 
 		dialogTexts [0] = "Who dares enter my domain?"; //Boss
@@ -138,6 +135,7 @@ public class BossTalking : MonoBehaviour
 				{
 					Debug.Log ("Turn successful");
 					findAllDialogElements ();
+					nextButton.GetComponent<Button> ().onClick.AddListener (nextDialogBoss);
 				}
 			}
 		}
@@ -222,7 +220,7 @@ public class BossTalking : MonoBehaviour
 		this.GetComponent<BossTalking>().enabled = false;
 	}
 
-	private void dialogBoss(int dialogNumber)
+	public void dialogBoss(int dialogNumber)
 	{		
 		if (dialogNumber == 1 || dialogNumber == 6 || dialogNumber == 9)
 		{
@@ -256,36 +254,43 @@ public class BossTalking : MonoBehaviour
 		characterName.color = tempColor;
 		dialogTextBox.color = tempColor;
 
-		if (dialogNumber == 6)
+		if (dialogNumber == 0)
 		{
-			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
-		} 
-		else if (dialogNumber == 2)
+			questInfo.text = "Talk to Sir Spikypillow";
+		} else if (dialogNumber == 2)
 		{
 			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isHappyBoss", true);
-		} 
-		else if (dialogNumber == 7)
-		{
-			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isAngryBoss", true);
-		} 
-		else if (dialogNumber == 9)
+		} else if (dialogNumber == 6)
 		{
 			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
-		} 
-		else if (dialogNumber == 10)
+		} else if (dialogNumber == 7)
+		{
+			if (GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().GetBool ("isHappyBoss") == true)
+			{
+				GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isHappyBoss", false);
+			}
+			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isAngryBoss", true);
+		} else if (dialogNumber == 9)
+		{
+			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
+		} else if (dialogNumber == 10)
 		{
 			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isAngryBoss", true);
-		}
-		else if (dialogNumber == 11)
+		} else if (dialogNumber == 11)
 		{
+			questInfo.text = "Defeat Sir Spikypillow";
 			activateScripts ();
 			doneTaling = true;
 			buttonEvents.pause ();
 
-			for (int i = 0; i < GameObject.Find("dialogue_elements").transform.childCount; i++)
+			for (int i = 0; i < GameObject.Find ("dialogue_elements").transform.childCount; i++)
 			{
-				GameObject.Find("dialogue_elements").transform.GetChild (i).gameObject.SetActive (false);
+				GameObject.Find ("dialogue_elements").transform.GetChild (i).gameObject.SetActive (false);
 			}
+		} 
+		else if (dialogNumber == 12)
+		{
+			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
 		}
 
 	}
