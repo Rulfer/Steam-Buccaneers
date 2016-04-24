@@ -12,7 +12,7 @@ public class PointTowards : MonoBehaviour
 		if(SceneManager.GetActiveScene().name == "Tutorial")
 			goTarget = GameObject.FindGameObjectWithTag ("shop");
 		else if(SceneManager.GetActiveScene().name != "Shop" && SceneManager.GetActiveScene().name != "Tutorial")
-			goTarget = GameObject.Find ("BossSpawn");
+			goTarget = GameObject.Find ("BossSpawnCompass");
 	}
 
 	void Update () 
@@ -53,8 +53,9 @@ public class PointTowards : MonoBehaviour
 		v3Pos.y -= 0.5f; 
 		v3Pos.z = 0;      // I think I can do this rather than do a 
 		//   a full projection onto the plane
-
+		Debug.Log(v3Pos);
 		float fAngle = Mathf.Atan2 (v3Pos.x, v3Pos.y);
+		Debug.Log (fAngle);
 		this.transform.localEulerAngles = new Vector3(0.0f, 0.0f, (-fAngle * Mathf.Rad2Deg));
 	}
 }

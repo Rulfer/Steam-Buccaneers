@@ -2,6 +2,7 @@
 using System.Collections;
 using EZCameraShake;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AIprojectile : MonoBehaviour {
 	private CheatCodesScript cheats;
@@ -83,8 +84,14 @@ public class AIprojectile : MonoBehaviour {
 			
 			if(other.transform.root.name == "Boss(Clone)")
 			{
-				if ((other.GetComponentInParent<AIMaster>().aiHealth - damageOutput) <= 0)
-					SceneManager.LoadScene("cog_screen");
+				if ((other.GetComponentInParent<AIMaster> ().aiHealth - damageOutput) <= 0)
+				{
+					other.GetComponentInParent<BossTalking> ().enabled = true;
+					other.GetComponentInParent<BossTalking> ().findAllDialogElements();
+					other.GetComponentInParent<BossTalking> ().dialogBoss (12);
+					other.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
+				}
+					//SceneManager.LoadScene("cog_screen");
 			}
 			if(other.transform.root.name == "Marine(Clone)")
 			{
@@ -154,4 +161,5 @@ public class AIprojectile : MonoBehaviour {
 			Destroy(this.gameObject, source.clip.length);
 		}
 	}
+		
 }

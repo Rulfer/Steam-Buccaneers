@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ShipHitObject : MonoBehaviour 
 {
@@ -54,7 +55,11 @@ public class ShipHitObject : MonoBehaviour
 				
 				if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
 				{
-					SceneManager.LoadScene("cog_screen");
+					col.transform.GetComponentInParent<BossTalking> ().enabled = true;
+					col.transform.GetComponentInParent<BossTalking> ().findAllDialogElements();
+					col.transform.GetComponentInParent<BossTalking> ().dialogBoss (12);
+					col.transform.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
+					//SceneManager.LoadScene("cog_screen");
 				}
 				if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 				{
