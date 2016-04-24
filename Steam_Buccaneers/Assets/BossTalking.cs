@@ -35,10 +35,6 @@ public class BossTalking : MonoBehaviour
 	private gameButtons buttonEvents;
 	//Character vinduer
 	private GameObject bossCharacterWindow;
-	//dialog deler
-	private GameObject talkBubble;
-	private GameObject avatarWindow;
-	private GameObject avatarWindow2;
 
 	bool turnLeft;
 	bool turnRight;
@@ -70,9 +66,6 @@ public class BossTalking : MonoBehaviour
 		nextButton = GameObject.Find ("dialogue_next");
 		nextButton.GetComponent<Button> ().onClick.AddListener (nextDialogBoss);
 
-		talkBubble = GameObject.Find ("bubble_ingame");
-		avatarWindow = GameObject.Find ("avatar1");
-		avatarWindow2 = GameObject.Find ("avatar2");
 		nameLeftPos = new Vector3(115.0f, -25.0f);
 		nameRightPos = new Vector3 (600.0f, -25.0f);
 

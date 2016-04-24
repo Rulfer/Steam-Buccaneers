@@ -19,10 +19,12 @@ public class gameButtons : MonoBehaviour {
 			Debug.Log (SceneManager.GetActiveScene ().name);
 			if (SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene ().name != "Shop")
 			{
-				escMenu = GameObject.Find ("menu");
-				GameObject.Find ("menu").SetActive (false);
-				Debug.Log (escMenu + "Is alive!");
-				i++;
+				if (GameObject.Find ("menu"))
+				{
+					escMenu = GameObject.Find ("menu");
+					GameObject.Find ("menu").SetActive (false);
+					Debug.Log (escMenu + "Is alive!");
+				}
 			}
 
 		}
