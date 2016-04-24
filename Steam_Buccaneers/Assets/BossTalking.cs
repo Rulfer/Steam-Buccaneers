@@ -117,34 +117,39 @@ public class BossTalking : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if (doneTaling == false)
+		if(GameControl.control.talkedWithBoss == false)
 		{
-			
-			detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
-
-			if (detectDistance < 100)
+			if (doneTaling == false)
 			{
+				
+				detectDistance = Vector3.Distance (playerPoint.transform.position, this.transform.position); //calculates the distance between the AI and the player
+
+				if (detectDistance < 100)
+				{
+					if (faced == false)
+						facePlayer ();
+				}
+
 				if (faced == false)
-					facePlayer ();
-			}
-
-			if (faced == false)
-			{
-				if (turnLeft == true)
 				{
-					this.transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
-				}
+					if (turnLeft == true)
+					{
+						this.transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
+					}
 
-				if (turnRight == true)
+					if (turnRight == true)
+					{
+						this.transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+					}
+				} else
 				{
-					this.transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
+					Debug.Log ("Turn successful");
+					findAllDialogElements ();
 				}
-			} else
-			{
-				Debug.Log ("Turn successful");
-				findAllDialogElements ();
 			}
 		}
+		else
+			activateScripts();
 	}
 
 	void facePlayer()
@@ -210,15 +215,18 @@ public class BossTalking : MonoBehaviour
 
 	void activateScripts()
 	{
-		this.GetComponent<AIMaster>().enabled = true;
+		GameControl.control.talkedWithBoss = true;
 		this.GetComponent<AImove>().enabled = true;
 		this.GetComponent<AIavoid>().enabled = true;
-		this.GetComponent<AIPatroling>().enabled = true;
+		this.GetComponent<AIMaster>().enabled = true;
+		this.GetComponent<AIMaster>().kill.gameObject.SetActive(true);
 
 		playerPoint.GetComponent<PlayerMove2>().enabled = true;
 		playerPoint.GetComponent<Rigidbody>().mass = 1;
 		playerPoint.GetComponent<Rigidbody>().angularDrag = 0.5f;
 		playerPoint.GetComponent<Rigidbody>().drag = 0.5f;
+
+		this.GetComponent<BossTalking>().enabled = false;
 	}
 
 	private void dialogBoss(int dialogNumber)

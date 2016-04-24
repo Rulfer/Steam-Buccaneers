@@ -10,6 +10,7 @@ public class AIMaster : MonoBehaviour
 	private GameObject playerPoint;
 	public GameObject boom;
 	public GameObject kill;
+	private GameObject[] bombs;
 
 	public Material mat2;
 	public Material mat3;
@@ -42,9 +43,6 @@ public class AIMaster : MonoBehaviour
 		aiHealthMat2= aiHealth * 0.66f;
 		aiHealthMat3 = aiHealth * 0.33f;
 		source = this.GetComponent<AudioSource>();
-
-		if(this.transform.name == "Boss(Clone)")
-			kill.gameObject.SetActive(false);
 	}
 	
 	void Update () 
@@ -245,15 +243,24 @@ public class AIMaster : MonoBehaviour
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(isCargo == false)
+			if(isCargo == false && isBoss == false)
 			{
 				SpawnAI.spawn.marineShips[arrayIndex] = null;
 				SpawnAI.spawn.availableIndes[arrayIndex] = true;
 				SpawnAI.spawn.livingShips--;
 			}
-			else
+			else if(isCargo == true)
 				SpawnAI.spawn.livingCargo = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
+			if(isBoss == true)
+			{
+				isFighting = false;
+				GameControl.control.isFighting = false;
+				SpawnAI.spawn.stopFightTimer = false;
+				bombs = GameObject.FindGameObjectsWithTag("bomb");
+				foreach(GameObject go in bombs)
+					Destroy(go);
+			}
 		}
 		Instantiate(boom, this.transform.position, this.transform.rotation);
 		boom.GetComponent<DeleteParticles>().killDuration = 3;
