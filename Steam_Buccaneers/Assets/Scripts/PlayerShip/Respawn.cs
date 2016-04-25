@@ -8,6 +8,7 @@ public class Respawn : MonoBehaviour
 	int tempI;
 	private float distance;
 	public GameObject[] shops;
+	private GameObject[] bombs;
 	private GameObject player;
 	public GameObject deathScreen;
 	private bool showDeathScreen = false;
@@ -52,8 +53,6 @@ public class Respawn : MonoBehaviour
 			{
 				PlayerMove2.turnLeft = false;
 				PlayerMove2.turnRight = false;
-				showDeathScreen = true;
-				deathScreen.SetActive (showDeathScreen);
 				GameControl.control.isFighting = false;
 				player.GetComponent<DeadPlayer>().enabled = true;
 				isDead = true;
@@ -70,11 +69,17 @@ public class Respawn : MonoBehaviour
 					{
 						GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
 						isPaused = true;
+						showDeathScreen = true;
+						deathScreen.SetActive (showDeathScreen);
 					}
 				}
 			}
 			if (Input.GetKey(KeyCode.Space))
 			{
+				if (isPaused == false)
+				{
+					GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+				}
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
@@ -98,6 +103,11 @@ public class Respawn : MonoBehaviour
 			}
 
 		}
+
+		bombs = GameObject.FindGameObjectsWithTag("bomb");
+		foreach(GameObject go in bombs)
+			Destroy(go);
+
 		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,shops[tempI].transform.position.y,shops[tempI].transform.position.z - 100);
 		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;
@@ -135,8 +145,11 @@ public class Respawn : MonoBehaviour
 		}
 
 		portrett2.transform.GetChild (1).transform.GetChild (2).gameObject.SetActive (true);
-		GameObject.Find ("Portrett2_marine").SetActive (false);
-		if (GameObject.Find ("Portrett2_boss"))
+		if (GameObject.Find ("Portrett2_marine"))
+		{
+			GameObject.Find ("Portrett2_marine").SetActive (false);
+		}
+			if (GameObject.Find ("Portrett2_boss"))
 		{
 			GameObject.Find ("Portrett2_boss").SetActive (false);
 		}
@@ -144,7 +157,6 @@ public class Respawn : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		GameObject.Find ("dialogue_next").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
-		nextButton = GameObject.Find ("dialogue_next_shop");
 		nameLeftPos = new Vector3(115.0f, -25.0f);
 		nameRightPos = new Vector3 (525.0f, -25.0f);
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
@@ -10,6 +11,13 @@ public class gameButtons : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		i = 0;
+
+		if (SceneManager.GetActiveScene ().name != "Shop")
+		{
+			GameObject.Find ("resume").GetComponent<Button> ().onClick.AddListener (resume);
+			GameObject.Find ("load").GetComponent<Button> ().onClick.AddListener (GameControl.control.Load);
+			GameObject.Find ("exit").GetComponent<Button> ().onClick.AddListener (closeApplication);
+		}
 	}
 
 	void Update()
@@ -19,10 +27,12 @@ public class gameButtons : MonoBehaviour {
 			Debug.Log (SceneManager.GetActiveScene ().name);
 			if (SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene ().name != "Shop")
 			{
-				escMenu = GameObject.Find ("menu");
-				GameObject.Find ("menu").SetActive (false);
-				Debug.Log (escMenu + "Is alive!");
-				i++;
+				if (GameObject.Find ("menu"))
+				{
+					escMenu = GameObject.Find ("menu");
+					GameObject.Find ("menu").SetActive (false);
+					Debug.Log (escMenu + "Is alive!");
+				}
 			}
 
 		}
@@ -35,7 +45,7 @@ public class gameButtons : MonoBehaviour {
 		}
 
 		//Debug.Log (escMenu);
-	if (Input.GetKeyDown (KeyCode.Escape))
+		if (Input.GetKeyDown (KeyCode.Escape) && SceneManager.GetActiveScene().name != "main_menu")
 		{
 		setDifferent ();
 		escMenu.SetActive(escMenuStatus);
@@ -49,6 +59,7 @@ public class gameButtons : MonoBehaviour {
 
 	public void pause()
 	{
+		Debug.Log ("Pause game");
 		if(Time.timeScale == 0)
 		{
 			Time.timeScale = 1;

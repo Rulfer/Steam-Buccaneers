@@ -45,17 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AudioController.cs" />
-     <Compile Include="Assets\BossTalking.cs" />
-     <Compile Include="Assets\DeadPlayer.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
-     <Compile Include="Assets\FindMissingScripts.cs" />
-     <Compile Include="Assets\GUIManager.cs" />
-     <Compile Include="Assets\Graphics\shop\Cursor.cs" />
-     <Compile Include="Assets\MusicControl.cs" />
+     <Compile Include="Assets\Graphics\shop\SetCursorPosition.cs" />
+     <Compile Include="Assets\PlayVideoScript.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
@@ -71,18 +66,23 @@
      <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
+     <Compile Include="Assets\Scripts\BackgroundSongsController.cs" />
+     <Compile Include="Assets\Scripts\BossTalking.cs" />
      <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
+     <Compile Include="Assets\Scripts\DeadPlayer.cs" />
      <Compile Include="Assets\Scripts\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\FX\randomScaleMove.cs" />
      <Compile Include="Assets\Scripts\FX\rotate.cs" />
+     <Compile Include="Assets\Scripts\GUIManager.cs" />
      <Compile Include="Assets\Scripts\Gravity and simple movement\gravityPull.cs" />
      <Compile Include="Assets\Scripts\Minimap\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Minimap\ZoomMinimap.cs" />
+     <Compile Include="Assets\Scripts\MusicControl.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
@@ -109,6 +109,7 @@
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
      <Compile Include="Assets\Scripts\Scene\newGame.cs" />
      <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
+     <Compile Include="Assets\Scripts\ShipHitObject.cs" />
      <Compile Include="Assets\Scripts\Shop\changeSliderValue.cs" />
      <Compile Include="Assets\Scripts\Shop\monies.cs" />
      <Compile Include="Assets\Scripts\Shop\setCurrentHealth.cs" />
@@ -117,6 +118,7 @@
      <Compile Include="Assets\Scripts\Shop\spesialAmmo.cs" />
      <Compile Include="Assets\Scripts\Shop\updateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\updatePayment.cs" />
+     <Compile Include="Assets\Scripts\ShopkeeperDialog.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
      <Compile Include="Assets\Scripts\World\ObjectiveButtons.cs" />
@@ -129,8 +131,7 @@
      <Compile Include="Assets\Scripts\World\SpawnTreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\TreasurePlanet.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
-     <Compile Include="Assets\ShipHitObject.cs" />
-     <Compile Include="Assets\WorldBorder.cs" />
+     <Compile Include="Assets\Scripts\WorldBorder.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />

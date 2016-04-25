@@ -2,14 +2,17 @@
 using System.Collections;
 using EZCameraShake;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class BombHitSomething : MonoBehaviour {
 	private float radius = 20F;
 	private float force = 10.0f;
+	private float distance;
 
 	CameraShakeInstance shake;
 	public GameObject explosion;
+//	GameObject playerPos;
 
 	public AudioClip[] clips;
 	private AudioSource source;
@@ -17,6 +20,7 @@ public class BombHitSomething : MonoBehaviour {
 	void Start()
 	{
 		source = this.GetComponent<AudioSource>();
+	//	playerPos = GameObject.Find("PlayerShip");
 	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
@@ -33,7 +37,11 @@ public class BombHitSomething : MonoBehaviour {
 			
 			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - 10) <= 0)
 			{
-				SceneManager.LoadScene("cog_screen");
+				other.GetComponentInParent<BossTalking> ().enabled = true;
+				other.GetComponentInParent<BossTalking> ().findAllDialogElements();
+				other.GetComponentInParent<BossTalking> ().dialogBoss (12);
+				other.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
+				//SceneManager.LoadScene("cog_screen");
 			}
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
 			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
@@ -66,7 +74,7 @@ public class BombHitSomething : MonoBehaviour {
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
-			if(hit.tag == "aiShip") //If we hit the aiShip
+			if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an aiShip
 			{
 				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
 			}
@@ -78,7 +86,13 @@ public class BombHitSomething : MonoBehaviour {
 				if(rb != null) //The parent got the rigidbody!
 				{
 					rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
-					if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "PlayerShip")
+					if(hit.transform.root.name == "PlayerShip")
+					{
+						rb.mass = 5;
+						rb.drag = 5;
+						rb.angularDrag = 5;
+					}
+					if(hit.transform.root.name == "Boss(Clone)")
 					{
 						rb.mass = 5;
 						rb.drag = 5;

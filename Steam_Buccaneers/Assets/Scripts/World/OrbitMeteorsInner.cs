@@ -4,14 +4,14 @@ using System.Collections;
 public class OrbitMeteorsInner : MonoBehaviour 
 {
 	Vector3 rotateLocalVec;
-	GameObject player;
+	//GameObject player;
 	int crashdamage;
 	Rigidbody asteroidV;
 
 	// Use this for initialization
 	void Start () 
 	{
-		player = GameObject.Find ("PlayerShip");
+		//player = GameObject.Find ("PlayerShip");
 		rotateLocalVec = new Vector3 (Mathf.RoundToInt(Random.Range(-1,1)), 
 		Mathf.RoundToInt(Random.Range(-1,1)),Mathf.RoundToInt(Random.Range(-1,1)));
 	

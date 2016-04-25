@@ -155,7 +155,7 @@ public class GameControl : MonoBehaviour {
 		//sets lokal data posisions to what we read of.
 		shipPos = FloatstoVector3(data.shipPos);
 		//Update gameobjects with loaded data
-		GameObject goP = GameObject.FindGameObjectWithTag ("Player");
+		GameObject goP = GameObject.Find ("PlayerShip");
 		goP.transform.root.position = FloatstoVector3(data.shipPos);
 		goP.transform.rotation = Quaternion.Euler(0, 0,0);
 		goP.GetComponentInParent<Rigidbody>().velocity = Vector3.zero;
@@ -175,6 +175,10 @@ public class GameControl : MonoBehaviour {
 
 	public void ChangeScene(string name)
 	{
+		if (name == "cog_screen")
+		{
+			this.GetComponent<gameButtons> ().pause ();
+		}
 		//Changes scene to parameter
 		loadingCanvas.SetActive(true);
 		StartCoroutine(LoadingScreen(name));

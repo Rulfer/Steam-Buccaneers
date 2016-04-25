@@ -12,7 +12,7 @@ public class RotateBackgroundElements : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		this.transform.Rotate(rotateVec, 0.01f);
 		

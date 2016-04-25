@@ -16,7 +16,7 @@ public class ObjectiveButtons : MonoBehaviour {
 
 	public void PirateLord () 
 	{
-		compassNeedle.goTarget = GameObject.Find ("BossSpawn");
+		compassNeedle.goTarget = GameObject.Find ("BossSpawnCompass");
 		questInfo.text = "Find ancient cog!";
 	}
 
@@ -55,6 +55,7 @@ public class ObjectiveButtons : MonoBehaviour {
 				tempI = i;
 			}
 		}
+
 		compassNeedle.goTarget = treasure [tempI];
 		questInfo.text = "Find treasure planet!";
 	}

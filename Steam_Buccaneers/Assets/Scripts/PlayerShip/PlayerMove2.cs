@@ -74,7 +74,6 @@ public class PlayerMove2 : MonoBehaviour
 		}*/
 
 
-		Debug.Log (boostCooldownTimer + " " + boostCooledDown);
 
 		if (GameControl.control.isFighting == true && isBoosting == true)
 		{

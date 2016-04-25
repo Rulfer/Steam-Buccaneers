@@ -25,6 +25,7 @@ public class Tutorial : MonoBehaviour
 	private string[] character = new string[3];
 	private Vector2 nameLeftPos;
 	private Vector2 nameRightPos;
+	private Vector2 nameShop;
 	private string textColorPlayer;
 	private string textColorShopkeeper;
 	private string textColorMarine;
@@ -142,6 +143,8 @@ public class Tutorial : MonoBehaviour
 
 		nameLeftPos = new Vector3(115.0f, -25.0f);
 		nameRightPos = new Vector3 (525.0f, -25.0f);
+
+		nameShop = new Vector3 (215.4f, 73.2f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorShopkeeper = "#631911FF";
@@ -285,7 +288,7 @@ public class Tutorial : MonoBehaviour
 			"And remember; Keep alive and keep flying, a living customer is a paying customer. " +
 			"Come back anytime should you need something.";//Shopkeeper
 		
-		dialogTexts [36] = "Oh, and one more thing. You are never far from one of my shops, just " +
+		dialogTexts [36] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
 			"the funky music and you will get there!";//Shopkeeper
 		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
@@ -335,9 +338,19 @@ public class Tutorial : MonoBehaviour
 			//Sets dialog and character
 			setDialog (character [0], dialogTexts [stage]);
 			//Moves name closer to portrait
-			if (characterName.gameObject.GetComponent<RectTransform>().anchoredPosition != nameRightPos)
+			if (SceneManager.GetActiveScene ().name != "Shop")
 			{
-				characterName.gameObject.GetComponent<RectTransform>().anchoredPosition = nameRightPos;
+				if (characterName.gameObject.GetComponent<RectTransform> ().anchoredPosition != nameRightPos)
+				{
+					characterName.gameObject.GetComponent<RectTransform> ().anchoredPosition = nameRightPos;
+				}
+			} 
+			else
+			{
+				if (characterName.gameObject.GetComponent<RectTransform> ().anchoredPosition != nameShop)
+				{
+					characterName.gameObject.GetComponent<RectTransform> ().anchoredPosition = nameShop;
+				}
 			}
 			//Changes color on text which is closer to character
 			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
@@ -496,7 +509,7 @@ public class Tutorial : MonoBehaviour
 	private void makeTutorialEnemy()
 	{
 		Instantiate (AI, this.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-
+		GameControl.control.isFighting = true;
 		Debug.Log("New Target = " + AI);
 	}
 

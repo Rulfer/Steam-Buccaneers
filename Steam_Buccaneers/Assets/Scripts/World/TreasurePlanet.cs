@@ -5,7 +5,7 @@ using System.Collections;
 public class TreasurePlanet : MonoBehaviour 
 {
 	bool treasureHasBeenPickedUp;
-
+	public GameObject animation;
 
 
 
@@ -26,7 +26,7 @@ public class TreasurePlanet : MonoBehaviour
 		if (other.tag == "Player" && treasureHasBeenPickedUp == false)
 		{
 			//spill av animasjon
-
+			animation.SetActive(true);
 			treasureHasBeenPickedUp = true;
 			GameControl.control.money += 500;
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();

@@ -263,7 +263,6 @@ public class SpawnAI : MonoBehaviour
 	void spawnShip ()
 	{
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
-		Debug.Log("Relativebosspoint is " + relativeBossPoint);
 		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null)
 		{
 			if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
