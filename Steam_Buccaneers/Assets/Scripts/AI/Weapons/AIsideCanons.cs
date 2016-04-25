@@ -50,19 +50,19 @@ public class AIsideCanons : MonoBehaviour {
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
 						cannonLevel[i] = 1;
-						this.GetComponent<AIMaster>().cannonLevelOne++;
+						this.GetComponentInParent<AIMaster>().cannonLevelOne++;
 					}
 					else if(SpawnAI.cannonLevel[i] == 2)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
 						cannonLevel[i] = 2;
-						this.GetComponent<AIMaster>().cannonLevelTwo++;
+						this.GetComponentInParent<AIMaster>().cannonLevelTwo++;
 					}
 					else if(SpawnAI.cannonLevel[i] == 3)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
 						cannonLevel[i] = 3;
-						this.GetComponent<AIMaster>().cannonLevelThree++;
+						this.GetComponentInParent<AIMaster>().cannonLevelThree++;
 					}
 				}
 			}
@@ -81,19 +81,19 @@ public class AIsideCanons : MonoBehaviour {
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh1;
 						cannonLevel[i] = 1;
-						this.GetComponent<AIMaster>().cannonLevelOne++;
+						this.GetComponentInParent<AIMaster>().cannonLevelOne++;
 					}
 					else if(SpawnAI.cannonLevel[i] == 2)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh2;
 						cannonLevel[i] = 2;
-						this.GetComponent<AIMaster>().cannonLevelTwo++;
+						this.GetComponentInParent<AIMaster>().cannonLevelTwo++;
 					}
 					else if(SpawnAI.cannonLevel[i] == 3)
 					{
 						allCannons[i].GetComponent<MeshFilter>().mesh = mesh3;
 						cannonLevel[i] = 3;
-						this.GetComponent<AIMaster>().cannonLevelThree++;
+						this.GetComponentInParent<AIMaster>().cannonLevelThree++;
 					}
 				}
 			}

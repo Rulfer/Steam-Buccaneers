@@ -157,7 +157,6 @@ public class Respawn : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		GameObject.Find ("dialogue_next").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
-		nextButton = GameObject.Find ("dialogue_next_shop");
 		nameLeftPos = new Vector3(115.0f, -25.0f);
 		nameRightPos = new Vector3 (525.0f, -25.0f);
 

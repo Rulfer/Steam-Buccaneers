@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
@@ -10,6 +11,10 @@ public class gameButtons : MonoBehaviour {
 	void OnLevelWasLoaded(int level)
 	{
 		i = 0;
+
+		GameObject.Find ("resume").GetComponent<Button> ().onClick.AddListener (resume);
+		GameObject.Find ("load").GetComponent<Button> ().onClick.AddListener (GameControl.control.Load);
+		GameObject.Find ("exit").GetComponent<Button> ().onClick.AddListener (closeApplication);
 	}
 
 	void Update()
@@ -37,7 +42,7 @@ public class gameButtons : MonoBehaviour {
 		}
 
 		//Debug.Log (escMenu);
-	if (Input.GetKeyDown (KeyCode.Escape))
+		if (Input.GetKeyDown (KeyCode.Escape) && SceneManager.GetActiveScene().name != "main_menu")
 		{
 		setDifferent ();
 		escMenu.SetActive(escMenuStatus);
