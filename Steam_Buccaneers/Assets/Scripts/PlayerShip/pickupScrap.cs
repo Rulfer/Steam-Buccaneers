@@ -19,7 +19,7 @@ public class pickupScrap : MonoBehaviour {
 		for(int i = 0; i < scrapArray.Length; i++)
 		{
 			temp = transform.position - scrapArray[i].transform.position; 
-			scrapArray[i].GetComponent<Rigidbody>().AddForce(temp.normalized * (Mathf.Max((pickupRange-temp.magnitude)/5,0)), ForceMode.VelocityChange);
+			scrapArray[i].GetComponent<Rigidbody>().AddForce(temp.normalized * (Mathf.Max((pickupRange-temp.magnitude)/10,0)), ForceMode.VelocityChange);
 		}
 	}
 }
