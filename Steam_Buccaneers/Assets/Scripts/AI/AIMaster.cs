@@ -11,7 +11,6 @@ public class AIMaster : MonoBehaviour
 	public GameObject kill;
 	private GameObject[] bombs;
 	private GameObject playerPoint;
-	private GameObject tempScrap; //Used when creating new scraps
 
 	public Material mat2;
 	public Material mat3;
@@ -290,8 +289,9 @@ public class AIMaster : MonoBehaviour
 		{
 			for (int i = 0; i < temp; i++)
 			{
-				tempScrap = Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation) as GameObject;
-				tempScrap.GetComponent<ScrapRandomDirection>().value = (1 * cannonLevelOne) + (2 * cannonLevelTwo) + (3 * cannonLevelThree);
+				GameObject tempScrap = Instantiate (scrap [Random.Range (0, 4)]);
+				tempScrap.transform.position = this.transform.position;
+				tempScrap.GetComponent<ScrapRandomDirection>().setValue(cannonLevelOne, cannonLevelTwo, cannonLevelThree);
 			}
 		}
 
