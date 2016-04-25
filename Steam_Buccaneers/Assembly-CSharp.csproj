@@ -129,6 +129,7 @@
      <Compile Include="Assets\Scripts\World\TreasurePlanet.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\ShipHitObject.cs" />
+     <Compile Include="Assets\ShopkeeperDialog.cs" />
      <Compile Include="Assets\WorldBorder.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />

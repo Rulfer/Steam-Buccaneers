@@ -60,29 +60,38 @@ public class CombatAnimationController : MonoBehaviour {
 	{
 		if (character == "Player")
 		{
-			if (playerAnimation.GetComponent<Animator> ().GetBool ("isAngryMainCharacter") == true)
+			if (playerAnimation.activeInHierarchy)
 			{
-				playerAnimation.GetComponent<Animator> ().SetBool ("isAngryMainCharacter", false);
+				if (playerAnimation.GetComponent<Animator> ().GetBool ("isAngryMainCharacter") == true)
+				{
+					playerAnimation.GetComponent<Animator> ().SetBool ("isAngryMainCharacter", false);
+				}
+				playerAnimation.GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
 			}
-			playerAnimation.GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
 		} 
 		else if (character == "Enemy")
 		{
 			if (combatBoss == false)
 			{
-				if (marineAnimation.GetComponent<Animator> ().GetBool ("isAngryMarine") == true)
+				if (marineAnimation.activeInHierarchy)
 				{
-					marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", false);
+					if (marineAnimation.GetComponent<Animator> ().GetBool ("isAngryMarine") == true)
+					{
+						marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", false);
+					}
+					marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", true);
 				}
-				marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", true);
 			} 
 			else
 			{
-				if (bossAnimation.GetComponent<Animator> ().GetBool ("isAngryBoss") == true)
+				if (bossAnimation.activeInHierarchy)
 				{
-					bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", false);
+					if (bossAnimation.GetComponent<Animator> ().GetBool ("isAngryBoss") == true)
+					{
+						bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", false);
+					}
+					bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
 				}
-				bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", true);
 			}
 
 		}
@@ -93,29 +102,38 @@ public class CombatAnimationController : MonoBehaviour {
 	{
 		if (character == "Player")
 		{
-			if (playerAnimation.GetComponent<Animator> ().GetBool ("isHappyMainCharacter") == true)
+			if (playerAnimation.activeInHierarchy)
 			{
-				playerAnimation.GetComponent<Animator> ().SetBool ("isHappyMainCharacter", false);
+				if (playerAnimation.GetComponent<Animator> ().GetBool ("isHappyMainCharacter") == true)
+				{
+					playerAnimation.GetComponent<Animator> ().SetBool ("isHappyMainCharacter", false);
+				}
+				playerAnimation.GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
 			}
-			playerAnimation.GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
 		} 
 		else if (character == "Enemy")
 		{
 			if (combatBoss == false)
 			{
-				if (marineAnimation.GetComponent<Animator> ().GetBool ("isHappyMarine") == true)
+				if (marineAnimation.activeInHierarchy)
 				{
-					marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", false);
+					if (marineAnimation.GetComponent<Animator> ().GetBool ("isHappyMarine") == true)
+					{
+						marineAnimation.GetComponent<Animator> ().SetBool ("isHappyMarine", false);
+					}
+					marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", true);
 				}
-				marineAnimation.GetComponent<Animator> ().SetBool ("isAngryMarine", true);
 			} 
 			else
 			{
-				if (bossAnimation.GetComponent<Animator> ().GetBool ("isHappyBoss") == true)
+				if (bossAnimation.activeInHierarchy)
 				{
-					bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", false);
+					if (bossAnimation.GetComponent<Animator> ().GetBool ("isHappyBoss") == true)
+					{
+						bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", false);
+					}
+					bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", true);
 				}
-				bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", true);
 			}
 		
 		}
