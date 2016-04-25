@@ -28,27 +28,34 @@ public class cameraController : MonoBehaviour
 		PlayerPOS = player.transform.transform.position;
 		this.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway, (PlayerPOS.z)); 
 
-		// Kamera zoom
-		float scrollDistance = Input.GetAxisRaw("Mouse ScrollWheel");
-
-		if (scrollDistance > 0f)
+		if(MinimapCamera.miniCam.isMinimap)
 		{
-			if (distanceAway >= 50)
+			// Kamera zoom
+			float scrollDistance = Input.GetAxisRaw("Mouse ScrollWheel");
+
+			if (scrollDistance > 0f)
 			{
-				//Debug.Log (scrollDistance);
-				distanceAway -= scrollBy;
-				//Debug.Log (distanceAway);
+				if (distanceAway >= 50)
+				{
+					//Debug.Log (scrollDistance);
+					distanceAway -= scrollBy;
+					//Debug.Log (distanceAway);
+				}
+			}
+			else if (scrollDistance < 0f)
+			{
+				// scroll down
+				if (distanceAway <= 200)
+				{
+					//Debug.Log (scrollDistance);
+					distanceAway += scrollBy;
+					//Debug.Log (distanceAway);
+				}
 			}
 		}
-		else if (scrollDistance < 0f)
+		else
 		{
-			// scroll down
-			if (distanceAway <= 200)
-			{
-				//Debug.Log (scrollDistance);
-				distanceAway += scrollBy;
-				//Debug.Log (distanceAway);
-			}
+			this.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+210, (PlayerPOS.z)); 
 		}
 	}
 }

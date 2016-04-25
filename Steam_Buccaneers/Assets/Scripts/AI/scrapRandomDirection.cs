@@ -22,7 +22,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 		randomDirectionZ = Random.onUnitSphere.z;
 		axisOfRotation = Random.onUnitSphere;
 		angularVelocity = Random.Range (20, 40);
-		value = Random.Range(1, 5);
+		value = Random.Range(5, 15);
 		scrapRigid = GetComponent<Rigidbody>();
 
 		scrapRigid.AddForce(new Vector3(randomDirectionX, 0, randomDirectionZ) * speed * Time.deltaTime); //Adds a force for the beginning
