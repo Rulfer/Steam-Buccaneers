@@ -50,6 +50,8 @@
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Graphics\shop\SetCursorPosition.cs" />
+     <Compile Include="Assets\PlayVideoScript.cs" />
+     <Compile Include="Assets\ScaleToScreen.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
@@ -70,7 +72,7 @@
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
-     <Compile Include="Assets\Scripts\AudioController.cs" />
+     <Compile Include="Assets\Scripts\BackgroundSongsController.cs" />
      <Compile Include="Assets\Scripts\BossTalking.cs" />
      <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
      <Compile Include="Assets\Scripts\DeadPlayer.cs" />

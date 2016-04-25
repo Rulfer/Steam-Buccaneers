@@ -14,12 +14,9 @@ public class ShopkeeperDialog : MonoBehaviour {
 		{
 			shopkeeperDialogTexts [0] = "Welcome back! What can I do you for?";
 			shopkeeperDialogTexts [1] = "Good to SEA you again!";
-			shopkeeperDialogTexts [2] = "Shopkeeper shop! Best prices in all of known space!";
+			shopkeeperDialogTexts [2] = "Welcome to my shop! Best prices in all of known space!";
 			shopkeeperDialogTexts [3] = "Welcome! Buy my stuff!";
-
-	
 			int temp = Random.Range (0, shopkeeperDialogTexts.Length);
-
 			this.GetComponent<Text> ().text = shopkeeperDialogTexts [temp];
 		}
 	}

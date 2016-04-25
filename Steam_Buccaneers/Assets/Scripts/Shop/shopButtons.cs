@@ -21,6 +21,8 @@ public class shopButtons : MonoBehaviour {
 	private Slider healthSlider;
 	private GameObject[] canons = new GameObject[6];
 
+	public AudioSource source;
+
 	void Start()
 	{
 		//Finding objects to change icons on
@@ -100,6 +102,7 @@ public class shopButtons : MonoBehaviour {
 		{
 			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value && (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment <= GameControl.control.money)
 			{
+				
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
 				GameControl.control.money -= (int)GameObject.Find ("value_cost_hp").GetComponent<updatePayment> ().payment;
@@ -110,6 +113,7 @@ public class shopButtons : MonoBehaviour {
 		{
 			if (GameControl.control.health <= (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
 			{
+				source.Play();
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
 
@@ -137,11 +141,13 @@ public class shopButtons : MonoBehaviour {
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.hullUpgrade);
 					sliders [0].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
 					sliders[1].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
+					source.Play();
 				}
 				break;
 
 			case "special":
 				GameControl.control.specialAmmo ++;
+				source.Play();
 				break;
 
 			case "cannonT1":
@@ -149,14 +155,16 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.canonUpgrades[0] ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[0]);
+					source.Play();
 				}
 				break;
 
 			case "cannonT2":
 				if (GameControl.control.canonUpgrades[1] < maxUpgrade)
 				{
-				GameControl.control.canonUpgrades[1] ++;
-				changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[1]);
+					GameControl.control.canonUpgrades[1] ++;
+					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[1]);
+					source.Play();
 				}
 				break;
 
@@ -165,6 +173,7 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.canonUpgrades[2] ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[2]);
+					source.Play();
 				}
 				break;
 
@@ -181,6 +190,7 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.canonUpgrades[4] ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[4]);
+					source.Play();
 				}
 				break;
 
@@ -189,6 +199,7 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.canonUpgrades[5] ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.canonUpgrades[5]);
+					source.Play();
 				}
 				break;
 
@@ -197,6 +208,7 @@ public class shopButtons : MonoBehaviour {
 				{
 					GameControl.control.thrusterUpgrade ++;
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.thrusterUpgrade);
+					source.Play();
 				}
 				break;
 			default:
