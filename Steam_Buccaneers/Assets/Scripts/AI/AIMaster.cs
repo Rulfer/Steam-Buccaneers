@@ -290,7 +290,7 @@ public class AIMaster : MonoBehaviour
 		{
 			for (int i = 0; i < temp; i++)
 			{
-				tempScrap = Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation);
+				tempScrap = Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation) as GameObject;
 				tempScrap.GetComponent<ScrapRandomDirection>().value = (1 * cannonLevelOne) + (2 * cannonLevelTwo) + (3 * cannonLevelThree);
 			}
 		}
