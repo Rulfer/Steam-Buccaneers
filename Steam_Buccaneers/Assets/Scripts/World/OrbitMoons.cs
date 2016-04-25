@@ -15,7 +15,7 @@ public class OrbitMoons : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if(MinimapCamera.miniCam.isMinimap == true)
 		{

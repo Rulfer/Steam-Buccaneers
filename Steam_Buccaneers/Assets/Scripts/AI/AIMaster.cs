@@ -10,6 +10,7 @@ public class AIMaster : MonoBehaviour
 	private GameObject playerPoint;
 	public GameObject boom;
 	public GameObject kill;
+	private GameObject[] bombs;
 
 	public Material mat2;
 	public Material mat3;
@@ -26,7 +27,7 @@ public class AIMaster : MonoBehaviour
 	public bool isCargo = false;
 	public bool usingMat2 = false;
 	public bool usingMat3 = false;
-	private bool isFighting = false;
+	public bool isFighting = false;
 
 	public int arrayIndex;
 	private int ranNum;
@@ -79,17 +80,20 @@ public class AIMaster : MonoBehaviour
 				}
 				else
 				{
-					if(GameControl.control.isFighting == false)
-						reactivatePatroling();
-					if(detectDistance > aiRadar + 50)
-						reactivatePatroling();
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(GameControl.control.isFighting == false)
+							reactivatePatroling();
+						if(detectDistance > aiRadar + 50)
+							reactivatePatroling();
+					}
 				}
 			}
-			else if(isBoss == true)
+			else if(isBoss == true && GameControl.control.talkedWithBoss == true)
 			{
 				deaktivatePatroling();
 			}
-
+				
 			if(detectDistance > 350)//If the distance is greater than this number, delete this AI
 				killAbsentAI();
 		}
@@ -239,17 +243,34 @@ public class AIMaster : MonoBehaviour
 	{
 		if(SceneManager.GetActiveScene().name != "Tutorial")
 		{
-			if(isCargo == false)
+			if(isCargo == false && isBoss == false)
 			{
 				SpawnAI.spawn.marineShips[arrayIndex] = null;
 				SpawnAI.spawn.availableIndes[arrayIndex] = true;
 				SpawnAI.spawn.livingShips--;
 			}
-			else
+			else if(isCargo == true)
 				SpawnAI.spawn.livingCargo = false;
 			Destroy(this.GetComponent<AIPatroling>().target);
+			if(isBoss == true)
+			{
+				isFighting = false;
+				GameControl.control.isFighting = false;
+				SpawnAI.spawn.stopFightTimer = false;
+				bombs = GameObject.FindGameObjectsWithTag("bomb");
+				foreach(GameObject go in bombs)
+					Destroy(go);
+			}
 		}
-		Destroy(this.gameObject);
+		Instantiate(boom, this.transform.position, this.transform.rotation);
+		boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+		this.GetComponent<DeadAI>().enabled = true;
+		deactivateAI();
+
+		source.clip = clip;
+		source.Play();
+		isDead = true;
 	}
 
 
@@ -260,10 +281,13 @@ public class AIMaster : MonoBehaviour
 			temp = Random.Range(1, 7);
 		else
 			temp = Random.Range(7, 15);
-		
-		for(int i = 0; i < temp; i++)
+
+		if (scrap.Length != 0)
 		{
-			Instantiate(scrap[Random.Range(0,4)], this.transform.position, this.transform.rotation);
+			for (int i = 0; i < temp; i++)
+			{
+				Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation);
+			}
 		}
 
 		if(SceneManager.GetActiveScene().name != "Tutorial")
