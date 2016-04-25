@@ -218,6 +218,8 @@ public class BossTalking : MonoBehaviour
 		playerPoint.GetComponent<Rigidbody>().drag = 0.5f;
 
 		this.GetComponent<BossTalking>().enabled = false;
+
+		BackgroundSongsController.audControl.bossCombat();
 	}
 
 	public void dialogBoss(int dialogNumber)

@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class AudioController : MonoBehaviour 
+public class BackgroundSongsController : MonoBehaviour 
 {
+	public static BackgroundSongsController audControl;
 	private AudioSource backgroundSource;
 	private AudioSource combatSource;
 	public AudioClip[] backgroundClips;
@@ -17,9 +18,12 @@ public class AudioController : MonoBehaviour
 	bool two = false;
 	bool three = false;
 
+	public bool fightingBoss = false;
+
 	// Use this for initialization
 	void Start ()
 	{
+		audControl = this;
 		one = true;
 		backgroundSource = GameObject.Find("CameraChild").GetComponent<AudioSource>();
 		backgroundSource.clip = backgroundClips[0];
@@ -44,14 +48,30 @@ public class AudioController : MonoBehaviour
 		}
 		if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
 		{
-			if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
+			if(fightingBoss == false)
 			{
-				volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
-				combatSource.volume = volumeCounter; //Sets the volum
-				if(volumeCounter >= 1) //The combat volume has reached 1
+				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 				{
-					counter = 0; //Reset the counter
-					volumeCounter = 0; //Reset the conter
+					volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
+					combatSource.volume = volumeCounter; //Sets the volum
+					if(volumeCounter >= 1) //The combat volume has reached 1
+					{
+						counter = 0; //Reset the counter
+						volumeCounter = 0; //Reset the conter
+					}
+				}
+			}
+			else
+			{
+				if(combatSource.volume < 0.99f)
+				{
+					volumeCounter += Time.deltaTime * 5;
+					combatSource.volume = volumeCounter;
+					if(volumeCounter >= 1)
+					{
+						counter = 0;
+						volumeCounter = 0;
+					}
 				}
 			}
 		}
@@ -74,6 +94,19 @@ public class AudioController : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void bossCombat()
+	{
+		one = false;
+		two = false;
+		three = false;
+		fightingBoss = true;
+		combatSource.clip = combatClips[3];
+		combatSource.Play();
+		backgroundSource.volume = 0;
+		backgroundSource.Stop();
+		volumeCounter = 0;
 	}
 
 	private void songOne()

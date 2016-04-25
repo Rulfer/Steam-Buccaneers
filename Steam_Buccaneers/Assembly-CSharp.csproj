@@ -70,7 +70,7 @@
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
-     <Compile Include="Assets\Scripts\AudioController.cs" />
+     <Compile Include="Assets\Scripts\BackgroundSongsController.cs" />
      <Compile Include="Assets\Scripts\BossTalking.cs" />
      <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
      <Compile Include="Assets\Scripts\DeadPlayer.cs" />
