@@ -53,9 +53,7 @@ public class PointTowards : MonoBehaviour
 		v3Pos.y -= 0.5f; 
 		v3Pos.z = 0;      // I think I can do this rather than do a 
 		//   a full projection onto the plane
-		Debug.Log(v3Pos);
 		float fAngle = Mathf.Atan2 (v3Pos.x, v3Pos.y);
-		Debug.Log (fAngle);
 		this.transform.localEulerAngles = new Vector3(0.0f, 0.0f, (-fAngle * Mathf.Rad2Deg));
 	}
 }

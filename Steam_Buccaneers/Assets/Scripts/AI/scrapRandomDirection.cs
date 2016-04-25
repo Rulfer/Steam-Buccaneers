@@ -11,7 +11,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 	private Rigidbody scrapRigid;
 
 	private int speed = 1500000;
-	private int value; //How much money the player get from pickin up this scrap
+	public int value; //How much money the player get from pickin up this scrap
 	public int killTimer = 2; //Changed in unity editor. Used to destroy this object after a given time
 
 	private float angularVelocity; //Speed of the rotation
@@ -22,7 +22,7 @@ public class ScrapRandomDirection : MonoBehaviour {
 		randomDirectionZ = Random.onUnitSphere.z;
 		axisOfRotation = Random.onUnitSphere;
 		angularVelocity = Random.Range (20, 40);
-		value = Random.Range(1, 5);
+		//value = Random.Range(5, 15);
 		scrapRigid = GetComponent<Rigidbody>();
 
 		scrapRigid.AddForce(new Vector3(randomDirectionX, 0, randomDirectionZ) * speed * Time.deltaTime); //Adds a force for the beginning
