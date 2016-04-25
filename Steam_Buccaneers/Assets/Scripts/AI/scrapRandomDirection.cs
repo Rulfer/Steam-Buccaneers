@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ScrapRandomDirection : MonoBehaviour {
-
+public class ScrapRandomDirection : MonoBehaviour 
+{
 	private float randomDirectionX; //Random X direction
 	private float randomDirectionZ; //Random Z direction
 	private Vector3 axisOfRotation; //Random rotation axis
@@ -27,6 +27,11 @@ public class ScrapRandomDirection : MonoBehaviour {
 
 		scrapRigid.AddForce(new Vector3(randomDirectionX, 0, randomDirectionZ) * speed * Time.deltaTime); //Adds a force for the beginning
 		killAfterXSeconds ( killTimer);
+	}
+
+	public void setValue(int one, int two, int three)
+	{
+		value = 1 * one + 2 * two + 3 * three;
 	}
 	
 	// Update is called once per frame
