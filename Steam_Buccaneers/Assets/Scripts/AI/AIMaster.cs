@@ -7,10 +7,11 @@ public class AIMaster : MonoBehaviour
 {
 	public GameObject[] scrap;
 	public GameObject aiModelObject;
-	private GameObject playerPoint;
 	public GameObject boom;
 	public GameObject kill;
 	private GameObject[] bombs;
+	private GameObject playerPoint;
+	private GameObject tempScrap; //Used when creating new scraps
 
 	public Material mat2;
 	public Material mat3;
@@ -30,6 +31,9 @@ public class AIMaster : MonoBehaviour
 	public bool isFighting = false;
 
 	public int arrayIndex;
+	public int cannonLevelOne = 0;
+	public int cannonLevelTwo = 0;
+	public int cannonLevelThree = 0;
 	private int ranNum;
 
 	public AudioClip clip;
@@ -286,7 +290,8 @@ public class AIMaster : MonoBehaviour
 		{
 			for (int i = 0; i < temp; i++)
 			{
-				Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation);
+				tempScrap = Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation);
+				tempScrap.GetComponent<ScrapRandomDirection>().value = (1 * cannonLevelOne) + (2 * cannonLevelTwo) + (3 * cannonLevelThree);
 			}
 		}
 
