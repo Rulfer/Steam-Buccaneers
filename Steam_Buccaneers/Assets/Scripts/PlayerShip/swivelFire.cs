@@ -12,15 +12,15 @@ public class swivelFire : MonoBehaviour
 	public AudioSource source;
 	public AudioClip[] clips;
 	bool fired = false;
-	float loadTimer = 0;
-	float loadDuration;
+	//float loadTimer = 0;
+	//float loadDuration;
 	public Texture2D aimed;
 	public Texture2D regular;
 
 	void Start () 
 	{
 		source = GetComponent<AudioSource> ();
-		loadDuration = (fireRate + fireDelay) - 0.6f;
+		//loadDuration = (fireRate + fireDelay) - 0.6f;
 	}
 
 	// Update is called once per frame
@@ -66,17 +66,6 @@ public class swivelFire : MonoBehaviour
 			source.Play();
 			fired = false;
 		}
-
-//		if(fired == true)
-//		{
-//			loadTimer += Time.deltaTime;
-//			if(loadTimer > loadDuration)
-//			{
-//				fired = false;
-//				loadTimer = 0;
-//				source.clip = clips[2];
-//				source.Play();
-//			}
-//		}
+			
 	}
 }

@@ -12,7 +12,7 @@ public class BombHitSomething : MonoBehaviour {
 
 	CameraShakeInstance shake;
 	public GameObject explosion;
-	GameObject playerPos;
+//	GameObject playerPos;
 
 	public AudioClip[] clips;
 	private AudioSource source;
@@ -20,7 +20,7 @@ public class BombHitSomething : MonoBehaviour {
 	void Start()
 	{
 		source = this.GetComponent<AudioSource>();
-		playerPos = GameObject.Find("PlayerShip");
+	//	playerPos = GameObject.Find("PlayerShip");
 	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
