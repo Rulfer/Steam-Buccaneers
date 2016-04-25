@@ -42,37 +42,34 @@ public class AudioController : MonoBehaviour
 			if(GameObject.Find("PlayerShip").transform.position.z > 12000)
 				songThree();
 		}
-		if(SceneManager.GetActiveScene().name != "Tutorial")
+		if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
 		{
-			if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
+			if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 			{
-				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
+				volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
+				combatSource.volume = volumeCounter; //Sets the volum
+				if(volumeCounter >= 1) //The combat volume has reached 1
 				{
-					volumeCounter += Time.deltaTime; //Increase the volume. After 1 second the volume will be 1. 
-					combatSource.volume = volumeCounter; //Sets the volum
-					if(volumeCounter >= 1) //The combat volume has reached 1
-					{
-						counter = 0; //Reset the counter
-						volumeCounter = 0; //Reset the conter
-					}
+					counter = 0; //Reset the counter
+					volumeCounter = 0; //Reset the conter
 				}
 			}
-			else
+		}
+		else
+		{
+			if(combatSource.volume > 0.01f)
 			{
-				if(combatSource.volume > 0.01f)
+				if(counter < 1)
+					counter += Time.deltaTime;
+				if(counter >= 1)
 				{
-					if(counter < 1)
-						counter += Time.deltaTime;
-					if(counter >= 1)
+					counter += Time.smoothDeltaTime;
+					combatSource.volume = 2-counter;
+					if(counter >= 2)
 					{
-						counter += Time.smoothDeltaTime;
-						combatSource.volume = 2-counter;
-						if(counter >= 2)
-						{
-							counter = 0;
-							volumeCounter = 0;
-							combatSource.volume = 0;
-						}
+						counter = 0;
+						volumeCounter = 0;
+						combatSource.volume = 0;
 					}
 				}
 			}
