@@ -6,6 +6,7 @@ public class cameraController : MonoBehaviour
 	public float distanceAway;
 	private float amountScrolled;
 	public float scrollBy;
+	private float boostDistance = 0;
 
 	private Vector3 PlayerPOS;
 	private GameObject player;
@@ -19,14 +20,14 @@ public class cameraController : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
-		//if(Input.GetKeyDown
+		//Debug.Log (boostDistance);
 
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
 		PlayerPOS = player.transform.transform.position;
-		this.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway, (PlayerPOS.z)); 
+		this.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway+boostDistance, (PlayerPOS.z)); 
 
 		if(MinimapCamera.miniCam.isMinimap)
 		{
@@ -50,6 +51,22 @@ public class cameraController : MonoBehaviour
 					//Debug.Log (scrollDistance);
 					distanceAway += scrollBy;
 					//Debug.Log (distanceAway);
+				}
+			}
+
+			if (PlayerMove2.isBoosting)
+			{
+				if (boostDistance <= 49)
+				{
+				boostDistance++;
+				}
+			}
+
+			else
+			{
+				if (boostDistance >= 1)
+				{
+					boostDistance --;
 				}
 			}
 		}
