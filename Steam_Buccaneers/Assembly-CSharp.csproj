@@ -51,7 +51,6 @@
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Graphics\shop\SetCursorPosition.cs" />
      <Compile Include="Assets\PlayVideoScript.cs" />
-     <Compile Include="Assets\ScaleToScreen.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
