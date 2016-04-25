@@ -7,15 +7,19 @@ public class PlayVideoScript : MonoBehaviour
 	private MovieTexture movie;
 
 	// Use this for initialization
-	void Start () 
+	void Update () 
 	{
-		movie = this.GetComponent<RawImage>().mainTexture as MovieTexture;
-		movie.Play();
+		if (this.isActiveAndEnabled)
+		{
+			//movie
+		}
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public void playTreasureAnimation () 
 	{
-	
+		this.enabled = true;
+		movie = this.GetComponent<RawImage>().mainTexture as MovieTexture;
+		movie.Play();
 	}
 }
