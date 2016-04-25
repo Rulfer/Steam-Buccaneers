@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class AudioController : MonoBehaviour 
+public class BackgroundSongsController : MonoBehaviour 
 {
+	public static BackgroundSongsController audControl;
 	private AudioSource backgroundSource;
 	private AudioSource combatSource;
 	public AudioClip[] backgroundClips;
@@ -17,9 +18,12 @@ public class AudioController : MonoBehaviour
 	bool two = false;
 	bool three = false;
 
+	public bool fightingBoss = false;
+
 	// Use this for initialization
 	void Start ()
 	{
+		audControl = this;
 		one = true;
 		backgroundSource = GameObject.Find("CameraChild").GetComponent<AudioSource>();
 		backgroundSource.clip = backgroundClips[0];
@@ -42,9 +46,9 @@ public class AudioController : MonoBehaviour
 			if(GameObject.Find("PlayerShip").transform.position.z > 12000)
 				songThree();
 		}
-		if(SceneManager.GetActiveScene().name != "Tutorial")
+		if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
 		{
-			if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
+			if(fightingBoss == false)
 			{
 				if (combatSource.volume < 0.99f) //The volume of the combat song is not 1 yet. 
 				{
@@ -59,24 +63,50 @@ public class AudioController : MonoBehaviour
 			}
 			else
 			{
-				if(combatSource.volume > 0.01f)
+				if(combatSource.volume < 0.99f)
 				{
-					if(counter < 1)
-						counter += Time.deltaTime;
-					if(counter >= 1)
+					volumeCounter += Time.deltaTime * 5;
+					combatSource.volume = volumeCounter;
+					if(volumeCounter >= 1)
 					{
-						counter += Time.smoothDeltaTime;
-						combatSource.volume = 2-counter;
-						if(counter >= 2)
-						{
-							counter = 0;
-							volumeCounter = 0;
-							combatSource.volume = 0;
-						}
+						counter = 0;
+						volumeCounter = 0;
 					}
 				}
 			}
 		}
+		else
+		{
+			if(combatSource.volume > 0.01f)
+			{
+				if(counter < 1)
+					counter += Time.deltaTime;
+				if(counter >= 1)
+				{
+					counter += Time.smoothDeltaTime;
+					combatSource.volume = 2-counter;
+					if(counter >= 2)
+					{
+						counter = 0;
+						volumeCounter = 0;
+						combatSource.volume = 0;
+					}
+				}
+			}
+		}
+	}
+
+	public void bossCombat()
+	{
+		one = false;
+		two = false;
+		three = false;
+		fightingBoss = true;
+		combatSource.clip = combatClips[3];
+		combatSource.Play();
+		backgroundSource.volume = 0;
+		backgroundSource.Stop();
+		volumeCounter = 0;
 	}
 
 	private void songOne()

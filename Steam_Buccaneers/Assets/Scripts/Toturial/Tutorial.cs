@@ -496,7 +496,7 @@ public class Tutorial : MonoBehaviour
 	private void makeTutorialEnemy()
 	{
 		Instantiate (AI, this.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
-
+		GameControl.control.isFighting = true;
 		Debug.Log("New Target = " + AI);
 	}
 
