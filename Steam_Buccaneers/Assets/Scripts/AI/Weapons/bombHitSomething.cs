@@ -2,6 +2,7 @@
 using System.Collections;
 using EZCameraShake;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class BombHitSomething : MonoBehaviour {
@@ -36,7 +37,11 @@ public class BombHitSomething : MonoBehaviour {
 			
 			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - 10) <= 0)
 			{
-				SceneManager.LoadScene("cog_screen");
+				other.GetComponentInParent<BossTalking> ().enabled = true;
+				other.GetComponentInParent<BossTalking> ().findAllDialogElements();
+				other.GetComponentInParent<BossTalking> ().dialogBoss (12);
+				other.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
+				//SceneManager.LoadScene("cog_screen");
 			}
 			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
 			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)

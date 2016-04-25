@@ -281,10 +281,13 @@ public class AIMaster : MonoBehaviour
 			temp = Random.Range(1, 7);
 		else
 			temp = Random.Range(7, 15);
-		
-		for(int i = 0; i < temp; i++)
+
+		if (scrap.Length != 0)
 		{
-			Instantiate(scrap[Random.Range(0,4)], this.transform.position, this.transform.rotation);
+			for (int i = 0; i < temp; i++)
+			{
+				Instantiate (scrap [Random.Range (0, 4)], this.transform.position, this.transform.rotation);
+			}
 		}
 
 		if(SceneManager.GetActiveScene().name != "Tutorial")
