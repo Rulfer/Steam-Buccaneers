@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using EZCameraShake;
 
 public class PlayerMove2 : MonoBehaviour 
 {
@@ -16,9 +17,11 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool turnLeft = false;
 	public static bool turnRight = false;
 	public static bool goingForward = false;
-	public bool isBoosting = false;
-	private float boostCooldownTimer = 3f;
-	private bool boostCooledDown = true;
+	public static bool isBoosting = false;
+	public static float boostCooldownTimer = 3f;
+	private bool boostCooledDown = false;
+	CameraShakeInstance shake;
+	private GameObject boostBar;
 
 	public static bool steerShip = true;
 
@@ -34,6 +37,7 @@ public class PlayerMove2 : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		boostBar = GameObject.Find ("boost_bar");
 		move = this;
 		player = GetComponent<Rigidbody>();
 		if (GameObject.Find ("TutorialControl") != null)
@@ -63,23 +67,24 @@ public class PlayerMove2 : MonoBehaviour
 
 	// Update is called once per frame
 	void FixedUpdate () 
-	{/*
-		if(SceneManager.GetActiveScene().name == "Tutorial")
+	{
+		
+		//Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting);
+	/*	if (GameControl.control.isFighting == true)
 		{
-			if (GameObject.Find ("Marine(Clone)"))
-			{
-
-			}
-
+			Debug.Log ("do i do this more than once?");
+			boostBar.SetActive(true);
+		}
+		else
+		{
+			boostBar.SetActive(false);
 		}*/
-
-
-
-		if (GameControl.control.isFighting == true && isBoosting == true)
+		if (GameControl.control.isFighting == true && isBoosting == true && boostCooledDown == true)
 		{
 			maxVelocity *= 2;
 			player.AddForce (transform.forward * force*2 * Time.deltaTime);
-			boostCooldownTimer -= Time.fixedDeltaTime;
+			boostCooldownTimer -= Time.deltaTime;
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 1, 0.10f, 0.8f);
 			//boostCooldownTimer -= Time.deltaTime;
 		}
 
@@ -90,8 +95,8 @@ public class PlayerMove2 : MonoBehaviour
 			boostCooledDown = false;
 		}
 
-		if (boostCooldownTimer < 3f && isBoosting == false && GameControl.control.isFighting == true || 
-			boostCooldownTimer < 3f && isBoosting == true && GameControl.control.isFighting == false )
+		if ((boostCooldownTimer <= 3f && isBoosting == false && GameControl.control.isFighting == true) || 
+			(boostCooldownTimer <= 3f && GameControl.control.isFighting == false))
 		{
 			boostCooldownTimer +=Time.deltaTime/2;
 			if (boostCooldownTimer >= 3f)
@@ -119,17 +124,20 @@ public class PlayerMove2 : MonoBehaviour
 		//{
 		if (hitBomb == false && GameControl.control.health > 0) 
 		{
-			if (Input.GetKey (KeyCode.LeftShift) && boostCooledDown == true)
+			if (Input.GetKey (KeyCode.LeftShift))
 			{
 				Boost();
 			}
 
-//			else 
-//			{
-//				isBoosting = false;
-//			}
+			else
+			{
+				if (!GameControl.control.isFighting)
+				{
+					isBoosting = false;
+				}
+			}
 				
-			if (Input.GetKey (KeyCode.W)) 
+			if (Input.GetKey (KeyCode.W) && isBoosting == false) 
 			{
 				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [0] == false)
 				{
@@ -265,30 +273,23 @@ public class PlayerMove2 : MonoBehaviour
 
 	void Boost()
 	{
-			//if the player is not in combat, boost is active as long as the player uses it
-			if (GameControl.control.isFighting != true)
-			{
-				maxVelocity *= 2;
-				isBoosting = true;
+		//if the player is not in combat, boost is active as long as the player uses it
+		if (GameControl.control.isFighting != true)
+		{
+			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1f, 1f, 0.1f, 0.8f);
+			maxVelocity *= 2;
+			isBoosting = true;
 
-				//propelling the player forward at double the speed
-				player.AddForce (transform.forward * force*2 * Time.deltaTime);
+			//propelling the player forward at double the speed
+			player.AddForce (transform.forward * force*2 * Time.deltaTime);
+		}
 
-				// Testing if the player is in combat
-			}
-
-			if (GameControl.control.isFighting == true && boostCooledDown == true)
-			{
-				//boostCooldownTimer -= Time.deltaTime;
-				if (boostCooledDown == true)
-				{
-					isBoosting = true;
-				}
-
-
-				//bool boostCooledDown
-			}
+		// Testing if the player is in combat
+		if (GameControl.control.isFighting == true && boostCooledDown == true)
+		{
+					isBoosting = true;		
 		}
 	}
+}
 	
 
