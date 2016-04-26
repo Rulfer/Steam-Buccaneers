@@ -1,14 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\scrapRandomDirection.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World\OrbitMeteorsInner.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="276" Column="18" />
-      <File FileName="Assets\PlayVideoScript.cs" Line="22" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\PlayVideoScript.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ShopkeeperDialog.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\scrapRandomDirection.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Save and load\gameButtons.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Scene\onStartDeactivate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\CastRays.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" Line="43" Column="32" />
+      <File FileName="Assets\Scripts\World\OrbitMeteorsInner.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

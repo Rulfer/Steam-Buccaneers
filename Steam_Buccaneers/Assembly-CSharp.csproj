@@ -62,13 +62,13 @@
      <Compile Include="Assets\Scripts\AI\RotateCogLeft.cs" />
      <Compile Include="Assets\Scripts\AI\RotateCogRigh.cs" />
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
+     <Compile Include="Assets\Scripts\AI\ScrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\AI\SpawnAI.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
-     <Compile Include="Assets\Scripts\AI\scrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
@@ -133,6 +133,7 @@
      <Compile Include="Assets\Scripts\World\TreasurePlanet.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\Scripts\WorldBorder.cs" />
+     <Compile Include="Assets\UnpauseAndDelete.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />

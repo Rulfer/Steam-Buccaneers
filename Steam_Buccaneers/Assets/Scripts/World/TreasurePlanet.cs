@@ -5,7 +5,7 @@ using System.Collections;
 public class TreasurePlanet : MonoBehaviour 
 {
 	bool treasureHasBeenPickedUp;
-	public GameObject animation;
+	public GameObject treasureAnimation;
 
 
 
@@ -23,10 +23,14 @@ public class TreasurePlanet : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+		Debug.Log ("Enter treasureplanet");
 		if (other.tag == "Player" && treasureHasBeenPickedUp == false)
 		{
+			Debug.Log ("Play animation " + treasureAnimation);
 			//spill av animasjon
-			animation.SetActive(true);
+			GameObject.Find("GameControl").GetComponent<gameButtons>().pause();
+			Instantiate(treasureAnimation);
+			treasureAnimation.GetComponentInChildren<PlayVideoScript>().playTreasureAnimation ();
 			treasureHasBeenPickedUp = true;
 			GameControl.control.money += 500;
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();

@@ -254,7 +254,7 @@ public class AIMaster : MonoBehaviour
 			}
 			else if(isCargo == true)
 				SpawnAI.spawn.livingCargo = false;
-			Destroy(this.GetComponent<AIPatroling>().target);
+			//Destroy(this.GetComponent<AIPatroling>().target);
 			if(isBoss == true)
 			{
 				isFighting = false;
@@ -311,7 +311,7 @@ public class AIMaster : MonoBehaviour
 				GameControl.control.isFighting = false;
 				SpawnAI.spawn.stopFightTimer = false;
 			}
-			Destroy(this.GetComponent<AIPatroling>().target);
+			//Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
 		Instantiate(boom, this.transform.position, this.transform.rotation);
