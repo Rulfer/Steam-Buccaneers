@@ -44,7 +44,7 @@ public class ShipHitObject : MonoBehaviour
 			healthLost *= -1;
 		if(healthLost > 1) //If the damage dealt is greater than 1, deal the damage. 
 		{
-			if(col.contacts[0] != null)
+			if(col != null)
 			{
 				ContactPoint contact = col.contacts[0];
 				Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
