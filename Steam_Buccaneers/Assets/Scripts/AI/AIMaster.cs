@@ -306,11 +306,6 @@ public class AIMaster : MonoBehaviour
 			}
 			else
 				SpawnAI.spawn.livingCargo = false;
-			if(isFighting == true)
-			{			
-				GameControl.control.isFighting = false;
-				SpawnAI.spawn.stopFightTimer = false;
-			}
 			//Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
@@ -323,6 +318,12 @@ public class AIMaster : MonoBehaviour
 		source.clip = clip;
 		source.Play();
 		isDead = true;
+
+		if(isFighting == true)
+		{			
+			GameControl.control.isFighting = false;
+			SpawnAI.spawn.stopFightTimer = false;
+		}
 
 		if (GameObject.Find ("TutorialControl") != null)
 		{
