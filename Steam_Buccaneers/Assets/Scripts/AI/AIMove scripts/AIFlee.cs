@@ -3,8 +3,7 @@ using System.Collections;
 
 public class AIFlee : MonoBehaviour 
 {
-
-	public GameObject target;
+	private Vector3 target;
 	private GameObject player;
 	private float fleeTimer;
 	private float fleeDuration = 3;
@@ -34,16 +33,14 @@ public class AIFlee : MonoBehaviour
 	{
 		if(first)
 		{
-			target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			target.transform.name = "LOOK AT ME";
-			target.transform.position = fleeTargetPosition();
+			target = fleeTargetPosition();
 			first = false;
 		}
 		fleeTimer += Time.deltaTime;
 		if(fleeTimer >= fleeDuration)
-			target.transform.position = fleeTargetPosition();
+			target = fleeTargetPosition();
 
-		relativePoint = transform.InverseTransformPoint(target.transform.position);
+		relativePoint = transform.InverseTransformPoint(target);
 		if(relativePoint.x >-0.1 && relativePoint.x < 0.1)
 		{
 			if(relativePoint.z >= 0)
