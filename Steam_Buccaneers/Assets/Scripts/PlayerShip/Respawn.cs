@@ -111,6 +111,7 @@ public class Respawn : MonoBehaviour
 		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,shops[tempI].transform.position.y,shops[tempI].transform.position.z - 100);
 		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;
+		player.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
 		GameControl.control.health = 100;
 		player.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
