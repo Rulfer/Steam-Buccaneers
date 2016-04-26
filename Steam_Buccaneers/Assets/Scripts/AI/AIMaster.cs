@@ -264,16 +264,17 @@ public class AIMaster : MonoBehaviour
 				foreach(GameObject go in bombs)
 					Destroy(go);
 			}
+
+			Instantiate(boom, this.transform.position, this.transform.rotation);
+			boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+			this.GetComponent<DeadAI>().enabled = true;
+			deactivateAI();
+
+			source.clip = clip;
+			source.Play();
+			isDead = true;
 		}
-		Instantiate(boom, this.transform.position, this.transform.rotation);
-		boom.GetComponent<DeleteParticles>().killDuration = 3;
-
-		this.GetComponent<DeadAI>().enabled = true;
-		deactivateAI();
-
-		source.clip = clip;
-		source.Play();
-		isDead = true;
 	}
 
 
