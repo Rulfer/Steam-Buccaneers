@@ -6,6 +6,7 @@ public class swivelFire : MonoBehaviour
 {
 
 	public GameObject cannonball;
+	public GameObject aimedCursor;
 	public float fireRate;
 	public float fireDelay;
 	//public static int shotSpeed = 30;
@@ -14,8 +15,6 @@ public class swivelFire : MonoBehaviour
 	bool fired = false;
 	//float loadTimer = 0;
 	//float loadDuration;
-	public Texture2D aimed;
-	public Texture2D regular;
 
 	void Start () 
 	{
@@ -28,9 +27,8 @@ public class swivelFire : MonoBehaviour
 	{
 		if (Input.GetButton("Fire2"))
 		{
-			Cursor.SetCursor(aimed, Vector2.zero, CursorMode.Auto);
-
-
+			Cursor.visible = false;
+			aimedCursor.GetComponent<RawImage>().enabled = true;
 			//Debug.Log ("fukku shittu");
 			if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
 			{
@@ -52,7 +50,8 @@ public class swivelFire : MonoBehaviour
 
 		else
 		{
-			Cursor.SetCursor(regular, Vector2.zero, CursorMode.Auto);
+			Cursor.visible = true;
+			aimedCursor.GetComponent<RawImage>().enabled = false;
 		}
 		if(Input.GetButtonDown("Fire2"))
 		{
