@@ -70,7 +70,7 @@ public class PlayerMove2 : MonoBehaviour
 	void FixedUpdate () 
 	{
 		
-		Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting + " waiting for boost? " + waitForBoost);
+		//Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting + " waiting for boost? " + waitForBoost);
 
 		/*if (GameControl.control.isFighting == true && isBoosting == true && boostCooledDown == true)
 		{
