@@ -4,7 +4,7 @@ using System.Collections;
 
 public class AIPatroling : MonoBehaviour {
 
-	public GameObject target;
+	public Vector3 target;
 	private Vector3 relativePoint;
 
 	void Update () 
@@ -19,7 +19,7 @@ public class AIPatroling : MonoBehaviour {
 
 	void goToPoint()
 	{
-		relativePoint = transform.InverseTransformPoint(target.transform.position);
+		relativePoint = transform.InverseTransformPoint(target);
 		if(relativePoint.x >-0.1 && relativePoint.x < 0.1)
 		{
 			if(relativePoint.z >= 0)

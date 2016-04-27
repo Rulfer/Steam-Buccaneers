@@ -246,10 +246,9 @@ public class SpawnAI : MonoBehaviour
 			setCannonLevel();
 
 			Instantiate(Cargo, cargoSpawnpoint(), playerPoint.transform.rotation);
-			//Cargo.transform.position = spawnPos;
 			Cargo.GetComponent<AIMaster>().isCargo = true;
-			Cargo.GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			Cargo.GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
+			Cargo.GetComponent<AIPatroling>().target = setPatrolPoint();
+			//Cargo.GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
 			float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 			Cargo.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
 			if(Cargo.GetComponent<AIMaster>().aiHealth < 20)
@@ -280,9 +279,8 @@ public class SpawnAI : MonoBehaviour
 							temp.transform.position = marineSpawnpoint();
 							marineShips[i] = temp;
 							availableIndes[i] = false;
-							//marineShips[i].GetComponent<AIPatroling>().targetPos = patrolPoint;
-							marineShips[i].GetComponent<AIPatroling>().target = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-							marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
+							marineShips[i].GetComponent<AIPatroling>().target = setPatrolPoint();
+							//marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
 							float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 							marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
 							Debug.Log("Marine health: " + marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth);
@@ -300,14 +298,6 @@ public class SpawnAI : MonoBehaviour
 
 		if(relativeBossPoint < 200 && GameObject.Find("Boss(Clone)") == null)//We should spawn the boss
 		{
-//			for(int i = 0; i < marineShips.Length; i++)
-//			{
-//				if(marineShips[i] != null)
-//				{
-//					marineShips[i].GetComponent<AImove>().isPatroling = false;
-//					marineShips[i].GetComponent<AImove>().isFleeing = true;
-//				}
-//			}
 			Instantiate(Boss, bossSpawn.transform.position, bossSpawn.transform.rotation);
 			Boss.GetComponent<AIMaster>().isBoss = true;
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 100; //Sets the health

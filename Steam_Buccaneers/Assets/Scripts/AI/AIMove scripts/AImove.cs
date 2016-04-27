@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class AImove : MonoBehaviour {
-	private int targetPlanet;
-
 	public Rigidbody aiRigid;
 
 	public float force = 200f;
