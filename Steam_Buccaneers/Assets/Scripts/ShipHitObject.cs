@@ -77,6 +77,13 @@ public class ShipHitObject : MonoBehaviour
 						col.transform.GetComponent<AIMaster>().changeMat2();
 				}
 			}
+			if(col.transform.tag == "asteroid")
+			{
+				if(this.transform.name == "PlayerShip")
+					GameControl.control.health -= healthLost * 3;
+				else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" )
+					this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 3;
+			}
 		}
 	}
 }

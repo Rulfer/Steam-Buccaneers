@@ -27,7 +27,7 @@ public class PlayerRotate2 : MonoBehaviour
 		{
 			if (currentDeg >= maxDeg || currentDeg <= minDeg)
 			{
-				this.transform.Rotate(-rotationVec, 5*Time.deltaTime);
+				this.transform.Rotate(-rotationVec, 10*Time.deltaTime);
 			}
 			
 		}
@@ -36,20 +36,20 @@ public class PlayerRotate2 : MonoBehaviour
 		{
 			if (currentDeg >= maxDeg || currentDeg <= minDeg)
 			{
-				this.transform.Rotate(rotationVec, 5*Time.deltaTime);
+				this.transform.Rotate(rotationVec, 10*Time.deltaTime);
 			}
 		}
 
 		else
 		{
-			if ( currentDeg >= maxDeg-5f)
+			if ( currentDeg >= maxDeg-10f)
 			{
-				this.transform.Rotate(rotationVec, 5*Time.deltaTime);
+				this.transform.Rotate(rotationVec, 10*Time.deltaTime);
 			}
 
-			if ( currentDeg <= minDeg+5f)
+			if ( currentDeg <= minDeg+10f)
 			{
-				this.transform.Rotate(-rotationVec, 5*Time.deltaTime);
+				this.transform.Rotate(-rotationVec, 10*Time.deltaTime);
 			}
 	
 		}

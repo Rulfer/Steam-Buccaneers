@@ -254,7 +254,7 @@ public class AIMaster : MonoBehaviour
 			}
 			else if(isCargo == true)
 				SpawnAI.spawn.livingCargo = false;
-			Destroy(this.GetComponent<AIPatroling>().target);
+			//Destroy(this.GetComponent<AIPatroling>().target);
 			if(isBoss == true)
 			{
 				isFighting = false;
@@ -264,16 +264,17 @@ public class AIMaster : MonoBehaviour
 				foreach(GameObject go in bombs)
 					Destroy(go);
 			}
+
+			Instantiate(boom, this.transform.position, this.transform.rotation);
+			boom.GetComponent<DeleteParticles>().killDuration = 3;
+
+			this.GetComponent<DeadAI>().enabled = true;
+			deactivateAI();
+
+			source.clip = clip;
+			source.Play();
+			isDead = true;
 		}
-		Instantiate(boom, this.transform.position, this.transform.rotation);
-		boom.GetComponent<DeleteParticles>().killDuration = 3;
-
-		this.GetComponent<DeadAI>().enabled = true;
-		deactivateAI();
-
-		source.clip = clip;
-		source.Play();
-		isDead = true;
 	}
 
 
@@ -310,7 +311,7 @@ public class AIMaster : MonoBehaviour
 				GameControl.control.isFighting = false;
 				SpawnAI.spawn.stopFightTimer = false;
 			}
-			Destroy(this.GetComponent<AIPatroling>().target);
+			//Destroy(this.GetComponent<AIPatroling>().target);
 		}
 
 		Instantiate(boom, this.transform.position, this.transform.rotation);
