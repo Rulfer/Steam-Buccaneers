@@ -146,13 +146,6 @@ public class PlayerMove2 : MonoBehaviour
 					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 				}
 			}
-			if (Input.GetKeyUp (KeyCode.LeftShift))
-			{
-				if (!GameControl.control.isFighting)
-				{
-					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
-				}
-			}
 				
 			if (Input.GetKey (KeyCode.W) && isBoosting == false) 
 			{
