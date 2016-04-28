@@ -115,6 +115,7 @@ public class AIprojectile : MonoBehaviour {
 				} 
 				if(other.transform.root.name == "Marine(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth > 0)
 				{
+					Debug.Log ("AIShip hit");
 					if(SceneManager.GetActiveScene().name != "Tutorial")
 					{
 						if(GameControl.control.isFighting == false)

@@ -75,7 +75,7 @@ public class BossTalking : MonoBehaviour
 
 	void setDialog()
 	{
-		characters [0] = "Sir Spikypillow";
+		characters [0] = "Sir Spikybottom";
 		characters [1] = "Player";
 
 		dialogTexts [0] = "Who dares enter my domain?"; //Boss
