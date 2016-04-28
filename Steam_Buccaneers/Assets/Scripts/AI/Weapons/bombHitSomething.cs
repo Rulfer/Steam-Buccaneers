@@ -43,7 +43,8 @@ public class BombHitSomething : MonoBehaviour {
 				other.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
 				//SceneManager.LoadScene("cog_screen");
 			}
-			other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
+			if(other.GetComponentInParent<AIMaster>().isBoss == true && GameControl.control.health > 0) //Boss can only loose health if player is alive
+				other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
 			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
 				other.transform.GetComponentInParent<AIMaster>().killAI();
 			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
