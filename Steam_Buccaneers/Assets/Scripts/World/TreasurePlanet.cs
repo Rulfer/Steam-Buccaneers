@@ -14,12 +14,6 @@ public class TreasurePlanet : MonoBehaviour
 	{
 		treasureHasBeenPickedUp = false;
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-
-	}
 
 	void OnTriggerEnter (Collider other)
 	{
@@ -34,7 +28,7 @@ public class TreasurePlanet : MonoBehaviour
 			treasureHasBeenPickedUp = true;
 			GameControl.control.money += 500;
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
-
+			gameObject.transform.parent.tag = "asteroid";
 		}
 	}
 }
