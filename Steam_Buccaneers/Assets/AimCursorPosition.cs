@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AimCursorPosition : MonoBehaviour 
 {
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		this.GetComponent<RawImage>().enabled = false;
 	}
 	
 	// Update is called once per frame
