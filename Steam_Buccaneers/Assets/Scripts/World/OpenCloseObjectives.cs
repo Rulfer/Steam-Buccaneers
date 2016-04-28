@@ -11,7 +11,7 @@ public class OpenCloseObjectives : MonoBehaviour {
 	public void openCloseObjectivemenu()
 	{
 		objectMenu.SetActive (!objectMenu.activeSelf);
-		if (objectMenu.activeSelf == true)
+		if (objectMenu.activeSelf == false)
 		{
 			this.gameObject.GetComponent<Image> ().sprite = pluss;
 		}
