@@ -47,7 +47,7 @@ public class ScrapRandomDirection : MonoBehaviour
 	//If the object hits the player it means that the player picked it up.
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.transform.root.name == "PlayerShip")
+		if(other.transform.tag == "Player")
 		{
 			GameControl.control.money += value; //Pay the player
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
