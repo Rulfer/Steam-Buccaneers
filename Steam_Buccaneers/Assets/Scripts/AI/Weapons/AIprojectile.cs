@@ -96,7 +96,13 @@ public class AIprojectile : MonoBehaviour {
 
 			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
-				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+				if(SceneManager.GetActiveScene().name != "Tutorial")
+				{
+					if(other.GetComponentInParent<AIMaster>().isBoss == true && GameControl.control.health > 0) //Boss can only loose health if player is alive
+						other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+				}
+				else
+					other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 				if (other.transform.GetComponentInParent<AIMaster> ().aiHealth <= 0)
 					other.transform.GetComponentInParent<AIMaster> ().killAI ();
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat3)
