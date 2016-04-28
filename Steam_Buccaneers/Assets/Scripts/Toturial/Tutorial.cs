@@ -284,7 +284,7 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. " +
 		"You know, you could lose that attitude, I don't think Sir Spikypillow will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
-		dialogTexts [39] = "Sir Spikypillow? Seriously?!?!?";//Player
+		dialogTexts [39] = "Sir Spikybottom? Seriously?!?!?";//Player
 		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
 			"Now shut it and get going!";//Shopkeeper
 		dialogTexts [41] = "...";//Player
