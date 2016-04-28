@@ -91,7 +91,7 @@ public class PlayerMove2 : MonoBehaviour
 		if ((boostCooldownTimer < 3f && isBoosting == false && GameControl.control.isFighting == true) || 
 			(boostCooldownTimer < 3f && GameControl.control.isFighting == false))
 		{
-			if (waitForBoost > -0.1f && waitForBoost < 3.1f)
+			if (waitForBoost > -0.1f && waitForBoost < 3.1f && !Input.GetKey(KeyCode.LeftShift))
 			{
 				waitForBoost -= Time.deltaTime;
 			}
@@ -127,7 +127,6 @@ public class PlayerMove2 : MonoBehaviour
 			if (Input.GetKey (KeyCode.LeftShift))
 			{
 				Boost();
-				waitForBoost = 3f;				
 			}
 
 			else
@@ -143,6 +142,7 @@ public class PlayerMove2 : MonoBehaviour
 
 				else if (GameControl.control.isFighting && boostCooldownTimer > 0f)
 				{
+					waitForBoost = 3f;
 					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 				}
 			}
