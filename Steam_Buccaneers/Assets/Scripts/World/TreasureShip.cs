@@ -5,7 +5,7 @@ public class TreasureShip : MonoBehaviour
 {
 	Vector3 rotateVec; //= new Vector3 (1f,1f,1f);
 	Vector3 randomSpawnVec;
-	public GameObject scrap;
+	public GameObject[] scrap;
 	public GameObject player;
 	private GameObject tempScrap;
 	float distanceAway;
@@ -32,7 +32,7 @@ public class TreasureShip : MonoBehaviour
 		{
 			randomSpawnVec  = new Vector3 (this.transform.position.x + Random.Range(-20f, 20f), 0f, 
 				this.transform.position.z + Random.Range(-20f, 20f));
-			tempScrap = Instantiate (scrap);
+			tempScrap = Instantiate (scrap[Random.Range(0, 4)]);
 			tempScrap.GetComponent<ScrapRandomDirection>().despawn = false;
 			tempScrap.transform.position = randomSpawnVec;
 			tempScrap.transform.rotation = this.transform.rotation;
