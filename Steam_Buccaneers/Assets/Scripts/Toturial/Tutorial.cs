@@ -282,7 +282,7 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
 		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. " +
-		"You know, you could lose that attitude, I don't think Sir Spikypillow will appreciate it. " +
+			"You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
 		dialogTexts [39] = "Sir Spikybottom? Seriously?!?!?";//Player
 		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +

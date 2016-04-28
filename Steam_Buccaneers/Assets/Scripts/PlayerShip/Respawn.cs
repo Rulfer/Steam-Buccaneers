@@ -160,8 +160,8 @@ public class Respawn : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		GameObject.Find ("dialogue_next").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
-		nameLeftPos = new Vector3(115.0f, -25.0f);
-		nameRightPos = new Vector3 (525.0f, -25.0f);
+		nameLeftPos = new Vector3(215.0f, -25.0f);
+		nameRightPos = new Vector3 (615.0f, -25.0f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorShopkeeper = "#631911FF";
@@ -170,8 +170,8 @@ public class Respawn : MonoBehaviour
 		characters [1] = "Player";
 
 		deathDialog [0] = "So, you decided to get yourself killed? Luckily I was there to help you out! I've fixed the ship for you, so you can be on your way!";
-		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this!";
-		deathDialog [2] = "Of cause! It's already taken care of, no worries!";
+		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this?";
+		deathDialog [2] = "Ofcause! It's already taken care of, no worries!";
 	}
 
 	private void teachDeath(int dialog)
