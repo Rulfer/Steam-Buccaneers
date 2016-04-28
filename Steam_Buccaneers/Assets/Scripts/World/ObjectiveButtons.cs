@@ -8,10 +8,31 @@ public class ObjectiveButtons : MonoBehaviour {
 	private PointTowards compassNeedle;
 	private Text questInfo;
 
+	float counter;
+
 	void Start()
 	{
 		compassNeedle = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
+		counter = 0;
+	}
+
+	void Update()
+	{
+		counter += Time.deltaTime;
+
+		if (counter > 10)
+		{
+			Debug.Log ("Compass target tag: " + compassNeedle.goTarget.gameObject.tag);
+			if (compassNeedle.goTarget.gameObject.tag == "shop")
+			{
+				Shop ();
+			} else if (compassNeedle.goTarget.gameObject.tag == "Treasure")
+			{
+				Treasure ();
+			}
+			counter = 0;
+		}
 	}
 
 	public void PirateLord () 
@@ -26,17 +47,26 @@ public class ObjectiveButtons : MonoBehaviour {
 		float temp = 1000000000;
 		int tempI = 0;
 		GameObject[] shops = GameObject.FindGameObjectsWithTag ("shop"); 
-		for (int i = 0; i < shops.Length; i++)
+
+		if (shops.Length > 0)
 		{
-			distance = Vector3.Distance(shops[i].transform.position, GameObject.Find("PlayerShip").transform.position);
-			if (distance < temp)
+			for (int i = 0; i < shops.Length; i++)
 			{
-				temp = distance;
-				tempI = i;
+				distance = Vector3.Distance (shops [i].transform.position, GameObject.Find ("PlayerShip").transform.position);
+				if (distance < temp)
+				{
+					temp = distance;
+					tempI = i;
+				}
 			}
+			compassNeedle.goTarget = shops [tempI];
+			questInfo.text = "Go to shop!";
+		} 
+		else
+		{
+			questInfo.text = "No shop close";
 		}
-		compassNeedle.goTarget = shops [tempI];
-		questInfo.text = "Go to shop!";
+
 	}
 
 	public void Treasure()
@@ -45,18 +75,26 @@ public class ObjectiveButtons : MonoBehaviour {
 		float distance;
 		float temp = 1000000000;
 		int tempI = 0;
-		GameObject[] treasure = GameObject.FindGameObjectsWithTag ("TreasurePlanet"); 
-		for (int i = 0; i < treasure.Length; i++)
-		{
-			distance = Vector3.Distance(treasure[i].transform.position, GameObject.Find("PlayerShip").transform.position);
-			if (distance < temp)
-			{
-				temp = distance;
-				tempI = i;
-			}
-		}
+		GameObject[] treasure = GameObject.FindGameObjectsWithTag ("Treasure"); 
 
-		compassNeedle.goTarget = treasure [tempI];
-		questInfo.text = "Find treasure planet!";
+		if (treasure.Length > 0)
+		{
+			for (int i = 0; i < treasure.Length; i++)
+			{
+				distance = Vector3.Distance (treasure [i].transform.position, GameObject.Find ("PlayerShip").transform.position);
+				if (distance < temp)
+				{
+					temp = distance;
+					tempI = i;
+				}
+			}
+
+			compassNeedle.goTarget = treasure [tempI];
+			questInfo.text = "Find treasure!";
+		} 
+		else
+		{
+			questInfo.text = "No treasure close!";
+		}
 	}
 }
