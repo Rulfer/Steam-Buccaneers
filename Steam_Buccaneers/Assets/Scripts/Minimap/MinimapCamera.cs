@@ -42,10 +42,13 @@ public class MinimapCamera : MonoBehaviour
 			{
 				if(Input.GetKeyDown(KeyCode.M))
 				{
-					if(!isMinimap)
-						deactivateBigMap();
+					if (!isMinimap)
+						deactivateBigMap ();
 					else
-						activateBigMap();
+					{
+						if(Time.timeScale != 0)
+						activateBigMap ();
+					}
 				}
 				yield return null;
 			}
