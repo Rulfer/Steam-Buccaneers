@@ -42,14 +42,14 @@ public class PlayerRotate2 : MonoBehaviour
 
 		else
 		{
-			if ( currentDeg >= maxDeg-10f)
+			if ( currentDeg >= maxDeg-15f)
 			{
-				this.transform.Rotate(rotationVec, 10*Time.deltaTime);
+				this.transform.Rotate(rotationVec, 15*Time.deltaTime);
 			}
 
-			if ( currentDeg <= minDeg+10f)
+			if ( currentDeg <= minDeg+15f)
 			{
-				this.transform.Rotate(-rotationVec, 10*Time.deltaTime);
+				this.transform.Rotate(-rotationVec, 15*Time.deltaTime);
 			}
 	
 		}
