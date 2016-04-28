@@ -44,7 +44,7 @@ public class SpawnTreasureShip : MonoBehaviour
 	//gets a random time between 5 and 10 minutes, when the next treasure ship spawns
 	void GetTime()
 	{
-		nextSpawnIn = Random.Range (300, 600);
+		nextSpawnIn = Random.Range (30, 60);
 	}
 		
 	// Spawns the treasure ship at a random position around the player

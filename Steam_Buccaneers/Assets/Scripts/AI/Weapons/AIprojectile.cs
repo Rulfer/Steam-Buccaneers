@@ -93,20 +93,18 @@ public class AIprojectile : MonoBehaviour {
 				}
 					//SceneManager.LoadScene("cog_screen");
 			}
-			if(other.transform.root.name == "Marine(Clone)")
-			{
-				if(SceneManager.GetActiveScene().name != "Tutorial")
-				{
-					if(GameControl.control.isFighting == false)
-					{
-						other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
-					}
-				}
-			}
 
 			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
-				other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+				if(SceneManager.GetActiveScene().name != "Tutorial")
+				{
+					if(other.GetComponentInParent<AIMaster>().isBoss == true && GameControl.control.health > 0) //Boss can only loose health if player is alive
+						other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+					else if(other.GetComponentInParent<AIMaster>().isBoss == false)
+						other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
+				}
+				else
+					other.GetComponentInParent<AIMaster>().aiHealth -= damageOutput;
 				if (other.transform.GetComponentInParent<AIMaster> ().aiHealth <= 0)
 					other.transform.GetComponentInParent<AIMaster> ().killAI ();
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat3)
@@ -117,6 +115,15 @@ public class AIprojectile : MonoBehaviour {
 					other.GetComponentInParent<AIMaster> ().testFleeing ();
 
 				} 
+				if(other.transform.root.name == "Marine(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth > 0)
+				{
+					Debug.Log ("AIShip hit");
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(GameControl.control.isFighting == false)
+							other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+					}
+				}
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat2)
 				{
 					if (other.GetComponentInParent<AIMaster> ().usingMat2 != true)

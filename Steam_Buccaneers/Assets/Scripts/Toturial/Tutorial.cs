@@ -141,8 +141,8 @@ public class Tutorial : MonoBehaviour
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
-		nameLeftPos = new Vector3(115.0f, -25.0f);
-		nameRightPos = new Vector3 (525.0f, -25.0f);
+		nameLeftPos = new Vector3(217.0f, -25.0f);
+		nameRightPos = new Vector3 (612.0f, -25.0f);
 
 		nameShop = new Vector3 (215.4f, 73.2f);
 
@@ -219,83 +219,72 @@ public class Tutorial : MonoBehaviour
 		character[2] = "Marine";
 
 		dialogTexts[0] = "Hey, congratulations on acquiring this beauty from yours truly.";//Shopkeeper
-		dialogTexts [1] = "What now, I already bought the ship, what more could you possibly want from me?";//Player
-		dialogTexts [2] = "Well, I have a the feeling you haven’t really flown one of these things before, am I right? "; //Shopkeeper
+		dialogTexts [1] = "What now, I’ve already bought the ship, what more could you possibly want from me?";//Player
+		dialogTexts [2] = "Well, I have the feeling you haven’t really flown one of these things before, am I right? "; //Shopkeeper
 		dialogTexts[3] = "So you have two options, either figuring out the controls for yourself, or let me help you."; 
-		dialogTexts[4] = "And at the moment, I can see one of them space cop types coming towards here on the radar. " +
+		dialogTexts[4] = "And at the moment, I can see one of them space cop types coming towards us on the radar. " +
 			"So I guess you don’t want to get shot into bits in an instant here."; //Shopkeeper
-		dialogTexts[5] = "Why would they bother me?  But alright, just tell me the basics " +
-			"and let me be on my way.";//Player
-		dialogTexts [6] = "Well, that beautiful hunk of metal you’ve just bought ain’t exactly acquired legally, " +
-		"you see, and the previous captain, who incidentally is “missing”, wasn’t the nicest of people in " +
-		"this here space. ";//Shopkeeper
-		dialogTexts [7] = "Also you’re human, aren’t you? So add them together and you know them cops aren’t " +
-			"going to give you an easy time.";//Shopkeeper
-		dialogTexts [8] = "But anyways, the controls are simple, just press “W” to move your ship forward, " +
-			"and “A” and “D” turns you around. Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
+		dialogTexts[5] = "Why would they bother me? But alright, just tell me the basics and let me be on my way.";//Player
+		dialogTexts [6] = "Well, that beautiful hunk of metal you’ve just bought ain’t exactly acquired legally, you see, and the previous" +
+			" captain who, incidentally, is “missing”, wasn’t the nicest of creatures in this here space. ";//Shopkeeper
+		dialogTexts [7] = "Also you’re human, aren’t you? So add them together and you know them cops aren’t going to give you an easy time.";//Shopkeeper
+		dialogTexts [8] = "But anyways. The controls are simple, just press “W” to move your ship forward. “A” and “D” turns you around. " +
+			"Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
 		dialogTexts [9] = "You can also boost your ship by pressing “Shift”. Just try that for a bit now, you got time before " +
 			"them cops arrive here.";//Shopkeeper
-		dialogTexts[10] = "Wow, is that it, and I couldn’t figure this out on myself how? " +
-			"Would’ve been my first guess anyway.";//Player
-		dialogTexts [11] = "Easy peasy. Now, you see you have some guns on either side of your ship there? " +
-			"You’ll fire the left side by pressing “Q” and the right side by pressing “E”. ";//Shopkeeper
+		dialogTexts[10] = "Wow, is that it? And I couldn’t figure this out by myself how? Would’ve been my first guess anyway.";//Player
+		dialogTexts [11] = "Easy peasy. Now, you see you have some guns on both sides of your ship there? You can fire the left side by pressing “Q” and the right side by pressing “E”.";//Shopkeeper
 		dialogTexts[12] = "Both yourself and bullets can be affected by gravity. So your bullets might not go where you want them to go, if you are to close to a planet." +
 			" You’ve got infinite ammo for these, thanks to one of them fancy machines on board.";//Shopkeeper
-		dialogTexts[13] = "Just fire a couple of volleys from either side, you got enough ammo for " +
-			"them to last a lifetime, so don’t worry about wasting them.";//Shopkeeper
-		dialogTexts[14] = "Just remember now - those cannons hanging on the side of the ship, " +
-			"those will rotate with the ship while you turn. so you might not hit your targets even " +
-			"though they are right next to you.";//Shopkeeper
-		dialogTexts[15] = "Gee, Einstein, could’ve figured that out on my own.";//Player
-		dialogTexts [16] = "Hey, keep your sassy human slang for your kin. Most won’t take kindly to that " +
-		"sort of language. "; //Shopkeeper
-		dialogTexts [17] = "Anyways, last but not least. The cannon on your roof right there, this is " +
-		"a special one. ";
-		dialogTexts[18] = "It is way more powerful than your regular cannons, and you can aim it around " +
-			"using your mouse. To fire hold down Mouse2, then click Mouse1. Test it out.";//Shopkeeper
+		dialogTexts[13] = "Just fire a couple of volleys from either side. You got enough ammo for them to last a lifetime, " +
+			"so don’t worry about wasting them.";//Shopkeeper
+		dialogTexts[14] = "Just remember now - those cannons hanging on the side of the ship will rotate with the ship while you turn. So you might not hit your targets even though they are right next to you.\n";//Shopkeeper
+		dialogTexts[15] = "Gee, Einstein, I could’ve figured that out on my own.";//Player
+		dialogTexts [16] = "Hey, keep your sassy human slang for your kin, most won’t take kindly to that sort of language! "; //Shopkeeper
+		dialogTexts [17] = "Anyways, last but not least; the cannon on your roof right there is a special one. ";
+		dialogTexts[18] = "It is way more powerful than your regular cannons, and you can aim it around using your mouse." +
+			" You fire by holding the right mouse button down and clicking the left mouse button. Test it out.";//Shopkeeper
 		dialogTexts[19] = "Remember, it is a way more accurate and powerful way to take down your opponents, " +
-			"but this doesn’t have a lifetime worth of ammo supply, but don’t worry, just visit a shop " +
-			"every once in awhile to stock up.";//Shopkeeper
-		dialogTexts[20] = "Thanks for telling after i’ve fired a couple, asshole.";//Player
-		dialogTexts[21] = "Hey, I am an entrepreneur aren’t i? Need to make money some way or another," +
-			" tell you what, i’ll reimburse you for the ones you’ve fired, all right?";//Shopkeeper
-		dialogTexts[22] = "Oh would you look at that, looks like we’re done just in time for them coppers" +
-			" to arrive here. Now test out what i’ve just taught you.";//Shopkeeper
-		dialogTexts[23] = "Stop right there criminal scum. You are wanted for peddling illegal goods " +
-			"and scavenged ships. And you, pirate, stay there and we’ll deal with you later.";//Marine
-		dialogTexts[24] = "What do you say, pirate? I’ll fix up your ship for free if you help " +
-			"me out here. Seems like you’ve got nothing to lose.";//Shopkeeper
+			"but this doesn’t have a lifetime worth of ammo supply. But don’t worry, just visit a shop every " +
+			"once in awhile to stock up.";//Shopkeeper
+		dialogTexts[20] = "Thanks for telling after I’ve fired a couple, asshole!";//Player
+		dialogTexts[21] = "Hey, I am an entrepreneur aren’t I? Need to make money some way or another. " +
+			"Tell you what, I’ll reimburse you for the ones you’ve fired, alright?";//Shopkeeper
+		dialogTexts[22] = "Oh would you look at that, looks like we’re done just in time for " +
+			"them coppers to arrive. Now test out what I’ve just taught you.";//Shopkeeper
+		dialogTexts[23] = "Stop right there criminal scum! You are wanted for peddling illegal" +
+			" goods and scavenged ships. And you, pirate! Stay there and we’ll deal with you later!";//Marine
+		dialogTexts[24] = "What do you say, pirate? I’ll fix up your ship for free if you help me " +
+			"out here. Seems like you’ve got nothing to lose.";//Shopkeeper
 		dialogTexts[25] = "If it gets you off my back, fine.";//Player
 		dialogTexts [26] = "Nicely done there, humie. Might make a fine pirate of you one day. " +
-		"You see those gears and other bits and bobs that’s left after that marine ship? " +
-		"This is what us traders take as payment. ";
+			"You see those gears and other bits and bobs that’s left after that marine ship? " +
+			"This is what us traders take as payment.";
 		dialogTexts[27] = "Fly over there, and pick it up.";//Shopkeeper
-		dialogTexts[28] = " And as promised I’ll fix your damage, just fly closer to me " +
-			"and i’ll open up a landing pad for you.";//Shopkeeper
-		dialogTexts[29] = "Here is what I, and most other shops around this sun has to offer.";//Shopkeeper
+		dialogTexts[28] = "  And as promised I’ll fix your damage, just fly closer to me and I’ll open up a landing pad for you.";//Shopkeeper
+		dialogTexts[29] = "Here is what I, and most other shops around this star has to offer.";//Shopkeeper
 		dialogTexts[30] = "You see all these icons on the blueprint of your ship here?";
-		dialogTexts [31] = "These " +
-		"are upgradeable parts. I can do upgrades for each of your side cannons, increase the damage your hull can take, or your back " +
-		"thruster output. ";
-		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon. Feel free to get so that you have 20. " +
+		dialogTexts [31] = "These are upgradeable parts. I can do upgrades for each of your side cannons, " +
+			"or I could increase the damage your hull can take before you’re blown to bits, " +
+			"or your back thruster output. ";
+		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon. " +
 			"Confirm your purchase on the bottom of the screen.";//Shopkeeper
-		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!” " +
-		"and drag the slider for how much you want to repair.";//Shopkeeper
-		dialogTexts[34] = "Then just confirm the amount, and " +
-			"i’ll fix it right away. And of course, to the top right you’ll see how much money " +
-			"you’ve got.";//Shopkeeper
-		dialogTexts[35] = "I guess that’s about it for what I can tell you, be on your way now. " +
-			"And remember; Keep alive and keep flying, a living customer is a paying customer. " +
-			"Come back anytime should you need something.";//Shopkeeper
+		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!”" +
+			" and drag the slider for how much you want to repair.";//Shopkeeper
+		dialogTexts[34] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
+			"to the top left you’ll see how much scraps you’ve got";//Shopkeeper
+		dialogTexts[35] = "I guess that’s about it for whatc I can tell you. Be on your way now, and remember; " +
+			"Keep alive and keep flying! A living customer is a paying customer. " +
+			"Come back anytime should you need something";//Shopkeeper
 		
 		dialogTexts [36] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
 			"the funky music and you will get there!";//Shopkeeper
 		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
 		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. " +
-		"You know, you could lose that attitude, I don't think Sir Spikypillow will appreciate it. " +
+			"You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
-		dialogTexts [39] = "Sir Spikypillow? Seriously?!?!?";//Player
+		dialogTexts [39] = "Sir Spikybottom? Seriously?!?!?";//Player
 		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
 			"Now shut it and get going!";//Shopkeeper
 		dialogTexts [41] = "...";//Player
@@ -460,6 +449,9 @@ public class Tutorial : MonoBehaviour
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = true;
 			GameObject.Find ("button_x").GetComponent<Button> ().enabled = true;
 			changeButtonInteractivity (true);
+			break;
+		case(35):
+			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
 			break;
 		case(36):
 			changeCharacterWindow ();

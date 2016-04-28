@@ -6,15 +6,16 @@ public class ScrapRandomDirection : MonoBehaviour
 {
 	private float randomDirectionX; //Random X direction
 	private float randomDirectionZ; //Random Z direction
-	private Vector3 axisOfRotation; //Random rotation axis
+	private float angularVelocity; //Speed of the rotation
 
+	private Vector3 axisOfRotation; //Random rotation axis
 	private Rigidbody scrapRigid;
+	public bool despawn = true;
 
 	private int speed = 1500000;
 	public int value; //How much money the player get from pickin up this scrap
 	public int killTimer = 2; //Changed in unity editor. Used to destroy this object after a given time
 
-	private float angularVelocity; //Speed of the rotation
 
 	// Use this for initialization
 	void Start () {
@@ -47,21 +48,28 @@ public class ScrapRandomDirection : MonoBehaviour
 	//If the object hits the player it means that the player picked it up.
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.transform.root.name == "PlayerShip")
+		if(other.transform.tag == "Player")
 		{
 			GameControl.control.money += value; //Pay the player
 			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
-			kill();
+
+			Destroy(this.gameObject); //Destroy this object
+			if (GameObject.Find("TutorialControl") != null)
+			{
+				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
+			}
 		}
 	}
 
 	void kill()
 	{
-		Destroy(this.gameObject); //Destroy this object
-		if (GameObject.Find("TutorialControl") != null)
+		if(despawn == true)
 		{
-			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
+			Destroy(this.gameObject); //Destroy this object
+			if (GameObject.Find("TutorialControl") != null)
+			{
+				GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().countingDownScrap ();
+			}
 		}
-
 	}
 }

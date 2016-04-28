@@ -10,7 +10,7 @@ public class pickupScrap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pickupRange = 40;
+		pickupRange = 30;
 	}
 	
 	// Update is called once per frame
