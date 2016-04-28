@@ -316,6 +316,7 @@ public class AIMaster : MonoBehaviour
 		deactivateAI();
 
 		source.clip = clip;
+		source.volume = 1;
 		source.Play();
 		isDead = true;
 
