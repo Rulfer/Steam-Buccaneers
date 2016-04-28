@@ -45,6 +45,7 @@ public class TreasureShip : MonoBehaviour
 	{
 		distanceAway = Vector3.Distance(this.transform.position, player.transform.position);
 
+		//Debug.Log (distanceAway + " Ableboelb")
 		if (distanceAway >= 750)
 		{
 			Destroy(gameObject);
