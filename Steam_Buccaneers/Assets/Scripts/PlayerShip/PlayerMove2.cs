@@ -22,6 +22,7 @@ public class PlayerMove2 : MonoBehaviour
 	private bool boostCooledDown = false;
 	CameraShakeInstance shake;
 	private GameObject boostBar;
+	private float waitForBoost = 3f;
 
 	public static bool steerShip = true;
 
@@ -69,40 +70,39 @@ public class PlayerMove2 : MonoBehaviour
 	void FixedUpdate () 
 	{
 		
-		//Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting);
-	/*	if (GameControl.control.isFighting == true)
-		{
-			Debug.Log ("do i do this more than once?");
-			boostBar.SetActive(true);
-		}
-		else
-		{
-			boostBar.SetActive(false);
-		}*/
-		if (GameControl.control.isFighting == true && isBoosting == true && boostCooledDown == true)
+		//Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting + " waiting for boost? " + waitForBoost);
+
+		/*if (GameControl.control.isFighting == true && isBoosting == true && boostCooledDown == true)
 		{
 			maxVelocity *= 2;
 			player.AddForce (transform.forward * force*2 * Time.deltaTime);
 			boostCooldownTimer -= Time.deltaTime;
-			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 1, 0.10f, 0.8f);
 			//boostCooldownTimer -= Time.deltaTime;
-		}
+		}*/
 
 		if(boostCooldownTimer <= 0f)
 		{
 			boostCooldownTimer = 0f;
 			isBoosting = false;
 			boostCooledDown = false;
+			//CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 		}
 
-		if ((boostCooldownTimer <= 3f && isBoosting == false && GameControl.control.isFighting == true) || 
-			(boostCooldownTimer <= 3f && GameControl.control.isFighting == false))
+		if ((boostCooldownTimer < 3f && isBoosting == false && GameControl.control.isFighting == true) || 
+			(boostCooldownTimer < 3f && GameControl.control.isFighting == false))
 		{
-			boostCooldownTimer +=Time.deltaTime/2;
-			if (boostCooldownTimer >= 3f)
+			if (waitForBoost > -0.1f && waitForBoost < 3.1f)
 			{
-				boostCooldownTimer = 3f;
-				boostCooledDown = true;
+				waitForBoost -= Time.deltaTime;
+			}
+			if (waitForBoost <= 0)
+			{
+				boostCooldownTimer +=Time.deltaTime/3;
+				if (boostCooldownTimer >= 3f)
+				{
+					boostCooldownTimer = 3f;
+					//boostCooledDown = true;
+				}
 			}
 
 		}
@@ -127,13 +127,23 @@ public class PlayerMove2 : MonoBehaviour
 			if (Input.GetKey (KeyCode.LeftShift))
 			{
 				Boost();
+				waitForBoost = 3f;				
 			}
 
 			else
 			{
+				isBoosting = false;
+			}
+			if (Input.GetKeyDown (KeyCode.LeftShift))
+			{
 				if (!GameControl.control.isFighting)
 				{
-					isBoosting = false;
+					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+				}
+
+				else if (GameControl.control.isFighting && boostCooldownTimer > 0f)
+				{
+					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 				}
 			}
 				
@@ -274,9 +284,8 @@ public class PlayerMove2 : MonoBehaviour
 	void Boost()
 	{
 		//if the player is not in combat, boost is active as long as the player uses it
-		if (GameControl.control.isFighting != true)
+		if (!GameControl.control.isFighting)
 		{
-			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1f, 1f, 0.1f, 0.8f);
 			maxVelocity *= 2;
 			isBoosting = true;
 
@@ -285,9 +294,12 @@ public class PlayerMove2 : MonoBehaviour
 		}
 
 		// Testing if the player is in combat
-		if (GameControl.control.isFighting == true && boostCooledDown == true)
+		if (GameControl.control.isFighting == true && boostCooldownTimer > 0 /*boostCooledDown == true*/)
 		{
-					isBoosting = true;		
+			maxVelocity *= 2;
+			player.AddForce (transform.forward * force*2 * Time.deltaTime);
+			boostCooldownTimer -= Time.deltaTime;
+			isBoosting = true;		
 		}
 	}
 }
