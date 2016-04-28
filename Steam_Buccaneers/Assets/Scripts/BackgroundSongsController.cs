@@ -7,6 +7,7 @@ public class BackgroundSongsController : MonoBehaviour
 	public static BackgroundSongsController audControl;
 	private AudioSource backgroundSource;
 	private AudioSource combatSource;
+	public AudioClip deathClip;
 	public AudioClip[] backgroundClips;
 	public AudioClip[] combatClips;
 
@@ -17,7 +18,7 @@ public class BackgroundSongsController : MonoBehaviour
 	bool one = false;
 	bool two = false;
 	bool three = false;
-
+	bool isDead = false;
 	public bool fightingBoss = false;
 
 	// Use this for initialization
@@ -35,7 +36,7 @@ public class BackgroundSongsController : MonoBehaviour
 
 	void Update()
 	{
-		if(GameControl.control.isFighting == false)
+		if(GameControl.control.isFighting == false && isDead == false)
 		{
 			if(GameObject.Find("PlayerShip").transform.position.z < 4000)
 			{
@@ -46,7 +47,7 @@ public class BackgroundSongsController : MonoBehaviour
 			if(GameObject.Find("PlayerShip").transform.position.z > 12000)
 				songThree();
 		}
-		if(GameControl.control.isFighting == true) //The spawning has topped, so a combat is ongoing
+		if(GameControl.control.isFighting == true && isDead == false) //The spawning has topped, so a combat is ongoing
 		{
 			if(fightingBoss == false)
 			{
@@ -94,6 +95,23 @@ public class BackgroundSongsController : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void playDeadSong()
+	{
+		isDead = true;
+		backgroundSource.clip = deathClip;
+		backgroundSource.volume = 1;
+		backgroundSource.Play();
+		backgroundSource.loop = false;
+		combatSource.Stop();
+		combatSource.volume = 0;
+	}
+
+	public void stopDeadSong()
+	{
+		isDead = false;
+		backgroundSource.loop = true;
 	}
 
 	public void bossCombat()

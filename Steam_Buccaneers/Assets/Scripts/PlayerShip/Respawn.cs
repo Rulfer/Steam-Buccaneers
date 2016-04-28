@@ -71,6 +71,7 @@ public class Respawn : MonoBehaviour
 						isPaused = true;
 						showDeathScreen = true;
 						deathScreen.SetActive (showDeathScreen);
+						GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().playDeadSong();
 					}
 				}
 			}
@@ -85,6 +86,7 @@ public class Respawn : MonoBehaviour
 				deathScreen.SetActive (showDeathScreen);
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 				player.GetComponent<DeadPlayer> ().enabled = false;
+				GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().stopDeadSong();
 			}
 			player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}

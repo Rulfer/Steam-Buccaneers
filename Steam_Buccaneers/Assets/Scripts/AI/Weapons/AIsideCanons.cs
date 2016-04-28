@@ -135,7 +135,7 @@ public class AIsideCanons : MonoBehaviour {
 				}
 			}
 
-			else
+			else if(this.transform.root.name == "Marine(Clone)")
 			{
 				for(int i = 0; i < leftCannons.Length; i++)
 				{
@@ -150,6 +150,24 @@ public class AIsideCanons : MonoBehaviour {
 					else if(cannonLevel[i] == 3)
 					{
 						Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					}
+				}
+			}
+			else if(this.transform.root.name == "Cargo(Clone)")
+			{
+				if(this.GetComponentInParent<AImove>().isFleeing == true) //We know the Cargo ship is fleeing
+				{
+					if(cannonLevel[1] == 1)
+					{
+						Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation);
+					}
+					else if(cannonLevel[1] == 2)
+					{
+						Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation);
+					}
+					else if(cannonLevel[1] == 3)
+					{
+						Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation);
 					}
 				}
 			}
@@ -191,17 +209,20 @@ public class AIsideCanons : MonoBehaviour {
 			}
 			else if(this.transform.root.name == "Cargo(Clone)")
 			{
-				if(cannonLevel[1] == 1)
+				if(this.GetComponentInParent<AImove>().isFleeing == true) //We know the Cargo ship is fleeing
 				{
-					Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation);
-				}
-				else if(cannonLevel[1] == 2)
-				{
-					Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation);
-				}
-				else if(cannonLevel[1] == 3)
-				{
-					Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation);
+					if(cannonLevel[1] == 1)
+					{
+						Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation);
+					}
+					else if(cannonLevel[1] == 2)
+					{
+						Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation);
+					}
+					else if(cannonLevel[1] == 3)
+					{
+						Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation);
+					}
 				}
 			}
 		}

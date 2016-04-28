@@ -93,16 +93,6 @@ public class AIprojectile : MonoBehaviour {
 				}
 					//SceneManager.LoadScene("cog_screen");
 			}
-			if(other.transform.root.name == "Marine(Clone)")
-			{
-				if(SceneManager.GetActiveScene().name != "Tutorial")
-				{
-					if(GameControl.control.isFighting == false)
-					{
-						other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
-					}
-				}
-			}
 
 			if(other.GetComponentInParent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
 			{
@@ -117,6 +107,14 @@ public class AIprojectile : MonoBehaviour {
 					other.GetComponentInParent<AIMaster> ().testFleeing ();
 
 				} 
+				if(other.transform.root.name == "Marine(Clone)" && other.GetComponentInParent<AIMaster>().aiHealth > 0)
+				{
+					if(SceneManager.GetActiveScene().name != "Tutorial")
+					{
+						if(GameControl.control.isFighting == false)
+							other.transform.GetComponentInParent<AIMaster>().deaktivatePatroling();
+					}
+				}
 				else if (other.GetComponentInParent<AIMaster> ().aiHealth <= other.GetComponentInParent<AIMaster> ().aiHealthMat2)
 				{
 					if (other.GetComponentInParent<AIMaster> ().usingMat2 != true)
