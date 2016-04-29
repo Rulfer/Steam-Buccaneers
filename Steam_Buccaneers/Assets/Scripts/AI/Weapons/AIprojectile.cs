@@ -32,7 +32,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		characterWindows = GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController>();
 		source = this.GetComponent<AudioSource>();
-		test.AddForce (this.transform.right * projectileSpeed);
+		//test.AddForce (this.transform.right * projectileSpeed);
 		player = GameObject.Find("PlayerShip");
 
 		axisOfRotation = Random.onUnitSphere;
