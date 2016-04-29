@@ -106,6 +106,9 @@ public class BackgroundSongsController : MonoBehaviour
 		backgroundSource.loop = false;
 		combatSource.Stop();
 		combatSource.volume = 0;
+		one = false;
+		two = false;
+		three = false;
 	}
 
 	public void stopDeadSong()
