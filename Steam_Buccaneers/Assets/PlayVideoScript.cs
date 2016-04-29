@@ -17,8 +17,8 @@ public class PlayVideoScript : MonoBehaviour
 	void Update () 
 	{
 		timer += Time.realtimeSinceStartup - forrigeTid;
-		Debug.Log (Time.time + "-" + forrigeTid);
-		Debug.Log (timer);
+		//Debug.Log (Time.time + "-" + forrigeTid);
+		//Debug.Log (timer);
 		if (timer >= 6)
 		{
 			Destroy (this.gameObject);

@@ -6,8 +6,11 @@ public class TreasureShip : MonoBehaviour
 	Vector3 rotateVec; //= new Vector3 (1f,1f,1f);
 	Vector3 randomSpawnVec;
 	public GameObject[] scrap;
+	private GameObject[] scrapsLyingAroundShip = new GameObject[20];
 	public GameObject player;
 	private GameObject tempScrap;
+	private int antallScrapIgjen = 20;
+
 	float distanceAway;
 	int xRot;
 	int yRot;
@@ -36,6 +39,7 @@ public class TreasureShip : MonoBehaviour
 			tempScrap.GetComponent<ScrapRandomDirection>().despawn = false;
 			tempScrap.transform.position = randomSpawnVec;
 			tempScrap.transform.rotation = this.transform.rotation;
+			scrapsLyingAroundShip [i] = tempScrap;
 		}
 	}
 
@@ -46,10 +50,27 @@ public class TreasureShip : MonoBehaviour
 		distanceAway = Vector3.Distance(this.transform.position, player.transform.position);
 
 		//Debug.Log (distanceAway + " Ableboelb")
-		if (distanceAway >= 750)
+		for (int i = 0; i < scrapsLyingAroundShip.Length; i++)
 		{
-			Destroy(gameObject);
+			if (scrapsLyingAroundShip [i] == null)
+			{
+				antallScrapIgjen--;
+			}
 		}
+
+		if (antallScrapIgjen == 0)
+		{
+
+
+			for (int j = 0; j < scrapsLyingAroundShip.Length; j++)
+				Destroy (scrapsLyingAroundShip[j]);
+
+			gameObject.tag = "asteroid";
+		}
+
+		if (distanceAway >= 750)
+			Destroy(gameObject);
+
 		//scrap = GameObject.Find("scrap");
 
 		//Just rotates the ship around a little bit
@@ -58,5 +79,6 @@ public class TreasureShip : MonoBehaviour
 		/*randomSpawnVec  = new Vector3 (this.transform.position.x + Random.Range(-20f, 20f), 0f, 
 			this.transform.position.z + Random.Range(-20f, 20f));
 		Instantiate (scrap, randomSpawnVec, this.transform.rotation);*/
+		antallScrapIgjen = 20;
 	}
 }

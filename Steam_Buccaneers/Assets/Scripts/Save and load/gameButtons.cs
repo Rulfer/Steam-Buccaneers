@@ -45,7 +45,7 @@ public class gameButtons : MonoBehaviour {
 		}
 
 		//Debug.Log (escMenu);
-		if (Input.GetKeyDown (KeyCode.Escape) && SceneManager.GetActiveScene().name != "main_menu")
+		if (Input.GetKeyDown (KeyCode.Escape) && SceneManager.GetActiveScene().name != "main_menu" && Time.timeScale != 0)
 		{
 		setDifferent ();
 		escMenu.SetActive(escMenuStatus);
