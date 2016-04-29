@@ -281,8 +281,8 @@ public class Tutorial : MonoBehaviour
 			"the funky music and you will get there!";//Shopkeeper
 		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
-		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. " +
-			"You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
+		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. You can also press “M” to see the map.";
+		dialogTexts[39] ="You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
 		dialogTexts [39] = "Sir Spikybottom? Seriously?!?!?";//Player
 		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
@@ -298,7 +298,7 @@ public class Tutorial : MonoBehaviour
 		//Player dialog: 1, 5, 10, 15, 20, 25, 38, 40, 42
 		//Marine dialog: 20
 		//Dialog runs here
-		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25|| stage == 37 || stage == 39 || stage == 41)
+		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25|| stage == 37 || stage == 40 || stage == 42)
 		{
 			//Sets dialog and character
 			setDialog (character [1], dialogTexts [stage]);

@@ -32,7 +32,7 @@ public class AIprojectile : MonoBehaviour {
 	{
 		characterWindows = GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController>();
 		source = this.GetComponent<AudioSource>();
-		test.AddForce (this.transform.right * projectileSpeed);
+		//test.AddForce (this.transform.right * projectileSpeed);
 		player = GameObject.Find("PlayerShip");
 
 		axisOfRotation = Random.onUnitSphere;
@@ -156,7 +156,7 @@ public class AIprojectile : MonoBehaviour {
 			}
 		}
 
-		if(other.tag == "shop" || other.tag == "Planet" || other.tag == "asteroid")
+		if(other.tag == "shop" || other.tag == "Planet" || other.tag == "asteroid" || other.tag == "Moon")
 		{
 			source.clip = hitSounds[Random.Range(0, 3)];
 			if(this.gameObject != null)

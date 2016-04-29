@@ -33,7 +33,8 @@ public class swivelFire : MonoBehaviour
 			if (Input.GetButtonUp ("Fire1") && Time.time > fireDelay && GameControl.control.specialAmmo > 0 && GameControl.control.health > 0)
 			{
 				fireDelay = Time.time + fireRate;
-				Instantiate (cannonball, transform.position , transform.rotation);
+				GameObject test = Instantiate (cannonball, transform.position , transform.rotation) as GameObject;
+				test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 				source.clip = clips[0];
 				source.Play();
 				GameControl.control.specialAmmo -= 1;

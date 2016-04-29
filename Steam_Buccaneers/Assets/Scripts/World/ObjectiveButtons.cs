@@ -23,15 +23,21 @@ public class ObjectiveButtons : MonoBehaviour {
 
 		if (counter > 10)
 		{
-			Debug.Log ("Compass target tag: " + compassNeedle.goTarget.gameObject.tag);
-			if (compassNeedle.goTarget.gameObject.tag == "shop")
+			if (compassNeedle.goTarget != null)
 			{
-				Shop ();
-			} else if (compassNeedle.goTarget.gameObject.tag == "Treasure")
+				if (compassNeedle.goTarget.gameObject.tag == "shop")
+				{
+					Shop ();
+				} else if (compassNeedle.goTarget.gameObject.tag == "Treasure")
+				{
+					Treasure ();
+				}
+				counter = 0;
+			} 
+			else
 			{
 				Treasure ();
 			}
-			counter = 0;
 		}
 	}
 

@@ -260,18 +260,18 @@ public class PlayerMove2 : MonoBehaviour
 		//}
 
 
-		if(goingForward == true || turnLeft == true || turnRight == true)
-		{
-			if(source.isPlaying == false && clip == 0)
-				playLoopSound();
-			else if(source.isPlaying == false && clip != 0)
-				playStartSound();
-		}
-		else if(goingForward == false && turnLeft == false && turnRight == false)
-		{
-			if(clip != 2)
-				playEndSound();
-		}
+//		if(goingForward == true || turnLeft == true || turnRight == true)
+//		{
+//			if(source.isPlaying == false && clip == 0)
+//				playLoopSound();
+//			else if(source.isPlaying == false && clip != 0)
+//				playStartSound();
+//		}
+//		else if(goingForward == false && turnLeft == false && turnRight == false)
+//		{
+//			if(clip != 2)
+//				playEndSound();
+//		}
 		//}
 	}
 
