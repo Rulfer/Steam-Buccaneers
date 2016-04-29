@@ -65,7 +65,7 @@ public class TreasureShip : MonoBehaviour
 			for (int j = 0; j < scrapsLyingAroundShip.Length; j++)
 				Destroy (scrapsLyingAroundShip[j]);
 
-			gameObject.tag = "asteroid";
+			gameObject.tag = "Untagged";
 		}
 
 		if (distanceAway >= 750)
