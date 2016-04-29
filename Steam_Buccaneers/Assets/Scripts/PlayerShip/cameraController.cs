@@ -7,6 +7,14 @@ public class cameraController : MonoBehaviour
 	private float amountScrolled;
 	public float scrollBy;
 	private float boostDistance = 0;
+/*	Vector3 maxDistance;
+	Vector3 maxDistanceBoosting;
+	Vector3 minDistance;
+	float tempDist;
+	Vector3 cameraNow;
+	float startTime;
+	float travelLength;
+	float speed = 100f;*/
 
 	private Vector3 PlayerPOS;
 	private GameObject player;
@@ -15,18 +23,35 @@ public class cameraController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		//tempDist = (PlayerPOS.y)+distanceAway;
 		player = GameObject.Find("PlayerShip");	
 		//gameCamera = GameObject.Find("MaingameCamera");
 	}
 	
 	// Update is called once per frame
 	void Update () 
-	{
-		//Debug.Log (boostDistance);
+	{/*
+		if (Input.GetKeyDown (KeyCode.LeftShift))
+		{
+			tempDist = (PlayerPOS.y)+distanceAway;
+			startTime = Time.time;
+		}
 
+		if (Input.GetKeyUp (KeyCode.LeftShift) || PlayerMove2.boostCooldownTimer <= 0f)
+		{
+			startTime = Time.time;
+		}
+
+		Debug.Log (tempDist);
+		*/
 		// låser kamera til player
 		//Vector3 PlayerPOS = GameObject.Find("space donger 5 million").transform.transform.position;
 		PlayerPOS = player.transform.transform.position;
+		/*
+		maxDistance = new Vector3 (PlayerPOS.x, PlayerPOS.y +200f, PlayerPOS.z);
+		maxDistanceBoosting = new Vector3 (PlayerPOS.x, PlayerPOS.y + 250f, PlayerPOS.z);
+		minDistance = new Vector3 (PlayerPOS.x, PlayerPOS.y +50f, PlayerPOS.z);
+		*/
 		this.transform.position = new Vector3(PlayerPOS.x, (PlayerPOS.y)+distanceAway+boostDistance, (PlayerPOS.z)); 
 
 		if(MinimapCamera.miniCam.isMinimap)
@@ -58,7 +83,7 @@ public class cameraController : MonoBehaviour
 			{
 				if (boostDistance <= 49)
 				{
-				boostDistance++;
+					boostDistance ++;
 				}
 			}
 
@@ -69,6 +94,24 @@ public class cameraController : MonoBehaviour
 					boostDistance --;
 				}
 			}
+			/*
+			if (PlayerMove2.isBoosting && this.transform.position != maxDistanceBoosting)
+			{
+				travelLength = Vector3.Distance(cameraNow,maxDistanceBoosting);
+				float distCovered = (Time.time -startTime)*speed;
+				float fracJourney = distCovered /travelLength;
+				cameraNow = new Vector3(PlayerPOS.x, tempDist, PlayerPOS.z);
+				this.transform.position = Vector3.Lerp(cameraNow, maxDistanceBoosting, fracJourney);
+			}
+
+			else
+			{
+				travelLength = Vector3.Distance(cameraNow,maxDistanceBoosting);
+				float distCovered = (Time.time -startTime)*speed;
+				float fracJourney = distCovered /travelLength;
+				cameraNow = new Vector3(PlayerPOS.x, tempDist, PlayerPOS.z);
+				this.transform.position = Vector3.Lerp(maxDistanceBoosting, cameraNow, fracJourney);
+			}*/
 		}
 		else
 		{

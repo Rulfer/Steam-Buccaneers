@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\cameraController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="145" Column="24" />
+      <File FileName="Assets\Scripts\PlayerShip\cameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShip\PlayerMove2.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
       <File FileName="Assets\PlayVideoScript.cs" Line="1" Column="1" />
@@ -14,7 +15,6 @@
       <File FileName="Assets\Scripts\AI\AIMove scripts\CastRays.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\World\OrbitMeteorsInner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\cameraController.cs" Line="40" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
