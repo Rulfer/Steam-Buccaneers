@@ -65,15 +65,19 @@ public class sideWeaponControl : MonoBehaviour
 
 				if(GameControl.control.canonUpgrades[i] == 1)
 				{
-					Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					Debug.Log (this.GetComponentInParent<Rigidbody> ().velocity);
+					GameObject test = Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 				}
 				else if(GameControl.control.canonUpgrades[i] == 2)
 				{
-					Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					GameObject test = Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 				}
 				else if(GameControl.control.canonUpgrades[i] == 3)
 				{
-					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					GameObject test = Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 				}
 
 
@@ -127,15 +131,18 @@ public class sideWeaponControl : MonoBehaviour
 			{
 				if(GameControl.control.canonUpgrades[i+3] == 1)
 				{
-					Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);
+					GameObject test = Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 				}
 				else if(GameControl.control.canonUpgrades[i+3] == 2)
 				{
-					Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation);
+					GameObject test = Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 				}
 				else if(GameControl.control.canonUpgrades[i+3] == 3)
 				{
-					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+					GameObject test = Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 				}				//Debug.Log ("right pew");
 
 
