@@ -63,8 +63,8 @@ public class BossTalking : MonoBehaviour
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		nextButton = GameObject.Find ("dialogue_next");
 
-		nameLeftPos = new Vector3(115.0f, -25.0f);
-		nameRightPos = new Vector3 (480.0f, -25.0f);
+		nameLeftPos = new Vector3(215.0f, -25.0f);
+		nameRightPos = new Vector3 (570.0f, -25.0f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorBoss = "#4F3430FF";
@@ -75,7 +75,7 @@ public class BossTalking : MonoBehaviour
 
 	void setDialog()
 	{
-		characters [0] = "Sir Spikypillow";
+		characters [0] = "Sir Spikybottom";
 		characters [1] = "Player";
 
 		dialogTexts [0] = "Who dares enter my domain?"; //Boss

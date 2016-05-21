@@ -44,45 +44,51 @@ public class ShipHitObject : MonoBehaviour
 			healthLost *= -1;
 		if(healthLost > 1) //If the damage dealt is greater than 1, deal the damage. 
 		{
-			ContactPoint contact = col.contacts[0];
-			Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
-			if(col.transform.name == "PlayerShip")
-				GameControl.control.health -= healthLost;
-			if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" )
+			if(col != null)
 			{
-				if(col.transform.name == "Cargo(Clone)")
-					col.transform.GetComponent<AIMaster>().thisAIFlee();
-				
-				if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
+				ContactPoint contact = col.contacts[0];
+				Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
+				if(col.transform.name == "PlayerShip")
+					GameControl.control.health -= healthLost;
+				if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" )
 				{
-					col.transform.GetComponentInParent<BossTalking> ().enabled = true;
-					col.transform.GetComponentInParent<BossTalking> ().findAllDialogElements();
-					col.transform.GetComponentInParent<BossTalking> ().dialogBoss (12);
-					col.transform.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
-					//SceneManager.LoadScene("cog_screen");
+					if(col.transform.name == "Cargo(Clone)")
+						col.transform.GetComponent<AIMaster>().thisAIFlee();
+					
+					if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
+					{
+						col.transform.GetComponentInParent<BossTalking> ().enabled = true;
+						col.transform.GetComponentInParent<BossTalking> ().findAllDialogElements();
+						col.transform.GetComponentInParent<BossTalking> ().dialogBoss (12);
+						col.transform.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
+						//SceneManager.LoadScene("cog_screen");
+					}
+					if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
+					{
+						col.transform.GetComponent<AIMaster>().aiHealth -= healthLost;
+						if(col.transform.GetComponent<AIMaster>().aiHealth <= 0)
+						{
+							col.transform.GetComponent<AIMaster>().killAI();
+						}
+						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat3)
+						{
+							col.transform.GetComponent<AIMaster>().changeMat3();
+							col.transform.GetComponent<AIMaster>().testFleeing();
+						}
+						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat2)
+							col.transform.GetComponent<AIMaster>().changeMat2();
+					}
 				}
-				if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
+				if(col.transform.tag == "asteroid")
 				{
-					col.transform.GetComponent<AIMaster>().aiHealth -= healthLost;
-					if(col.transform.GetComponent<AIMaster>().aiHealth <= 0)
+					if (this.transform.name == "PlayerShip")
 					{
-						col.transform.GetComponent<AIMaster>().killAI();
+						GameControl.control.health -= healthLost * 8;
+						this.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
 					}
-					else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat3)
-					{
-						col.transform.GetComponent<AIMaster>().changeMat3();
-						col.transform.GetComponent<AIMaster>().testFleeing();
-					}
-					else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat2)
-						col.transform.GetComponent<AIMaster>().changeMat2();
+					else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" )
+						this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 3;
 				}
-			}
-			if(col.transform.tag == "asteroid")
-			{
-				if(this.transform.name == "PlayerShip")
-					GameControl.control.health -= healthLost * 3;
-				else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" )
-					this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 3;
 			}
 		}
 	}

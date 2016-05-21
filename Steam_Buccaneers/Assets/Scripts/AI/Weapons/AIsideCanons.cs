@@ -131,25 +131,50 @@ public class AIsideCanons : MonoBehaviour {
 			{
 				for(int i = 0; i < 6; i++)
 				{
-					Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+					GameObject test = Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 				}
 			}
 
-			else
+			else if(this.transform.root.name == "Marine(Clone)")
 			{
 				for(int i = 0; i < leftCannons.Length; i++)
 				{
 					if(cannonLevel[i] == 1)
 					{
-						Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+						GameObject test = Instantiate (cannonball1, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 					else if(cannonLevel[i] == 2)
 					{
-						Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+						GameObject test = Instantiate (cannonball2, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 					else if(cannonLevel[i] == 3)
 					{
-						Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation);
+						GameObject test = Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
+					}
+				}
+			}
+			else if(this.transform.root.name == "Cargo(Clone)")
+			{
+				if(this.GetComponentInParent<AImove>().isFleeing == true) //We know the Cargo ship is fleeing
+				{
+					if(cannonLevel[1] == 1)
+					{
+						GameObject test = Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
+					}
+					else if(cannonLevel[1] == 2)
+					{
+						GameObject test = Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
+					}
+					else if(cannonLevel[1] == 3)
+					{
+						GameObject test = Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 				}
 			}
@@ -167,7 +192,8 @@ public class AIsideCanons : MonoBehaviour {
 			{
 				for(int i = 0; i < 6; i++)
 				{
-					Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+					GameObject test = Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation) as GameObject;
+					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 				}
 			}
 
@@ -177,31 +203,40 @@ public class AIsideCanons : MonoBehaviour {
 				{
 					if(cannonLevel[i+3] == 1)
 					{
-						Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation);
+						GameObject test = Instantiate (cannonball1, rightCannons[i].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 					}
 					else if(cannonLevel[i+3] == 2)
 					{
-						Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation);
+						GameObject test = Instantiate (cannonball2, rightCannons[i].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 					}
 					else if(cannonLevel[i+3] == 3)
 					{
-						Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation);
+						GameObject test = Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
 					}
 				}
 			}
 			else if(this.transform.root.name == "Cargo(Clone)")
 			{
-				if(cannonLevel[1] == 1)
+				if(this.GetComponentInParent<AImove>().isFleeing == true) //We know the Cargo ship is fleeing
 				{
-					Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation);
-				}
-				else if(cannonLevel[1] == 2)
-				{
-					Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation);
-				}
-				else if(cannonLevel[1] == 3)
-				{
-					Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation);
+					if(cannonLevel[1] == 1)
+					{
+						GameObject test = Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
+					}
+					else if(cannonLevel[1] == 2)
+					{
+						GameObject test = Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
+					}
+					else if(cannonLevel[1] == 3)
+					{
+						GameObject test = Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right));
+					}
 				}
 			}
 		}

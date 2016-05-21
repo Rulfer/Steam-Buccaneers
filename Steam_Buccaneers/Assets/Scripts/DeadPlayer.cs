@@ -10,6 +10,9 @@ public class DeadPlayer : MonoBehaviour
 	private float rotateTimer = 0;
 	private float rotateDuration = 5;
 
+	private AudioSource source;
+	public AudioClip[] clips;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -17,7 +20,10 @@ public class DeadPlayer : MonoBehaviour
 		angularVelocity = Random.Range (20, 40);
 		this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 		Instantiate(boom, this.transform.position, this.transform.rotation);
-
+		source = this.GetComponent<AudioSource>();
+		source.clip = clips[Random.Range(0, 5)];
+		source.volume = 1;
+		source.Play();
 	}
 
 	void Update()

@@ -71,6 +71,7 @@ public class Respawn : MonoBehaviour
 						isPaused = true;
 						showDeathScreen = true;
 						deathScreen.SetActive (showDeathScreen);
+						GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().playDeadSong();
 					}
 				}
 			}
@@ -79,14 +80,18 @@ public class Respawn : MonoBehaviour
 				if (isPaused == false)
 				{
 					GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+					isPaused = true;
 				}
 				RespawnPlayer();
 				showDeathScreen = false;
 				deathScreen.SetActive (showDeathScreen);
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 				player.GetComponent<DeadPlayer> ().enabled = false;
+				GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().stopDeadSong();
+				timer = 0;
 			}
 			player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			Debug.Log ("Is game paused: " + isPaused);
 		}
 	}
 
@@ -127,6 +132,7 @@ public class Respawn : MonoBehaviour
 		else
 		{
 			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 		}
 		
@@ -158,8 +164,8 @@ public class Respawn : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		GameObject.Find ("dialogue_next").GetComponent<Button> ().onClick.AddListener (nextDialogDeath);
-		nameLeftPos = new Vector3(115.0f, -25.0f);
-		nameRightPos = new Vector3 (525.0f, -25.0f);
+		nameLeftPos = new Vector3(215.0f, -25.0f);
+		nameRightPos = new Vector3 (615.0f, -25.0f);
 
 		textColorPlayer = "#173E3CFF";
 		textColorShopkeeper = "#631911FF";
@@ -168,8 +174,8 @@ public class Respawn : MonoBehaviour
 		characters [1] = "Player";
 
 		deathDialog [0] = "So, you decided to get yourself killed? Luckily I was there to help you out! I've fixed the ship for you, so you can be on your way!";
-		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this!";
-		deathDialog [2] = "Of cause! It's already taken care of, no worries!";
+		deathDialog [1] = "Oh thank you, that's actually really nice! Wait, will I have to pay for this?";
+		deathDialog [2] = "Ofcause! It's already taken care of, no worries!";
 	}
 
 	private void teachDeath(int dialog)
@@ -214,6 +220,7 @@ public class Respawn : MonoBehaviour
 				dialogGui.transform.GetChild (i).gameObject.SetActive (false);
 			}
 			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 			GameControl.control.firstDeath = true;
 		}
