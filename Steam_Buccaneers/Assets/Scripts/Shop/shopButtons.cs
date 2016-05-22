@@ -82,6 +82,17 @@ public class ShopButtons : MonoBehaviour {
 		}
 	}
 
+	void Update()
+	{
+		if (GameObject.Find ("Slider_refill"))
+		{
+			if (GameControl.control.health + GameControl.control.money < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
+			{
+				GameObject.Find ("Slider_refill").GetComponent<Slider> ().value = GameControl.control.health + GameControl.control.money;
+			}
+		}
+	}
+
 	public void closeRepair () 
 	{
 		repairMenu.SetActive(false);

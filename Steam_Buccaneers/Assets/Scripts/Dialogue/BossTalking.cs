@@ -22,7 +22,7 @@ public class BossTalking : MonoBehaviour
 	//Number that keeps track of progress
 	public int dialogNumber;
 	//Array that hold the tutorial dialog
-	private string[] dialogTexts = new string[13];
+	private string[] dialogTexts = new string[15];
 	//Holds quest information
 	private Text questInfo;
 	//Character names
@@ -292,7 +292,10 @@ public class BossTalking : MonoBehaviour
 		} 
 		else if (dialogNumber == 12)
 		{
-			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
+			if (GameObject.Find ("Portrett"))
+			{
+				GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isHappyMainCharacter", true);
+			}
 		}
 
 	}

@@ -10,7 +10,7 @@ public class ShopkeeperDialog : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		if (GameObject.Find ("TutorialControl"))
+		if (!GameObject.Find ("TutorialControl"))
 		{
 			shopkeeperDialogTexts [0] = "Welcome back! What can I do you for?";
 			shopkeeperDialogTexts [1] = "Good to SEA you again!";
@@ -18,10 +18,10 @@ public class ShopkeeperDialog : MonoBehaviour {
 			shopkeeperDialogTexts [3] = "Welcome! Buy my stuff!";
 			int temp = Random.Range (0, shopkeeperDialogTexts.Length);
 			this.GetComponent<Text> ().text = shopkeeperDialogTexts [temp];
+			GameObject.Find ("dialogue_next_shop").SetActive (false);
 		} 
 		else
 		{
-			GameObject.Find ("dialogue_next_shop").SetActive (false);
 		}
 	}
 }

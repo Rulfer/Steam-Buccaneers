@@ -89,7 +89,7 @@ public class ShopText : MonoBehaviour {
 			break;
 
 		case "special":
-			header.GetComponent<Text>().text = specialWeaponName;
+			header.GetComponent<Text>().text = specialWeaponName + ". You have " + GameControl.control.specialAmmo + ".";
 			infoText.GetComponent<Text>().text = specialWeapon;
 			cost.GetComponent<Text>().text = specialAmmoCost+",-";
 			currentPrice = specialAmmoCost;
