@@ -32,10 +32,6 @@ public class PlayerMove : MonoBehaviour
 
 	private GameObject TutorialControl;
 
-	private AudioSource source;
-	public AudioClip[] clips;
-	private int clip = 2;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -51,9 +47,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			Destroy (TutorialControl);
 		}
-
-		source = this.GetComponent<AudioSource>();
-
+			
 		if (GameControl.control.thrusterUpgrade == 2)
 		{
 			force = 1400;
@@ -258,49 +252,6 @@ public class PlayerMove : MonoBehaviour
 			}
 
 		}
-		//}
-
-
-//		if(goingForward == true || turnLeft == true || turnRight == true)
-//		{
-//			if(source.isPlaying == false && clip == 0)
-//				playLoopSound();
-//			else if(source.isPlaying == false && clip != 0)
-//				playStartSound();
-//		}
-//		else if(goingForward == false && turnLeft == false && turnRight == false)
-//		{
-//			if(clip != 2)
-//				playEndSound();
-//		}
-		//}
-	}
-
-	private void playStartSound()
-	{
-		source.clip = clips[0];
-		source.loop = false;
-		source.Stop();
-		source.Play();
-		clip = 0;
-	}
-
-	private void playLoopSound()
-	{
-		source.clip = clips[1];
-		source.loop = true;
-		source.Stop();
-		source.Play();
-		clip = 1;
-	}
-
-	private void playEndSound()
-	{
-		source.clip = clips[2];
-		source.loop = false;
-		source.Stop();
-		source.Play();	
-		clip = 2;
 	}
 
 	void OnTriggerEnter(Collider other)
