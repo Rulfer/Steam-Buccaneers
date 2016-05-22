@@ -36,47 +36,46 @@ public class SpawnAI : MonoBehaviour
 	{
 		spawn = this;
 
-		marineShips = new GameObject[maxMarines];
-		availableIndes = new bool[maxMarines];
+		marineShips = new GameObject[maxMarines]; //Sets the array length equal to the maximum ammount of marines we want in the game
+		availableIndes = new bool[maxMarines]; //Does the same with this array
 
-		for(int i = 0; i < marineShips.Length; i++)
+		for(int i = 0; i < marineShips.Length; i++) //Cleans out the arrays
 		{
 			marineShips[i] = null;
 			availableIndes[i] = true;
 		}
-		waitBeforeNewSpawn();
-		waitBeforeCargoSpawn();
+		waitBeforeNewSpawn(); //Start the marine spawn timer
+		waitBeforeCargoSpawn(); //Start the cargo spawn timer
 	}
 
 	void Update()
 	{
 		startFightTimer += Time.deltaTime;
 
-		if(stopFightTimer == true)
-			startFightTimer = 0;
+		if(stopFightTimer == true) //A fight is not to start automatically
+			startFightTimer = 0; //reset the timer
 		
-		if(startFightTimer > 45)
+		if(startFightTimer > 45) //There are 45 seconds since last fight. Starte one. 
 		{
-			startFightTimer = 0;
-			float temp = 10000;
-			float aiPlayerDistance;
-			int tempI = 100;
+			startFightTimer = 0; //Reset the timer
+			float temp = 10000; //Create a value to test with, it needs to be large
+			float aiPlayerDistance; //Distance between player and enemies
+			int tempI = 100; //Holds the index of the enemy to fight
 			for(int i = 0; i < marineShips.Length; i++)
 			{
-				if(marineShips[i] != null)
+				if(marineShips[i] != null) //Make sure a marine is alive in the current index
 				{
-					aiPlayerDistance = Vector3.Distance (playerPoint.transform.position, marineShips[i].transform.position); //Distance between player and where the boss spawns
-					if(aiPlayerDistance < temp)
+					aiPlayerDistance = Vector3.Distance (playerPoint.transform.position, marineShips[i].transform.position); //Distance between player and marine
+					if(aiPlayerDistance < temp) //The distance is lower than temp, i.e. the new closest enemy. 
 					{
-						temp = aiPlayerDistance;
-						tempI = i;
+						temp = aiPlayerDistance; //Sett temp to the new value
+						tempI = i; //Save the array index
 					}
 				}
 			}
-			if(tempI != 100)
+			if(tempI != 100) //An enemy was alive and is the one to fight the player
 			{
-				marineShips[tempI].GetComponent<AIMaster>().deaktivatePatroling();
-				marineShips[tempI].GetComponent<AIMaster>().allAIFlee();
+				marineShips[tempI].GetComponent<AIMaster>().deaktivatePatroling(); //Deactivate that enemies patroling and engage the player
 			}
 		}
 	}
