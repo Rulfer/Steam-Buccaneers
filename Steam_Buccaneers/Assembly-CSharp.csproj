@@ -93,8 +93,8 @@
      <Compile Include="Assets\Scripts\PlayerShip\ChangeMaterial.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\DeadPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PickupScrap.cs" />
-     <Compile Include="Assets\Scripts\PlayerShip\PlayerMove2.cs" />
-     <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate2.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\PlayerRotate.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Projectile.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\Respawn.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\SetWeapon.cs" />

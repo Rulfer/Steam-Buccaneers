@@ -51,8 +51,8 @@ public class Respawn : MonoBehaviour
 		{
 			if (isDead == false)
 			{
-				PlayerMove2.turnLeft = false;
-				PlayerMove2.turnRight = false;
+				PlayerMove.turnLeft = false;
+				PlayerMove.turnRight = false;
 				GameControl.control.isFighting = false;
 				player.GetComponent<DeadPlayer>().enabled = true;
 				isDead = true;

@@ -57,7 +57,7 @@ public class AIMaster : MonoBehaviour
 			if(detectDistance < aiRadar - 100)
 			{
 				if(isCargo == false)
-					this.GetComponent<AImove>().force = PlayerMove2.move.force;
+					this.GetComponent<AImove>().force = PlayerMove.move.force;
 			}
 
 			if(isBoss == false)
@@ -115,7 +115,7 @@ public class AIMaster : MonoBehaviour
 		this.GetComponent<AIPatroling>().enabled = true;
 		this.GetComponent<AImove>().isPatroling = true;
 		this.GetComponent<AImove>().isFleeing = false;
-		this.GetComponent<AImove>().force = PlayerMove2.move.force;
+		this.GetComponent<AImove>().force = PlayerMove.move.force;
 	}
 
 	public void deaktivatePatroling()
@@ -131,12 +131,12 @@ public class AIMaster : MonoBehaviour
 		this.GetComponent<AIPatroling>().enabled = false;
 		this.GetComponent<AImove>().isPatroling = false;
 		if(isCargo == false)
-			this.GetComponent<AImove>().force = PlayerMove2.move.force + 200;
+			this.GetComponent<AImove>().force = PlayerMove.move.force + 200;
 		else
 		{
 			testedFleeing = true;
 			this.GetComponent<AImove>().isFleeing = true;
-			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
+			this.GetComponent<AImove>().force = PlayerMove.move.force - 100;
 		}
 	}
 
@@ -340,7 +340,7 @@ public class AIMaster : MonoBehaviour
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat3);
 			this.GetComponent<DamagedAI>().startFire();
 			usingMat3 = true;
-			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
+			this.GetComponent<AImove>().force = PlayerMove.move.force - 100;
 		}
 	}	
 
@@ -351,7 +351,7 @@ public class AIMaster : MonoBehaviour
 			aiModelObject.GetComponent<Renderer>().material = new Material(mat2);
 			this.GetComponent<DamagedAI>().startSmoke();
 			usingMat2 = true;
-			this.GetComponent<AImove>().force = PlayerMove2.move.force - 100;
+			this.GetComponent<AImove>().force = PlayerMove.move.force - 100;
 		}
 	}
 

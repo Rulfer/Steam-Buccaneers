@@ -65,7 +65,7 @@ public class BombHitSomething : MonoBehaviour {
 			Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
 			if(hit.transform.root.name == "PlayerShip") //If we hit the player
 			{
-				PlayerMove2.hitBomb = true; //Disable movement
+				PlayerMove.hitBomb = true; //Disable movement
 			}
 			if(hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
 			{

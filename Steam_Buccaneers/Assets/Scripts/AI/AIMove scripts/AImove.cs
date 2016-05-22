@@ -29,8 +29,8 @@ public class AImove : MonoBehaviour {
 	{
 		player = GameObject.Find("PlayerShip");
 		aiRigid = this.GetComponent<Rigidbody>();
-		force = PlayerMove2.move.force;
-		maxVelocity = PlayerMove2.move.maxVelocity;
+		force = PlayerMove.move.force;
+		maxVelocity = PlayerMove.move.maxVelocity;
 	}
 		
     void FixedUpdate () 

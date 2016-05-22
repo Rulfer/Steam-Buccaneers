@@ -14,6 +14,6 @@ public class BoostSlider : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		this.GetComponent<Slider>().value = PlayerMove2.boostCooldownTimer;
+		this.GetComponent<Slider>().value = PlayerMove.boostCooldownTimer;
 	}
 }
