@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cameraController : MonoBehaviour 
+public class CameraController : MonoBehaviour 
 {
 	public float distanceAway;
 	private float amountScrolled;
@@ -79,7 +79,7 @@ public class cameraController : MonoBehaviour
 				}
 			}
 
-			if (PlayerMove2.isBoosting)
+			if (PlayerMove.isBoosting)
 			{
 				if (boostDistance <= 49)
 				{

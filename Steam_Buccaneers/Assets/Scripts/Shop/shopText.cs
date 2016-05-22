@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class shopText : MonoBehaviour {
+public class ShopText : MonoBehaviour {
 
 	private GameObject header;
 	private GameObject infoText;

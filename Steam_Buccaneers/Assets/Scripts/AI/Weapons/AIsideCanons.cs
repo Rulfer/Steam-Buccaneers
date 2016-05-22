@@ -163,17 +163,17 @@ public class AIsideCanons : MonoBehaviour {
 				{
 					if(cannonLevel[1] == 1)
 					{
-						GameObject test = Instantiate (cannonball1, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						GameObject test = Instantiate (cannonball1, leftCannons[0].transform.position, transform.rotation) as GameObject;
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 					else if(cannonLevel[1] == 2)
 					{
-						GameObject test = Instantiate (cannonball2, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						GameObject test = Instantiate (cannonball2, leftCannons[0].transform.position, transform.rotation) as GameObject;
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 					else if(cannonLevel[1] == 3)
 					{
-						GameObject test = Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation) as GameObject;
+						GameObject test = Instantiate (cannonball3, leftCannons[0].transform.position, transform.rotation) as GameObject;
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right));
 					}
 				}

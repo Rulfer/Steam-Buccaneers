@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class updatePayment : MonoBehaviour 
+public class UpdatePayment : MonoBehaviour 
 {
 	float sliderValue;
 	public float payment;

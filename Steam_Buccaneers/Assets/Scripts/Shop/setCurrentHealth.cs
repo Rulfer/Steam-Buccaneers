@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class setCurrentHealth : MonoBehaviour 
+public class SetCurrentHealth : MonoBehaviour 
 {
 	void Start () 
 	{

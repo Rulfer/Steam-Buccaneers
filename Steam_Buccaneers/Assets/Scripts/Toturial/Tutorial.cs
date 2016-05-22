@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
 	//Text that says pause
 	public GameObject pauseText;
 	//Array that hold the tutorial dialog
-	private string[] dialogTexts = new string[43];
+	private string[] dialogTexts = new string[44];
 	//Holds quest information
 	private Text questInfo;
 	//Character names
@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour
 	private string textColorMarine;
 	private Color tempColor;
 	//getting ahold of button functions
-	private gameButtons buttonEvents;
+	private GameButtons buttonEvents;
 	//AIship used to battle
 	public GameObject AI;
 	//Character vinduer
@@ -114,7 +114,7 @@ public class Tutorial : MonoBehaviour
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		pauseText = GameObject.Find ("pause");
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 
 		marineCharacterWindow = GameObject.Find ("Portrett2_marine");
 		shopKeeperCharacterWindow = GameObject.Find ("Portrett2_shopkeeper");
@@ -138,7 +138,7 @@ public class Tutorial : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
 		nameLeftPos = new Vector3(217.0f, -25.0f);
@@ -267,13 +267,13 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [31] = "These are upgradeable parts. I can do upgrades for each of your side cannons, " +
 			"or I could increase the damage your hull can take before you’re blown to bits, " +
 			"or your back thruster output. ";
-		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon. " +
-			"Confirm your purchase on the bottom of the screen.";//Shopkeeper
+		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon." +
+			"Confirm your purchase on the bottom of the screen. Click untill you got 20.";//Shopkeeper
 		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!”" +
 			" and drag the slider for how much you want to repair.";//Shopkeeper
 		dialogTexts[34] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
-			"to the top left you’ll see how much scraps you’ve got";//Shopkeeper
-		dialogTexts[35] = "I guess that’s about it for whatc I can tell you. Be on your way now, and remember; " +
+			"to the top left you’ll see how much scraps you’ve got.";//Shopkeeper
+		dialogTexts[35] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
 			"Keep alive and keep flying! A living customer is a paying customer. " +
 			"Come back anytime should you need something";//Shopkeeper
 		
@@ -284,10 +284,10 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. You can also press “M” to see the map.";
 		dialogTexts[39] ="You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
-		dialogTexts [39] = "Sir Spikybottom? Seriously?!?!?";//Player
-		dialogTexts [40] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
+		dialogTexts [40] = "Sir Spikybottom? Seriously?!?!?";//Player
+		dialogTexts [41] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
 			"Now shut it and get going!";//Shopkeeper
-		dialogTexts [41] = "...";//Player
+		dialogTexts [42] = "...";//Player
 
 	}
 
@@ -449,9 +449,11 @@ public class Tutorial : MonoBehaviour
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = true;
 			GameObject.Find ("button_x").GetComponent<Button> ().enabled = true;
 			changeButtonInteractivity (true);
+			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = false;
 			break;
 		case(35):
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
+			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = true;
 			break;
 		case(36):
 			changeCharacterWindow ();
@@ -459,7 +461,7 @@ public class Tutorial : MonoBehaviour
 			questInfo.text = "Talk to shopkeeper.";
 			pauseText.SetActive (true);
 			break;
-		case(42):
+		case(43):
 			questInfo.text = "Find ancient cog!";
 			talkBubble.SetActive (false);
 			avatarWindow.SetActive (false);

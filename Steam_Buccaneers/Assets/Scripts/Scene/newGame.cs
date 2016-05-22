@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class newGame : MonoBehaviour {
+public class NewGame : MonoBehaviour {
 
 	public void starNewGame()
 	{

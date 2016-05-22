@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class setWeapon : MonoBehaviour {
+public class SetWeapon : MonoBehaviour {
 
 	private GameObject[] canons;
 	public Mesh[] canonMesh = new Mesh[3];

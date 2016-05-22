@@ -72,7 +72,7 @@ public class MinimapCamera : MonoBehaviour
 		minimapBackground.SetActive(false);
 		animationCanvas.SetActive(false);
 		boss.transform.localScale = new Vector3(21, 21, 21);
-		player.transform.localScale = new Vector3(600, 600, 600);
+		player.transform.localScale = new Vector3(1000, 1000, 1000);
 		foreach(GameObject go in shops)
 			go.transform.localScale = new Vector3 (20, 20, 20);
 		foreach(GameObject go in diamonds)

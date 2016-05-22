@@ -136,7 +136,7 @@ public class GameControl : MonoBehaviour {
 	public void Load()
 	{
 		//Have to check if file exists before attempting to read it
-		if (File.Exists (Application.persistentDataPath + "/playerInfo.ohhijohnny")) 
+		if (File.Exists (Application.persistentDataPath + "/playerInfo.ohhijohnny") && SceneManager.GetActiveScene().name != "Tutorial")  
 		{
 			//Makes binaryformatter to be able to convert binary into data
 			BinaryFormatter bf = new BinaryFormatter();
@@ -177,7 +177,7 @@ public class GameControl : MonoBehaviour {
 	{
 		if (name == "cog_screen")
 		{
-			this.GetComponent<gameButtons> ().pause ();
+			this.GetComponent<GameButtons> ().pause ();
 		}
 		//Changes scene to parameter
 		loadingCanvas.SetActive(true);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class swivelWeaponControl : MonoBehaviour 
+public class SwivelWeaponControl : MonoBehaviour 
 {
 	private Camera mainCam;
 	public float speed;
