@@ -32,6 +32,5 @@ public class PlayVideoScript : MonoBehaviour
 		this.enabled = true;
 		movie = this.GetComponent<RawImage>().mainTexture as MovieTexture;
 		movie.Play();
-
 	}
 }

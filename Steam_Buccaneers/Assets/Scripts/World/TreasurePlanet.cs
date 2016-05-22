@@ -20,6 +20,8 @@ public class TreasurePlanet : MonoBehaviour
 		Debug.Log ("Enter treasureplanet");
 		if (other.tag == "Player" && treasureHasBeenPickedUp == false)
 		{
+			if(GameObject.Find("_GUIManager"))
+				GameObject.Find("_GUIManager").SetActive(false);
 			Debug.Log ("Play animation " + treasureAnimation);
 			//spill av animasjon
 			GameObject.Find("GameControl").GetComponent<GameButtons>().pause();
