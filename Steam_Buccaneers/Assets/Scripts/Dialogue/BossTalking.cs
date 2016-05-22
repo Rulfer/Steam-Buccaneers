@@ -22,7 +22,7 @@ public class BossTalking : MonoBehaviour
 	//Number that keeps track of progress
 	public int dialogNumber;
 	//Array that hold the tutorial dialog
-	private string[] dialogTexts = new string[15];
+	private string[] dialogTexts = new string[20];
 	//Holds quest information
 	private Text questInfo;
 	//Character names
