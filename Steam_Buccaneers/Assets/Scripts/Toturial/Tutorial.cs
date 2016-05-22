@@ -230,8 +230,8 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [7] = "Also you’re human, aren’t you? So add them together and you know them cops aren’t going to give you an easy time.";//Shopkeeper
 		dialogTexts [8] = "But anyways. The controls are simple, just press “W” to move your ship forward. “A” and “D” turns you around. " +
 			"Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
-		dialogTexts [9] = "You can also boost your ship by pressing “Shift”. Just try that for a bit now, you got time before " +
-			"them cops arrive here.";//Shopkeeper
+		dialogTexts [9] = "You can also put your engine into overdrive by pressing “Shift.” But beware, while you’re in combat mode, your ship is using a lot of power, " +
+			"so you can’t boost continously. Out of combat you should be fine.";//Shopkeeper
 		dialogTexts[10] = "Wow, is that it? And I couldn’t figure this out by myself how? Would’ve been my first guess anyway.";//Player
 		dialogTexts [11] = "Easy peasy. Now, you see you have some guns on both sides of your ship there? You can fire the left side by pressing “Q” and the right side by pressing “E”.";//Shopkeeper
 		dialogTexts[12] = "Both yourself and bullets can be affected by gravity. So your bullets might not go where you want them to go, if you are to close to a planet." +
@@ -251,7 +251,8 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[21] = "Hey, I am an entrepreneur aren’t I? Need to make money some way or another. " +
 			"Tell you what, I’ll reimburse you for the ones you’ve fired, alright?";//Shopkeeper
 		dialogTexts[22] = "Oh would you look at that, looks like we’re done just in time for " +
-			"them coppers to arrive. Now test out what I’ve just taught you.";//Shopkeeper
+			"them coppers to arrive. Now test out what I’ve just taught you. " +
+			"Oh, and before i forget, you can zoom in and out your camera using the “scroll wheel” on your mouse. ";//Shopkeeper
 		dialogTexts[23] = "Stop right there criminal scum! You are wanted for peddling illegal" +
 			" goods and scavenged ships. And you, pirate! Stay there and we’ll deal with you later!";//Marine
 		dialogTexts[24] = "What do you say, pirate? I’ll fix up your ship for free if you help me " +
@@ -261,18 +262,18 @@ public class Tutorial : MonoBehaviour
 			"You see those gears and other bits and bobs that’s left after that marine ship? " +
 			"This is what us traders take as payment.";
 		dialogTexts[27] = "Fly over there, and pick it up.";//Shopkeeper
-		dialogTexts[28] = "  And as promised I’ll fix your damage, just fly closer to me and I’ll open up a landing pad for you.";//Shopkeeper
+		dialogTexts[28] = "  And as promised I’ll fix your damage, just fly closer to me and I’ll open up a landing pad for you. ";//Shopkeeper
 		dialogTexts[29] = "Here is what I, and most other shops around this star has to offer.";//Shopkeeper
 		dialogTexts[30] = "You see all these icons on the blueprint of your ship here?";
 		dialogTexts [31] = "These are upgradeable parts. I can do upgrades for each of your side cannons, " +
 			"or I could increase the damage your hull can take before you’re blown to bits, " +
 			"or your back thruster output. ";
 		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon." +
-			"Confirm your purchase on the bottom of the screen. Click untill you got 20.";//Shopkeeper
+			"Confirm your purchase on the bottom of the screen. Buy back up to 20. ";//Shopkeeper
 		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!”" +
 			" and drag the slider for how much you want to repair.";//Shopkeeper
 		dialogTexts[34] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
-			"to the top left you’ll see how much scraps you’ve got.";//Shopkeeper
+			"in the top left you’ll see how much scraps you’ve got.";//Shopkeeper
 		dialogTexts[35] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
 			"Keep alive and keep flying! A living customer is a paying customer. " +
 			"Come back anytime should you need something";//Shopkeeper
@@ -282,9 +283,9 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
 		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. You can also press “M” to see the map.";
-		dialogTexts[39] ="You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
+		dialogTexts[39] ="You know, you could lose that attitude, I don't think Sir Pincushion will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
-		dialogTexts [40] = "Sir Spikybottom? Seriously?!?!?";//Player
+		dialogTexts [40] = "Sir Pincushion? Seriously?!";//Player
 		dialogTexts [41] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
 			"Now shut it and get going!";//Shopkeeper
 		dialogTexts [42] = "...";//Player
