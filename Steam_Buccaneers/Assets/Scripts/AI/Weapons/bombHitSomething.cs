@@ -67,7 +67,7 @@ public class BombHitSomething : MonoBehaviour {
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
-			if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
+			if(hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
 			{
 				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
 			}
