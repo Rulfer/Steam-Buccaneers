@@ -9,6 +9,7 @@ public class GameControl : MonoBehaviour {
 
 	//Making a controller which is going to last as long as the game is running. Other scrips can access the data without problems
 	public static GameControl control;
+	public GameObject guiManager;
 
 	//Here is the gamedata saved
 	public Vector3 shipPos;
@@ -181,7 +182,12 @@ public class GameControl : MonoBehaviour {
 		}
 		//Changes scene to parameter
 		loadingCanvas.SetActive(true);
+		if(GameObject.Find("_GUIManager"))  
+			GameObject.Find("_GUIManager").SetActive(false);
 		StartCoroutine(LoadingScreen(name));
+		if(GameObject.Find("_GUIManager"))  
+			GameObject.Find("_GUIManager").SetActive(true);
+		
 	}
 
 	IEnumerator LoadingScreen(string sceneName)
