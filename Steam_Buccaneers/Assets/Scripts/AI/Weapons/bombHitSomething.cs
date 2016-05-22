@@ -20,7 +20,6 @@ public class BombHitSomething : MonoBehaviour {
 	void Start()
 	{
 		source = this.GetComponent<AudioSource>();
-	//	playerPos = GameObject.Find("PlayerShip");
 	}
 
 	void OnTriggerEnter(Collider other) //The bomb hit something
@@ -30,32 +29,25 @@ public class BombHitSomething : MonoBehaviour {
 			GameControl.control.health -= 10; //Remove 10 health from the player
 			CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(2, 5, 0.10f, 0.8f); //This actually instantiates the camera shake. Do NOT remove this line of code. 
 		}
-		if(other.tag == "aiShip") //It hit the AI
+		if(other.tag == "aiShip") //It hit an enemy
 		{
-			if(other.transform.root.name == "Cargo(Clone)")
-				other.transform.GetComponentInParent<AIMaster>().thisAIFlee();
-			
-			if(other.transform.root.name == "Boss(Clone)" && (other.GetComponentInParent<AIMaster>().aiHealth - 10) <= 0)
+			if(other.transform.root.name == "Cargo(Clone)") //The bomb hit a cargo ship
+				other.transform.GetComponentInParent<AIMaster>().thisAIFlee(); //It will now flee
+
+			if(other.transform.root.name != "Boss(Clone)") // We hit an enemy, but not the boss
 			{
-				other.GetComponentInParent<BossTalking> ().enabled = true;
-				other.GetComponentInParent<BossTalking> ().findAllDialogElements();
-				other.GetComponentInParent<BossTalking> ().dialogBoss (12);
-				other.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
-				//SceneManager.LoadScene("cog_screen");
+				other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health rom the enemy
+				if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0) //We are going to kill it if the health is 0 or less
+					other.transform.GetComponentInParent<AIMaster>().killAI(); //Kil the enemy that hit the bomb
+				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3) //The enemy did not die, but lost enough health to get a new material
+				{
+					other.GetComponentInParent<AIMaster>().changeMat3(); //Change the material
+				}
+				else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2) //The enemy lost enough health to change to the second material
+					other.GetComponentInParent<AIMaster>().changeMat2(); //Change the material
 			}
-			if(other.GetComponentInParent<AIMaster>().isBoss == true && GameControl.control.health > 0) //Boss can only loose health if player is alive
-				other.transform.GetComponentInParent<AIMaster>().aiHealth -= 10; //Remove 10 health from the AI
-			if(other.transform.GetComponentInParent<AIMaster>().aiHealth <= 0)
-				other.transform.GetComponentInParent<AIMaster>().killAI();
-			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat3)
-			{
-				other.GetComponentInParent<AIMaster>().changeMat3();
-				other.GetComponentInParent<AIMaster>().testFleeing();
-			}
-			else if(other.GetComponentInParent<AIMaster>().aiHealth <= other.GetComponentInParent<AIMaster>().aiHealthMat2)
-				other.GetComponentInParent<AIMaster>().changeMat2();
 		}
-		if(other.tag == "canonball") //A ball hit this object
+		if(other.tag == "canonball") //A ball hit this bomb
 		{
 			Destroy(other.gameObject); //destroyd the canonball
 		}
@@ -64,9 +56,9 @@ public class BombHitSomething : MonoBehaviour {
 
 	void createExplotion()
 	{
-		Vector3 explotionPos = this.transform.position; //The position of this object. The origin of the explotion
+		Vector3 explosionPos = this.transform.position; //The position of this object. The origin of the explotion
 
-		Collider[] colliders = Physics.OverlapSphere(explotionPos, radius);//An array containing every object that has hit the explotion
+		Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);//An array containing every object that has hit the explosion
 
 		foreach(Collider hit in colliders) //We will do the same check for every object in the array
 		{
@@ -75,7 +67,7 @@ public class BombHitSomething : MonoBehaviour {
 			{
 				PlayerMove2.hitBomb = true; //Disable movement
 			}
-			if(hit.transform.root.name == "Boss(Clone)" || hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an aiShip
+			if(hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
 			{
 				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
 			}
@@ -86,14 +78,11 @@ public class BombHitSomething : MonoBehaviour {
 				rb = test.GetComponent<Rigidbody>(); //Changes rb to be the rigidbody of the root object
 				if(rb != null) //The parent got the rigidbody!
 				{
-					rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
+					rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
+					//We increase drag and mass of the player if it get hit by a bomb.
+					//This is to decrease the bumpy feeling of the ship, and decrease 
+					//the ammount of distance the player can move due to the impact. 
 					if(hit.transform.root.name == "PlayerShip")
-					{
-						rb.mass = 5;
-						rb.drag = 5;
-						rb.angularDrag = 5;
-					}
-					if(hit.transform.root.name == "Boss(Clone)")
 					{
 						rb.mass = 5;
 						rb.drag = 5;
@@ -104,15 +93,15 @@ public class BombHitSomething : MonoBehaviour {
 
 			else //The object has the rigidbody component (usually meaning this object and canonballs)
 			{
-				rb.AddExplosionForce(force, explotionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the rigidbody
+				rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the rigidbody
 			}
 		}
 
-		Instantiate(explosion, this.transform.position, this.transform.rotation);
-		source.clip = clips[Random.Range(0, 5)];
+		Instantiate(explosion, this.transform.position, this.transform.rotation); //Instantiate explosion simulation
+		source.clip = clips[Random.Range(0, 5)]; //Play a random audioclip 
 		source.Play();
-		this.GetComponent<MeshCollider>().enabled = false;
-		this.GetComponent<MeshRenderer>().enabled = false;
-		Destroy(this.gameObject, source.clip.length); //Destroys this object
+		this.GetComponent<MeshCollider>().enabled = false; //Disable the collider
+		this.GetComponent<MeshRenderer>().enabled = false; //Disable the mesh and make the bomb invisible
+		Destroy(this.gameObject, source.clip.length); //Destroys this object once the clip is done playing
 	}
 }
