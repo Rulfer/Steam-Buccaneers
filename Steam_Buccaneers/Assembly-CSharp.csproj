@@ -132,6 +132,7 @@
      <Compile Include="Assets\Scripts\World\TreasurePlanet.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\WorldBorder.cs" />
+     <Compile Include="Assets\TreasureRandomDirection.cs" />
      <Compile Include="Assets\UnpauseAndDelete.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
