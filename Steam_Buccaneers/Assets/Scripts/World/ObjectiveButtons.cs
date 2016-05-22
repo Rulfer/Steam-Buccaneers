@@ -21,7 +21,7 @@ public class ObjectiveButtons : MonoBehaviour {
 	{
 		counter += Time.deltaTime;
 
-		if (counter > 10)
+		if (counter > 5)
 		{
 			if (compassNeedle.goTarget != null)
 			{
