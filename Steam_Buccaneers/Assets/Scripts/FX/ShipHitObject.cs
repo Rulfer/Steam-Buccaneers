@@ -84,7 +84,7 @@ public class ShipHitObject : MonoBehaviour
 					if (this.transform.name == "PlayerShip")
 					{
 						GameControl.control.health -= healthLost * 8;
-						this.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+						this.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
 					}
 					else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" )
 						this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 3;

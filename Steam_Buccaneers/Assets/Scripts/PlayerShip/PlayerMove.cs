@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using EZCameraShake;
 
-public class PlayerMove2 : MonoBehaviour 
+public class PlayerMove : MonoBehaviour 
 {
-	public static PlayerMove2 move;
+	public static PlayerMove move;
 	public static Rigidbody player;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public float force;
@@ -18,6 +18,7 @@ public class PlayerMove2 : MonoBehaviour
 	public static bool turnRight = false;
 	public static bool goingForward = false;
 	public static bool isBoosting = false;
+	// bad name for this variable, this is in fact the pool of available boosting power/time
 	public static float boostCooldownTimer = 3f;
 	private bool boostCooledDown = false;
 	CameraShakeInstance shake;
@@ -31,14 +32,11 @@ public class PlayerMove2 : MonoBehaviour
 
 	private GameObject TutorialControl;
 
-	private AudioSource source;
-	public AudioClip[] clips;
-	private int clip = 2;
-
 	// Use this for initialization
 	void Start () 
 	{
 		boostBar = GameObject.Find ("boost_bar");
+		boostBar.SetActive (false);
 		move = this;
 		player = GetComponent<Rigidbody>();
 		if (GameObject.Find ("TutorialControl") != null)
@@ -49,9 +47,7 @@ public class PlayerMove2 : MonoBehaviour
 		{
 			Destroy (TutorialControl);
 		}
-
-		source = this.GetComponent<AudioSource>();
-
+			
 		if (GameControl.control.thrusterUpgrade == 2)
 		{
 			force = 1400;
@@ -80,31 +76,50 @@ public class PlayerMove2 : MonoBehaviour
 			//boostCooldownTimer -= Time.deltaTime;
 		}*/
 
+		// removing and adding the boosting bar
+		if (GameControl.control.isFighting && !boostBar.activeSelf)
+		{
+			boostBar.SetActive(true);
+		}
+
+		else if (!GameControl.control.isFighting && boostBar.activeSelf && boostCooledDown)
+		{
+			boostBar.SetActive(false);
+		}
+
 		if(boostCooldownTimer <= 0f)
 		{
 			boostCooldownTimer = 0f;
 			isBoosting = false;
-			boostCooledDown = false;
 			//CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+		}
+		else if (boostCooldownTimer < 3f)
+		{
+			boostCooledDown = false;
 		}
 
 		if ((boostCooldownTimer < 3f && isBoosting == false && GameControl.control.isFighting == true) || 
 			(boostCooldownTimer < 3f && GameControl.control.isFighting == false))
 		{
-			if (waitForBoost > -0.1f && waitForBoost < 3.1f)
+			if (waitForBoost > -0.1f && waitForBoost < 3.1f && !Input.GetKey(KeyCode.LeftShift) && GameControl.control.isFighting)
 			{
 				waitForBoost -= Time.deltaTime;
 			}
+			if (!GameControl.control.isFighting && waitForBoost > 0)
+			{
+				waitForBoost = 0;
+			}
+
 			if (waitForBoost <= 0)
 			{
 				boostCooldownTimer +=Time.deltaTime/3;
 				if (boostCooldownTimer >= 3f)
 				{
+					boostCooledDown = true;
 					boostCooldownTimer = 3f;
 					//boostCooledDown = true;
 				}
 			}
-
 		}
 			
 		if(hitBomb == true)
@@ -127,7 +142,6 @@ public class PlayerMove2 : MonoBehaviour
 			if (Input.GetKey (KeyCode.LeftShift))
 			{
 				Boost();
-				waitForBoost = 3f;				
 			}
 
 			else
@@ -143,7 +157,17 @@ public class PlayerMove2 : MonoBehaviour
 
 				else if (GameControl.control.isFighting && boostCooldownTimer > 0f)
 				{
+					//if (boostCooldownTimer <=
+					waitForBoost = 3f;
 					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
+				}
+			}
+
+			if (Input.GetKeyUp (KeyCode.LeftShift))
+			{
+				if (GameControl.control.isFighting && boostCooldownTimer > 0f)
+				{
+					waitForBoost = 3f;
 				}
 			}
 				
@@ -228,49 +252,6 @@ public class PlayerMove2 : MonoBehaviour
 			}
 
 		}
-		//}
-
-
-//		if(goingForward == true || turnLeft == true || turnRight == true)
-//		{
-//			if(source.isPlaying == false && clip == 0)
-//				playLoopSound();
-//			else if(source.isPlaying == false && clip != 0)
-//				playStartSound();
-//		}
-//		else if(goingForward == false && turnLeft == false && turnRight == false)
-//		{
-//			if(clip != 2)
-//				playEndSound();
-//		}
-		//}
-	}
-
-	private void playStartSound()
-	{
-		source.clip = clips[0];
-		source.loop = false;
-		source.Stop();
-		source.Play();
-		clip = 0;
-	}
-
-	private void playLoopSound()
-	{
-		source.clip = clips[1];
-		source.loop = true;
-		source.Stop();
-		source.Play();
-		clip = 1;
-	}
-
-	private void playEndSound()
-	{
-		source.clip = clips[2];
-		source.loop = false;
-		source.Stop();
-		source.Play();	
-		clip = 2;
 	}
 
 	void OnTriggerEnter(Collider other)

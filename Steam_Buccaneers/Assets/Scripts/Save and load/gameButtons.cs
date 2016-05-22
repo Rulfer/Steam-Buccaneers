@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class gameButtons : MonoBehaviour {
+public class GameButtons : MonoBehaviour {
 	private bool escMenuStatus = false;
 	public GameObject escMenu;
 	private int i = 0;

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class swivelFire : MonoBehaviour 
+public class SwivelFire : MonoBehaviour 
 {
 
 	public GameObject cannonball;

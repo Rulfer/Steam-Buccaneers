@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class changeSliderValue : MonoBehaviour {
+public class ChangeSliderValue : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () 

@@ -51,8 +51,8 @@ public class Respawn : MonoBehaviour
 		{
 			if (isDead == false)
 			{
-				PlayerMove2.turnLeft = false;
-				PlayerMove2.turnRight = false;
+				PlayerMove.turnLeft = false;
+				PlayerMove.turnRight = false;
 				GameControl.control.isFighting = false;
 				player.GetComponent<DeadPlayer>().enabled = true;
 				isDead = true;
@@ -67,7 +67,7 @@ public class Respawn : MonoBehaviour
 				{
 					if (isPaused == false)
 					{
-						GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+						GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause ();
 						isPaused = true;
 						showDeathScreen = true;
 						deathScreen.SetActive (showDeathScreen);
@@ -79,7 +79,8 @@ public class Respawn : MonoBehaviour
 			{
 				if (isPaused == false)
 				{
-					GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+					GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause ();
+					isPaused = true;
 				}
 				RespawnPlayer();
 				showDeathScreen = false;
@@ -87,8 +88,10 @@ public class Respawn : MonoBehaviour
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 				player.GetComponent<DeadPlayer> ().enabled = false;
 				GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().stopDeadSong();
+				timer = 0;
 			}
 			player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			Debug.Log ("Is game paused: " + isPaused);
 		}
 	}
 
@@ -116,7 +119,7 @@ public class Respawn : MonoBehaviour
 		player.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
 		GameControl.control.health = 100;
-		player.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+		player.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
 
 		if (GameControl.control.firstDeath == false)
 		{
@@ -128,7 +131,8 @@ public class Respawn : MonoBehaviour
 		} 
 		else
 		{
-			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 		}
 		
@@ -215,7 +219,8 @@ public class Respawn : MonoBehaviour
 			{
 				dialogGui.transform.GetChild (i).gameObject.SetActive (false);
 			}
-			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 			GameControl.control.firstDeath = true;
 		}

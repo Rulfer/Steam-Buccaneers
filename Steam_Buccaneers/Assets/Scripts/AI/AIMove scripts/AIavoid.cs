@@ -34,7 +34,7 @@ public class AIavoid : MonoBehaviour {
 		RaycastHit objectHit;
 		if(Physics.Raycast(this.transform.position, fwd, out objectHit, detectDistance))
 		{
-			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "Moon" || objectHit.transform.tag == "asteroid" || objectHit.transform.tag == "aiShip") //The planet is in front of the AI
+			if(objectHit.transform.tag == "Planet" || objectHit.transform.tag == "Moon" || objectHit.transform.tag == "asteroid" || objectHit.transform.root.name == "Cargo(Clone)" || objectHit.transform.root.name == "Marine(Clone)" || objectHit.transform.root.name == "Boss(Clone)") //The planet is in front of the AI
 			{
 				if(relativePlayerPoint.x > 0) //Player to the right of the AI
 				{

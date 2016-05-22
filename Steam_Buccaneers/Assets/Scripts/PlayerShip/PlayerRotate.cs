@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerRotate2 : MonoBehaviour
+public class PlayerRotate : MonoBehaviour
 {
 	Vector3 rotationVec = new Vector3 (0f, 0f, 1f);
 	Vector3 uprightRot = new Vector3(0f, 180f, 0f);
@@ -23,7 +23,7 @@ public class PlayerRotate2 : MonoBehaviour
 
 		//Debug.Log (currentDeg);
 
-		if (PlayerMove2.turnLeft == true) 
+		if (PlayerMove.turnLeft == true) 
 		{
 			if (currentDeg >= maxDeg || currentDeg <= minDeg)
 			{
@@ -32,7 +32,7 @@ public class PlayerRotate2 : MonoBehaviour
 			
 		}
 			
-		else if (PlayerMove2.turnRight == true)
+		else if (PlayerMove.turnRight == true)
 		{
 			if (currentDeg >= maxDeg || currentDeg <= minDeg)
 			{
@@ -54,7 +54,7 @@ public class PlayerRotate2 : MonoBehaviour
 	
 		}
 
-		if ( PlayerMove2.turnLeft == false && PlayerMove2.turnRight == false)
+		if ( PlayerMove.turnLeft == false && PlayerMove.turnRight == false)
 		{
 			if (currentDeg < 0.2f || currentDeg > 359.8f)
 			{

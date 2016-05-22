@@ -22,7 +22,7 @@ public class PlayVideoScript : MonoBehaviour
 		if (timer >= 6)
 		{
 			Destroy (this.gameObject);
-			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+			GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause ();
 		}
 		forrigeTid = Time.realtimeSinceStartup;
 	}

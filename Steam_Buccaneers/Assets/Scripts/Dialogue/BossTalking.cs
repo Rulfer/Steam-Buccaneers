@@ -33,7 +33,7 @@ public class BossTalking : MonoBehaviour
 	private string textColorBoss;
 	private Color tempColor;
 	//getting ahold of button functions
-	private gameButtons buttonEvents;
+	private GameButtons buttonEvents;
 
 	bool turnLeft;
 	bool turnRight;
@@ -47,12 +47,12 @@ public class BossTalking : MonoBehaviour
 		this.GetComponent<AIavoid>().enabled = false;
 		this.GetComponent<AIPatroling>().enabled = false;
 		playerPoint = GameObject.Find ("PlayerShip"); //As the player is a prefab, I had to add it to the variable this way
-		turnSpeed = PlayerMove2.move.turnSpeed-1;
+		turnSpeed = PlayerMove.move.turnSpeed-1;
 	}
 
 	public void findAllDialogElements()
 	{
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 		buttonEvents.pause ();
 		for (int i = 0; i < GameObject.Find("dialogue_elements").transform.childCount; i++)
 		{
@@ -147,7 +147,7 @@ public class BossTalking : MonoBehaviour
 	{
 		if(firstTime == true)
 		{
-			playerPoint.GetComponent<PlayerMove2>().enabled = false;
+			playerPoint.GetComponent<PlayerMove>().enabled = false;
 			playerPoint.GetComponent<Rigidbody>().mass = 5;
 			playerPoint.GetComponent<Rigidbody>().angularDrag = 5;
 			playerPoint.GetComponent<Rigidbody> ().drag = 5;
@@ -212,7 +212,7 @@ public class BossTalking : MonoBehaviour
 		this.GetComponent<AIMaster>().enabled = true;
 		this.GetComponent<AIMaster>().kill.gameObject.SetActive(true);
 
-		playerPoint.GetComponent<PlayerMove2>().enabled = true;
+		playerPoint.GetComponent<PlayerMove>().enabled = true;
 		playerPoint.GetComponent<Rigidbody>().mass = 1;
 		playerPoint.GetComponent<Rigidbody>().angularDrag = 0.5f;
 		playerPoint.GetComponent<Rigidbody>().drag = 0.5f;
