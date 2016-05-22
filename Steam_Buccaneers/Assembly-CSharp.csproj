@@ -114,11 +114,11 @@
      <Compile Include="Assets\Scripts\Shop\ChangeSliderValue.cs" />
      <Compile Include="Assets\Scripts\Shop\Monies.cs" />
      <Compile Include="Assets\Scripts\Shop\SetCurrentHealth.cs" />
+     <Compile Include="Assets\Scripts\Shop\ShopButtons.cs" />
+     <Compile Include="Assets\Scripts\Shop\ShopText.cs" />
      <Compile Include="Assets\Scripts\Shop\SpesialAmmo.cs" />
      <Compile Include="Assets\Scripts\Shop\UpdateHealth.cs" />
      <Compile Include="Assets\Scripts\Shop\UpdatePayment.cs" />
-     <Compile Include="Assets\Scripts\Shop\shopButtons.cs" />
-     <Compile Include="Assets\Scripts\Shop\shopText.cs" />
      <Compile Include="Assets\Scripts\Toturial\Tutorial.cs" />
      <Compile Include="Assets\Scripts\World\ChangeScene.cs" />
      <Compile Include="Assets\Scripts\World\ObjectiveButtons.cs" />

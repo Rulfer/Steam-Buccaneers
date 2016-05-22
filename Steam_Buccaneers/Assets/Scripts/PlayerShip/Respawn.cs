@@ -108,8 +108,9 @@ public class Respawn : MonoBehaviour
 				temp = distance;
 				tempI = i;
 			}
-
 		}
+
+		GameObject.Find ("dialogue_elements").GetComponent<CombatAnimationController> ().combatBoss = false;
 
 		bombs = GameObject.FindGameObjectsWithTag("bomb");
 		foreach(GameObject go in bombs)
