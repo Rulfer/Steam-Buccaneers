@@ -16,7 +16,7 @@ public class UpdateHealth : MonoBehaviour
 	{
 
 		sliderValue = GameObject.Find("Slider_refill").GetComponent<Slider>().value;
-		Debug.Log(sliderValue);
+		//Debug.Log(sliderValue);
 		if (sliderValue > GameControl.control.health)
 		{
 			gameObject.GetComponent<Text>().text = sliderValue.ToString() + "HP";

@@ -173,13 +173,17 @@ public class Tutorial : MonoBehaviour
 
 	void Update()
 	{
-		if (dialogNumber >= 31 && dialogNumber < 35)
+		Debug.Log (dialogNumber);
+
+		if (dialogNumber >= 31 && dialogNumber <= 35)
 		{
 			for (int i = 0; i < blinkingButtons.Length; i++)
 			{
+				Debug.Log (blinkingButtons[i]);
 				if (blinkingButtons [i] != null)
 				{
 					cb = blinkingButtons [i].colors;
+					Debug.Log (blinkingButtons [i].colors.normalColor.a);
 					if (blinkingButtons [i].colors.normalColor.a >= 1)
 					{
 						goingDown = true;
@@ -202,14 +206,14 @@ public class Tutorial : MonoBehaviour
 					blinkingButtons [i].colors = cb;
 				}
 			}
+			if (SceneManager.GetActiveScene ().name == "WorldMaster")
+			{
+				talkBubble.SetActive (true);
+				avatarWindow.SetActive (true);
+				avatarWindow2.SetActive (true);
+				nextDialog ();
+			}
 		} 
-		else if (dialogNumber == 35 && SceneManager.GetActiveScene().name == "WorldMaster")
-		{
-			talkBubble.SetActive (true);
-			avatarWindow.SetActive (true);
-			avatarWindow2.SetActive (true);
-			nextDialog ();
-		}
 	}
 
 	private void dialogInArray()
@@ -324,8 +328,16 @@ public class Tutorial : MonoBehaviour
 		} 
 		else
 		{
-			//Sets dialog and character
-			setDialog (character [0], dialogTexts [stage]);
+			if (stage == 34 && GameControl.control.health == 100)
+			{
+				setDialog (character [0], "It seems like you havent got a scratch! Good for you! Next time you come back with broken ship you can repair your ship here. Click “V” to continue.");
+			}
+			else
+			{
+				//Sets dialog and character
+				setDialog (character [0], dialogTexts [stage]);
+			}
+
 			//Moves name closer to portrait
 			if (SceneManager.GetActiveScene ().name != "Shop")
 			{
@@ -444,6 +456,7 @@ public class Tutorial : MonoBehaviour
 			blinkingButtons [0].enabled = true;
 			break;
 		case(34):
+			clearButtons ();
 			blinkingButtons [0] = GameObject.Find ("button_v").GetComponent<Button> ();
 			nextButton.SetActive (false);
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = true;
@@ -452,8 +465,10 @@ public class Tutorial : MonoBehaviour
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = false;
 			break;
 		case(35):
+			clearButtons ();
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = true;
+			blinkingButtons [0] = GameObject.Find ("ExitButton").GetComponent<Button> ();
 			break;
 		case(36):
 			changeCharacterWindow ();
