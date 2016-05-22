@@ -62,38 +62,41 @@ public class BombHitSomething : MonoBehaviour {
 
 		foreach(Collider hit in colliders) //We will do the same check for every object in the array
 		{
-			Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
-			if(hit.transform.root.name == "PlayerShip") //If we hit the player
+			if(hit.transform.root.name != "Boss(Clone)")
 			{
-				PlayerMove.hitBomb = true; //Disable movement
-			}
-			if(hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
-			{
-				hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
-			}
-			if(rb == null) //The object has no rigidbody. Check if the root has
-			{
-				Transform test; //Creates a variable to hold the object
-				test = hit.transform.root; //Sets the object equal to the objects root (aka the object with the Rigidbody)
-				rb = test.GetComponent<Rigidbody>(); //Changes rb to be the rigidbody of the root object
-				if(rb != null) //The parent got the rigidbody!
+				Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
+				if(hit.transform.root.name == "PlayerShip") //If we hit the player
 				{
-					rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
-					//We increase drag and mass of the player if it get hit by a bomb.
-					//This is to decrease the bumpy feeling of the ship, and decrease 
-					//the ammount of distance the player can move due to the impact. 
-					if(hit.transform.root.name == "PlayerShip")
+					PlayerMove.hitBomb = true; //Disable movement
+				}
+				if(hit.transform.root.name == "Marine(Clone)" || hit.transform.root.name == "Cargo(Clone)") //If we hit an enemy
+				{
+					hit.GetComponentInParent<AImove>().hitBomb = true; //Disable movement
+				}
+				if(rb == null) //The object has no rigidbody. Check if the root has
+				{
+					Transform test; //Creates a variable to hold the object
+					test = hit.transform.root; //Sets the object equal to the objects root (aka the object with the Rigidbody)
+					rb = test.GetComponent<Rigidbody>(); //Changes rb to be the rigidbody of the root object
+					if(rb != null) //The parent got the rigidbody!
 					{
-						rb.mass = 5;
-						rb.drag = 5;
-						rb.angularDrag = 5;
+						rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the root object
+						//We increase drag and mass of the player if it get hit by a bomb.
+						//This is to decrease the bumpy feeling of the ship, and decrease 
+						//the ammount of distance the player can move due to the impact. 
+						if(hit.transform.root.name == "PlayerShip")
+						{
+							rb.mass = 5;
+							rb.drag = 5;
+							rb.angularDrag = 5;
+						}
 					}
 				}
-			}
 
-			else //The object has the rigidbody component (usually meaning this object and canonballs)
-			{
-				rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the rigidbody
+				else //The object has the rigidbody component (usually meaning this object and canonballs)
+				{
+					rb.AddExplosionForce(force, explosionPos, radius, 0, ForceMode.Impulse); //Adds explotions to the rigidbody
+				}
 			}
 		}
 

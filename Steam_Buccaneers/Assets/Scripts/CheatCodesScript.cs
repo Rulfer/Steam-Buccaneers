@@ -41,7 +41,7 @@ public class CheatCodesScript : MonoBehaviour
 			{
 				killTimer += Time.deltaTime;
 				GUI.Label(windowRect, cheatResult);
-				Debug.Log("we are displaying shit");
+				//Debug.Log("we are displaying shit");
 			}
 			else
 			{

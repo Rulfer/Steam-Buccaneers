@@ -12,7 +12,7 @@ public class GameButtons : MonoBehaviour {
 	{
 		i = 0;
 
-		if (SceneManager.GetActiveScene ().name != "Shop")
+		if (SceneManager.GetActiveScene ().name != "Shop" && SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene ().name != "cog_screen")
 		{
 			GameObject.Find ("resume").GetComponent<Button> ().onClick.AddListener (resume);
 			GameObject.Find ("load").GetComponent<Button> ().onClick.AddListener (GameControl.control.Load);
