@@ -65,11 +65,11 @@
      <Compile Include="Assets\Scripts\AI\RotateEngineCog.cs" />
      <Compile Include="Assets\Scripts\AI\ScrapRandomDirection.cs" />
      <Compile Include="Assets\Scripts\AI\SpawnAI.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\aiSpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
