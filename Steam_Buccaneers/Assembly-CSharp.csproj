@@ -68,8 +68,8 @@
      <Compile Include="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIprojectile.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
+     <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
-     <Compile Include="Assets\Scripts\AI\Weapons\bombHitSomething.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
+     <Compile Include="Assets\Scripts\PlayerShip\CameraController.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\ChangeMaterial.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\DeadPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\PickupScrap.cs" />
@@ -100,7 +101,6 @@
      <Compile Include="Assets\Scripts\PlayerShip\SideWeaponControl.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\SwivelFire.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\SwivelWeaponControl.cs" />
-     <Compile Include="Assets\Scripts\PlayerShip\cameraController.cs" />
      <Compile Include="Assets\Scripts\Save and load\GameButtons.cs" />
      <Compile Include="Assets\Scripts\Save and load\GameControl.cs" />
      <Compile Include="Assets\Scripts\Scene\ChangeLayers.cs" />
