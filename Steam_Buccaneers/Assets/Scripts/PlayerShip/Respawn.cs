@@ -80,6 +80,7 @@ public class Respawn : MonoBehaviour
 				if (isPaused == false)
 				{
 					GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause ();
+					isPaused = true;
 				}
 				RespawnPlayer();
 				showDeathScreen = false;
@@ -87,8 +88,10 @@ public class Respawn : MonoBehaviour
 				player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 				player.GetComponent<DeadPlayer> ().enabled = false;
 				GameObject.Find("CameraChild").GetComponent<BackgroundSongsController>().stopDeadSong();
+				timer = 0;
 			}
 			player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			Debug.Log ("Is game paused: " + isPaused);
 		}
 	}
 
@@ -129,6 +132,7 @@ public class Respawn : MonoBehaviour
 		else
 		{
 			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 		}
 		
@@ -216,6 +220,7 @@ public class Respawn : MonoBehaviour
 				dialogGui.transform.GetChild (i).gameObject.SetActive (false);
 			}
 			GameObject.Find ("GameControl").GetComponent<gameButtons> ().pause();
+			isPaused = false;
 			isDead = false;
 			GameControl.control.firstDeath = true;
 		}
