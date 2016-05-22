@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class monies : MonoBehaviour {
+public class Monies : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sideWeaponControl : MonoBehaviour 
+public class SideWeaponControl : MonoBehaviour 
 {
 	//public AudioSource pangPang;
 	public GameObject cannonball;

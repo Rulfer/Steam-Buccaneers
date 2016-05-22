@@ -65,7 +65,7 @@ public class AIprojectile : MonoBehaviour {
 				source.Play();
 
 				GameControl.control.health -= damageOutput;
-				other.GetComponentInChildren<changeMaterial> ().checkPlayerHealth();
+				other.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
 				if(GameControl.control.health <= 0)
 					other.GetComponentInParent<DeadPlayer>().enabled = true;
 

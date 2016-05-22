@@ -22,7 +22,7 @@ public class TreasurePlanet : MonoBehaviour
 		{
 			Debug.Log ("Play animation " + treasureAnimation);
 			//spill av animasjon
-			GameObject.Find("GameControl").GetComponent<gameButtons>().pause();
+			GameObject.Find("GameControl").GetComponent<GameButtons>().pause();
 			Instantiate(treasureAnimation);
 			treasureAnimation.GetComponentInChildren<PlayVideoScript>().playTreasureAnimation ();
 			treasureHasBeenPickedUp = true;
