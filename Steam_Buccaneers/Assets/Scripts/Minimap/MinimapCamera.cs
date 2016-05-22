@@ -16,6 +16,7 @@ public class MinimapCamera : MonoBehaviour
 	public GameObject animationCanvas; //dialogue_elements in Canvas_Ingame
 	public GameObject renderPlane; //map_world_bg
 	public GameObject renderPlaneBackground; //Plane
+	public GameObject compas; //Canvas with compas and it's choices
 
 	public GameObject[] shops;
 	public GameObject[] diamonds;
@@ -71,6 +72,7 @@ public class MinimapCamera : MonoBehaviour
 		renderPlaneBackground.SetActive(true);
 		minimapBackground.SetActive(false);
 		animationCanvas.SetActive(false);
+		compas.SetActive(false);
 		boss.transform.localScale = new Vector3(21, 21, 21);
 		player.transform.localScale = new Vector3(1000, 1000, 1000);
 		foreach(GameObject go in shops)
@@ -102,6 +104,7 @@ public class MinimapCamera : MonoBehaviour
 		renderPlaneBackground.SetActive(false);
 		minimapBackground.SetActive(true);
 		animationCanvas.SetActive(true);
+		compas.SetActive(true);
 		this.transform.rotation = Quaternion.Euler(90, 0, 0);
 		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture;
