@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using EZCameraShake;
 
-public class PlayerMove2 : MonoBehaviour 
+public class PlayerMove : MonoBehaviour 
 {
-	public static PlayerMove2 move;
+	public static PlayerMove move;
 	public static Rigidbody player;
 	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
 	public float force;

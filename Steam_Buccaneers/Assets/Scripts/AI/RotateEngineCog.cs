@@ -11,11 +11,11 @@ public class RotateEngineCog : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		xspeed =PlayerMove2.player.velocity.x;
+		xspeed =PlayerMove.player.velocity.x;
 		if(xspeed < 0)
 			xspeed *= -1;
 
-		zspeed = PlayerMove2.player.velocity.z;
+		zspeed = PlayerMove.player.velocity.z;
 		if(zspeed < 0)
 			zspeed *= -1;
 		

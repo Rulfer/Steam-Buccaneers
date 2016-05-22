@@ -79,7 +79,7 @@ public class CameraController : MonoBehaviour
 				}
 			}
 
-			if (PlayerMove2.isBoosting)
+			if (PlayerMove.isBoosting)
 			{
 				if (boostDistance <= 49)
 				{
