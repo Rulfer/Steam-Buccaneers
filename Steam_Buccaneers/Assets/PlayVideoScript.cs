@@ -13,6 +13,7 @@ public class PlayVideoScript : MonoBehaviour
 	{
 		forrigeTid = Time.realtimeSinceStartup;
 		guiManager = GameObject.Find("_GUIManager");
+		guiManager.SetActive (false);
 	}
 
 	// Use this for initialization

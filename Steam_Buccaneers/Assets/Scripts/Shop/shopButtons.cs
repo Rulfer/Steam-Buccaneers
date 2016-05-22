@@ -84,7 +84,7 @@ public class ShopButtons : MonoBehaviour {
 
 	void Update()
 	{
-		if (GameObject.Find ("Slider_refill") && GameObject.Find ("TutorialControl") != null)
+		if (GameObject.Find ("Slider_refill"))
 		{
 			if (GameControl.control.health + GameControl.control.money < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
 			{
@@ -101,7 +101,7 @@ public class ShopButtons : MonoBehaviour {
 	public void openRepair()
 	{
 		repairMenu.SetActive(true);
-		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 33)
+		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 34)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
