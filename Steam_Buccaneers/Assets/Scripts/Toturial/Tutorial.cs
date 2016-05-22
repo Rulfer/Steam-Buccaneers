@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
 	//Text that says pause
 	public GameObject pauseText;
 	//Array that hold the tutorial dialog
-	private string[] dialogTexts = new string[44];
+	private string[] dialogTexts = new string[45];
 	//Holds quest information
 	private Text questInfo;
 	//Character names
@@ -175,7 +175,7 @@ public class Tutorial : MonoBehaviour
 	{
 		Debug.Log (dialogNumber);
 
-		if (dialogNumber >= 31 && dialogNumber <= 35)
+		if (dialogNumber >= 31 && dialogNumber <= 36)
 		{
 			for (int i = 0; i < blinkingButtons.Length; i++)
 			{
@@ -273,25 +273,28 @@ public class Tutorial : MonoBehaviour
 			"or your back thruster output. ";
 		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon." +
 			"Confirm your purchase on the bottom of the screen. Click untill you got 20.";//Shopkeeper
-		dialogTexts [33] = "To repair your ship, just press the button that says “Repair my vessel!”" +
+		dialogTexts [33] = "As you've might have noticed if you got hit during your fight, there is no form " +
+		"of health bar displayed on you HUD. You'll see on your ship when it starts to smoke and burn, " +
+		"then it's probably time to get to a shop and repair.";
+		dialogTexts [34] = "To repair your ship, just press the button that says “Repair my vessel!”" +
 			" and drag the slider for how much you want to repair.";//Shopkeeper
-		dialogTexts[34] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
+		dialogTexts[35] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
 			"to the top left you’ll see how much scraps you’ve got.";//Shopkeeper
-		dialogTexts[35] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
+		dialogTexts[36] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
 			"Keep alive and keep flying! A living customer is a paying customer. " +
-			"Come back anytime should you need something";//Shopkeeper
+			"Come back anytime should you need something.";//Shopkeeper
 		
-		dialogTexts [36] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
+		dialogTexts [37] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
 			"the funky music and you will get there!";//Shopkeeper
-		dialogTexts [37] = "...Right. By the way, where is the first pirate lord? " +
+		dialogTexts [38] = "...Right. By the way, where is the first pirate lord? " +
 			"I want to get this done with!";//Player
-		dialogTexts [38] = "The coordinates are already installed, just follow the compass to your left. You can also press “M” to see the map.";
-		dialogTexts[39] ="You know, you could lose that attitude, I don't think Sir Spikybottom will appreciate it. " +
+		dialogTexts [39] = "The coordinates are already installed, just follow the compass to your left. You can also press “M” to see the map.";
+		dialogTexts[40] ="You know, you could lose that attitude, I don't think Sir Pincushion will appreciate it. " +
 			"He is quite posh from what I've heard.";//Shopkeeper
-		dialogTexts [40] = "Sir Spikybottom? Seriously?!?!?";//Player
-		dialogTexts [41] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
+		dialogTexts [41] = "Sir Pincushion? Seriously?!?!?";//Player
+		dialogTexts [42] = "Yes, yes, he is a pirate lord and will be your first challenge. " +
 			"Now shut it and get going!";//Shopkeeper
-		dialogTexts [42] = "...";//Player
+		dialogTexts [43] = "...";//Player
 
 	}
 
@@ -302,7 +305,7 @@ public class Tutorial : MonoBehaviour
 		//Player dialog: 1, 5, 10, 15, 20, 25, 38, 40, 42
 		//Marine dialog: 20
 		//Dialog runs here
-		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25|| stage == 37 || stage == 40 || stage == 42)
+		if (stage == 1 || stage == 5 || stage == 10 || stage == 15 || stage == 20 || stage == 25|| stage == 38 || stage == 41 || stage == 43)
 		{
 			//Sets dialog and character
 			setDialog (character [1], dialogTexts [stage]);
@@ -328,7 +331,7 @@ public class Tutorial : MonoBehaviour
 		} 
 		else
 		{
-			if (stage == 34 && GameControl.control.health == 100)
+			if (stage == 33 && GameControl.control.health == 100)
 			{
 				setDialog (character [0], "It seems like you havent got a scratch! Good for you! Next time you come back with broken ship you can repair your ship here. Click “V” to continue.");
 			}
@@ -450,12 +453,16 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (false);
 			break;
 		case(33):
-			changeButtonInteractivity (false);
 			clearButtons ();
+			changeButtonInteractivity (false);
+			nextButton.SetActive (true);
+			break;
+		case(34):
+			nextButton.SetActive (false);
 			blinkingButtons [0] = GameObject.Find ("button_repair").GetComponent<Button> ();
 			blinkingButtons [0].enabled = true;
 			break;
-		case(34):
+		case(35):
 			clearButtons ();
 			blinkingButtons [0] = GameObject.Find ("button_v").GetComponent<Button> ();
 			nextButton.SetActive (false);
@@ -464,19 +471,19 @@ public class Tutorial : MonoBehaviour
 			changeButtonInteractivity (true);
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = false;
 			break;
-		case(35):
+		case(36):
 			clearButtons ();
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = true;
 			blinkingButtons [0] = GameObject.Find ("ExitButton").GetComponent<Button> ();
 			break;
-		case(36):
+		case(37):
 			changeCharacterWindow ();
 			bossCharacterWindow.SetActive (false);
 			questInfo.text = "Talk to shopkeeper.";
 			pauseText.SetActive (true);
 			break;
-		case(43):
+		case(44):
 			questInfo.text = "Find ancient cog!";
 			talkBubble.SetActive (false);
 			avatarWindow.SetActive (false);
