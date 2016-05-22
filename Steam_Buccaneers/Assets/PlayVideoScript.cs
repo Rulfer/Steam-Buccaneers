@@ -7,10 +7,12 @@ public class PlayVideoScript : MonoBehaviour
 	private MovieTexture movie;
 	float timer;
 	float forrigeTid;
+	GameObject guiManager;
 
 	void Start()
 	{
 		forrigeTid = Time.realtimeSinceStartup;
+		guiManager = GameObject.Find("_GUIManager");
 	}
 
 	// Use this for initialization
@@ -21,8 +23,9 @@ public class PlayVideoScript : MonoBehaviour
 		//Debug.Log (timer);
 		if (timer >= 6)
 		{
-			Destroy (this.gameObject);
 			GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause ();
+			guiManager.SetActive(true);
+			Destroy (this.gameObject);
 		}
 		forrigeTid = Time.realtimeSinceStartup;
 	}

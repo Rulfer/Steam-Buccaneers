@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AIavoid : MonoBehaviour {
-	private GameObject player;
+public class AIavoid : MonoBehaviour 
+{
+	private GameObject player; //A referense to the player object
 
-	public bool hitFront = false;
-	public bool hitSide = false;
+	public bool hitFront = false; //Tells AIMove if something is in front of it
+	public bool hitSide = false; //Tells AIMove if something is to the side of it
 
-	private Vector3 relativePlayerPoint;
-	private Vector3 fwd;
+	private Vector3 relativePlayerPoint; //Relative position between this enemy and the player
+	private Vector3 fwd; //Forward vector
 
-	private float hitTimer;
-	private int detectDistance = 60;
+	private int detectDistance = 60; //Length of enemies radar
 
 	// Use this for initialization
 	void Start () {
@@ -20,13 +20,13 @@ public class AIavoid : MonoBehaviour {
 	
 	void Update () 
 	{
-		fwd = this.transform.TransformDirection(Vector3.forward);
+		fwd = this.transform.TransformDirection(Vector3.forward); //Casts a ray forwards
 
-		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow);
+		Debug.DrawRay(this.transform.position, fwd * detectDistance, Color.yellow); //Only visible in the editor
 
 		relativePlayerPoint = transform.InverseTransformPoint(player.transform.position); //Used to check if the player is to the left or right of the AI
 
-		sensors();
+		sensors(); //Test if the sensor hit something
 	}
 
 	private void sensors()
@@ -64,7 +64,7 @@ public class AIavoid : MonoBehaviour {
 				hitFront = true;
 			}
 
-			else 
+			else //The raycast hit nothing of interest
 			{
 				this.GetComponent<AImove>().turnLeft = false;
 				this.GetComponent<AImove>().turnRight = false;
@@ -72,7 +72,7 @@ public class AIavoid : MonoBehaviour {
 			}
 		}
 
-		else
+		else //The raycast hit nothing
 		{
 			this.GetComponent<AImove>().turnLeft = false;
 			this.GetComponent<AImove>().turnRight = false;
