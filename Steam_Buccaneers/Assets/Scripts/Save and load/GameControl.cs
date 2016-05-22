@@ -177,7 +177,7 @@ public class GameControl : MonoBehaviour {
 	{
 		if (name == "cog_screen")
 		{
-			this.GetComponent<gameButtons> ().pause ();
+			this.GetComponent<GameButtons> ().pause ();
 		}
 		//Changes scene to parameter
 		loadingCanvas.SetActive(true);

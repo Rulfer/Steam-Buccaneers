@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class rotate : MonoBehaviour {
+public class Rotate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

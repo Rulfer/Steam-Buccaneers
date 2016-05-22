@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class changeMaterial : MonoBehaviour {
+public class ChangeMaterial : MonoBehaviour {
 
 	public Material[] playerMat = new Material[3];
 

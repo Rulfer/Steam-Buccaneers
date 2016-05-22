@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour
 	private string textColorMarine;
 	private Color tempColor;
 	//getting ahold of button functions
-	private gameButtons buttonEvents;
+	private GameButtons buttonEvents;
 	//AIship used to battle
 	public GameObject AI;
 	//Character vinduer
@@ -114,7 +114,7 @@ public class Tutorial : MonoBehaviour
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		pauseText = GameObject.Find ("pause");
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 
 		marineCharacterWindow = GameObject.Find ("Portrett2_marine");
 		shopKeeperCharacterWindow = GameObject.Find ("Portrett2_shopkeeper");
@@ -138,7 +138,7 @@ public class Tutorial : MonoBehaviour
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 
 		nameLeftPos = new Vector3(217.0f, -25.0f);

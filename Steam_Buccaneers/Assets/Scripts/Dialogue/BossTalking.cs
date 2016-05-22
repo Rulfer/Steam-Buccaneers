@@ -33,7 +33,7 @@ public class BossTalking : MonoBehaviour
 	private string textColorBoss;
 	private Color tempColor;
 	//getting ahold of button functions
-	private gameButtons buttonEvents;
+	private GameButtons buttonEvents;
 
 	bool turnLeft;
 	bool turnRight;
@@ -52,7 +52,7 @@ public class BossTalking : MonoBehaviour
 
 	public void findAllDialogElements()
 	{
-		buttonEvents = GameObject.Find ("GameControl").GetComponent<gameButtons> ();
+		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 		buttonEvents.pause ();
 		for (int i = 0; i < GameObject.Find("dialogue_elements").transform.childCount; i++)
 		{

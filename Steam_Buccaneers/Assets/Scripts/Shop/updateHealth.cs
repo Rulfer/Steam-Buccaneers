@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class updateHealth : MonoBehaviour 
+public class UpdateHealth : MonoBehaviour 
 {
 	float sliderValue;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class gravityPull : MonoBehaviour
+public class GravityPull : MonoBehaviour
 {
 	//Puts range of teh gravitationalfield
 	public float range = 10f;

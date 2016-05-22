@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class pickupScrap : MonoBehaviour {
+public class PickupScrap : MonoBehaviour {
 
 	public GameObject[] scrapArray; //Every scrap object on the scene
 	private Vector3 temp; //the difference between player and scap position
