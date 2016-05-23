@@ -13,7 +13,7 @@ public class BoostSlider : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () 
-	{
+	{	// sets the slider value equal to the resource pool in the PlayerMove script
 		this.GetComponent<Slider>().value = PlayerMove.boostCooldownTimer;
 	}
 }

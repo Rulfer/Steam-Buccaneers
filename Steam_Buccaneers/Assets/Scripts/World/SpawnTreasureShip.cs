@@ -3,45 +3,38 @@ using System.Collections;
 
 public class SpawnTreasureShip : MonoBehaviour 
 {
-	float nextSpawnIn;
-	public GameObject player;
-	public GameObject treasureShip;
-	float xPos;
-	float zPos;
-	Vector3 spawnPos;
-	float spawnDistance;
-	//float timeLeft;
+	float nextSpawnIn; // variable for declaring how long until the next spawn of a treasure ship
+	public GameObject player; // the player game object
+	public GameObject treasureShip; // the treasure ship game object
+	float xPos; // the position on the x-axis the treasure ship is to spawn at
+	float zPos; // the position on the z-axis the treasure ship is to spawn at
+	Vector3 spawnPos; // vector for holding the spawn coordinates
+	float spawnDistance; // 
 
 	// Use this for initialization
 	void Start () 
 	{
-		GetTime();
+		GetTime(); // initiates the function to get time for a ship to spawn
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		Timer();
+		Timer(); // always runs the timer function
 	}
 
 	void Timer ()
 	{
-		//timeLeft = nextSpawnIn;
-		//timeLeft -= Time.deltaTime;
-		nextSpawnIn -= Time.deltaTime;
+		nextSpawnIn -= Time.deltaTime; // count down to when the next ship should spawn
 
 		if (nextSpawnIn <= 0f)
 		{
-			SpawnTreasure();
+			SpawnTreasure(); // does the function that spawns the treasure
 		}
-
-		//Debug.Log (nextSpawnIn);
-		
-		
 		
 	}
 
-	//gets a random time between 5 and 10 minutes, when the next treasure ship spawns
+	//gets a random time between 30 and 60 seconds, when the next treasure ship spawns
 	void GetTime()
 	{
 		nextSpawnIn = Random.Range (30, 60);
@@ -51,11 +44,12 @@ public class SpawnTreasureShip : MonoBehaviour
 	void SpawnTreasure ()
 	{
 		
-		spawnPos = treasureSpawnpoint();
-		spawnDistance = Vector3.Distance (spawnPos, player.transform.position);
+		spawnPos = treasureSpawnpoint(); // sets the spawn position equal to the spawn point 
+		spawnDistance = Vector3.Distance (spawnPos, player.transform.position); // 
 
+		// creates the treasure ship at the spawn position
 		Instantiate(treasureShip, spawnPos, player.transform.rotation);
-		GetTime();
+		GetTime(); // gets a new time for the next treasure to spawn
 	}
 
 	private Vector3 treasureSpawnpoint()
