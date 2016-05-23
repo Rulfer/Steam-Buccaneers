@@ -7,6 +7,7 @@ public class Continue : MonoBehaviour {
 	// Use this for initialization
 	public void startWorldMaster () 
 	{
+		//( ͡° ͜ʖ ͡°)
 		GameControl.control.ChangeScene ("WorldMaster");
 	}
 }

@@ -4,20 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class StoreLauncher : MonoBehaviour {
 
+	//Picks up all AI and shops in arrays and deletes them. Also bossSpawn
 	private GameObject[] AI;
 	private GameObject[] shops;
 	public GameObject bossSpawn;
+
 	private bool entered = false;
 
 	void OnTriggerEnter(Collider collision)
 	{
-
+		//If player enter shop trigger
 		if (collision.gameObject.tag == "Player")
 		{
+			//And it is tutorial
 			if (GameObject.Find ("TutorialControl") != null)
 			{
+				//And the tutorial says that player can enter the store
 				if (GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().enterStore == true)
 				{
+					//He will enter
 					//Saves the store name
 					GameControl.control.storeName = this.name;
 					//Writes data to file in GameControl.cs
@@ -28,9 +33,10 @@ public class StoreLauncher : MonoBehaviour {
 				}
 					
 			} 
+			//And it is not tutorial
 			else
 			{
-					
+				//He will enter	
 				//Saves the store name
 				GameControl.control.storeName = this.name;
 				//Writes data to file in GameControl.cs
@@ -47,7 +53,7 @@ public class StoreLauncher : MonoBehaviour {
 		}
 	}
 
-	//Sometimes the player is inside the shop before the OnTriggerEnter notices it.
+	//Sometimes the player is inside the shop before the OnTriggerEnter notices it. 
 	//This check is to combat that issue.
 	void OnTriggerStay(Collider collision) 
 	{
