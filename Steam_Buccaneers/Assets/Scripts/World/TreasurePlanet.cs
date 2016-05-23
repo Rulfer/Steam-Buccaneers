@@ -4,8 +4,8 @@ using System.Collections;
 
 public class TreasurePlanet : MonoBehaviour 
 {
-	bool treasureHasBeenPickedUp;
-	public GameObject treasureAnimation;
+	bool treasureHasBeenPickedUp; // bool for checking if the player has picked up the treasure
+	public GameObject treasureAnimation; // the animation of the player picking up the scrap
 
 
 
@@ -29,15 +29,15 @@ public class TreasurePlanet : MonoBehaviour
 			
 	}
 
-	void OnTriggerEnter (Collider other)
+	void OnTriggerEnter (Collider other) // collider for checking if player is to pick up the scrap
 	{
 
 		Debug.Log ("Enter treasureplanet");
-		if (other.tag == "Player" && treasureHasBeenPickedUp == false )
+		if (other.tag == "Player" && treasureHasBeenPickedUp == false ) // if the player hits the collider and has not yet picked up the treasure
 		{
-			if (this.transform.name == "TreasurePlanet")
+			if (this.transform.name == "TreasurePlanet") // if the collider belongs to treasure planet
 			{
-				if (GameControl.control.treasureplanetsfound [0] == true)
+				if (GameControl.control.treasureplanetsfound [0] == true) 
 					return;
 			} 
 			else
@@ -54,7 +54,7 @@ public class TreasurePlanet : MonoBehaviour
 			// plays the animation of the player picking up the treasure
 			treasureAnimation.GetComponentInChildren<PlayVideoScript>().playTreasureAnimation ();
 
-			treasureHasBeenPickedUp = true;
+			treasureHasBeenPickedUp = true; // setting that the player has picked up the treasure
 			if (this.transform.name == "TreasurePlanet")
 			{
 				GameControl.control.treasureplanetsfound [0] = true;
@@ -63,9 +63,9 @@ public class TreasurePlanet : MonoBehaviour
 			{
 				GameControl.control.treasureplanetsfound [1] = true;
 			}
-			GameControl.control.money += 500;
-			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
-			gameObject.transform.parent.tag = "asteroid";
+			GameControl.control.money += 500; // gives the player the treasure
+			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString(); // updates players total scrap
+			gameObject.transform.parent.tag = "asteroid"; // changes the tag of the treasure planet so it the player will no longer trigger the function of picking up treasure
 		}
 	}
 }

@@ -4,13 +4,13 @@ using System.Collections;
 public class TreasureShip : MonoBehaviour 
 {
 
-	Vector3 rotateVec; //= new Vector3 (1f,1f,1f);
-	Vector3 randomSpawnVec;
-	public GameObject[] scrap;
-	private GameObject[] scrapsLyingAroundShip = new GameObject[20];
-	public GameObject player;
-	private GameObject tempScrap;
-	private float distanceAway;
+	Vector3 rotateVec; // vector for the ships rotation
+	Vector3 randomSpawnVec; // vector for the ships spawn location
+	public GameObject[] scrap; // array holding scrap
+	private GameObject[] scrapsLyingAroundShip = new GameObject[20]; // array for the scrap
+	public GameObject player; // the player game object
+	private GameObject tempScrap; // the scrap objects
+	private float distanceAway; // a variable used for calculating distance between player and treasure ship
 
 	// Use this for initialization
 	void Start () 
