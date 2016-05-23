@@ -3,9 +3,10 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class CombatAnimationController : MonoBehaviour {
-
+	//This script holds control over combatanimations. Which animation is going to be shown, when it is going to be shown and if it is goign to be shown.
 	public GameObject playerCharacterWindow;
 	public GameObject enemyCharacterWindow;
+
 	public GameObject marineAnimation;
 	public GameObject bossAnimation;
 	public GameObject shopKeeperAnimation;
@@ -16,17 +17,22 @@ public class CombatAnimationController : MonoBehaviour {
 
 	
 	// Update is called once per frame
+	//Using fixedupdate so Time.timescale = 0 doesnt stop animation 
 	void FixedUpdate () 
 	{
+		//Check if it is tutorial before playing combat animaitons
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && GameObject.Find("TutorialControl") == null)
 		{
+			//Animation appear in combat
 			if (GameControl.control.isFighting == true)
 			{
+				//If boss exist it is bossbattle
 				if (GameObject.Find ("Boss(Clone)"))
 				{
 					combatBoss = true;
 				}
 
+				//Starting boss or marine animation
 				if (combatBoss == true)
 				{
 					bossAnimation.SetActive (true);
@@ -38,6 +44,7 @@ public class CombatAnimationController : MonoBehaviour {
 					marineAnimation.SetActive (true);
 				}
 
+				//Starting player animation. Removing shopkeeperanimation just in case it was used last time.
 				enemyCharacterWindow.SetActive (true);
 				playerCharacterWindow.SetActive (true);
 				shopKeeperAnimation.SetActive (false);
@@ -56,10 +63,13 @@ public class CombatAnimationController : MonoBehaviour {
 		}
 
 	}
+	//Use this funksjon for starting happyanimation
 	public void setHappy(string character)
 	{
+		//Checking which character animation that is going to be played.
 		if (character == "Player")
 		{
+			//Checking that the animation is activ before we try to chenge the bool in the animator
 			if (playerAnimation.activeInHierarchy)
 			{
 				if (playerAnimation.GetComponent<Animator> ().GetBool ("isAngryMainCharacter") == true)
@@ -71,8 +81,10 @@ public class CombatAnimationController : MonoBehaviour {
 		} 
 		else if (character == "Enemy")
 		{
+			//Checking if it is bossbattle
 			if (combatBoss == false)
 			{
+				//Checking that the animation is activ before we try to chenge the bool in the animator
 				if (marineAnimation.activeInHierarchy)
 				{
 					if (marineAnimation.GetComponent<Animator> ().GetBool ("isAngryMarine") == true)
@@ -86,6 +98,7 @@ public class CombatAnimationController : MonoBehaviour {
 			{
 				if (bossAnimation.activeInHierarchy)
 				{
+					//Checking that the animation is activ before we try to chenge the bool in the animator
 					if (bossAnimation.GetComponent<Animator> ().GetBool ("isAngryBoss") == true)
 					{
 						bossAnimation.GetComponent<Animator> ().SetBool ("isAngryBoss", false);
@@ -97,11 +110,13 @@ public class CombatAnimationController : MonoBehaviour {
 		}
 
 	}
-
+	//Use this funksjon for starting angryanimation
 	public void setAngry(string character)
 	{
+		//Checking which character animation that is going to be played.
 		if (character == "Player")
 		{
+			//Checking that the animation is activ before we try to chenge the bool in the animator
 			if (playerAnimation.activeInHierarchy)
 			{
 				if (playerAnimation.GetComponent<Animator> ().GetBool ("isHappyMainCharacter") == true)
@@ -115,6 +130,7 @@ public class CombatAnimationController : MonoBehaviour {
 		{
 			if (combatBoss == false)
 			{
+				//Checking that the animation is activ before we try to chenge the bool in the animator
 				if (marineAnimation.activeInHierarchy)
 				{
 					if (marineAnimation.GetComponent<Animator> ().GetBool ("isHappyMarine") == true)
@@ -128,6 +144,7 @@ public class CombatAnimationController : MonoBehaviour {
 			{
 				if (bossAnimation.activeInHierarchy)
 				{
+					//Checking that the animation is activ before we try to chenge the bool in the animator
 					if (bossAnimation.GetComponent<Animator> ().GetBool ("isHappyBoss") == true)
 					{
 						bossAnimation.GetComponent<Animator> ().SetBool ("isHappyBoss", false);

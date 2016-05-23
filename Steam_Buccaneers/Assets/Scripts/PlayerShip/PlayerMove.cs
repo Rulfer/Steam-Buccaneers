@@ -6,39 +6,32 @@ using EZCameraShake;
 public class PlayerMove : MonoBehaviour 
 {
 	public static PlayerMove move;
-	public static Rigidbody player;
-	public Vector3 stopRotatingShitface = new Vector3 (90f,180f,0f);
-	public float force;
-	private float boostingForce = 500f;
-	public int turnSpeed = 50;
-	public float playerTurn = 0.50f;
-	public Vector3 maxVelocity;
-	private Vector3 maxBoostVelocity = new Vector3 (1000f, 0f, 1000f);
-	public static bool turnLeft = false;
-	public static bool turnRight = false;
-	public static bool goingForward = false;
-	public static bool isBoosting = false;
-	// bad name for this variable, this is in fact the pool of available boosting power/time
-	public static float boostCooldownTimer = 3f;
-	private bool boostCooledDown = false;
+	public static Rigidbody player; // the rigidbody of the player ship
+	public float force; // how much force the player accelerates at
+	public int turnSpeed = 50; // variable for the turning speed of the player
+	public Vector3 maxVelocity; // vector for the max velocity the player can drive at
+	public static bool turnLeft = false; // bool for testing if the player is turning left
+	public static bool turnRight = false; // bool for testing if the player is turning right
+	public static bool goingForward = false; // bool for testing if the player is moving forward
+	public static bool isBoosting = false; // a bool for testing if the player is boosting or not
+	public static float boostCooldownTimer = 3f;// bad name for this variable, this is in fact the pool of available boosting power/time
+	private bool boostCooledDown = false; //a bool for testing if the player can boost again
 	CameraShakeInstance shake;
-	private GameObject boostBar;
-	private float waitForBoost = 3f;
+	private GameObject boostBar; // the boost bar game object
+	private float waitForBoost = 3f; // variable used for the timer of the boost to cool down
 
-	public static bool steerShip = true;
-
-	public static bool hitBomb = false;
+	public static bool hitBomb = false; // bool for testing if the player was hit by a bomb
 	private float bombTimer = 0;
 
-	private GameObject TutorialControl;
+	private GameObject TutorialControl; //
 
 	// Use this for initialization
 	void Start () 
 	{
-		boostBar = GameObject.Find ("boost_bar");
-		boostBar.SetActive (false);
+		boostBar = GameObject.Find ("boost_bar"); // finding and declaring the boost bar
+		boostBar.SetActive (false); // immediately setting it inactive
 		move = this;
-		player = GetComponent<Rigidbody>();
+		player = GetComponent<Rigidbody>(); // get the players rigidbody
 		if (GameObject.Find ("TutorialControl") != null)
 		{
 			TutorialControl = GameObject.Find ("TutorialControl");
@@ -65,59 +58,56 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		
-		//Debug.Log("boosting timer: " + boostCooldownTimer + " cooled down? " + boostCooledDown + " boosting? " + isBoosting + " waiting for boost? " + waitForBoost);
-
-		/*if (GameControl.control.isFighting == true && isBoosting == true && boostCooledDown == true)
-		{
-			maxVelocity *= 2;
-			player.AddForce (transform.forward * force*2 * Time.deltaTime);
-			boostCooldownTimer -= Time.deltaTime;
-			//boostCooldownTimer -= Time.deltaTime;
-		}*/
+		Debug.Log(boostCooldownTimer + " " + isBoosting + " " + waitForBoost);
 
 		// removing and adding the boosting bar
+		// if the player is in combat, and the boost bar is not active, set it active
 		if (GameControl.control.isFighting && !boostBar.activeSelf)
 		{
 			boostBar.SetActive(true);
 		}
 
+		// if the player is not in combat, and the boostbar is both active and full, set it inactive
 		else if (!GameControl.control.isFighting && boostBar.activeSelf && boostCooledDown)
 		{
 			boostBar.SetActive(false);
 		}
 
-		if(boostCooldownTimer <= 0f)
+		if(boostCooldownTimer <= 0f) 
 		{
 			boostCooldownTimer = 0f;
 			isBoosting = false;
-			//CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 		}
 		else if (boostCooldownTimer < 3f)
 		{
 			boostCooledDown = false;
 		}
 
+		// if the boosting resource is not full, and the player is either not boosting while in combat, OR is not in combat
 		if ((boostCooldownTimer < 3f && isBoosting == false && GameControl.control.isFighting == true) || 
 			(boostCooldownTimer < 3f && GameControl.control.isFighting == false))
 		{
+			// if the timer that starts the replenishing of the boosting resource is between -0.1 and 3.1, not pressing down left shift
+			// and in combat, then the timer for replenishing the boosting resource should start counting down
 			if (waitForBoost > -0.1f && waitForBoost < 3.1f && !Input.GetKey(KeyCode.LeftShift) && GameControl.control.isFighting)
 			{
 				waitForBoost -= Time.deltaTime;
 			}
+			// if the player is not in combat, and the timer for waiting for the boost to replenish is above 0, it is set to 0 to start
+			// filling up the boost meter immediately
 			if (!GameControl.control.isFighting && waitForBoost > 0)
 			{
 				waitForBoost = 0;
 			}
 
+			// if the timer for the boost has reached or is below 0, it should start replenishing the boosting resource
 			if (waitForBoost <= 0)
 			{
-				boostCooldownTimer +=Time.deltaTime/3;
-				if (boostCooldownTimer >= 3f)
+				boostCooldownTimer +=Time.deltaTime/3;// replenishing the boosting resource at the time it takes to complete a frame divided by 3
+				if (boostCooldownTimer >= 3f) // if the boost cooldown timer has reached its max number or above
 				{
-					boostCooledDown = true;
-					boostCooldownTimer = 3f;
-					//boostCooledDown = true;
+					boostCooledDown = true; // the boost is set to have been cooled down
+					boostCooldownTimer = 3f; // the boosting resource is 3
 				}
 			}
 		}
@@ -134,43 +124,45 @@ public class PlayerMove : MonoBehaviour
 				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
-
-		//if (steerShip == true) 
-		//{
-		if (hitBomb == false && GameControl.control.health > 0) 
+			
+		if (hitBomb == false && GameControl.control.health > 0) // if the player has not been hit, and is alive
 		{
-			if (Input.GetKey (KeyCode.LeftShift))
+			if (Input.GetKey (KeyCode.LeftShift)) // the key that enables the player to boost
 			{
-				Boost();
+				if (GameControl.control.isFighting && boostCooldownTimer > 0)
+				{
+				Boost(); // calling the boosting function
+				}
+
+				else if (!GameControl.control.isFighting)
+				{
+					Boost();
+				}
+
 			}
 
-			else
+			else // if not left shift is down, the player is not boosting
 			{
 				isBoosting = false;
 			}
+
+			// checking only if the player has pressed down the button, not if is actively down
 			if (Input.GetKeyDown (KeyCode.LeftShift))
 			{
-				if (!GameControl.control.isFighting)
+				if (!GameControl.control.isFighting) // if the player is not in combat
 				{
+					// the camera shakes as you press the boost button
 					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 				}
-
+				// if the player is in combat, and the boost resource is above 0, ie. can boost
 				else if (GameControl.control.isFighting && boostCooldownTimer > 0f)
 				{
-					//if (boostCooldownTimer <=
-					waitForBoost = 3f;
+					// the camera shakes as you press the boost button
 					CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(1, 5, 0.10f, 0.8f);
 				}
 			}
 
-			if (Input.GetKeyUp (KeyCode.LeftShift))
-			{
-				if (GameControl.control.isFighting && boostCooldownTimer > 0f)
-				{
-					waitForBoost = 3f;
-				}
-			}
-				
+			// if the player is pressing the forwards key, and is not boosting
 			if (Input.GetKey (KeyCode.W) && isBoosting == false) 
 			{
 				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [0] == false)
@@ -178,13 +170,13 @@ public class PlayerMove : MonoBehaviour
 					TutorialControl.GetComponent<Tutorial> ().wadCheck [0] = true;
 					TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
 				}
-				goingForward = true;
-				player.AddForce (transform.forward * force * Time.deltaTime);
-				// Series of if tests
+			
+				goingForward = true; // the player is moving forward
+				player.AddForce (transform.forward * force * Time.deltaTime); //adding force to the player so that they accelerate
+
+				// Series of if tests seeing if the player can accelerate in the diffrent directions in the x- and z-axis
 				if (player.velocity.x >= maxVelocity.x) 
-				{ //|| -player.velocity.x >= -maxVelocity.x)
-					// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
-					// in the z-axis, although it does in fact accelerate.
+				{
 					player.velocity = new Vector3 (maxVelocity.x, 0.0f, player.velocity.z);
 				}
 
@@ -202,85 +194,72 @@ public class PlayerMove : MonoBehaviour
 					player.velocity = new Vector3 (player.velocity.x, 0.0f, -maxVelocity.z);
 				}
 			} 
-			else
+			else // if this is not true, the player is not moving forward
 			{
 				goingForward = false;
 			}
-//		else 
-//		{
-//				//player.velocity = player.velocity * 0.90f;
-//				//goingForward = false;
-//			}
 
-
-		if (Input.GetKey (KeyCode.A)) 
+		if (Input.GetKey (KeyCode.A)) // if the player is turning to the left
 			{
 				if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [1] != true)
 				{
 					TutorialControl.GetComponent<Tutorial> ().wadCheck [1] = true;
 				TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
 				}
-				transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
-				turnLeft = true;
+				// we rotate the player to the left using the turn speed * the frames in game in real time
+				transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime); 
+				turnLeft = true; // the player is turning left
 				
-			} 
-		else 
+			}
+
+		else // if the button press is not true, the player is not turning left
 		{
 			turnLeft = false;
 		}
 
-			if (Input.GetKey (KeyCode.D)) 
+			if (Input.GetKey (KeyCode.D)) // if the player is turning right
 			{
 			if (TutorialControl != null && TutorialControl.GetComponent<Tutorial> ().wadCheck [2] != true)
 			{
 				TutorialControl.GetComponent<Tutorial> ().wadCheck [2] = true;
 				TutorialControl.GetComponent<Tutorial> ().checkArray (TutorialControl.GetComponent<Tutorial> ().wadCheck);
 			}
-				transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
-				turnRight = true;
+				// we rotate the player to the right using the turn speed * the frames in game in real time
+				transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime); 
+				turnRight = true; // the player is turning right
 			}
-		// ALT DETTE ER NYTT
-		else 
+
+		else // if the button press is not true, then we are not turning right
 			{
 				turnRight = false;
 			}
-				
-			// Just a test to see if how fast we can drive without problems, also for testing the possibilities for increasing max speed in the shop upgrade menus.
-			if (Input.GetKeyDown (KeyCode.X)) {
-				maxVelocity += new Vector3 (0.5f, 0.0f, 0.5f);
-				Debug.Log (maxVelocity);
+		}
+	}
+
+	void OnTriggerEnter(Collider other) // if the player is colliding
+	{
+		if (other.tag == "Planet" || other.tag == "Moon") // if the player is colliding with either a moon or a planet
+		{
+			GameControl.control.health = 0; // the players health is set to 0 and instantly dies
+		}
+	}
+
+	void Boost() // function for boosting
+	{
+		maxVelocity *= 2; // while boosting the player can move at double the speed
+		isBoosting = true; // the player is indeed boosting
+
+		// the player accelerates at double the normal speed per second
+		player.AddForce (transform.forward * force*2 * Time.deltaTime);
+
+
+		if (GameControl.control.isFighting)// if the player is in combat, excecute the following things
+		{
+			boostCooldownTimer -= Time.deltaTime; // the boosting resource is used, and reduced by the time it takes to complete that frame
+			if (isBoosting && waitForBoost != 3f) // if the player is boosting and is not yet set to 3, set it to 3
+			{
+				waitForBoost = 3f; // the timer for the boost to replenish is set to 3 seconds
 			}
-
-		}
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Planet" || other.tag == "Moon")
-		{
-			GameControl.control.health = 0;
-		}
-	}
-
-	void Boost()
-	{
-		//if the player is not in combat, boost is active as long as the player uses it
-		if (!GameControl.control.isFighting)
-		{
-			maxVelocity *= 2;
-			isBoosting = true;
-
-			//propelling the player forward at double the speed
-			player.AddForce (transform.forward * force*2 * Time.deltaTime);
-		}
-
-		// Testing if the player is in combat
-		if (GameControl.control.isFighting == true && boostCooldownTimer > 0 /*boostCooledDown == true*/)
-		{
-			maxVelocity *= 2;
-			player.AddForce (transform.forward * force*2 * Time.deltaTime);
-			boostCooldownTimer -= Time.deltaTime;
-			isBoosting = true;		
 		}
 	}
 }
