@@ -1,40 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\AIMove scripts\AImove.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FX\EngineFlames.cs">
     <Files>
-      <File FileName="Assets\Scripts\AI\AIMove scripts\AImove.cs" Line="230" Column="5" />
-      <File FileName="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIMove scripts\CastRays.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\Weapons\AIprojectile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\Weapons\AIsideCanons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\Weapons\AISpecialWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\Weapons\BombHitSomething.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIMaster.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\DeadAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\RotateCogLeft.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\RotateCogRigh.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\RotateEngineCog.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\ScrapRandomDirection.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\SpawnAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Dialogue\BossTalking.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FX\EngineFlames.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FX\Rotate.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FX\ShipHitObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Minimap\GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Minimap\MinimapCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Minimap\ZoomMinimap.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Music &amp; Sounds\BackgroundSongsController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Music &amp; Sounds\MusicControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Music &amp; Sounds\PlayClickSound.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Particle Effects\DamagedAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Particle Effects\DamagedPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Particle Effects\DeleteParticles.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PickupScrap.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\DeadPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Scene\QuitScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CheatCodesScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\AimCursorPosition.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Animation\ChangeBool.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FX\EngineFlames.cs" Line="92" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

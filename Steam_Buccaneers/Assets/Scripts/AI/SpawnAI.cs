@@ -20,7 +20,7 @@ public class SpawnAI : MonoBehaviour
 	public GameObject Cargo; //The Cargo prefab
 
 	public static int[] cannonLevel = new int[6];
-	public bool[] cannonUpgraded = new bool[6];
+//	public bool[] cannonUpgraded = new bool[6];
 	public bool[] availableIndes; //Bool used to check the availability in the marineShips array
 	public bool stopFightTimer = false;
 	public bool livingCargo = false;
@@ -115,7 +115,7 @@ public class SpawnAI : MonoBehaviour
 						cannonLevel[i] = 2;
 					}
 					upgradedWapons++;
-					cannonUpgraded[i] = true;
+//					cannonUpgraded[i] = true;
 				}
 				else
 				{
@@ -141,7 +141,7 @@ public class SpawnAI : MonoBehaviour
 						cannonLevel[i] = 2;
 					}
 					upgradedWapons++;
-					cannonUpgraded[i] = true;
+//					cannonUpgraded[i] = true;
 				}
 				else
 				{
