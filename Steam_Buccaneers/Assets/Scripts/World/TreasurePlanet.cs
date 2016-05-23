@@ -12,19 +12,40 @@ public class TreasurePlanet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		treasureHasBeenPickedUp = false;
+		if (this.transform.name == "TreasurePlanet")
+		{
+			if (GameControl.control.treasureplanetsfound [0] == true)
+				treasureHasBeenPickedUp = true;
+			else
+				treasureHasBeenPickedUp = false;
+		} 
+		else
+		{
+			if (GameControl.control.treasureplanetsfound [1] == true)
+				treasureHasBeenPickedUp = true;
+			else
+				treasureHasBeenPickedUp = false;
+		}
+			
 	}
 
 	void OnTriggerEnter (Collider other)
 	{
-		//Debug.Log ("Enter treasureplanet");
-		// if the player enters the collider and the treasure has not yet been picked up
-		if (other.tag == "Player" && treasureHasBeenPickedUp == false)
-			
+
+		Debug.Log ("Enter treasureplanet");
+		if (other.tag == "Player" && treasureHasBeenPickedUp == false )
 		{
-			// sets the GUI elements to inactive
-			if(GameObject.Find("_GUIManager"))
-				GameObject.Find("_GUIManager").SetActive(false);
+			if (this.transform.name == "TreasurePlanet")
+			{
+				if (GameControl.control.treasureplanetsfound [0] == true)
+					return;
+			} 
+			else
+			{
+				if (GameControl.control.treasureplanetsfound [1] == true)
+					return;
+			}
+				
 			Debug.Log ("Play animation " + treasureAnimation);
 			// pauses the game while animation is playing
 			GameObject.Find("GameControl").GetComponent<GameButtons>().pause();
@@ -32,10 +53,19 @@ public class TreasurePlanet : MonoBehaviour
 			Instantiate(treasureAnimation);
 			// plays the animation of the player picking up the treasure
 			treasureAnimation.GetComponentInChildren<PlayVideoScript>().playTreasureAnimation ();
-			treasureHasBeenPickedUp = true; // sets the treasure to have been picked up
-			GameControl.control.money += 500; // gives the player the scrap
-			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString(); //updates scrap number
-			gameObject.transform.parent.tag = "asteroid"; // gives the planet another tag
+
+			treasureHasBeenPickedUp = true;
+			if (this.transform.name == "TreasurePlanet")
+			{
+				GameControl.control.treasureplanetsfound [0] = true;
+			} 
+			else
+			{
+				GameControl.control.treasureplanetsfound [1] = true;
+			}
+			GameControl.control.money += 500;
+			GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString();
+			gameObject.transform.parent.tag = "asteroid";
 		}
 	}
 }
