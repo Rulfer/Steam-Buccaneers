@@ -9,7 +9,6 @@ public class TreasureShip : MonoBehaviour
 	private GameObject[] scrapsLyingAroundShip = new GameObject[20];
 	public GameObject player;
 	private GameObject tempScrap;
-	private int antallScrapIgjen = 20;
 
 	float distanceAway;
 	int xRot;

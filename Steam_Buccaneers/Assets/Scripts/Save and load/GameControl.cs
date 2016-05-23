@@ -4,6 +4,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour {
 
@@ -23,6 +24,7 @@ public class GameControl : MonoBehaviour {
 	public bool firstDeath = false;
 	public bool isFighting = false;
 	public bool talkedWithBoss = false;
+	public bool[] treasureplanetsfound = new bool[2];
 
 	public GameObject loadingCanvas;
 
@@ -130,6 +132,7 @@ public class GameControl : MonoBehaviour {
 		data.specialAmmo = specialAmmo;
 		data.thrusterUpgrade = thrusterUpgrade;
 		data.firstDeath = firstDeath;
+		data.treasureplanetsfound = treasureplanetsfound;
 
 		return data;
 	}
@@ -167,6 +170,10 @@ public class GameControl : MonoBehaviour {
 		specialAmmo = data.specialAmmo;
 		thrusterUpgrade = data.thrusterUpgrade;
 		firstDeath = data.firstDeath;
+		treasureplanetsfound = data.treasureplanetsfound;
+
+		GameObject.Find ("value_scraps_tab").GetComponent<Text> ().text = money.ToString();
+		GameObject.Find ("value_ammo_tab").GetComponent<Text> ().text = specialAmmo.ToString();
 	}
 
 	public void newGame()
@@ -181,7 +188,10 @@ public class GameControl : MonoBehaviour {
 			this.GetComponent<GameButtons> ().pause ();
 		}
 		//Changes scene to parameter
-		loadingCanvas.SetActive(true);
+		if (loadingCanvas != null)
+		{
+			loadingCanvas.SetActive (true);
+		}
 		if(GameObject.Find("_GUIManager"))  
 			GameObject.Find("_GUIManager").SetActive(false);
 		StartCoroutine(LoadingScreen(name));
@@ -234,4 +244,5 @@ class PlayerData
 	public int specialAmmo;
 	public int thrusterUpgrade;
 	public bool firstDeath = false;
+	public bool[] treasureplanetsfound = new bool[2];
 }

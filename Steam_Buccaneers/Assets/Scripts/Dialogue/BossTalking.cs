@@ -75,7 +75,7 @@ public class BossTalking : MonoBehaviour
 
 	void setDialog()
 	{
-		characters [0] = "Sir Spikybottom";
+		characters [0] = "Sir Pincushion";
 		characters [1] = "Player";
 
 		dialogTexts [0] = "Who dares enter my domain?"; //Boss
@@ -258,7 +258,7 @@ public class BossTalking : MonoBehaviour
 
 		if (dialogNumber == 0)
 		{
-			questInfo.text = "Talk to Sir Spikypillow";
+			questInfo.text = "Talk to Sir Pincushion";
 		} else if (dialogNumber == 2)
 		{
 			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isHappyBoss", true);
@@ -280,7 +280,7 @@ public class BossTalking : MonoBehaviour
 			GameObject.Find ("Portrett2_boss").GetComponent<Animator> ().SetBool ("isAngryBoss", true);
 		} else if (dialogNumber == 11)
 		{
-			questInfo.text = "Defeat Sir Spikypillow";
+			questInfo.text = "Defeat Sir Pincushion";
 			activateScripts ();
 			doneTaling = true;
 			buttonEvents.pause ();
