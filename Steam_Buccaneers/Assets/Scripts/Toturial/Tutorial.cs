@@ -274,8 +274,8 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon." +
 			"Confirm your purchase on the bottom of the screen. Click untill you got 20.";//Shopkeeper
 		dialogTexts [33] = "As you've might have noticed if you got hit during your fight, there is no form " +
-		"of health bar displayed on you HUD. You'll see on your ship when it starts to smoke and burn, " +
-		"then it's probably time to get to a shop and repair.";
+			"of health bar displayed on you HUD. You'll see on your ship when it starts to smoke and burn, " +
+			"then it's probably time to get to a shop and repair.";
 		dialogTexts [34] = "To repair your ship, just press the button that says “Repair my vessel!”" +
 			" and drag the slider for how much you want to repair.";//Shopkeeper
 		dialogTexts[35] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
@@ -283,7 +283,7 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[36] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
 			"Keep alive and keep flying! A living customer is a paying customer. " +
 			"Come back anytime should you need something.";//Shopkeeper
-		
+
 		dialogTexts [37] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
 			"the funky music and you will get there!";//Shopkeeper
 		dialogTexts [38] = "...Right. By the way, where is the first pirate lord? " +
@@ -359,7 +359,7 @@ public class Tutorial : MonoBehaviour
 			//Changes color on text which is closer to character
 			ColorUtility.TryParseHtmlString (textColorShopkeeper, out tempColor);
 		}
-			
+
 		characterName.color = tempColor;
 		dialogTextBox.color = tempColor;
 
@@ -637,5 +637,5 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (true);
 		}
 	}
-			
+
 }

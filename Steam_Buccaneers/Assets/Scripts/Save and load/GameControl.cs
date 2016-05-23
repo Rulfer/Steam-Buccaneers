@@ -120,6 +120,7 @@ public class GameControl : MonoBehaviour {
 		{
 			GameObject goP = GameObject.Find (storeName);
 			GameControl.control.shipPos = goP.transform.position + (Vector3.forward * 100);
+			GameControl.control.shipPos = new Vector3 (GameControl.control.shipPos.x, 0, GameControl.control.shipPos.z);
 		}
 		//Stores the data we are going to write to file here. All data that are goign to be written to file has to be stored in "data".
 		//Writes data to file in GameControl.cs

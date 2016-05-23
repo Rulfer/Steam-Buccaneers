@@ -31,6 +31,7 @@ public class TreasurePlanet : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+
 		Debug.Log ("Enter treasureplanet");
 		if (other.tag == "Player" && treasureHasBeenPickedUp == false )
 		{
@@ -46,10 +47,13 @@ public class TreasurePlanet : MonoBehaviour
 			}
 				
 			Debug.Log ("Play animation " + treasureAnimation);
-			//spill av animasjon
+			// pauses the game while animation is playing
 			GameObject.Find("GameControl").GetComponent<GameButtons>().pause();
+			// creates the treasure animation
 			Instantiate(treasureAnimation);
+			// plays the animation of the player picking up the treasure
 			treasureAnimation.GetComponentInChildren<PlayVideoScript>().playTreasureAnimation ();
+
 			treasureHasBeenPickedUp = true;
 			if (this.transform.name == "TreasurePlanet")
 			{
