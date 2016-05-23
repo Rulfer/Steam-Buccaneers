@@ -7,6 +7,7 @@ public class UpdateHealth : MonoBehaviour
 	float sliderValue;
 
 	// Use this for initialization
+	//Just for updating health gui
 	void Start () 
 	{
 		gameObject.GetComponent<Text>().text = GameControl.control.health.ToString() + "HP";

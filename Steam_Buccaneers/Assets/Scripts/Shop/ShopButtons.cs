@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class ShopButtons : MonoBehaviour {
 
+	//repairmenu referance
 	public GameObject repairMenu;
+
+	//All the sprites for upgrades
 	public Sprite hullLvl1;
 	public Sprite hullLvl2;
 	public Sprite hullLvl3;
@@ -14,13 +17,13 @@ public class ShopButtons : MonoBehaviour {
 	public Sprite thrusterLvl1;
 	public Sprite thrusterLvl2;
 	public Sprite thrusterLvl3;
+	//Healthslider 
 	private Slider[] sliders;
-
+	//Buttons for upgrades
 	private GameObject hull;
 	private GameObject thruster;
-	private Slider healthSlider;
 	private GameObject[] canons = new GameObject[6];
-
+	//Plays click sound
 	public AudioSource source;
 
 	void Start()
@@ -34,11 +37,12 @@ public class ShopButtons : MonoBehaviour {
 		canons[3] = GameObject.Find("cannonB1");
 		canons[4] = GameObject.Find("cannonB2");
 		canons[5] = GameObject.Find("cannonB3");
-
+		//Finding slider and setting value
 		sliders =repairMenu.GetComponentsInChildren<Slider> ();
 		sliders [0].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
 		sliders[1].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
-			//Set right icons
+
+			//Set right icons for shopbuttons
 		if (GameControl.control.hullUpgrade == 1)
 		{
 			hull.GetComponent<Image>().sprite = hullLvl1;
@@ -84,6 +88,7 @@ public class ShopButtons : MonoBehaviour {
 
 	void Update()
 	{
+		//If slider is showing, check if player can afford current value. If not, put it back to max health player can repair
 		if (GameObject.Find ("Slider_refill"))
 		{
 			if (GameControl.control.health + GameControl.control.money < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
@@ -95,45 +100,55 @@ public class ShopButtons : MonoBehaviour {
 
 	public void closeRepair () 
 	{
+		//Closes repairmenu
 		repairMenu.SetActive(false);
 	}
 
 	public void openRepair()
 	{
+		//Opens repairmenu
 		repairMenu.SetActive(true);
+		//In tutorial, if it is exactly dialog nr 34, also contiue dialog
 		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 34)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
 	}
 
+	//Function for confirm repair button
 	public void buyHealth()
 	{
+		//If it is not tutorial
 		if (GameObject.Find ("TutorialControl") == null)
 		{
+			//And slider value is bigger than current healt and player have enough money to repair
 			if (GameControl.control.health < (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value && (int)GameObject.Find ("value_cost_hp").GetComponent<UpdatePayment> ().payment <= GameControl.control.money)
 			{
-				
+				//He can repair ship
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
 				GameControl.control.money -= (int)GameObject.Find ("value_cost_hp").GetComponent<UpdatePayment> ().payment;
 				GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
 			}
 		} 
+		//If it is tutorial and his health is not full
 		else if (GameControl.control.health != 100)
 		{
+			//He can repair ship for free because shopkeeper is nice
 			if (GameControl.control.health <= (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
 			{
+				//Play click
 				source.Play ();
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
-
+				//When player is full health in tutorial, dialog continues
 				if (GameControl.control.health == 100)
 				{
 					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 				}
 			}
 		} 
+		//if it is tutorial and his health is full click sound is played but no healing neccesary
 		else
 		{
 			source.Play ();
@@ -143,13 +158,17 @@ public class ShopButtons : MonoBehaviour {
 
 	public void buyUpgrade()
 	{
+		//upgradebuttons is clicked
 		int maxUpgrade = 3;
+		//Saves name of upgrade user has chosen
 		string upgradeName = this.gameObject.GetComponent<ShopText>().currentUpgradeName;
+		//If the price is below or exactly the player money he can buy it
 		if (this.gameObject.GetComponent<ShopText>().currentPrice <= GameControl.control.money)
 		{
 			Debug.Log(upgradeName);
 			switch (upgradeName)
 			{
+			//If the upgrade is hull, his upgrade is saved and reparirmenu slider is extended
 			case "hull":
 				if (GameControl.control.hullUpgrade < maxUpgrade)
 				{
@@ -157,15 +176,16 @@ public class ShopButtons : MonoBehaviour {
 					changeIcon(upgradeName, GameObject.Find(upgradeName), GameControl.control.hullUpgrade);
 					sliders [0].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
 					sliders[1].maxValue = 100 + (50 * (GameControl.control.hullUpgrade-1));
+
 					source.Play();
 				}
 				break;
-
+			//If it is just bullets, the bullet i added to gamecontrol
 			case "special":
 				GameControl.control.specialAmmo ++;
 				source.Play();
 				break;
-
+			//if it is one of the canons the correct canon gets the upgrade
 			case "cannonT1":
 				if (GameControl.control.canonUpgrades[0] < maxUpgrade)
 				{
@@ -220,6 +240,7 @@ public class ShopButtons : MonoBehaviour {
 				break;
 
 			case "thruster":
+				//Thruster upgrade is saved
 				if (GameControl.control.thrusterUpgrade < maxUpgrade)
 				{
 					GameControl.control.thrusterUpgrade ++;
@@ -228,28 +249,34 @@ public class ShopButtons : MonoBehaviour {
 				}
 				break;
 			default:
-
+				//if nothing is chosen, nothing happens
 				break;
 			}
-
+			//Checks if there is more upgrades left on the chosen upgrade
 			if (this.gameObject.GetComponent<ShopText>().noMoreUpgrade == false)
 			{
+				//Checks if it is tutorial
 				if (GameObject.Find ("TutorialControl") == null)
 				{
+					//Takes money from player and updages GUI
 					GameControl.control.money -= this.gameObject.GetComponent<ShopText> ().currentPrice;
 					GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
 				} 
 				else
 				{
+					//If it is tutorial and specialAmmo is over 20 you can buy as normal
 					if (GameControl.control.specialAmmo > 20)
 					{
 						GameControl.control.money -= this.gameObject.GetComponent<ShopText> ().currentPrice;
 						GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
-					} else if (GameControl.control.specialAmmo == 20)
+					} 
+					//If it is tutorial and it is exactly 20 dialog will continue
+					else if (GameControl.control.specialAmmo == 20)
 					{
 						GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 					}
 				}
+				//updates text
 				this.gameObject.GetComponent<ShopText>().updateText(this.gameObject.GetComponent<ShopText>().currentUpgradeName);
 				Debug.Log("This Works TM");
 			}
@@ -257,11 +284,13 @@ public class ShopButtons : MonoBehaviour {
 
 
 	}
-
+	//changes icon on upgrade after it is upgraded
 	private void changeIcon(string iconName, GameObject iconObject, int upgradeLvl)
 	{
+		//Deletes number on end of icon name
 		iconName = iconName.Remove(iconName.Length-2, 2);
 		Debug.Log(iconName + ", " + upgradeLvl + ".");
+		//checks which upgrade icon is needed and then changes sprites
 		switch(iconName)
 		{
 		case "hull":
