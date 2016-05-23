@@ -15,16 +15,24 @@ public class ChangeScene : MonoBehaviour
 	void Start () 
 	{
 		inShop = false; // setting shop to false so we can load the parts of the level
-	
+		part1Loaded = false;
+		part2Loaded = false;
+		part3Loaded = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		Debug.Log (part1Loaded + " Part 1");
+		Debug.Log (part2Loaded + " Part 2");
+		Debug.Log (part3Loaded + " Part 3");
+
 		// if the current scene is not tutorial, shop, main menu or the loading screen
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && SceneManager.GetActiveScene ().name != "Shop" && SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene().name != "loading_screen")
 		{
-
+			LoadScenes();
+			UnloadScenes();
+			/*
 			if (inShop != true) // if the player is not in the shop
 			{
 				LoadScenes (); // function for loading scenes
@@ -35,7 +43,14 @@ public class ChangeScene : MonoBehaviour
 				part1Loaded = false;  
 				part2Loaded = false;
 				part3Loaded = false;
-			}
+			}*/
+		}
+
+		else // every scene in the world is not loaded
+		{
+			part1Loaded = false;  
+			part2Loaded = false;
+			part3Loaded = false;
 		}
 	}
 
@@ -59,8 +74,6 @@ public class ChangeScene : MonoBehaviour
 				player.transform.position.z <= 12000 && part3Loaded == true && part2Loaded == false ||
 				player.transform.position.z >= 3000 && player.transform.position.z < 12000 && part2Loaded == false)
 			{
-
-				//Debug.Log("hello, it is you im looking for");
 				SceneManager.LoadScene("worldPt2", LoadSceneMode.Additive); // loads the scene in addition to the worldMain scene
 				part2Loaded = true; // says that the scene is now loaded 
 			}
