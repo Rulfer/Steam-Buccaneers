@@ -58,8 +58,6 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		Debug.Log(boostCooldownTimer + " " + isBoosting + " " + waitForBoost);
-
 		// removing and adding the boosting bar
 		// if the player is in combat, and the boost bar is not active, set it active
 		if (GameControl.control.isFighting && !boostBar.activeSelf)
@@ -131,7 +129,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				if (GameControl.control.isFighting && boostCooldownTimer > 0)
 				{
-				Boost(); // calling the boosting function
+					Boost(); // calling the boosting function
 				}
 
 				else if (!GameControl.control.isFighting)

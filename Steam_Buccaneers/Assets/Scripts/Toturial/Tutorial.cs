@@ -234,8 +234,8 @@ public class Tutorial : MonoBehaviour
 		dialogTexts [7] = "Also you’re human, aren’t you? So add them together and you know them cops aren’t going to give you an easy time.";//Shopkeeper
 		dialogTexts [8] = "But anyways. The controls are simple, just press “W” to move your ship forward. “A” and “D” turns you around. " +
 			"Just remember you can’t drive backwards in this thing, since it ain’t got no thrusters in the front.";//Shopkeeper
-		dialogTexts [9] = "You can also boost your ship by pressing “Shift”. Just try that for a bit now, you got time before " +
-			"them cops arrive here.";//Shopkeeper
+		dialogTexts [9] = "You can push the engine into overdrive by pressing “Shift.” While in combat, your're using a lot of power, " +
+			"so you can’t boost continously. Out of combat you should be fine. This deals more ramming damage to enemies. Try the controls now.";//Shopkeeper
 		dialogTexts[10] = "Wow, is that it? And I couldn’t figure this out by myself how? Would’ve been my first guess anyway.";//Player
 		dialogTexts [11] = "Easy peasy. Now, you see you have some guns on both sides of your ship there? You can fire the left side by pressing “Q” and the right side by pressing “E”.";//Shopkeeper
 		dialogTexts[12] = "Both yourself and bullets can be affected by gravity. So your bullets might not go where you want them to go, if you are to close to a planet." +
@@ -265,7 +265,7 @@ public class Tutorial : MonoBehaviour
 			"You see those gears and other bits and bobs that’s left after that marine ship? " +
 			"This is what us traders take as payment.";
 		dialogTexts[27] = "Fly over there, and pick it up.";//Shopkeeper
-		dialogTexts[28] = "  And as promised I’ll fix your damage, just fly closer to me and I’ll open up a landing pad for you.";//Shopkeeper
+		dialogTexts[28] = "  And as promised I’ll fix your damage, just fly over that landing pad marked with the big red X.";//Shopkeeper
 		dialogTexts[29] = "Here is what I, and most other shops around this star has to offer.";//Shopkeeper
 		dialogTexts[30] = "You see all these icons on the blueprint of your ship here?";
 		dialogTexts [31] = "These are upgradeable parts. I can do upgrades for each of your side cannons, " +
@@ -274,15 +274,14 @@ public class Tutorial : MonoBehaviour
 		dialogTexts[32] = "The icon in the middle is ammunition for your special weapon." +
 			"Confirm your purchase on the bottom of the screen. Click untill you got 20.";//Shopkeeper
 		dialogTexts [33] = "As you've might have noticed if you got hit during your fight, there is no form " +
-			"of health bar displayed on you HUD. You'll see on your ship when it starts to smoke and burn, " +
-			"then it's probably time to get to a shop and repair.";
+			"of health bar displayed on you HUD. You’ll see when your ship starts to smoke and burn, then it’s time to get to a repair.";
 		dialogTexts [34] = "To repair your ship, just press the button that says “Repair my vessel!”" +
 			" and drag the slider for how much you want to repair.";//Shopkeeper
 		dialogTexts[35] = "Then just confirm the amount, and I’ll fix it right away. And of course, " +
 			"to the top left you’ll see how much scraps you’ve got.";//Shopkeeper
 		dialogTexts[36] = "I guess that’s about it for what I can tell you. Be on your way now, and remember; " +
 			"Keep alive and keep flying! A living customer is a paying customer. " +
-			"Come back anytime should you need something.";//Shopkeeper
+			"Exit by pressing the X in the top right corner.";//Shopkeeper
 
 		dialogTexts [37] = "Oh, and one more thing. You are never far from one of my shops, just follow " +
 			"the funky music and you will get there!";//Shopkeeper
