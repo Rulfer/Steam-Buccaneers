@@ -10,6 +10,7 @@ public class TreasureShip : MonoBehaviour
 	private GameObject[] scrapsLyingAroundShip = new GameObject[20];
 	public GameObject player;
 	private GameObject tempScrap;
+	private float distanceAway;
 
 	// Use this for initialization
 	void Start () 
