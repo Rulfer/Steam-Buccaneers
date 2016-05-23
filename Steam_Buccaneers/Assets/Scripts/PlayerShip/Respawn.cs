@@ -121,7 +121,6 @@ public class Respawn : MonoBehaviour
 		player.transform.position = spawnCoord;
 		player.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		GameControl.control.money -= (GameControl.control.money*10)/100;
-		GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString(); // updates players total scrap
 		GameControl.control.health = 100;
 		player.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
 
