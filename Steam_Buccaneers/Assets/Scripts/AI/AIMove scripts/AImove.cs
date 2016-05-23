@@ -4,73 +4,76 @@ using System.Collections;
 public class AImove : MonoBehaviour {
 	public Rigidbody aiRigid;
 
-	public float force = 200f;
-	public int turnSpeed = 50;
-	private float bombTimer;
+	public float force = 200f; //Force of the enemy. This is what drives the models forwards in the scene. 
+	public int turnSpeed = 50; //How fast the enemy can turn. 
+	private float bombTimer; //Timer used to disable movement when hitting a bomb. 
 
-	private float distanceToPlayer;
-	private float distanceToObjective;
-	float minDist = 20f;
-	float maxDist = 80f;
+	private float distanceToPlayer; //Stores the distance between the enemy and the player
+	float minDist = 20f; //Used to check if the player is too close to the enemy
+	float maxDist = 80f; //Used to check if the player is too far away from the enemy
 
-	public bool turnLeft = false;
-	public bool turnRight = false;
-	public bool hitBomb = false;
-	public bool isPatroling = true;
-	private bool playerInFrontOfAI;
-	public bool isFleeing = false;
+	public bool turnLeft = false; //Bool to activate left turning
+	public bool turnRight = false; //Bool to activate right turning
+	public bool hitBomb = false; //Bool used to activate/deactivate driving
+	public bool isPatroling = true; //The enemy is driving towards an objective, not chasing the player
+	private bool playerInFrontOfAI; //True if the player is directly in front of the enemy
+	public bool isFleeing = false; //Bool to activate/deactivate fleeing
 
-	private GameObject player;
-	public Vector3 relativePoint;
-	public Vector3 maxVelocity;
+	private GameObject player; //Reference to the player object
+	public Vector3 relativePoint; //Stores the relative position between the player and the enemy
+	public Vector3 maxVelocity; //Max allowed velocity
 
 
 	void Start ()
 	{
 		player = GameObject.Find("PlayerShip");
 		aiRigid = this.GetComponent<Rigidbody>();
-		force = PlayerMove.move.force;
-		maxVelocity = PlayerMove.move.maxVelocity;
+		force = PlayerMove.move.force; //Sets force equal to that of the player
+		maxVelocity = PlayerMove.move.maxVelocity; //Sets max velocity equal to that of the player
 	}
 		
     void FixedUpdate () 
 	{
-		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false)
+		if(this.GetComponent<AIavoid>().hitFront == false && this.GetComponent<AIavoid>().hitSide == false) //Nothing is blocking the path
 		{
-			if(isPatroling == false)
+			if(isPatroling == false) //This enemy is not patroling
 			{
-				if(isFleeing == false)
+				if(isFleeing == false) //This enemy is not fleeing, so it must be in combat
 				{
-					checkPlayerPosition ();
+					checkPlayerPosition (); //See where the player is 
 				}
 				else
-					this.GetComponent<AIFlee>().flee();
+					this.GetComponent<AIFlee>().flee(); //Continue fleeing
 			}
 		}
 
+		//If an enemy hits one of the boss's bombs, they are to be stunned for 1 second.
 		if(hitBomb ==  true)
 		{
-			bombTimer += Time.deltaTime;
-			if(bombTimer >= 1)
+			bombTimer += Time.deltaTime; //Increase passed time
+			if(bombTimer >= 1) //Timer has reached required duration
 			{
-				bombTimer = 0;
-				hitBomb = false;
+				bombTimer = 0; //Reset bomb timer
+				hitBomb = false; //No longer affected by the stun
+
+				//Reset Rigidbody values
 				this.transform.root.GetComponent<Rigidbody>().mass = 1;
 				this.transform.root.GetComponent<Rigidbody>().drag = 0.5f;
 				this.transform.root.GetComponent<Rigidbody>().angularDrag = 0.5f;
 			}
 		}
 			
-		relativePoint = transform.InverseTransformPoint(player.transform.position);
+		relativePoint = transform.InverseTransformPoint(player.transform.position); //Check and save the relative position between this enemy and the player
 
-		if(hitBomb == false)
+		if(hitBomb == false) //The enemy is not affected by a bomb
 		{
-			aiRigid.AddForce(transform.forward * force*Time.deltaTime);
-			// Series of if tests
-			if (aiRigid.velocity.x >= maxVelocity.x) //|| -aiRigid.velocity.x >= -maxVelocity.x)
+			aiRigid.AddForce(transform.forward * force*Time.deltaTime); //Drive forwards
+
+			//Series of tests to see if the velocity in eeither the x og z axis are to high.
+			//We need to restrict the velocity like this to prevent any ships from driving
+			//too fast. 
+			if (aiRigid.velocity.x >= maxVelocity.x)
 			{
-				// one type of fix, but it is far from correct, speed stays around the max velocity, but it also makes it a lot harder to accelerate
-				// in the z-axis, although it does in fact accelerate.
 				aiRigid.velocity = new Vector3 (maxVelocity.x, 0.0f, aiRigid.velocity.z);
 			}
 
@@ -89,29 +92,28 @@ public class AImove : MonoBehaviour {
 				aiRigid.velocity = new Vector3 (aiRigid.velocity.x, 0.0f, -maxVelocity.z);
 			}
 
-			if (turnLeft == true) 
+			if (turnLeft == true) //One of the scripts has told this script to activate this part of the code
 			{
 				this.transform.Rotate (Vector3.down, turnSpeed * Time.deltaTime);
 			}
 
-			if (turnRight == true) 
+			if (turnRight == true) //One of the scripts has told this script to activate this part of the code
 			{
 				this.transform.Rotate (Vector3.up, turnSpeed * Time.deltaTime);
 			}
 		}
 	}
 		
-	//Uses the data recieved from isFacingAgent
-	//to determine weather or not to turn left,
+	//Uses the data recieved from isFacingPlayer to determine weather or not to turn left,
 	//right or continue driving forward
 	void checkPlayerPosition()
 	{
-		playerInFrontOfAI = isFacingAgent ();
+		playerInFrontOfAI = isFacingPlayer (); //Returns a bool value
 		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //distance between AI and player
 
 		if(distanceToPlayer > maxDist) //AI too far away from the player
 		{
-			if(playerInFrontOfAI == true)
+			if(playerInFrontOfAI == true) //Player directly to the front
 			{
 				turnLeft = false;
 				turnRight = false;
@@ -119,18 +121,18 @@ public class AImove : MonoBehaviour {
 
 			else
 			{
-				turnTowardsPlayer ();
+				turnTowardsPlayer (); //Player is not to the front. Calculate how to turn
 			}
 		}
 
-		else if(distanceToPlayer < minDist)
+		else if(distanceToPlayer < minDist) //Too close to the player
 		{
-			avoidPlayer();
+			avoidPlayer(); //Maneuver away from the player
 		}
 
-		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist) //Perfect distance! Lets aim our cannons directly at the player
+		else if(distanceToPlayer < maxDist && distanceToPlayer > minDist) //Perfect distance! Aim the cannons directly at the player
 		{
-			canonsFacingPlayer(player);
+			canonsFacingPlayer(player); //Turn so that the canons face the player, rather than turn to chase the player
 		}
 	}
 
@@ -138,7 +140,7 @@ public class AImove : MonoBehaviour {
 	//is facing straight for the player.
 	private void canonsFacingPlayer(GameObject test)
 	{
-		relativePoint = Transformation(test);
+		relativePoint = Transformation(test); //Relative position between this enemy and the player
 
 		//We use the public bools "fireLeft" and "fireRight" from the
 		//AIsideCanons.cs script. These change based on Raycast checks.
@@ -180,58 +182,59 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
-	//If the AI gets to close to the player, we want it to avoid collitions
+	//If the enemy gets to close to the player, we want it to avoid collitions
 	void avoidPlayer()
 	{
-		relativePoint = Transformation(player);
-		if (relativePoint.x <= 0)
+		relativePoint = Transformation(player); //Relative position between this enemy and the player 
+		if (relativePoint.x <= 0) //Player to the left
 		{
 			turnLeft = false;
 			turnRight = true;
 		}
-		else if (relativePoint.x >= 0) 
+		else if (relativePoint.x >= 0) //Player to the right
 		{
 			turnRight = false;
 			turnLeft = true;
 		}
 	}
 
-	//Makes the AI Ship turn towards the agent
+	//Makes the enemy turn towards the player
 	void turnTowardsPlayer()
 	{
-		relativePoint = Transformation(player);
-		if (relativePoint.x <= 0)
+		relativePoint = Transformation(player); //Relative position between this enemy and the player
+		if (relativePoint.x <= 0) //Player to the left
 		{
 			turnLeft = true;
 			turnRight = false;
 		}
-		else if (relativePoint.x >= 0) {
+		else if (relativePoint.x >= 0) //Player to the right
+		{
 			turnRight = true;
 			turnLeft = false;
 		}
 	}
 
 
-	//Runs a test and returns the result in a float variable.
+	//Runs a test and returns the result in a vector3 variable.
 	//Used to determine if an object is to the left, right
 	//or front of This object
 	private Vector3 Transformation(GameObject test)
 	{
-		relativePoint = transform.InverseTransformPoint(test.transform.position);
-		return relativePoint;
+		relativePoint = transform.InverseTransformPoint(test.transform.position); //Relative position between this object (enemy) and the parsed parameter
+		return relativePoint; //Return the result
 	}
 
-	//Checks if the AI Ship is facing the Agent object or not
-	private bool isFacingAgent()
+	//Checks if the enemy is facing the player or not
+	private bool isFacingPlayer()
 	{
-		if(relativePoint.z > 0)
+		if(relativePoint.z > 0) //The player is in front of the enemy
 		{
-			if(relativePoint.x > -0.01 && relativePoint.x < 0.01)
+			if(relativePoint.x > -0.01 && relativePoint.x < 0.01) //The player is directly in front of the enemy
 			{
-				return true;
+				return true; //Return true
 			}
-			else return false;
+			else return false; //Player is in front of the enemy, but to either of the sides. Return false
 		}
-		else return false;
+		else return false; //Player is somewhere behind the enemy. Return false. 
 	}
 }
