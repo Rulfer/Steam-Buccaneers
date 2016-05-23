@@ -13,17 +13,25 @@ public class GameControl : MonoBehaviour {
 	public GameObject guiManager;
 
 	//Here is the gamedata saved
+	//Ship position this is the position where ship leaves shop.
+	//So ship will always load outside last shop visisted
 	public Vector3 shipPos;
+	//Name of store to spawn outside
 	public string storeName = "";
+	//Stats
 	public int health;
 	public int money;
 	public int[] canonUpgrades = new int[6];
 	public int hullUpgrade;
 	public int specialAmmo;
 	public int thrusterUpgrade;
+	//Saving first death so player dont need to talk to shopkeeper again
 	public bool firstDeath = false;
+	//Not a saved veriable, but makes it easy for many scripts to see if player is in battle
 	public bool isFighting = false;
+	//Not a saved varible. Checks if played have had dialog with boss
 	public bool talkedWithBoss = false;
+	//Saves if treasureplanets are visited, so players cant just load game and go to same planet
 	public bool[] treasureplanetsfound = new bool[2];
 
 	public GameObject loadingCanvas;
@@ -68,25 +76,12 @@ public class GameControl : MonoBehaviour {
 	//Runs when scene is loaded
 	void OnLevelWasLoaded(int level)
 	{
-
+		//Load game when entering worldmaster
+		//This will happen from main menu and from shop scene
 		if (SceneManager.GetActiveScene ().name == "WorldMaster")
 		{
 			Load ();
 		}
-	}
-
-	//Makes Gui on launch of program
-	void OnGUI()
-	{
-		//Only for debug purposes to see the saved posistions 
-//		GUI.Label (new Rect (10, 220, 160, 30), "ShipPos: " + shipPos);
-//		GUI.Label (new Rect (10, 240, 160, 30), "Last Store: " + storeName);
-//		GUI.Label (new Rect (10, 260, 160, 30), "Health: " + health);
-//		GUI.Label (new Rect (10, 280, 160, 39), "Money: " + money);
-//		GUI.Label (new Rect (10, 300, 160, 30), "SpessAmmo: " + specialAmmo);
-//		GUI.Label (new Rect (10, 320, 260, 39), "Canon upgrade lvl: " + canonUpgrades[0] + ", " + canonUpgrades[1] + ", " + canonUpgrades[2] + ", " + canonUpgrades[3] + ", " + canonUpgrades[4] + ", " + canonUpgrades[5] + ", " );
-//		GUI.Label (new Rect (10, 340, 160, 30), "Hullupgrade: " + hullUpgrade);
-//		GUI.Label (new Rect (10, 360, 160, 30), "thrusterUpgrade: " + thrusterUpgrade);
 	}
 
 	public void Save(string storesName)
@@ -172,30 +167,35 @@ public class GameControl : MonoBehaviour {
 		thrusterUpgrade = data.thrusterUpgrade;
 		firstDeath = data.firstDeath;
 		treasureplanetsfound = data.treasureplanetsfound;
-
+		//Update gui
 		GameObject.Find ("value_scraps_tab").GetComponent<Text> ().text = money.ToString();
 		GameObject.Find ("value_ammo_tab").GetComponent<Text> ().text = specialAmmo.ToString();
 	}
 
 	public void newGame()
 	{
+		//delete savefile
 		File.Delete (Application.persistentDataPath + "/playerInfo.ohhijohnny");
 	}
 
 	public void ChangeScene(string name)
 	{
+		//pause game before entering cogscreen for random error to not appear
 		if (name == "cog_screen")
 		{
 			this.GetComponent<GameButtons> ().pause ();
 		}
-		//Changes scene to parameter
+		//Sets loadingscreen active 
 		if (loadingCanvas != null)
 		{
 			loadingCanvas.SetActive (true);
 		}
+		//hides minimap when loadingscreen is up
 		if(GameObject.Find("_GUIManager"))  
 			GameObject.Find("_GUIManager").SetActive(false);
+		//Keeps loadingscreen going while game is loading
 		StartCoroutine(LoadingScreen(name));
+		//turns on minimap when loadingscreen is done
 		if(GameObject.Find("_GUIManager"))  
 			GameObject.Find("_GUIManager").SetActive(true);
 		
@@ -203,6 +203,7 @@ public class GameControl : MonoBehaviour {
 
 	IEnumerator LoadingScreen(string sceneName)
 	{
+		//Loads scene while loadingscreen is up
 		async = SceneManager.LoadSceneAsync (sceneName);
 		Debug.Log ("Load progress = " + async.progress);
 		yield return async;

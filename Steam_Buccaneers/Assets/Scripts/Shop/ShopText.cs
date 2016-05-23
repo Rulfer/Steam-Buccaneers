@@ -3,36 +3,39 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class ShopText : MonoBehaviour {
-
+	//All text stuff
 	private GameObject header;
 	private GameObject infoText;
 	private GameObject cost;
-
+	//Info about upgrades
 	private string[] hullTxt = new string[2];
 	private string [] thrusterTxt = new string[2];
 	private string [] canonTxt = new string[2];
 	private string specialWeapon;
-
+	//Upgrades names
 	private string[] hullName = new string[2];
 	private string [] thrusterName = new string[2];
 	private string [] canonName = new string[2];
 	private string specialWeaponName;
-
+	//Number for canon 0-5
 	private int canonNumber;
+	//Saves prices for upgrades
 	public int[] hullCost = new int[2];
 	public int [] thrusterCost = new int[2];
 	public int [] canonCost = new int[2];
 	public int specialAmmoCost;
-
+	//Int that holds 3 which is max upgrade
 	private int maxUpgrade;
-
+	//Variables which saves current upgrade price and name
 	public int currentPrice;
 	public string currentUpgradeName;
+	//Variable who checks if it can be upgraded more
 	public bool noMoreUpgrade;
 
 	// Use this for initialization
 	void Start () 
 	{
+		//giving all variables values
 		header = GameObject.Find("header");
 		infoText = GameObject.Find("description");
 		cost = GameObject.Find("value_cost");
@@ -69,9 +72,11 @@ public class ShopText : MonoBehaviour {
 
 	public void updateText(string buttonName)
 	{
+		//Sends inn name of upgradebutton
 		noMoreUpgrade = false;
 		Debug.Log("Change text");
 		currentUpgradeName = buttonName;
+		//checks which upgrade it is then changes text according. If it is the last upgrade no text will appear
 		switch (currentUpgradeName)
 		{
 		case "hull":

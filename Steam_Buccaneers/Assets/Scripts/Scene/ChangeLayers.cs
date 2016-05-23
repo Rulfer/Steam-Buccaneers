@@ -4,13 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class ChangeLayers : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	void LateUpdate () 
+	{
 		if (Vector3.Distance (Vector3.zero, this.transform.position) < 17 && SceneManager.GetSceneByName ("Layer0").isLoaded == false) 
 		{
 			SceneManager.LoadSceneAsync ("Layer0", LoadSceneMode.Additive);
