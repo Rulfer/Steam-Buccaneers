@@ -108,10 +108,10 @@
      <Compile Include="Assets\Scripts\Scene\Continue.cs" />
      <Compile Include="Assets\Scripts\Scene\DoNotDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\GoBack.cs" />
-     <Compile Include="Assets\Scripts\Scene\NewGame.cs" />
-     <Compile Include="Assets\Scripts\Scene\OnStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Scene\QuitScript.cs" />
      <Compile Include="Assets\Scripts\Scene\StoreLauncher.cs" />
+     <Compile Include="Assets\Scripts\Scene\newGame.cs" />
+     <Compile Include="Assets\Scripts\Scene\onStartDeactivate.cs" />
      <Compile Include="Assets\Scripts\Shop\ChangeSliderValue.cs" />
      <Compile Include="Assets\Scripts\Shop\Monies.cs" />
      <Compile Include="Assets\Scripts\Shop\SetCurrentHealth.cs" />
