@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 	public static bool hitBomb = false; // bool for testing if the player was hit by a bomb
 	private float bombTimer = 0;
 
-	private GameObject TutorialControl; //
+	private GameObject TutorialControl;
 
 	// Use this for initialization
 	void Start () 
@@ -71,12 +71,13 @@ public class PlayerMove : MonoBehaviour
 			boostBar.SetActive(false);
 		}
 
+		// Setting the value of the boost resource to 0 if it is equal or less than 0
 		if(boostCooldownTimer <= 0f) 
 		{
 			boostCooldownTimer = 0f;
-			isBoosting = false;
+			isBoosting = false; // we are no longer boosting either if the resource is empty
 		}
-		else if (boostCooldownTimer < 3f)
+		else if (boostCooldownTimer < 3f) // Setting false that the boost is completely cooled down if it is less than 3
 		{
 			boostCooledDown = false;
 		}
@@ -127,14 +128,16 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey (KeyCode.LeftShift)) // the key that enables the player to boost
 			{
+				// if we are in combat and we have resources to boost with
 				if (GameControl.control.isFighting && boostCooldownTimer > 0)
 				{
 					Boost(); // calling the boosting function
 				}
 
+				// if we are not in combat
 				else if (!GameControl.control.isFighting)
 				{
-					Boost();
+					Boost(); // calling the boost function
 				}
 
 			}

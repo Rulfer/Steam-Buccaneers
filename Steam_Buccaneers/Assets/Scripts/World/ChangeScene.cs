@@ -15,18 +15,11 @@ public class ChangeScene : MonoBehaviour
 	void Start () 
 	{
 		inShop = false; // setting shop to false so we can load the parts of the level
-		part1Loaded = false;
-		part2Loaded = false;
-		part3Loaded = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		Debug.Log (part1Loaded + " Part 1");
-		Debug.Log (part2Loaded + " Part 2");
-		Debug.Log (part3Loaded + " Part 3");
-
 		// if the current scene is not tutorial, shop, main menu or the loading screen
 		if (SceneManager.GetActiveScene ().name != "Tutorial" && SceneManager.GetActiveScene ().name != "Shop" && SceneManager.GetActiveScene ().name != "main_menu" && SceneManager.GetActiveScene().name != "loading_screen")
 		{
