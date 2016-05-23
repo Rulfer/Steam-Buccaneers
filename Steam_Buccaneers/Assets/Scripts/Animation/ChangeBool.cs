@@ -3,16 +3,11 @@ using System.Collections;
 
 public class ChangeBool : StateMachineBehaviour {
 
-	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	//override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
-
-	 //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) 
 	{
 
-
+		//This is where combatanimation gets turned of after played wanted amount of time.
+		//Portrett is player animation
 			if (animator.name == "Portrett")
 			{
 				if (stateInfo.normalizedTime > 1 && !animator.IsInTransition (layerIndex))
@@ -28,7 +23,7 @@ public class ChangeBool : StateMachineBehaviour {
 					}
 				}
 			}
-
+		//This is boss animation
 			else if (animator.name == "Portrett2_boss")
 			{
 				if (stateInfo.normalizedTime > 2 && !animator.IsInTransition (layerIndex))
@@ -44,7 +39,7 @@ public class ChangeBool : StateMachineBehaviour {
 					}
 				}
 			}
-
+		//This is enemy animation
 			else if (animator.name == "Portrett2_marine")
 			{
 				if (stateInfo.normalizedTime > 2 && !animator.IsInTransition (layerIndex))
@@ -64,18 +59,4 @@ public class ChangeBool : StateMachineBehaviour {
 
 	}
 
-	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
-
-	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
-	//override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
-
-	// OnStateIK is called right after Animator.OnAnimatorIK(). Code that sets up animation IK (inverse kinematics) should be implemented here.
-	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
 }
