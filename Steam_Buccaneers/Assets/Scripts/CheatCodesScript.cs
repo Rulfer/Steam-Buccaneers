@@ -121,8 +121,9 @@ public class CheatCodesScript : MonoBehaviour
 			case "money": //These three will give the player money
 			case "Money":
 			case "MONEY":
-				GameControl.control.money += 100; //Give the player 100 money. Will not update on the screen before the player enters a shop
-				cheatResult = "Gained 100 scraps."; 
+				GameControl.control.money += 1000; //Give the player 1000 money.
+				cheatResult = "Gained 1000 scraps."; 
+				GameObject.Find("value_scraps_tab").GetComponent<Text>().text = GameControl.control.money.ToString(); // updates players total scrap
 				break;
 			default: //Invalid cheat
 				cheatResult = "Error: Incorrect cheat code."; 
