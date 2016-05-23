@@ -38,9 +38,12 @@ public class GameButtons : MonoBehaviour {
 		}
 		if (i == 10)
 		{
-			if (GameControl.control.loadingCanvas.activeSelf == true)
+			if (GameControl.control.loadingCanvas != null)
 			{
-				GameControl.control.loadingCanvas.SetActive (false);
+				if (GameControl.control.loadingCanvas.activeSelf == true)
+				{
+					GameControl.control.loadingCanvas.SetActive (false);
+				}
 			}
 		}
 

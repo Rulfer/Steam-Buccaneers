@@ -6,16 +6,14 @@ using UnityEngine.UI;
 
 
 public class BombHitSomething : MonoBehaviour {
-	private float radius = 20F;
-	private float force = 10.0f;
-	private float distance;
+	private float radius = 20F; //Explosion radius
+	private float force = 10.0f; //Force applied from the explosion
 
-	CameraShakeInstance shake;
-	public GameObject explosion;
-//	GameObject playerPos;
+	CameraShakeInstance shake; //Reference to the camera shake script
+	public GameObject explosion; //Explosion particle simulation
 
-	public AudioClip[] clips;
-	private AudioSource source;
+	public AudioClip[] clips; //An array containing multiple audio clips
+	private AudioSource source; //Auio source
 
 	void Start()
 	{
@@ -62,7 +60,7 @@ public class BombHitSomething : MonoBehaviour {
 
 		foreach(Collider hit in colliders) //We will do the same check for every object in the array
 		{
-			if(hit.transform.root.name != "Boss(Clone)")
+			if(hit.transform.root.name != "Boss(Clone)") //We don't want to apply force to the boss. 
 			{
 				Rigidbody rb = hit.GetComponent<Rigidbody>(); //rb holds the Rigidbody data for every object in the array
 				if(hit.transform.root.name == "PlayerShip") //If we hit the player

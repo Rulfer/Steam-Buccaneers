@@ -101,7 +101,7 @@ public class ShopButtons : MonoBehaviour {
 	public void openRepair()
 	{
 		repairMenu.SetActive(true);
-		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 33)
+		if (GameObject.Find ("TutorialControl") != null && GameObject.Find ("TutorialControl").GetComponent<Tutorial>().dialogNumber == 34)
 		{
 			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
@@ -120,11 +120,11 @@ public class ShopButtons : MonoBehaviour {
 				GameObject.Find ("value_scraps").GetComponent<Text> ().text = GameControl.control.money.ToString ();
 			}
 		} 
-		else
+		else if (GameControl.control.health != 100)
 		{
 			if (GameControl.control.health <= (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value)
 			{
-				source.Play();
+				source.Play ();
 				GameControl.control.health = (int)GameObject.Find ("Slider_refill").GetComponent<Slider> ().value;
 				GameObject.Find ("Slider_current_hp").GetComponent<Slider> ().value = GameControl.control.health;
 
@@ -133,6 +133,11 @@ public class ShopButtons : MonoBehaviour {
 					GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 				}
 			}
+		} 
+		else
+		{
+			source.Play ();
+			GameObject.Find ("TutorialControl").GetComponent<Tutorial> ().nextDialog ();
 		}
 	}
 
