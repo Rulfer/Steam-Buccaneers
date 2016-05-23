@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class Respawn : MonoBehaviour 
 {
-	float temp = 100000;
+	//Set start radius to look for shop
+	float shopToPlayerDistance= 100000;
 	int tempI;
 	private float distance;
 	public GameObject[] shops;
@@ -103,9 +104,9 @@ public class Respawn : MonoBehaviour
 		for (int i = 0; i < shops.Length; i++)
 		{
 			distance = Vector3.Distance(shops[i].transform.position, player.transform.position);
-			if (distance < temp)
+			if (distance < shopToPlayerDistance)
 			{
-				temp = distance;
+				shopToPlayerDistance= distance;
 				tempI = i;
 			}
 		}
@@ -123,6 +124,7 @@ public class Respawn : MonoBehaviour
 		GameControl.control.money -= (GameControl.control.money*10)/100;
 		GameControl.control.health = 100;
 		player.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
+		GameObject.Find ("value_scraps_tab").GetComponent<Text> ().text = GameControl.control.money.ToString();
 
 		if (GameControl.control.firstDeath == false)
 		{
