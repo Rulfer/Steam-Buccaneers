@@ -51,24 +51,23 @@ public class SwivelFire : MonoBehaviour
 				}
 			}
 		}
-
+		// if we are not holding down the right mouse button
 		else
 		{
-			Cursor.visible = true;
-			aimedCursor.GetComponent<RawImage>().enabled = false;
+			Cursor.visible = true; // the default cursor is visible
+			aimedCursor.GetComponent<RawImage>().enabled = false; // the aim cursor is not visible
 		}
-		if(Input.GetButtonDown("Fire2"))
+		if(Input.GetButtonDown("Fire2")) // if we press down the right mouse button
 		{
-			source.clip = clips[1];
-			source.Play();
+			source.clip = clips[1]; // load sound of enabling the cannon
+			source.Play(); // play the sound
 		}
 
-		if(Time.time > fireDelay && fired == true)
+		if(Time.time > fireDelay && fired == true) // if the cannon can fire again
 		{
-			source.clip = clips[2];
-			source.Play();
-			fired = false;
-		}
-			
+			source.clip = clips[2]; // load the reload sound clip
+			source.Play(); // play the sound clip
+			fired = false; // the cannon is set to not have shot yet
+		}			
 	}
 }
