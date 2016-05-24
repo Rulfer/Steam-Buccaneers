@@ -337,7 +337,7 @@ public class Tutorial : MonoBehaviour
 		} 
 		else
 		{
-			if (stage == 33 && GameControl.control.health == 100)
+			if (stage == 35 && GameControl.control.health == 100)
 			{
 				setDialog (character [0], "It seems like you havent got a scratch! Good for you! Next time you come back with broken ship you can repair your ship here. Click “V” to continue.");
 			}
