@@ -186,8 +186,8 @@ public class SpawnAI : MonoBehaviour
 		while(foundSpawn == false) //Has not found a spawn yet
 		{
 			//Create random numbers between 100 and 200
-			float tempPosX = Random.Range(100f, 250f); //Random x position
-			float tempPosZ = Random.Range(100f, 250f); //andom z position
+			float tempPosX = Random.Range(200f, 250f); //Random x position
+			float tempPosZ = Random.Range(200f, 250f); //andom z position
 			float posX;
 			float posZ;
 			//Creates a random variable from 1 to 10 (the last number is not included, aka 11).
