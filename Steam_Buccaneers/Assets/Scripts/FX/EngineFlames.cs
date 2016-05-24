@@ -3,18 +3,15 @@ using System.Collections;
 
 public class EngineFlames : MonoBehaviour {
 
-	private Rigidbody rigi;
-	private Vector3 oldScale;
-	private Vector3 newScale;
-	private float tempZ;
-	private float speed;
-	private float xSpeed;
-	private float zSpeed;
+	private Rigidbody rigi; //This objects rigid body
+	private float speed; //Speed of the parent ship
+	private float xSpeed; //Speed in x-direction
+	private float zSpeed; //Speed in z-direction
 
-	private bool goingDown = false;
-	private float scalingspeed;
-	private float maxZ;
-	private float lowerZ;
+	private bool goingDown = false; //Used to see if we should make the flame smaler or bigger
+	private float scalingspeed; //How fast the scaling is
+	private float maxZ; //Max allowed Z scale
+	private float lowerZ; //Max allowed lower Z scale
 
 	// Use this for initialization
 	void Start () {
@@ -27,76 +24,50 @@ public class EngineFlames : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if(this.transform.root.name == "PlayerShip")
+		if(this.gameObject.transform.localScale.z >= maxZ) //The scale of the flame is greater than or equal to the maxZ variable
 		{
-			if(this.gameObject.transform.localScale.z >= maxZ)
-			{
-				goingDown = true;
-				setNewLowerScale();
-			}
-
-			else if(this.gameObject.transform.localScale.z <= lowerZ)
-			{
-				goingDown = false;
-				setNewUpperScale();
-			}
-
-			if(goingDown == false)
-			{
-				this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
-			}
-			else
-			{
-				this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
-			}
+			goingDown = true; //Scale it down
+			setNewLowerScale(); //Generate new lower scale
 		}
-		else
+
+		else if(this.gameObject.transform.localScale.z <= lowerZ) //The scale of the flame is lower than or equal to the lowerZ variable
 		{
-			if(this.gameObject.transform.localScale.z >= maxZ)
-			{
-				goingDown = true;
-				setNewLowerScale();
-			}
+			goingDown = false; //Scale it up
+			setNewUpperScale(); //Generate new upper scale
+		}
 
-			else if(this.gameObject.transform.localScale.z <= lowerZ)
-			{
-				goingDown = false;
-				setNewUpperScale();
-			}
-
-			if(goingDown == false)
-			{
-				this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed);
-			}
-			else
-			{
-				this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed);
-			}
+		if(goingDown == false) //Scaling up
+		{
+			this.gameObject.transform.localScale += new Vector3(0, 0, scalingspeed); //Increase scale based on scalingspeed
+		}
+		else //Scale the flame down
+		{
+			this.gameObject.transform.localScale -= new Vector3(0, 0, scalingspeed); //Decrease scale based on scalingspeed
 		}
 	}
 
-	private void setNewLowerScale()
+	private void setNewLowerScale() //Generate new lower value
 	{
-		goingDown = true;
+		goingDown = true; //Scale down the flame
 
-		lowerZ = maxZ * 0.9f;
-		if(lowerZ < 0)
+		lowerZ = maxZ * 0.9f; //Decrease to 90% of current scale
+		if(lowerZ < 0) //Ship is at a standstill
 			lowerZ = 0;
 	}
 
-	private void setNewUpperScale()
+	private void setNewUpperScale() //Generate new upper value
 	{
-		goingDown = false;
+		goingDown = false; //Scale up the flame
 
-		xSpeed = rigi.velocity.x;
-		zSpeed = rigi.velocity.z;
-		if(xSpeed < 0)
-			xSpeed *= -1;
-		if(zSpeed < 0)
-			zSpeed *= -1;
-		speed = xSpeed + zSpeed;
-		maxZ = speed * 0.2f * Time.deltaTime;
-		if(maxZ < 0)
+		xSpeed = rigi.velocity.x; //The velocity in x-direction
+		zSpeed = rigi.velocity.z; //The velocity in z-direction
+		if(xSpeed < 0) //Driving to the left
+			xSpeed *= -1; //Make the number positive
+		if(zSpeed < 0) //Driving downwards
+			zSpeed *= -1; //Make the number positive
+		speed = xSpeed + zSpeed; //Total speed
+		maxZ = speed * 0.2f * Time.deltaTime; //Generate new max z scale
+		if(maxZ < 0) //Ship is standing still
 			maxZ = 0;
 	}
 }
