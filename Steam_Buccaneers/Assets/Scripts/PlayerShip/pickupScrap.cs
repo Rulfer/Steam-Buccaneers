@@ -10,16 +10,16 @@ public class PickupScrap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pickupRange = 30;
+		pickupRange = 30; //How far the magnet reach
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		scrapArray = GameObject.FindGameObjectsWithTag("scrap"); //Holds all scrap objects in this array
-		for(int i = 0; i < scrapArray.Length; i++)
+		for(int i = 0; i < scrapArray.Length; i++) //Test every scrap in the scene
 		{
-			temp = transform.position - scrapArray[i].transform.position; 
-			scrapArray[i].GetComponent<Rigidbody>().AddForce(temp.normalized * (Mathf.Max((pickupRange-temp.magnitude)/2.5f,0)), ForceMode.VelocityChange);
+			temp = transform.position - scrapArray[i].transform.position; //Distance between player and the scrap
+			scrapArray[i].GetComponent<Rigidbody>().AddForce(temp.normalized * (Mathf.Max((pickupRange-temp.magnitude)/2.5f,0)), ForceMode.VelocityChange); //Add force to the scrap
 		}
 	}
 }

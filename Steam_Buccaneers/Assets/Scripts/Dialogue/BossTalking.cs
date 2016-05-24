@@ -204,7 +204,7 @@ public class BossTalking : MonoBehaviour
 				turnLeft = true;
 				turnRight = false;
 			}
-			else
+			else //The player is to the right of the boss
 			{
 				turnLeft = false;
 				turnRight = true;
@@ -213,28 +213,29 @@ public class BossTalking : MonoBehaviour
 		}
 	}
 
-	private bool isFacingPlayer()
+	private bool isFacingPlayer() //See if the player is directly in front of the boss
 	{
-		if(relativePoint.z > 0)
+		if(relativePoint.z > 0) //Player in front of the boss
 		{
-			if(relativePoint.x > -1 && relativePoint.x < 1)
+			if(relativePoint.x > -1 && relativePoint.x < 1) //Player directly in front of the boss
 			{
-				return true;
+				return true; //Return true
 			}
-			else return false;
+			else return false; //Player not directly in front of the boss
 		}
-		else return false;
+		else return false; //Player behind the boss
 	}
 
-	//Activates all scripts and makes player light again so the battle can beginn
-	void activateScripts()
+	void activateScripts() //Reactivate boss and player
 	{
+		//Activate boss scripts
 		GameControl.control.talkedWithBoss = true;
 		this.GetComponent<AImove>().enabled = true;
 		this.GetComponent<AIavoid>().enabled = true;
 		this.GetComponent<AIMaster>().enabled = true;
 		this.GetComponent<AIMaster>().kill.gameObject.SetActive(true);
 
+		//Activate PlayerMove and reduce mass on RigidBody
 		playerPoint.GetComponent<PlayerMove>().enabled = true;
 		playerPoint.GetComponent<Rigidbody>().mass = 1;
 		playerPoint.GetComponent<Rigidbody>().angularDrag = 0.5f;
@@ -242,7 +243,7 @@ public class BossTalking : MonoBehaviour
 
 		this.GetComponent<BossTalking>().enabled = false;
 
-		BackgroundSongsController.audControl.bossCombat();
+		BackgroundSongsController.audControl.bossCombat(); //Play the correct combatsong
 	}
 
 	//Function that keeps track of what is going to happen with each dialog
