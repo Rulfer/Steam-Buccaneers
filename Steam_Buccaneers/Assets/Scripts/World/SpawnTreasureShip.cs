@@ -9,7 +9,7 @@ public class SpawnTreasureShip : MonoBehaviour
 	float xPos; // the position on the x-axis the treasure ship is to spawn at
 	float zPos; // the position on the z-axis the treasure ship is to spawn at
 	Vector3 spawnPos; // vector for holding the spawn coordinates
-	float spawnDistance; // 
+	//float spawnDistance; // 
 
 	// Use this for initialization
 	void Start () 
@@ -45,7 +45,7 @@ public class SpawnTreasureShip : MonoBehaviour
 	{
 		
 		spawnPos = treasureSpawnpoint(); // sets the spawn position equal to the spawn point 
-		spawnDistance = Vector3.Distance (spawnPos, player.transform.position); // 
+		//spawnDistance = Vector3.Distance (spawnPos, player.transform.position); // 
 
 		// creates the treasure ship at the spawn position
 		Instantiate(treasureShip, spawnPos, player.transform.rotation);
