@@ -146,7 +146,7 @@ public class Respawn : MonoBehaviour
 			Destroy(go);
 
 		//Player coor is the nearest shop -100 i z
-		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,shops[tempI].transform.position.y,shops[tempI].transform.position.z - 100);
+		Vector3 spawnCoord = new Vector3 (shops[tempI].transform.position.x,0,shops[tempI].transform.position.z - 100);
 		//Rotates ship around to point towards shop
 		player.transform.localEulerAngles = new Vector3(0,0,0);
 		player.transform.position = spawnCoord;
