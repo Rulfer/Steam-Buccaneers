@@ -62,13 +62,7 @@ public class AIsideCanons : MonoBehaviour {
 					}
 				}
 			}
-//			else if(this.transform.root.name == "Boss(Clone)") //This is the boss
-//			{
-//				for(int i = 0; i < 6; i++) 
-//				{
-//					SpawnAI.spawn.cannonUpgraded[i] = false;
-//				}
-//			}
+
 			else if(this.transform.root.name == "Cargo(Clone)") //This is the cargo ship
 			{
 				for(int i = 0; i < 2; i++) //Run the loop 2 times, one for each cannon
@@ -121,7 +115,7 @@ public class AIsideCanons : MonoBehaviour {
 			fireDelayLeft = Time.time + fireRate; //Update fireDelay with time and firerate to generate new cooldown time
 
 			sourceLeft.clip = cannonFireSounds[Random.Range(0, 3)]; //Plays a random audioclip
-			sourceLeft.Play();
+
 
 			if(this.transform.root.name == "Boss(Clone)") //This is the boss object
 			{
@@ -130,6 +124,7 @@ public class AIsideCanons : MonoBehaviour {
 					GameObject test = Instantiate (cannonball3, leftCannons[i].transform.position, leftCannons[i].transform.rotation) as GameObject; //Instantiate a cannonball at the cannons position and rotation
 					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right)); //Add force to the cannonball
 				}
+				sourceLeft.Play();
 			}
 
 			else if(this.transform.root.name == "Marine(Clone)") //This is a marine                                                                                                                                                  
@@ -152,6 +147,7 @@ public class AIsideCanons : MonoBehaviour {
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right)); //Add force to the cannonball
 					}
 				}
+				sourceLeft.Play();
 			}
 			else if(this.transform.root.name == "Cargo(Clone)") //This is a cargo ship
 			{
@@ -172,6 +168,7 @@ public class AIsideCanons : MonoBehaviour {
 						GameObject test = Instantiate (cannonball3, leftCannons[0].transform.position, transform.rotation) as GameObject; //Instantiate a level 3 cannon at the cannons position and rotation
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * -this.transform.right)); //Add force to the cannonball
 					}
+					sourceLeft.Play();
 				}
 			}
 		}
@@ -181,7 +178,6 @@ public class AIsideCanons : MonoBehaviour {
 			fireDelayRight = Time.time + fireRate; //Update fireDelay with time and firerate to generate new cooldown time
 
 			sourceRight.clip = cannonFireSounds[Random.Range(0, 3)]; //Play a random audioclip
-			sourceRight.Play();
 
 			if(this.transform.root.name == "Boss(Clone)") //This is the boss
 			{
@@ -190,6 +186,7 @@ public class AIsideCanons : MonoBehaviour {
 					GameObject test = Instantiate (cannonball3, rightCannons[i].transform.position, transform.rotation) as GameObject; //Instantiate a level 3 cannon at the cannons position and rotation
 					test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right)); //Add force to the cannonball
 				}
+				sourceRight.Play();
 			}
 
 			else if(this.transform.root.name == "Marine(Clone)") //This is a marine
@@ -212,6 +209,7 @@ public class AIsideCanons : MonoBehaviour {
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right)); //Add force to the cannonball
 					}
 				}
+				sourceRight.Play();
 			}
 			else if(this.transform.root.name == "Cargo(Clone)") //This is a cargo ship
 			{
@@ -232,6 +230,7 @@ public class AIsideCanons : MonoBehaviour {
 						GameObject test = Instantiate (cannonball3, rightCannons[0].transform.position, transform.rotation) as GameObject; //Instantiate a level 3 cannon at the cannons position and rotation
 						test.GetComponent<Rigidbody> ().AddForce (this.GetComponentInParent<Rigidbody> ().velocity + (test.GetComponent<AIprojectile> ().projectileSpeed * this.transform.right)); //Add force to the cannonball
 					}
+					sourceRight.Play();
 				}
 			}
 		}
