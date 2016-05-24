@@ -10,6 +10,7 @@ public class OpenCloseObjectives : MonoBehaviour {
 	
 	public void openCloseObjectivemenu()
 	{
+		//For toggle button next to compass. Open and closes objectivemenu
 		objectMenu.SetActive (!objectMenu.activeSelf);
 		if (objectMenu.activeSelf == false)
 		{

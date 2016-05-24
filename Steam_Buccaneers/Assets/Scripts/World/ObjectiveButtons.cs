@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class ObjectiveButtons : MonoBehaviour {
 
+	//Script which points compassneedle
 	private PointTowards compassNeedle;
+	//Textbox which holds questinfo
 	private Text questInfo;
-
 	float counter;
 
 	void Start()
 	{
+		//Sets values for varibles
 		compassNeedle = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		counter = 0;
@@ -20,7 +22,7 @@ public class ObjectiveButtons : MonoBehaviour {
 	void Update()
 	{
 		counter += Time.deltaTime;
-
+		//After 5 sec check if new target is available. This is to remove treasure that is already picked up
 		if (counter > 5)
 		{
 			if (compassNeedle.goTarget != null)
@@ -43,12 +45,14 @@ public class ObjectiveButtons : MonoBehaviour {
 
 	public void PirateLord () 
 	{
+		//Points to pirate lord and change text
 		compassNeedle.goTarget = GameObject.Find ("BossSpawnCompass");
 		questInfo.text = "Find ancient cog!";
 	}
 
 	public void Shop () 
 	{
+		//FInds all shops in distance and chooses the closest one for target for compass
 		float distance;
 		float temp = 1000000000;
 		int tempI = 0;
@@ -77,7 +81,7 @@ public class ObjectiveButtons : MonoBehaviour {
 
 	public void Treasure()
 	{
-		//Wait for treasures to be done
+		//Finding closest treasure and setting as target for compass
 		float distance;
 		float temp = 1000000000;
 		int tempI = 0;

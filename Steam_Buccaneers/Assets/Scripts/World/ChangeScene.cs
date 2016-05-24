@@ -25,18 +25,7 @@ public class ChangeScene : MonoBehaviour
 		{
 			LoadScenes();
 			UnloadScenes();
-			/*
-			if (inShop != true) // if the player is not in the shop
-			{
-				LoadScenes (); // function for loading scenes
-				UnloadScenes (); // function for unloading scenes
-			} 
-			else // every scene in the world is not loaded
-			{
-				part1Loaded = false;  
-				part2Loaded = false;
-				part3Loaded = false;
-			}*/
+
 		}
 
 		else // every scene in the world is not loaded

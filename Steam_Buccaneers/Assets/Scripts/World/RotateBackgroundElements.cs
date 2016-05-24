@@ -5,12 +5,6 @@ using System.Collections;
 public class RotateBackgroundElements : MonoBehaviour 
 {
 	Vector3 rotateVec = new Vector3(0f,0f,1f);// vector for rotating the object in the z-axis
-
-	// Use this for initialization
-	void Start () 
-	{
-	
-	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
