@@ -49,12 +49,16 @@ public class ShipHitObject : MonoBehaviour
 				ContactPoint contact = col.contacts[0];
 				Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
 				if(col.transform.name == "PlayerShip") //Make player loose health
-					GameControl.control.health -= healthLost;
-				if(GameControl.control.health <= 0) //Player died
 				{
-					col.transform.GetComponentInParent<DeadPlayer>().enabled = true;
-					col.transform.GetComponentInParent<DeadPlayer>().killPlayer();
+					GameControl.control.health -= healthLost;
+					Debug.Log("Player health is " + GameControl.control.health);
 				}
+//				if(GameControl.control.health <= 0) //Player died
+//				{
+//					
+//					col.transform.GetComponentInParent<DeadPlayer>().enabled = true;
+//					col.transform.GetComponentInParent<DeadPlayer>().killPlayer();
+//				}
 				if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" ) //We hit one of the enemies
 				{
 					if(col.transform.name == "Cargo(Clone)") //We hit the Cargo ship, make it flee
