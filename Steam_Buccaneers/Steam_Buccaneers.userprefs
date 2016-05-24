@@ -1,12 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\CameraController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\AIMove scripts\AIavoid.cs">
     <Files>
+      <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="340" Column="19" />
       <File FileName="Assets\Scripts\PlayerShip\CameraController.cs" Line="56" Column="23" />
       <File FileName="Assets\Scripts\FX\EngineFlames.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
->>>>>>> refs/remotes/origin/Johns2nd
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
