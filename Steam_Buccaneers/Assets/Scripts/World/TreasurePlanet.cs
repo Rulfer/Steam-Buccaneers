@@ -12,8 +12,10 @@ public class TreasurePlanet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		//If the name is TreasurePlanet it means it is the first treasureplanet
 		if (this.transform.name == "TreasurePlanet")
 		{
+			//Checks if it is already picked up
 			if (GameControl.control.treasureplanetsfound [0] == true)
 				treasureHasBeenPickedUp = true;
 			else
@@ -21,6 +23,8 @@ public class TreasurePlanet : MonoBehaviour
 		} 
 		else
 		{
+			//For second treasureplanet
+			//Checks if it is picked up
 			if (GameControl.control.treasureplanetsfound [1] == true)
 				treasureHasBeenPickedUp = true;
 			else
@@ -31,22 +35,22 @@ public class TreasurePlanet : MonoBehaviour
 
 	void OnTriggerEnter (Collider other) // collider for checking if player is to pick up the scrap
 	{
-
-		Debug.Log ("Enter treasureplanet");
+		
 		if (other.tag == "Player" && treasureHasBeenPickedUp == false ) // if the player hits the collider and has not yet picked up the treasure
 		{
-			if (this.transform.name == "TreasurePlanet") // if the collider belongs to treasure planet
+			if (this.transform.name == "TreasurePlanet") // if the collider belongs to the first treasureplanet
 			{
+				//Return if it already picked up
 				if (GameControl.control.treasureplanetsfound [0] == true) 
 					return;
 			} 
 			else
 			{
+				//Return if it already picked up
 				if (GameControl.control.treasureplanetsfound [1] == true)
 					return;
 			}
 				
-			Debug.Log ("Play animation " + treasureAnimation);
 			// pauses the game while animation is playing
 			GameObject.Find("GameControl").GetComponent<GameButtons>().pause();
 			// creates the treasure animation

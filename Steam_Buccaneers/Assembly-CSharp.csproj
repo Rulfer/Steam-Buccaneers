@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
+     <Compile Include="Assets\Scripts\Animation\UnpauseAndDelete.cs" />
      <Compile Include="Assets\Scripts\CheatCodesScript.cs" />
      <Compile Include="Assets\Scripts\Dialogue\BossTalking.cs" />
      <Compile Include="Assets\Scripts\Dialogue\ShopkeeperDialog.cs" />
@@ -134,7 +135,6 @@
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\WorldBorder.cs" />
      <Compile Include="Assets\TreasureRandomDirection.cs" />
-     <Compile Include="Assets\UnpauseAndDelete.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />
