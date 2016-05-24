@@ -191,13 +191,13 @@ public class BossTalking : MonoBehaviour
 		Debug.Log ("Realtivepoint is : " + relativePoint);
 		bool playerInFrontOfAI = isFacingPlayer ();
 
-		if(playerInFrontOfAI == true)
+		if(playerInFrontOfAI == true) //Boss if facing player
 		{
 			turnLeft = false;
 			turnRight = false;
 			faced = true;
 		}
-		else
+		else //Boss needs to turn
 		{
 			if(relativePoint.x <= 0) //The player is to the left of the boss)
 			{
