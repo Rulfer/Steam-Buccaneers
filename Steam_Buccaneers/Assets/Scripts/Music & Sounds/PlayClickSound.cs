@@ -15,10 +15,9 @@ public class PlayClickSound : MonoBehaviour {
 
 	void Update()
 	{
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(0)) //When the player clicks while in the shop, play a audio clip
 		{
-			Debug.Log("hello");
-			source.PlayOneShot(effect);
+			source.PlayOneShot(effect); //Play the clip
 		}
 	}
 }

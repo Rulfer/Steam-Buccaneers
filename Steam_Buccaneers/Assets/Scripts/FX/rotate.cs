@@ -11,7 +11,7 @@ public class Rotate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.Rotate (Vector3.back);
+		transform.Rotate (Vector3.back); //Rotate the cog
 	
 	}
 }

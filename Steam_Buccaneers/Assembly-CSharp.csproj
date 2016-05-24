@@ -45,13 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AimCursorPosition.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
      <Compile Include="Assets\EZ Camera Shake\Scripts\Utilities\CameraUtilities.cs" />
      <Compile Include="Assets\Graphics\shop\SetCursorPosition.cs" />
-     <Compile Include="Assets\PlayVideoScript.cs" />
      <Compile Include="Assets\Scripts\AI\AIMaster.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIFlee.cs" />
      <Compile Include="Assets\Scripts\AI\AIMove scripts\AIPatroling.cs" />
@@ -69,6 +67,7 @@
      <Compile Include="Assets\Scripts\AI\Weapons\AIsideCanons.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\BombHitSomething.cs" />
      <Compile Include="Assets\Scripts\AI\Weapons\ExtraCannonSensors.cs" />
+     <Compile Include="Assets\Scripts\AimCursorPosition.cs" />
      <Compile Include="Assets\Scripts\Animation\ChangeBool.cs" />
      <Compile Include="Assets\Scripts\Animation\CombatAnimationController.cs" />
      <Compile Include="Assets\Scripts\Animation\DelayStartShopkeeperPointing.cs" />
@@ -80,7 +79,7 @@
      <Compile Include="Assets\Scripts\FX\EngineFlames.cs" />
      <Compile Include="Assets\Scripts\FX\Rotate.cs" />
      <Compile Include="Assets\Scripts\FX\ShipHitObject.cs" />
-     <Compile Include="Assets\Scripts\Gravity and simple movement\GravityPull.cs" />
+     <Compile Include="Assets\Scripts\Gravity\GravityPull.cs" />
      <Compile Include="Assets\Scripts\Minimap\GUIManager.cs" />
      <Compile Include="Assets\Scripts\Minimap\MinimapCamera.cs" />
      <Compile Include="Assets\Scripts\Minimap\ZoomMinimap.cs" />
@@ -90,6 +89,7 @@
      <Compile Include="Assets\Scripts\Particle Effects\DamagedAI.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DamagedPlayer.cs" />
      <Compile Include="Assets\Scripts\Particle Effects\DeleteParticles.cs" />
+     <Compile Include="Assets\Scripts\PlayVideoScript.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\BoostSlider.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\CameraController.cs" />
      <Compile Include="Assets\Scripts\PlayerShip\ChangeMaterial.cs" />
@@ -132,9 +132,9 @@
      <Compile Include="Assets\Scripts\World\RotateBackgroundElements.cs" />
      <Compile Include="Assets\Scripts\World\SpawnTreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\TreasurePlanet.cs" />
+     <Compile Include="Assets\Scripts\World\TreasureRandomDirection.cs" />
      <Compile Include="Assets\Scripts\World\TreasureShip.cs" />
      <Compile Include="Assets\Scripts\World\WorldBorder.cs" />
-     <Compile Include="Assets\TreasureRandomDirection.cs" />
      <None Include="Assets\Materials\ToonBasic.shader" />
      <None Include="Assets\MiniMap\MaskShader.shader" />
      <None Include="Assets\Materials\ToonBasicOutline.shader" />

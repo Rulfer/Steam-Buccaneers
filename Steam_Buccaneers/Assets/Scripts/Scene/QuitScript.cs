@@ -5,6 +5,6 @@ public class QuitScript : MonoBehaviour {
 
 	public void quitGame ()
 	{
-		Application.Quit ();
+		Application.Quit (); //Quit the game
 	}
 }
