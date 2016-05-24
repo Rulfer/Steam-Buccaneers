@@ -60,6 +60,7 @@ public class MinimapCamera : MonoBehaviour
 	{
 		isMinimap = false; //Close the minimap
 		Time.timeScale = 0; //Pause the game
+		ortSize = this.GetComponent<Camera>().orthographicSize;
 		this.transform.position = new Vector3(0, 700, 7220); //Move to this position
 		this.transform.rotation = Quaternion.Euler(90, -90, 0); //Rotate the camera to show the world sideways
 		this.GetComponent<Camera>().orthographicSize = 8000; //Size of the camera
@@ -105,6 +106,7 @@ public class MinimapCamera : MonoBehaviour
 		animationCanvas.SetActive(true); //Animation windows activated
 		compas.SetActive(true); //Compas and quest info elements turned on
 		this.transform.rotation = Quaternion.Euler(90, 0, 0); //Rotate this camera to be correct for the minimap
+		this.GetComponent<Camera>().orthographicSize = ortSize;
 		this.GetComponent<Camera>().targetTexture = minimapTexture; //Change render texture
 		this.GetComponent<Camera>().cullingMask = 1 << 8 | 1 << 9 | 1 << 10; //Change culling mask
 		boss.transform.localScale = new Vector3(4.1f, 4.1f, 4.1f); //Reset boss icon scale
