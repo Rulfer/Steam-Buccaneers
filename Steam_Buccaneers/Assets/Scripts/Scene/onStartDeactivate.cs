@@ -4,8 +4,10 @@ using System.Collections;
 public class OnStartDeactivate : MonoBehaviour {
 	public GameObject temp;
 
-	// Use this for initialization
-	void Start () {
+	//Script used for all objects we dont want to see at first.
+	//Made because of laziness
+	void Start () 
+	{
 		this.gameObject.SetActive(false);
 	}
 }

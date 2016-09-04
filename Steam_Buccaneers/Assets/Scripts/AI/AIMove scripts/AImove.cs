@@ -109,9 +109,9 @@ public class AImove : MonoBehaviour {
 	void checkPlayerPosition()
 	{
 		playerInFrontOfAI = isFacingPlayer (); //Returns a bool value
-		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //distance between AI and player
+		distanceToPlayer = Vector3.Distance (this.transform.position, player.transform.position); //distance between enemy and player
 
-		if(distanceToPlayer > maxDist) //AI too far away from the player
+		if(distanceToPlayer > maxDist) //Enemy too far away from the player
 		{
 			if(playerInFrontOfAI == true) //Player directly to the front
 			{
@@ -136,7 +136,7 @@ public class AImove : MonoBehaviour {
 		}
 	}
 
-	//Turns the AI Ship so that the canons on either side
+	//Turns the enemy so that the canons on either side
 	//is facing straight for the player.
 	private void canonsFacingPlayer(GameObject test)
 	{
@@ -149,7 +149,7 @@ public class AImove : MonoBehaviour {
 		//smoother turning, compared to the previous stuttering one.
 		if(relativePoint.x <= 0) //Player to the left
 		{
-			if(AIsideCanons.canons.fireLeft == false) //The AI cant shoot at the player
+			if(AIsideCanons.canons.fireLeft == false) //The enemy cant shoot at the player
 			{
 				if(relativePoint.z >= 0) //Player to the front-left
 				{

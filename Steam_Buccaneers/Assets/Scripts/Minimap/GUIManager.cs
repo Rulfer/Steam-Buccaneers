@@ -2,22 +2,16 @@
 using System.Collections;
 
 public class GUIManager : MonoBehaviour {
-	public RenderTexture miniMapTexture;
-	public Material miniMapMaterial;
-
-
-	// Use this for initialization
-	void Awake () {
-	}
+	public RenderTexture miniMapTexture; //Renders the camera on this texture
+	public Material miniMapMaterial; //Holds both the map and the texture
 	
 	// Update is called once per frame
 	void OnGUI () 
 	{
-		if(MinimapCamera.miniCam.isMinimap)
+		if(MinimapCamera.miniCam.isMinimap) //Minimap is visible
 		{
-			if(Event.current.type == EventType.Repaint)
-				//Graphics.DrawTexture(new Rect(0,0, 128, 128), miniMapTexture, miniMapMaterial);
-				Graphics.DrawTexture(new Rect(Screen.width / 1.13f, Screen.height / 9.7f, Screen.width / 9.5f, Screen.width / 9.5f), miniMapTexture, miniMapMaterial);
+			if(Event.current.type == EventType.Repaint) //Draw the minimap
+				Graphics.DrawTexture(new Rect(Screen.width / 1.13f, Screen.height / 9.7f, Screen.width / 9.5f, Screen.width / 9.5f), miniMapTexture, miniMapMaterial); 
 		}
 	}
 }

@@ -59,19 +59,24 @@ public class Tutorial : MonoBehaviour
 	//Everything with blinkingbuttons v
 	//Array that holds shopbuttons that shall blink
 	private Button[] blinkingButtons = new Button[8];
+	//Holds oppacity of button that is blinking
 	private ColorBlock cb;
+	//To check if oppacity is going up or down
 	private bool goingDown = true;
+	//How fast button will blink
 	private float blinkingButtonSpeed;
-
+	//Holds shopbuttons to be able to turn of functionallity
 	private GameObject[] shopButtons = new GameObject[13];
 
 	void Awake()
 	{
+		//Have this so it doesnt get destroyd when entering shop and leaving shop
 		DontDestroyOnLoad (gameObject);
 	}
 
 	void OnLevelWasLoaded(int level)
 	{
+		//Gets objects and variables after which scene we just entered
 		if (SceneManager.GetActiveScene ().name == "Shop")
 		{
 			loadShop ();
@@ -87,7 +92,7 @@ public class Tutorial : MonoBehaviour
 		//Reassign textboxes in shop
 		dialogTextBox = GameObject.Find ("dialogue_ingame_shop").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name_shop").GetComponent<Text> ();
-
+		//Assigning buttons that is going to blink first
 		blinkingButtons [0] = GameObject.Find ("thruster").GetComponent<Button> ();
 		blinkingButtons [1] = GameObject.Find ("cannonT1").GetComponent<Button> ();
 		blinkingButtons [2] = GameObject.Find ("cannonT2").GetComponent<Button> ();
@@ -101,55 +106,54 @@ public class Tutorial : MonoBehaviour
 		shopButtons = GameObject.FindGameObjectsWithTag ("button");
 		changeButtonInteractivity (false);
 
-
-		Debug.Log ("Store Scene");
+		//Adds nextDialog() function to happen when nextbutton is clicked
 		GameObject.Find ("dialogue_next_shop").GetComponent<Button> ().onClick.AddListener (nextDialog);
 		nextButton = GameObject.Find ("dialogue_next_shop");
+		//Starts dialog
 		nextDialog ();
 	}
 
 	private void loadWorldMaster()
 	{
+		//Finds dialogboxes
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		pauseText = GameObject.Find ("pause");
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
-
+		//Finds characterportretts
 		marineCharacterWindow = GameObject.Find ("Portrett2_marine");
 		shopKeeperCharacterWindow = GameObject.Find ("Portrett2_shopkeeper");
 		bossCharacterWindow = GameObject.Find ("Portrett2_boss");
-
+		//Find new nextbutton and add function to happen with click
 		nextButton = GameObject.Find ("dialogue_next");
 		nextButton.GetComponent<Button> ().onClick.AddListener (nextDialog);
-
+		//Get the bubble and the windows around
 		talkBubble = GameObject.Find ("bubble_ingame");
 		avatarWindow = GameObject.Find ("avatar1");
 		avatarWindow2 = GameObject.Find ("avatar2");
-
+		//pause game
 		buttonEvents.pause ();
 	}
 
 	void Start ()
 	{
-		Debug.Log ("Start tutorial");
-		//marineCharacterWindow.SetActive (false);
-		//Initialize functions
+		//Find all objects needed
 		dialogTextBox = GameObject.Find ("dialogue_ingame").GetComponent<Text> ();
 		characterName = GameObject.Find ("dialogue_name").GetComponent<Text> ();
 		questInfo = GameObject.Find ("quest_info_text").GetComponent<Text> ();
 		buttonEvents = GameObject.Find ("GameControl").GetComponent<GameButtons> ();
 		compass = GameObject.Find ("compass_needle").GetComponent<PointTowards> ();
-
+		//Position characternames
 		nameLeftPos = new Vector3(217.0f, -25.0f);
 		nameRightPos = new Vector3 (612.0f, -25.0f);
-
+		//position shopkeeper name in shop
 		nameShop = new Vector3 (215.4f, 73.2f);
-
+		//Textcolor based on character
 		textColorPlayer = "#173E3CFF";
 		textColorShopkeeper = "#631911FF";
 		textColorMarine = "#323A46FF";
-
+		//Arrays to check if player has pressed all buttons
 		wadCheck [0] = false;
 		wadCheck [1] = false;
 		wadCheck [2] = false;
@@ -173,15 +177,16 @@ public class Tutorial : MonoBehaviour
 
 	void Update()
 	{
-		Debug.Log (dialogNumber);
-
+		//Between these dialogs the player is in shop Here buttons can blink
 		if (dialogNumber >= 31 && dialogNumber <= 36)
 		{
+			//Goes through all buttons that have to blink
 			for (int i = 0; i < blinkingButtons.Length; i++)
 			{
 				Debug.Log (blinkingButtons[i]);
 				if (blinkingButtons [i] != null)
 				{
+					//Changes oppacity on button to make it blink
 					cb = blinkingButtons [i].colors;
 					Debug.Log (blinkingButtons [i].colors.normalColor.a);
 					if (blinkingButtons [i].colors.normalColor.a >= 1)
@@ -201,11 +206,13 @@ public class Tutorial : MonoBehaviour
 					{
 						cb.normalColor = new Color (cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, cb.normalColor.a + blinkingButtonSpeed);
 					}
+					//change both pressed and highlighted and normal color
 					cb.pressedColor = cb.normalColor;
 					cb.highlightedColor = cb.normalColor;
 					blinkingButtons [i].colors = cb;
 				}
 			}
+			//If it is dialognumber 36 player enters WorldMaster and needs all dialogue things to show
 			if (SceneManager.GetActiveScene ().name == "WorldMaster")
 			{
 				talkBubble.SetActive (true);
@@ -215,7 +222,7 @@ public class Tutorial : MonoBehaviour
 			}
 		} 
 	}
-
+	//All dialog for tutorial
 	private void dialogInArray()
 	{
 		character[0] = "Shopkeeper";
@@ -330,7 +337,7 @@ public class Tutorial : MonoBehaviour
 		} 
 		else
 		{
-			if (stage == 33 && GameControl.control.health == 100)
+			if (stage == 35 && GameControl.control.health == 100)
 			{
 				setDialog (character [0], "It seems like you havent got a scratch! Good for you! Next time you come back with broken ship you can repair your ship here. Click “V” to continue.");
 			}
@@ -367,17 +374,20 @@ public class Tutorial : MonoBehaviour
 		{
 
 		case(9):
+			//Player is tested in control
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
 			questInfo.text = "Move using W A D.";
 			nextButton.SetActive (false);
 			break;
 		case(10):
+			//Player is done testing. Talking to shopkeepr
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			questInfo.text = "Talk to Shopkeeper.";
 			break;
 		case(13):
+			//Player is testing shooting
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
@@ -385,38 +395,44 @@ public class Tutorial : MonoBehaviour
 			questInfo.text = "Fire sidcanons using Q and E.";
 			break;
 		case(14):
+			//Player is done testing tlaing to shopkeeper
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			shootingAllowed (true, "NULL");
 			questInfo.text = "Talk to Shopkeeper.";
 			break;
 		case(18):
+			//Player is testing special weapon
 			buttonEvents.pause ();
 			pauseText.SetActive (false);
 			questInfo.text = "Fire special weapon using Mouse2, then Mouse1.";
 			nextButton.SetActive (false);
 			break;
 		case(19):
+			//done testing talking to shopkeeper
 			buttonEvents.pause ();
 			pauseText.SetActive (true);
 			questInfo.text = "Talk to Shopkeeper.";
 			break;
 		case(20):
+			//Gets angry after finding out that he has to pay for bullets
 			GameObject.Find ("Portrett").GetComponent<Animator> ().SetBool ("isAngryMainCharacter", true);
-			Debug.Log ("Change mood");
 			break;
 		case(21):
+			//Shopkeeper finds player reaction funny
 			GameObject.Find ("Portrett2_shopkeeper").GetComponent<Animator> ().SetBool ("isHappyShopkeeper", true);
-			Debug.Log ("Change mood");
 			break;
 		case(23):
+			//Spawns enemy
 			makeTutorialEnemy ();
 			changeCharacterWindow ();
 			break;
 		case(24):
+			//Talk to him
 			changeCharacterWindow ();
 			break;
 		case(25):
+			//Fight him!
 			changeCharacterWindow ();
 			buttonEvents.pause ();
 			questInfo.text = "Destroy Marineship.";
@@ -425,6 +441,7 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (false);
 			break;
 		case(26):
+			//Listen to shopkeeper
 			changeCharacterWindow ();
 			scrapHolder = (GameObject.FindGameObjectsWithTag ("scrap"));
 			scrapCount = scrapHolder.Length;
@@ -434,17 +451,20 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (true);
 			break;
 		case(27):
+			//Loot enemy
 			buttonEvents.pause ();
 			questInfo.text = "Pickup loot.";
 			pauseText.SetActive (false);
 			nextButton.SetActive (false);
 			break;
 		case(28):
+			//Enter shop
 			compass.goTarget = GameObject.Find ("shop1");
 			questInfo.text = "Enter store.";
 			enterStore = true;
 			break;
 		case(32):
+			//Show how to buy special bullets
 			clearButtons ();
 			blinkingButtons [0] = GameObject.Find ("special").GetComponent<Button> ();
 			blinkingButtons [0].enabled = true;
@@ -452,16 +472,19 @@ public class Tutorial : MonoBehaviour
 			nextButton.SetActive (false);
 			break;
 		case(33):
+			//Read what shopkeeper says
 			clearButtons ();
 			changeButtonInteractivity (false);
 			nextButton.SetActive (true);
 			break;
 		case(34):
+			//Enter repairmenu
 			nextButton.SetActive (false);
 			blinkingButtons [0] = GameObject.Find ("button_repair").GetComponent<Button> ();
 			blinkingButtons [0].enabled = true;
 			break;
 		case(35):
+			//Fix ship
 			clearButtons ();
 			blinkingButtons [0] = GameObject.Find ("button_v").GetComponent<Button> ();
 			nextButton.SetActive (false);
@@ -471,18 +494,21 @@ public class Tutorial : MonoBehaviour
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = false;
 			break;
 		case(36):
+			//Exit shop
 			clearButtons ();
 			GameObject.Find ("button_v").GetComponent<Button> ().enabled = false;
 			GameObject.Find ("ExitButton").GetComponent<Button> ().enabled = true;
 			blinkingButtons [0] = GameObject.Find ("ExitButton").GetComponent<Button> ();
 			break;
 		case(37):
+			//Enter world. Talk to shopkeeper
 			changeCharacterWindow ();
 			bossCharacterWindow.SetActive (false);
 			questInfo.text = "Talk to shopkeeper.";
 			pauseText.SetActive (true);
 			break;
 		case(44):
+			//Enter world for reals
 			questInfo.text = "Find ancient cog!";
 			talkBubble.SetActive (false);
 			avatarWindow.SetActive (false);
@@ -499,19 +525,21 @@ public class Tutorial : MonoBehaviour
 
 	public void nextDialog ()
 	{
+		//Continues dialog
 		dialogNumber++;
-		Debug.Log ("NextDialog " + dialogNumber);
 		dialog (dialogNumber);
 	}
 
 	public void setDialog (string character, string text)
 	{
+		//sets right text
 		characterName.text = character;
 		dialogTextBox.text = text;
 	}
 
 	private void shootingAllowed (bool status, string exception)
 	{
+		//Sets weapon shooting off and on after what programmer wants
 		for (int i = 0; i < shootyThings.Length; i++) 
 		{
 			if (shootyThings [i].name != exception)
@@ -523,6 +551,7 @@ public class Tutorial : MonoBehaviour
 
 	private Vector3 marineSpawnpoint()
 	{
+		//Sets spawn for enemy
 		bool foundSpawn = false;
 		Vector3 testerSpawnPos = new Vector3(0, 0, 0);
 
@@ -563,6 +592,7 @@ public class Tutorial : MonoBehaviour
 
 	private void makeTutorialEnemy()
 	{
+		//Makes enemy
 		GameObject temp = Instantiate (AI);
 		temp.transform.position = marineSpawnpoint();
 		GameControl.control.isFighting = true;
@@ -571,8 +601,7 @@ public class Tutorial : MonoBehaviour
 
 	private void changeCharacterWindow()
 	{
-		Debug.Log (marineCharacterWindow + " marine");
-		Debug.Log (shopKeeperCharacterWindow + " shopkeeper");
+		//Changes character talking
 		if (marineCharacterWindow.activeInHierarchy == false)
 		{
 			marineCharacterWindow.SetActive (true);
@@ -587,7 +616,7 @@ public class Tutorial : MonoBehaviour
 
 	public void countingDownScrap()
 	{
-
+		//Counts scrap from enemy and checks if all is picked up
 		scrapCount--;
 		Debug.Log ("Scraps left to pick up: " + scrapCount);
 
@@ -599,6 +628,7 @@ public class Tutorial : MonoBehaviour
 
 	private void clearButtons()
 	{
+		//Remove buttons in blinkingbuttons array
 		for (int i = 0; i < blinkingButtons.Length; i++)
 		{
 			if (blinkingButtons [i] != null)
@@ -612,6 +642,7 @@ public class Tutorial : MonoBehaviour
 
 	private void changeButtonInteractivity(bool possibleInteraction)
 	{
+		//Turns off or on buttons
 		foreach (GameObject i in shopButtons)
 		{
 			i.GetComponent<Button> ().enabled = possibleInteraction;
@@ -620,7 +651,8 @@ public class Tutorial : MonoBehaviour
 
 	public void checkArray(bool[] array)
 	{
-
+		//checks array send in.
+		//If all is true button to contiue dialog appears
 		int k = 0;
 
 		for (int i = 0; i < array.Length; i++)

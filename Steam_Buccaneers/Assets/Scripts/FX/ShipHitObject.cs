@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ShipHitObject : MonoBehaviour 
 {
-	private Vector3 currentVel;
-	private Vector3 newVel;
-	public GameObject sparkSimulation;
+	private Vector3 currentVel; //Curent velocity of this object
+	private Vector3 newVel; //Velocity after contact
+	public GameObject sparkSimulation; //Reference to a particle simulation
 
 	void Update()
 	{
@@ -48,19 +48,23 @@ public class ShipHitObject : MonoBehaviour
 			{
 				ContactPoint contact = col.contacts[0];
 				Instantiate(sparkSimulation, new Vector3(contact.point.x, contact.point.y + 20, contact.point.z), this.transform.rotation); //Create spark effects on the impact point. 
-				if(col.transform.name == "PlayerShip")
+				if(col.transform.name == "PlayerShip") //Make player loose health
+				{
 					GameControl.control.health -= healthLost;
-				if(GameControl.control.health <= 0)
-				{
-					col.transform.GetComponentInParent<DeadPlayer>().enabled = true;
-					col.transform.GetComponentInParent<DeadPlayer>().killPlayer();
+					Debug.Log("Player health is " + GameControl.control.health);
 				}
-				if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" )
+//				if(GameControl.control.health <= 0) //Player died
+//				{
+//					
+//					col.transform.GetComponentInParent<DeadPlayer>().enabled = true;
+//					col.transform.GetComponentInParent<DeadPlayer>().killPlayer();
+//				}
+				if(col.transform.name == "Boss(Clone)" || col.transform.name == "Marine(Clone)" || col.transform.name == "Cargo(Clone)" ) //We hit one of the enemies
 				{
-					if(col.transform.name == "Cargo(Clone)")
+					if(col.transform.name == "Cargo(Clone)") //We hit the Cargo ship, make it flee
 						col.transform.GetComponent<AIMaster>().thisAIFlee();
 					
-					if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0)
+					if(col.transform.name == "Boss(Clone)" && (col.transform.GetComponent<AIMaster>().aiHealth - healthLost) <= 0) //Boss died due to the impact
 					{
 						col.transform.GetComponentInParent<BossTalking> ().enabled = true;
 						col.transform.GetComponentInParent<BossTalking> ().findAllDialogElements();
@@ -68,31 +72,31 @@ public class ShipHitObject : MonoBehaviour
 						col.transform.GetComponentInParent<BossTalking> ().nextButton.GetComponent<Button> ().onClick.AddListener (delegate{GameControl.control.ChangeScene("cog_screen");});
 						//SceneManager.LoadScene("cog_screen");
 					}
-					if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure the projectile don't hit an already dead ship. 
+					if(col.transform.GetComponent<AIMaster>().isDead == false) //We make sure this ship don't hit an already dead ship. 
 					{
-						col.transform.GetComponent<AIMaster>().aiHealth -= healthLost;
-						if(col.transform.GetComponent<AIMaster>().aiHealth <= 0)
+						col.transform.GetComponent<AIMaster>().aiHealth -= healthLost; //Deal damage
+						if(col.transform.GetComponent<AIMaster>().aiHealth <= 0) //Is the enemy dead?
 						{
-							col.transform.GetComponent<AIMaster>().killAI();
+							col.transform.GetComponent<AIMaster>().killAI(); //Kill the enemy
 						}
-						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat3)
+						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat3) //Should it change to the "heavily damaged" material?
 						{
 							col.transform.GetComponent<AIMaster>().changeMat3();
-							col.transform.GetComponent<AIMaster>().testFleeing();
+							col.transform.GetComponent<AIMaster>().testFleeing(); //Test to see if it should flee
 						}
-						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat2)
+						else if(col.transform.GetComponent<AIMaster>().aiHealth <= col.transform.GetComponent<AIMaster>().aiHealthMat2) //Should it change to the "lightly damaged" material?
 							col.transform.GetComponent<AIMaster>().changeMat2();
 					}
 				}
-				if(col.transform.tag == "asteroid")
+				if(col.transform.tag == "asteroid") //This ship hit an asteroid
 				{
-					if (this.transform.name == "PlayerShip")
+					if (this.transform.name == "PlayerShip") //This is the player object
 					{
-						GameControl.control.health -= healthLost * 8;
-						this.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth();
+						GameControl.control.health -= healthLost * 8; //Deal a lot of damage
+						this.GetComponentInChildren<ChangeMaterial> ().checkPlayerHealth(); //See if a material change is needed 
 					}
-					else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" )
-						this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 3;
+					else if(this.transform.name == "Boss(Clone)" || this.transform.name == "Marine(Clone)" || this.transform.name == "Cargo(Clone)" ) //This is a enemy
+						this.transform.GetComponent<AIMaster>().aiHealth -= healthLost * 8; //Deal damage
 				}
 			}
 		}

@@ -20,16 +20,15 @@ public class SpawnAI : MonoBehaviour
 	public GameObject Cargo; //The Cargo prefab
 
 	public static int[] cannonLevel = new int[6];
-//	public bool[] cannonUpgraded = new bool[6];
 	public bool[] availableIndes; //Bool used to check the availability in the marineShips array
-	public bool stopFightTimer = false;
-	public bool livingCargo = false;
-	public bool trespassingWorldBorder = false;
+	public bool stopFightTimer = false; //Bool used to deactivate the timer that starts auromatic fights
+	public bool livingCargo = false; //True is a cargo ship is alive
+	public bool trespassingWorldBorder = false; //True is the player is trespassing the world border
 
 	public static Vector3 spawnPosition; //Where the AI should spawn
 
-	public int livingShips = 0;
-	public float startFightTimer = 0;
+	public int livingShips = 0; //Number of living ships
+	public float startFightTimer = 0; //If this reach a given number, start a fight
 
 	// Use this for initialization
 	void Start ()
@@ -50,7 +49,7 @@ public class SpawnAI : MonoBehaviour
 
 	void Update()
 	{
-		startFightTimer += Time.deltaTime;
+		startFightTimer += Time.deltaTime; //Update timer
 
 		if(stopFightTimer == true) //A fight is not to start automatically
 			startFightTimer = 0; //reset the timer
@@ -61,7 +60,7 @@ public class SpawnAI : MonoBehaviour
 			float temp = 10000; //Create a value to test with, it needs to be large
 			float aiPlayerDistance; //Distance between player and enemies
 			int tempI = 100; //Holds the index of the enemy to fight
-			for(int i = 0; i < marineShips.Length; i++)
+			for(int i = 0; i < marineShips.Length; i++) //Run through the entire array of marines
 			{
 				if(marineShips[i] != null) //Make sure a marine is alive in the current index
 				{
@@ -84,211 +83,205 @@ public class SpawnAI : MonoBehaviour
 	//every X second.
 	void waitBeforeNewSpawn () 
 	{
-		InvokeRepeating ("spawnShip", 1, 1);
+		InvokeRepeating ("spawnShip", 1, 2); //Check if a new marine should spawn every second seconds
 	}
 
 	void waitBeforeCargoSpawn()
 	{
-		InvokeRepeating("spawnCargo", 1, 10);
+		InvokeRepeating("spawnCargo", 1, 2); //Check if a cargo ship should spawn every second seconds
 	}
 
-	void setCannonLevel()
+	void setCannonLevel(bool cargo) //Generate cannonlevel
 	{
 		float relativeOriginPosition = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and where the boss spawns
 		float temp = Mathf.Floor(relativeOriginPosition * 0.02f); //2% of the distance is the new temp;
-		int upgradedWapons = 0;
+		int upgradedWapons = 0; //create variable holding number of upgraded weapons
 		int ranNum;
-		if(livingCargo == false)
+		if(cargo == false) //This is a marine
 		{
-			for(int i = 0; i < 6; i++)
+			for(int i = 0; i < 6; i++) //Check every cannon
 			{
 				ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
 				if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
 				{
-					ranNum = Random.Range(0, 101);
-					if(ranNum < temp*0.5)
+					ranNum = Random.Range(0, 101); //Generate random number that can be anything from 0 to 100
+					if(ranNum < temp*0.5) //If ranNum is lower than half of temp, we get a level 3 gun. This is just to make it harder to get a level 3 cannon
 					{
-						cannonLevel[i] = 3;
+						cannonLevel[i] = 3; //Cannon [i] is level 3
 					}
 					else
 					{
-						cannonLevel[i] = 2;
+						cannonLevel[i] = 2; //Cannon [i] is level 2
 					}
-					upgradedWapons++;
-//					cannonUpgraded[i] = true;
+					upgradedWapons++; //Increase amount of upgraded weapoons
 				}
-				else
+				else //Failed to upgrade
 				{
-					cannonLevel[i] = 1;
+					cannonLevel[i] = 1; //Cannon [i] is level 1
 				}
 			}
 		}
 
-		else
+		else //Upgrading cannons for the cargo ship
 		{
-			for(int i = 0; i < 2; i++)
+			for(int i = 0; i < 2; i++) //Check both cannons
 			{
 				ranNum = Random.Range (0, 101); //Generates a number from 0 to 100
 				if(ranNum < temp) //The roll is low enough! We got a lvl 2 gun now
 				{
-					ranNum = Random.Range(0, 101);
-					if(ranNum < temp*0.5)
+					ranNum = Random.Range(0, 101); //Generate random number that can be anything from 0 to 100
+					if(ranNum < temp*0.5) //If ranNum is lower than half of temp, we get a level 3 gun. This is just to make it harder to get a level 3 cannon
 					{
-						cannonLevel[i] = 3;
+						cannonLevel[i] = 3; //Cannon [i] is level 3
 					}
 					else
 					{
-						cannonLevel[i] = 2;
+						cannonLevel[i] = 2; //Cannon [i] is level 2
 					}
-					upgradedWapons++;
-//					cannonUpgraded[i] = true;
+					upgradedWapons++; //Increase amount of upgraded weapoons
 				}
-				else
+				else //Failed to upgrade
 				{
-					cannonLevel[i] = 1;
+					cannonLevel[i] = 1; //Cannon [i] is level 1
 				}
 			}
 		}
 	}
 
-	private Vector3 setPatrolPoint()
+	private Vector3 setPatrolPoint() //Generate a point in the world which the AI will drive towards
 	{
 		float tempPosX = Random.Range(playerPoint.transform.position.x, playerPoint.transform.position.x + 3000); //Random x position
 		float tempPosZ = Random.Range(playerPoint.transform.position.z, playerPoint.transform.position.z + 3000); //Random z position
 		float posX;
 		float posZ;
 
-		//Creates a random variable from 1 to 10 (the last number is not included, aka 11).
+		//Creates a random variable from 1 to 10 (the last number is not included).
 		//Use this number to determine if the variable should be positive or negative, just
 		//to create som variation in the spawnpositions of the AI.
 		float ranRangeX = Random.Range(1, 11);
-		if(ranRangeX > 5)
+		if(ranRangeX > 5) //Position is positive
 		{
 			posX = playerPoint.transform.position.x + tempPosX;
 
 		}
-		else posX = playerPoint.transform.position.x - tempPosX;
+		else posX = playerPoint.transform.position.x - tempPosX; //Position is negative
 
 
 		//Does the same to the Z position of the AI as we did with the X position just above this.
 		float ranRangeZ = Random.Range(1, 11);
-		if(ranRangeZ > 5)
+		if(ranRangeZ > 5)  //Position is positive
 		{
 			posZ = playerPoint.transform.position.z + tempPosZ;
 		}
-		else posZ = playerPoint.transform.position.z - tempPosZ;
-		return new Vector3(posX, 0, posZ);
+		else posZ = playerPoint.transform.position.z - tempPosZ;  //Position is negative
+		return new Vector3(posX, 0, posZ); //Return the position
 
 	}
 
-	private Vector3 marineSpawnpoint()
+	private Vector3 marineSpawnpoint() //Generate a position for the marine to spawn
 	{
-		bool foundSpawn = false;
-		Vector3 testerSpawnPos = new Vector3(0, 0, 0);
+		bool foundSpawn = false; //True when a valid position is found
+		Vector3 testerSpawnPos = new Vector3(0, 0, 0); //The vector we are going to return
 
-		while(foundSpawn == false)
+		while(foundSpawn == false) //Has not found a spawn yet
 		{
 			//Create random numbers between 100 and 200
-			float tempPosX = Random.Range(100f, 250f); //Random x position
-			float tempPosZ = Random.Range(100f, 250f); //andom z position
+			float tempPosX = Random.Range(150f, 250f); //Random x position
+			float tempPosZ = Random.Range(150f, 250f); //andom z position
 			float posX;
 			float posZ;
 			//Creates a random variable from 1 to 10 (the last number is not included, aka 11).
 			//Use this number to determine if the variable should be positive or negative, just
 			//to create som variation in the spawnpositions of the AI.
 			float ranRangeX = Random.Range(1, 11);
-			if(ranRangeX > 5)
+			if(ranRangeX > 5) //Position is positive
 			{
 				posX = tempPosX;
 			}
-			else posX = -tempPosX;
+			else posX = -tempPosX;  //Position is negative
 
 			//Does the same to the Z position of the AI as we did with the X position just above this.
 			float ranRangeZ = Random.Range(1, 11);
-			if(ranRangeZ > 5)
+			if(ranRangeZ > 5) //Position is positive
 			{
 				posZ = tempPosZ;
 			}
-			else posZ = -tempPosZ;
+			else posZ = -tempPosZ;  //Position is negative
 
-			testerSpawnPos = new Vector3 (posX+playerPoint.transform.position.x, 2, posZ+playerPoint.transform.position.z);
+			testerSpawnPos = new Vector3 (posX+playerPoint.transform.position.x, 2, posZ+playerPoint.transform.position.z); //Save the position
 
-			Collider[] colliders = Physics.OverlapSphere(testerSpawnPos, 10);
-			if(colliders.Length == 0)
+			Collider[] colliders = Physics.OverlapSphere(testerSpawnPos, 10); //Test if any other objects are within a 10 meter radious around the newly created spawnpoint
+			if(colliders.Length == 0) //There are not any other objects there!
 				foundSpawn = true; //Sets the position of the Marine relative to the player position
 		}
 
-		return testerSpawnPos;
+		return testerSpawnPos; //Return the position
 	}
 
-	private Vector3 cargoSpawnpoint()
+	private Vector3 cargoSpawnpoint() //Generate a position for the cargo to spawn
 	{
-		Vector3 playerPosition = playerPoint.transform.position;
-		Vector3 playerDirection = playerPoint.transform.forward;
-		//Quaternion playerRotation = playerPoint.transform.rotation;
-		float spawnDistance = 200;
-		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance;
+		Vector3 playerPosition = playerPoint.transform.position; //Position of the player
+		Vector3 playerDirection = playerPoint.transform.forward; //The players forward vector
+		float spawnDistance = 200; //Spawn 200 meters in front of the player
+		Vector3 spawnPos = playerPosition + playerDirection * spawnDistance; //Make a position directly in front of the player
 
-		Collider[] colliders = Physics.OverlapSphere(spawnPos, 10);
-		if(colliders.Length == 0)
-			return spawnPos;
-		else
-			return marineSpawnpoint();
+		Collider[] colliders = Physics.OverlapSphere(spawnPos, 10); //Test if any other objects are within a 10 meter radious around the newly created spawnpoint
+		if(colliders.Length == 0) //There are not any other objects there!
+			return spawnPos; //Return the position
+		else //There was something else there!
+			return marineSpawnpoint(); //Generate a random point, just as with the marine
 	}
 
 
-	void spawnCargo()
+	void spawnCargo() //Instantiate a cargo ship
 	{
-		if(livingCargo == false && GameControl.control.isFighting == false && trespassingWorldBorder == false && GameObject.Find("Boss(Clone)") == null)
+		if(livingCargo == false && GameControl.control.isFighting == false && trespassingWorldBorder == false && GameObject.Find("Boss(Clone)") == null) //Multiple tests to see if it is ok to spawn the cargo ship
 		{
-			livingCargo = true;
-			setCannonLevel();
+			livingCargo = true; //Set the variable to true to prevent multiple cargo ships at the same time
+			setCannonLevel(true); //Generate cannon levels for the cargo ship
 
-			Instantiate(Cargo, cargoSpawnpoint(), playerPoint.transform.rotation);
-			Cargo.GetComponent<AIMaster>().isCargo = true;
-			Cargo.GetComponent<AIPatroling>().target = setPatrolPoint();
-			//Cargo.GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
+			Instantiate(Cargo, cargoSpawnpoint(), playerPoint.transform.rotation); //Instantiate the cannon at a generated position
+			Cargo.GetComponent<AIMaster>().isCargo = true; //Tell the code that this is a cargo
+			Cargo.GetComponent<AIPatroling>().target = setPatrolPoint(); //Generate patrol point
 			float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 			Cargo.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
-			if(Cargo.GetComponent<AIMaster>().aiHealth < 20)
+			if(Cargo.GetComponent<AIMaster>().aiHealth < 20) //If the health is under 20
 			{
-				Cargo.GetComponent<AIMaster>().aiHealth = 20;
+				Cargo.GetComponent<AIMaster>().aiHealth = 20; //Set the health to 20
 			}
 		}
 	}
 
 
-	void spawnShip ()
+	void spawnShip () //Instantiate a marine or the boss
 	{
 		float relativeBossPoint = Vector3.Distance (playerPoint.transform.position, bossSpawn.transform.position); //Distance between player and where the boss spawns
-		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null)
+		if(trespassingWorldBorder == false && GameControl.control.isFighting == false && GameObject.Find("Boss(Clone)") == null) //Multiple tests to see if it is ok to spawn a marine
 		{
 			if(relativeBossPoint > 150) //We are too far away from the boss, so we spawn a regular AI.
 			{
-				if(livingShips < maxMarines)
+				if(livingShips < maxMarines) //There are not too many marines alive
 				{
-					livingShips++;
-					setCannonLevel();
+					livingShips++; //Increase amount of living marines
+					setCannonLevel(false); //Generate cannonlevels
 
-					for(int i = 0; i < marineShips.Length; i++)
+					for(int i = 0; i < marineShips.Length; i++) //Search for available position in array
 					{
-						if(availableIndes[i] == true)
+						if(availableIndes[i] == true) //Found available index
 						{		
-							GameObject temp = (Instantiate(Marine));
-							temp.transform.position = marineSpawnpoint();
-							marineShips[i] = temp;
-							availableIndes[i] = false;
-							marineShips[i].GetComponent<AIPatroling>().target = setPatrolPoint();
-							//marineShips[i].GetComponent<AIPatroling>().target.transform.position = setPatrolPoint();
+							GameObject temp = (Instantiate(Marine)); //Instantiate marine
+							temp.transform.position = marineSpawnpoint(); //Generate spawnpoint
+							marineShips[i] = temp; //Send the marine into the array
+							availableIndes[i] = false; //Make the index taken
+							marineShips[i].GetComponent<AIPatroling>().target = setPatrolPoint(); //Generate patrol point
 							float aiOriginDistance = Vector3.Distance (playerPoint.transform.position, origin.transform.position); //Distance between player and Origin
 							marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = Mathf.Floor(aiOriginDistance * 0.01f); //AI health is equal to the number that is 10% of the distance between it and origin
-							Debug.Log("Marine health: " + marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth);
-							if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20)
+							if(marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth < 20) //Health is under 20
 							{
-								marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20;
+								marineShips[i].gameObject.GetComponent<AIMaster>().aiHealth = 20; //Set health to 20
 							}
-							marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i;
-							return;
+							marineShips[i].gameObject.GetComponent<AIMaster>().arrayIndex = i; //Save this marines index in the array
+							return; //End the loop
 						}
 					}
 				}
@@ -297,11 +290,11 @@ public class SpawnAI : MonoBehaviour
 
 		if(relativeBossPoint < 200 && GameObject.Find("Boss(Clone)") == null)//We should spawn the boss
 		{
-			Instantiate(Boss, bossSpawn.transform.position, bossSpawn.transform.rotation);
-			Boss.GetComponent<AIMaster>().isBoss = true;
+			Instantiate(Boss, bossSpawn.transform.position, bossSpawn.transform.rotation); //Instantiate the boss at the boss's spawn position
+			Boss.GetComponent<AIMaster>().isBoss = true; //Tell the code that this is the boss
 			Boss.transform.GetComponent<AIMaster>().aiHealth = 100; //Sets the health
-			stopFightTimer = true;
-			GameControl.control.isFighting = true;
+			stopFightTimer = true; //Stop automatic fighting
+			GameControl.control.isFighting = true; //Tell the code globally that this ship is fighting
 		}
 	}
 }

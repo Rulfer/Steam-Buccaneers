@@ -74,12 +74,12 @@ public class AIMaster : MonoBehaviour
 							{
 								deaktivatePatroling(); //Deactivate the patroling and engage in combat
 							}
-							else if(GameControl.control.isFighting == true && isCargo == false) //An enemy is fighting the player, so this enemy should flee from the combat
+							else if(GameControl.control.isFighting == true) //An enemy is fighting the player, so this enemy should flee from the combat
 								thisAIFlee(); //Flee
 						}
 						else //We are in the tutorial scene, so start the combat
 						{
-							deaktivatePatroling();
+							deaktivatePatroling(); //Deactivate the patroling and engage in combat
 						}
 					}
 				}
@@ -87,7 +87,7 @@ public class AIMaster : MonoBehaviour
 				{
 					if(SceneManager.GetActiveScene().name != "Tutorial") //We are not in the tutorial scene
 					{
-						if(GameControl.control.isFighting == false) //There is currently not a fight
+						if(GameControl.control.isFighting == false && isCargo == false) //There is currently not a fight, and this is not the cargo ship
 							reactivatePatroling(); //Deactivate the chase, reactivate patroling
 						if(detectDistance > aiRadar + 50) //If the distance between this enemy and the player is big enough, restart patroling
 							reactivatePatroling(); //Deactivate the chase, reactivate patroling
@@ -149,20 +149,17 @@ public class AIMaster : MonoBehaviour
 
 		if(isBoss == false && isCargo == false) //This is a marine enemy
 		{
+			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AIFlee>().enabled = true; //Activate fleeing script
 			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AIPatroling>().enabled = false; //Disables patroling
 			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isPatroling = false; //Tells the script it is no longer patroling
 			SpawnAI.spawn.marineShips[arrayIndex].GetComponent<AImove>().isFleeing = true; //Tells the script it is fleeing
 		}
 		else if(isCargo == true) //This is a cargo ship
 		{
-			//At any given moment, there can only be one living cargo ship in the scene. 
-			//the "temp" variable finds this gameobject and uses the reference to edit
-			//the scripts of the cargo ship.
-			GameObject temp = GameObject.Find("Cargo(Clone)").gameObject;
-			testedFleeing = true; //Has tested fleeing
-			temp.GetComponent<AIPatroling>().enabled = false; //Disables the patroling script
-			temp.GetComponent<AImove>().isPatroling = false; //Tells the script it is no longer patroling 
-			temp.GetComponent<AImove>().isFleeing = true; //Tells the script it is fleeing
+			this.GetComponent<AIFlee>().enabled = true; //Activate fleeing script
+			this.GetComponent<AImove>().isPatroling = false; //Tells the script it is no longer patroling 
+			this.GetComponent<AImove>().isFleeing = true; //Tells the script it is fleeing
+			this.GetComponent<AIPatroling>().enabled = false; //Disables the patroling script
 		}
 	}
 

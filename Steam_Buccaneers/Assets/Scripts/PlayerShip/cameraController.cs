@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
 			{
 				if (cameraAddPOS > 50)// if the camera is above 50, which is the lowest distance the camera can be away, it will subtract
 				{
-					cameraAddPOS -= 10; // we subtract by 5 for each scroll to the distance we are to reach by scrolling
+					cameraAddPOS -= 10; // we subtract by 10 for each scroll to the distance we are to reach by scrolling
 				}
 			}
 
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
 			{
 				if (cameraAddPOS < 200)// if the camera is below 200, which is the highest distance the camera can be away, we will add
 				{
-					cameraAddPOS += 10; // we add by 5 for each scroll to the distance we are to reach by scrolling
+					cameraAddPOS += 10; // we add by 10 for each scroll to the distance we are to reach by scrolling
 				}
 			}
 				
@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
 			{
 				if (distanceAway >= 50)// as long as the distance is higher than 50
 				{
-					distanceAway --;// we will zoom the camera in
+					distanceAway -= 5;// we will zoom the camera in
 				}
 			}
 
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
 			{
 				if (distanceAway <= 200) // as long as the distance is lower than 200
 				{
-					distanceAway ++; // we will zoom the camera out
+					distanceAway += 5; // we will zoom the camera out
 				}
 			}
 

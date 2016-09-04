@@ -1,21 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShip\PlayerRotate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shop\UpdatePayment.cs">
     <Files>
+      <File FileName="Assets\Scripts\Shop\UpdatePayment.cs" Line="29" Column="71" />
+      <File FileName="Assets\Scripts\Toturial\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerShip\CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerMove.cs" Line="147" Column="24" />
-      <File FileName="Assets\Scripts\PlayerShip\SideWeaponControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\SwivelFire.cs" Line="71" Column="4" />
-      <File FileName="Assets\Scripts\PlayerShip\SwivelWeaponControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\ChangeScene.cs" Line="30" Column="3" />
-      <File FileName="Assets\Scripts\World\OrbitMeteorsInner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\OrbitMeteorsOuter.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\OrbitMoons.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\RotateBackgroundElements.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\SpawnTreasureShip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\TreasurePlanet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\World\TreasureShip.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerShip\PlayerRotate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FX\EngineFlames.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\AIMove scripts\AIavoid.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

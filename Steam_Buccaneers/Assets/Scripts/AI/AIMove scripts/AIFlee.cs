@@ -40,6 +40,7 @@ public class AIFlee : MonoBehaviour
 	{
 		if(first) //First time the enemy calculates flee position
 		{
+			player = GameObject.Find("PlayerShip");
 			target = fleeTargetPosition(); //Set the targets position
 			first = false; //It is no longer the first time for the test
 		}

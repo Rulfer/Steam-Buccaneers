@@ -11,7 +11,9 @@ public class PlayVideoScript : MonoBehaviour
 
 	void Start()
 	{
+		//Getting time
 		forrigeTid = Time.realtimeSinceStartup;
+		//finding minimap and hiding it so it doesnt cover animation
 		guiManager = GameObject.Find("_GUIManager");
 		guiManager.SetActive (false);
 	}
@@ -19,12 +21,15 @@ public class PlayVideoScript : MonoBehaviour
 	// Use this for initialization
 	void Update () 
 	{
+		//counting time
 		timer += Time.realtimeSinceStartup - forrigeTid;
-		//Debug.Log (Time.time + "-" + forrigeTid);
-		//Debug.Log (timer);
+		//If it has gone more than 6 sec animation is done and object will be destroyed
+		//Wanted to code this without hardcoding seconds, but could not find another solution
 		if (timer >= 6)
 		{
+			//Unpause game
 			GameObject.Find ("GameControl").GetComponent<GameButtons> ().pause ();
+			//Show minimap
 			guiManager.SetActive(true);
 			Destroy (this.gameObject);
 		}
@@ -33,6 +38,7 @@ public class PlayVideoScript : MonoBehaviour
 
 	public void playTreasureAnimation () 
 	{
+		//show movie
 		this.enabled = true;
 		movie = this.GetComponent<RawImage>().mainTexture as MovieTexture;
 		movie.Play();
